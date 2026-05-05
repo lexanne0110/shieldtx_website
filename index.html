@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShieldTX · Stop trading in public</title>
+  <meta name="description" content="Shield your perp trades on Hyperliquid. Same fills, zero footprint." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Inline SVG filters (grain) -->
+  <svg class="sr-only" aria-hidden="true" width="0" height="0" style="position:absolute">
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </svg>
+
+  <!-- Global grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- Fixed nav -->
+  <header class="nav" data-reveal>
+    <a class="nav-logo" href="#top" aria-label="ShieldTX">
+      <img src="assets/ShieldTX_Logo.svg" alt="ShieldTX" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#features">Product</a>
+      <a href="#compare">Compare</a>
+      <a href="#faq">FAQ</a>
+      <a href="#scan-tool">Scan your wallet</a>
+    </nav>
+    <a class="nav-cta btn-pill" href="#beta">Request access</a>
+    <div class="nav-progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="top">
+
+    <!-- 1. HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-shader">
+          <div class="blob b1"></div>
+          <div class="blob b2"></div>
+        </div>
+        <div class="hero-vignette"></div>
+      </div>
+
+      <div class="hero-grid hero-grid-split container">
+        <div class="hero-copy">
+          <h1 class="hero-title" data-split>
+            Stop Trading In <span class="accent">Public.</span>
+          </h1>
+          <p class="hero-sub" data-reveal>
+            Your Hyperliquid positions are live on 12+ copy bot feeds in seconds. ShieldTX breaks the signal. Same fills, zero footprint.
+          </p>
+          <div class="hero-ctas" data-reveal>
+            <a class="btn-pill btn-primary hero-cta-primary" href="#scan-tool">
+              Scan your wallet
+              <span class="hero-cta-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="hero-cta-secondary" href="#beta">Request beta access</a>
+          </div>
+        </div>
+
+        <div class="hero-image" data-reveal>
+          <div class="trade-frame trade-frame-hero">
+            <div class="tfb">
+              <div class="tfb-dots"><span></span><span></span><span></span></div>
+              <span class="tfb-url"><i class="tfb-lock">●</i> shieldtx.app<span class="tfb-path">/trade</span></span>
+              <span class="tfb-tag">SHIELDED</span>
+            </div>
+
+            <div class="trade-app">
+              <div class="ta-nav">
+                <div class="ta-nav-l">
+                  <span class="ta-logo">avail</span>
+                  <a class="ta-nav-link active" href="#">Trade</a>
+                  <a class="ta-nav-link" href="#">Leaderboard</a>
+                  <a class="ta-nav-link" href="#">Docs</a>
+                </div>
+                <div class="ta-nav-r">
+                  <span class="ta-balance"><span class="ta-shield">♥</span>$143.95<span class="ta-caret">▾</span></span>
+                  <span class="ta-user">FARADAY<span class="ta-caret">▾</span></span>
+                </div>
+              </div>
+
+              <div class="ta-pair">
+                <div class="ta-pair-name">
+                  <span class="ta-coin"></span>
+                  <b>HYPE-USDC</b>
+                  <span class="ta-pair-caret">▾</span>
+                  <span class="ta-lev">10x</span>
+                </div>
+                <div class="ta-stat"><span>Mark</span><b>278.81</b></div>
+                <div class="ta-stat"><span>Oracle</span><b>278.01</b></div>
+                <div class="ta-stat"><span>24h Change</span><b class="neg">-0.7835 / -2.58%</b></div>
+                <div class="ta-stat"><span>24h Volume</span><b>$50,867,772</b></div>
+                <div class="ta-stat"><span>Open Interest</span><b>$8,073,731,835</b></div>
+                <div class="ta-stat"><span>Funding</span><b>-0.7835</b></div>
+              </div>
+
+              <div class="ta-grid">
+                <div class="ta-chart">
+                  <div class="ta-chart-tools">
+                    <div class="ta-chart-tools-l">
+                      <button class="active">5m</button>
+                      <button>1h</button>
+                      <button>1d</button>
+                      <button class="ico">▾</button>
+                      <button class="ico">⏱</button>
+                      <span class="ta-nav-link">Indicators</span>
+                    </div>
+                    <div class="ta-chart-tools-r">
+                      <button class="ico">⌕</button>
+                      <button class="ico">⚙</button>
+                    </div>
+                  </div>
+                  <div class="ta-chart-body">
+                    <div class="ta-chart-rail">
+                      <span>＋</span><span>／</span><span>↗</span><span>⊞</span><span>⌗</span><span>T</span><span>⊙</span><span>⌫</span><span>⊕</span><span>⌂</span>
+                    </div>
+                    <div class="ta-chart-canvas">
+                      <svg class="ta-candles" viewBox="0 0 800 460" preserveAspectRatio="none" aria-hidden="true"></svg>
+                      <span class="ta-vol-label">Vol</span>
+                      <div class="ta-y-axis">
+                        <span>282.00</span><span>270.00</span><span>260.00</span><span>250.00</span><span>240.00</span><span>230.00</span><span>220.00</span><span>210.00</span><span>200.00</span>
+                      </div>
+                      <div class="ta-mark-tag">278.81</div>
+                      <div class="ta-vol-tag">17.6K</div>
+                      <div class="ta-x-axis">
+                        <span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>2026</span><span>Feb</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ta-book">
+                  <div class="ta-tabs">
+                    <button class="active">Order Book</button>
+                    <button>Trades</button>
+                    <div class="ta-tab-spacer"></div>
+                    <button class="ico">⋯</button>
+                  </div>
+                  <div class="ta-book-tools">
+                    <button>Q1 ▾</button>
+                    <button>USDC ▾</button>
+                  </div>
+                  <div class="ta-book-head">
+                    <span>Price</span><span>Size (USDC)</span><span>Total (USDC)</span>
+                  </div>
+                  <ul class="ta-book-asks">
+                    <li><i style="--p:90%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:80%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:72%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:64%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:54%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:42%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:30%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  </ul>
+                  <div class="ta-book-spread">
+                    <span>Spread</span><b>Q1</b><span class="muted">0.005%</span>
+                  </div>
+                  <ul class="ta-book-bids">
+                    <li><i style="--p:30%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:42%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:54%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:64%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:72%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:80%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                    <li><i style="--p:90%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  </ul>
+                </div>
+
+                <div class="ta-order">
+                  <div class="ta-tabs ta-tabs-r">
+                    <button class="active">Market</button>
+                    <button>Limit</button>
+                  </div>
+                  <div class="ta-side-row">
+                    <button class="ta-side ta-buy">↑ BUY/LONG</button>
+                    <button class="ta-side ta-sell">↓ SELL/SHORT</button>
+                  </div>
+                  <div class="ta-meta">
+                    <div class="ta-row"><span>Available</span><b>143.95<em>USDC</em></b></div>
+                    <div class="ta-row"><span>Position</span><b class="muted">000.00<em>ETH</em></b></div>
+                  </div>
+                  <div class="ta-input-block">
+                    <label>Size</label>
+                    <div class="ta-input"><input type="text" value="100.00" readonly /><span>USDC</span></div>
+                  </div>
+                  <div class="ta-input-block">
+                    <label>Leverage</label>
+                    <div class="ta-slider">
+                      <div class="ta-slider-track">
+                        <div class="ta-slider-fill" style="width:25%"></div>
+                        <span class="ta-slider-tick" style="--p:0%"></span>
+                        <span class="ta-slider-tick" style="--p:50%"></span>
+                        <span class="ta-slider-tick" style="--p:100%"></span>
+                        <span class="ta-slider-thumb" style="--p:25%"></span>
+                      </div>
+                      <div class="ta-slider-marks"><span>1x</span><span>5x</span><span>10x</span></div>
+                    </div>
+                  </div>
+                  <button class="ta-place" type="button">▽ PLACE ORDER</button>
+                </div>
+              </div>
+
+              <div class="ta-positions">
+                <div class="ta-pos-tabs">
+                  <button class="active">Positions <em>(1)</em></button>
+                  <button>Open orders</button>
+                  <button>Trade History</button>
+                </div>
+                <div class="ta-pos-table">
+                  <div class="ta-pos-row">
+                    <b>SOL <em>10x</em></b><span>0.81</span><span>0.86 <em>USDC</em></span><span>234.038</span><span>85.941</span><span class="ok">+$0.02 (+45.3%)</span><span>N/A</span><span>+$0.04 <em>(Cross)</em></span><span>+$0.00</span><span class="ta-close">Market</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. PROBLEM -->
+    <section class="problem" id="problem">
+      <div class="container">
+        <header class="problem-head">
+          <span class="eyebrow">The Problem</span>
+          <h2 class="section-title" data-split>Your wallet exposes everything.</h2>
+        </header>
+        <ul class="problem-cards">
+          <li class="problem-card" data-reveal>
+            <span class="problem-card-num">01</span>
+            <h3 class="problem-card-title">Everything is public</h3>
+            <p class="problem-card-body">Your full P&amp;L, position history, and account size are visible to everyone the moment you place a trade.</p>
+          </li>
+          <li class="problem-card" data-reveal>
+            <span class="problem-card-num">02</span>
+            <h3 class="problem-card-title">Profits leak to copy traders</h3>
+            <p class="problem-card-body">Tools like HyperDash and Dexly mirror your trades within seconds of execution and copy traders erode your profitability.</p>
+          </li>
+          <li class="problem-card" data-reveal>
+            <span class="problem-card-num">03</span>
+            <h3 class="problem-card-title">Enterprises are left out</h3>
+            <p class="problem-card-body">Trading desks and vaults with substantial size cannot use a venue where competitors read your book, every hour of every day.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. WHAT YOU DO TODAY -->
+    <section class="today" id="today">
+      <div class="container">
+        <header class="today-head">
+          <span class="eyebrow">What you do today</span>
+          <h2 class="section-title" data-split>Today's workarounds fail.</h2>
+        </header>
+        <ul class="today-rows">
+          <li class="today-row" data-reveal>
+            <span class="today-row-num">01</span>
+            <h3 class="today-row-title">Multiple wallets</h3>
+            <p class="today-row-body">Fractures your workflow. Managing gas, seed phrases, and transaction history across wallets adds operational overhead with no upside.</p>
+          </li>
+          <li class="today-row" data-reveal>
+            <span class="today-row-num">02</span>
+            <h3 class="today-row-title">Wallet clustering still wins</h3>
+            <p class="today-row-body">Arkham and Nansen cluster your different wallets through temporal correlation. Same asset, same direction, seconds apart is enough to link them.</p>
+          </li>
+          <li class="today-row" data-reveal>
+            <span class="today-row-num">03</span>
+            <h3 class="today-row-title">CEX routing</h3>
+            <p class="today-row-body">Hands over custody of your assets and leaves the venue. You lose self-custody and on-chain composability for shielding that should be native.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. SEE YOUR EXPOSURE — Wallet scanning tool -->
+    <section class="scan-tool" id="scan-tool">
+      <div class="scan-band">
+        <div class="scan-bg" aria-hidden="true">
+          <div class="scan-blob s1"></div>
+          <div class="scan-blob s2"></div>
+          <div class="scan-grid-overlay"></div>
+        </div>
+        <div class="container">
+          <header class="scan-head">
+            <span class="eyebrow inv">Scan your wallet</span>
+            <h2 class="section-title inv" data-split>See what you're broadcasting.</h2>
+            <p class="scan-sub" data-reveal>Paste any Hyperliquid wallet. We'll show you which bots are copying it, how fast they follow, and what it's costing in bps. No wallet connection or sign-in required.</p>
+          </header>
+
+          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal>
+            <input class="scan-form-input" id="scan-addr" type="text" placeholder="0x… your Hyperliquid address" spellcheck="false" autocomplete="off" />
+            <button class="btn-pill btn-primary" id="scan-run" type="submit">Scan</button>
+          </form>
+
+          <div class="scan-prefill" data-reveal>
+            <span class="scan-prefill-label">Don't have an address?</span>
+            <button class="scan-prefill-chip" type="button" data-prefill="0x741e8c52f3a4d6b9c2e1f0a8d3b7e9c5f2a1b6d8">Try sample whale</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0xeb85a2fc97d3b1e6c4a9f0d8b2e5c7a3f1d6b9e2">Try sample alpha trader</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0xc9630da7e1b4f2a8d6c3b9e5f7a1d2c8e4b6f3a9">Try sample leaderboard</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="scan-results" id="scan-results">
+        <div class="container">
+          <div class="stats-panel" id="stats-panel" aria-hidden="true">
+            <p class="stats-footnote" data-reveal>Based on <b id="stats-fills">847</b> fills over the past <b id="stats-days">30</b> days.</p>
+
+            <div class="stats-grid">
+              <article class="stat-card">
+                <div class="stat-label">Bots copying this wallet</div>
+                <div class="stat-val"><span class="stat-num" data-count-to="13">0</span></div>
+                <div class="stat-meta">HyperDash, Dexly, +11 others</div>
+                <div class="stat-bar"><span style="--p:82%"></span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-label">Avg follow speed</div>
+                <div class="stat-val"><span class="stat-num" data-count-to="3.6" data-decimals="1">0.0</span><sub>s</sub></div>
+                <div class="stat-meta">From your fill to copy bot fill</div>
+                <div class="stat-bar"><span style="--p:62%"></span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-label">Cost per round trip</div>
+                <div class="stat-val"><span class="stat-num" data-count-to="12">0</span><sub>bps</sub></div>
+                <div class="stat-meta">Slippage from copy traders front-running you</div>
+                <div class="stat-bar"><span style="--p:72%"></span></div>
+              </article>
+            </div>
+
+            <div class="wallets-panel">
+              <div class="wp-head">What's being published from this wallet</div>
+              <ul class="wp-published">
+                <li><span class="wp-pub-k">Position size</span><span class="wp-pub-v">Visible in real time</span></li>
+                <li><span class="wp-pub-k">Entry & exit prices</span><span class="wp-pub-v">Visible in real time</span></li>
+                <li><span class="wp-pub-k">Liquidation level</span><span class="wp-pub-v">Visible in real time</span></li>
+                <li><span class="wp-pub-k">Account balance</span><span class="wp-pub-v">Visible in real time</span></li>
+                <li><span class="wp-pub-k">Full trade history</span><span class="wp-pub-v">Visible in real time</span></li>
+              </ul>
+            </div>
+
+            <div class="wallets-panel">
+              <div class="wp-head">Top wallets copying you</div>
+              <ul class="wp-list">
+                <li><span class="wp-addr">0x741e…b852</span><span class="wp-bar" style="--p:100%"></span><span class="wp-trades">47 copy fills</span></li>
+                <li><span class="wp-addr">0xeb85…2fc9</span><span class="wp-bar" style="--p:92%"></span><span class="wp-trades">43 copy fills</span></li>
+                <li><span class="wp-addr">0xc963…0da7</span><span class="wp-bar" style="--p:83%"></span><span class="wp-trades">39 copy fills</span></li>
+                <li><span class="wp-addr">0x0da7…41eb</span><span class="wp-bar" style="--p:68%"></span><span class="wp-trades">32 copy fills</span></li>
+                <li><span class="wp-addr">0x52fc…9630</span><span class="wp-bar" style="--p:36%"></span><span class="wp-trades">17 copy fills</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES — vertical layout, 4 focused cards -->
+    <section class="features features-vertical" id="features">
+      <div class="container">
+        <header class="features-head">
+          <span class="eyebrow">Features</span>
+          <h2 class="section-title" data-split>Same trade. No broadcast.</h2>
+          <p class="features-lede" data-reveal>Confidential execution on Hyperliquid, with the compliance and custody desks need.</p>
+        </header>
+
+        <ol class="features-list">
+          <li class="feat-card" data-reveal>
+            <div class="feat-card-meta">
+              <span class="feat-num">01</span>
+              <span class="feat-tag">Shielding</span>
+            </div>
+            <div class="feat-card-body">
+              <h3 class="feat-title">Execution shielding</h3>
+              <p class="feat-body">Your position size, entry, and liquidation levels stay off the radar. Nothing on-chain links your trades to you, so copy bots have nothing to follow.</p>
+            </div>
+            <div class="feat-visual feat-visual-mask" aria-hidden="true">
+              <div class="fv-mask-card">
+                <div class="fv-mask-row"><span class="fv-mask-k">SIZE</span><span class="fv-mask-v"><i></i><i></i><i></i><i></i><i></i></span></div>
+                <div class="fv-mask-row"><span class="fv-mask-k">ENTRY</span><span class="fv-mask-v"><i></i><i></i><i></i><i></i><i></i></span></div>
+                <div class="fv-mask-row"><span class="fv-mask-k">LIQ.</span><span class="fv-mask-v"><i></i><i></i><i></i><i></i><i></i></span></div>
+                <div class="fv-mask-shield" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L20 7 L20 13 C20 18 16 21 12 22 C8 21 4 18 4 13 L4 7 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12 L11 14 L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="feat-card" data-reveal>
+            <div class="feat-card-meta">
+              <span class="feat-num">02</span>
+              <span class="feat-tag">Hyperliquid native</span>
+            </div>
+            <div class="feat-card-body">
+              <h3 class="feat-title">Hyperliquid fill parity</h3>
+              <p class="feat-body">Trades route to the native HL order book. Fills match direct Hyperliquid execution. Same liquidity, same fill quality, no routing tax.</p>
+            </div>
+            <div class="feat-visual feat-visual-spark" aria-hidden="true">
+              <svg class="fv-spark" viewBox="0 0 320 120" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="spark-fill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(51,112,255,.32)"/>
+                    <stop offset="100%" stop-color="rgba(51,112,255,0)"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,90 L40,72 L80,82 L120,52 L160,64 L200,40 L240,52 L280,28 L320,38 L320,120 L0,120 Z" fill="url(#spark-fill)"/>
+                <path d="M0,90 L40,72 L80,82 L120,52 L160,64 L200,40 L240,52 L280,28 L320,38" fill="none" stroke="#3370ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="280" cy="28" r="4" fill="#3370ff"/>
+              </svg>
+              <div class="fv-spark-label"><span>Native HL</span><b>0 bps routing tax</b></div>
+            </div>
+          </li>
+
+          <li class="feat-card" data-reveal>
+            <div class="feat-card-meta">
+              <span class="feat-num">03</span>
+              <span class="feat-tag">Institutions</span>
+            </div>
+            <div class="feat-card-body">
+              <h3 class="feat-title">Compliant by design</h3>
+              <p class="feat-body">Deposit screening, geo-blocking, and sanction compliance are built in. Desks and vaults get the highest compliance bar so size can move on-venue without exposure.</p>
+            </div>
+            <div class="feat-visual feat-visual-block" aria-hidden="true">
+              <div class="fv-globe">
+                <svg viewBox="0 0 120 120" fill="none">
+                  <circle cx="60" cy="60" r="46" stroke="#3370ff" stroke-width="1.4"/>
+                  <ellipse cx="60" cy="60" rx="46" ry="18" stroke="#3370ff" stroke-width="1.4" stroke-dasharray="3 3"/>
+                  <ellipse cx="60" cy="60" rx="20" ry="46" stroke="#3370ff" stroke-width="1.4" stroke-dasharray="3 3"/>
+                  <line x1="14" y1="60" x2="106" y2="60" stroke="#3370ff" stroke-width="1.4"/>
+                </svg>
+                <span class="fv-globe-pill">BLOCKED</span>
+                <span class="fv-globe-dot fv-globe-dot-1"></span>
+                <span class="fv-globe-dot fv-globe-dot-2"></span>
+              </div>
+            </div>
+          </li>
+
+          <li class="feat-card" data-reveal>
+            <div class="feat-card-meta">
+              <span class="feat-num">04</span>
+              <span class="feat-tag">Self-custody</span>
+            </div>
+            <div class="feat-card-body">
+              <h3 class="feat-title">You hold the keys</h3>
+              <p class="feat-body">Non-custodial vault on Arbitrum. Withdrawals are permissionless and verifiable. No admin key, no lockups, no counterparty risk.</p>
+            </div>
+            <div class="feat-visual feat-visual-flow" aria-hidden="true">
+              <div class="fv-flow-card">
+                <span class="fv-flow-label">Vault</span>
+                <span class="fv-flow-amount">25,000<em>USDC</em></span>
+              </div>
+              <span class="fv-flow-arrow"></span>
+              <div class="fv-flow-card fv-flow-card-out">
+                <span class="fv-flow-label">Your wallet</span>
+                <span class="fv-flow-amount fv-flow-amount-out">25,000<em>USDC</em></span>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. PREVIEW — animated demo -->
+    <section class="preview" id="preview">
+      <div class="container">
+        <header class="preview-head">
+          <span class="eyebrow">Preview</span>
+          <h2 class="section-title" data-split>Trade on Hyperliquid</h2>
+          <p class="preview-sub" data-reveal>It's perp trading on Hyperliquid, minus the broadcast.</p>
+        </header>
+
+        <div class="trade-frame" data-reveal>
+          <div class="tfb">
+            <div class="tfb-dots"><span></span><span></span><span></span></div>
+            <span class="tfb-url"><i class="tfb-lock">●</i> shieldtx.app<span class="tfb-path">/trade</span></span>
+            <span class="tfb-tag">SHIELDED</span>
+          </div>
+
+          <div class="trade-app">
+            <div class="ta-nav">
+              <div class="ta-nav-l">
+                <span class="ta-logo">avail</span>
+                <a class="ta-nav-link active" href="#">Trade</a>
+                <a class="ta-nav-link" href="#">Leaderboard</a>
+                <a class="ta-nav-link" href="#">Docs</a>
+              </div>
+              <div class="ta-nav-r">
+                <span class="ta-balance"><span class="ta-shield">♥</span>$143.95<span class="ta-caret">▾</span></span>
+                <span class="ta-user">FARADAY<span class="ta-caret">▾</span></span>
+              </div>
+            </div>
+
+            <div class="ta-pair">
+              <div class="ta-pair-name">
+                <span class="ta-coin"></span>
+                <b>HYPE-USDC</b>
+                <span class="ta-pair-caret">▾</span>
+                <span class="ta-lev">25x</span>
+              </div>
+              <div class="ta-stat"><span>Mark</span><b>278.81</b></div>
+              <div class="ta-stat"><span>Oracle</span><b>278.01</b></div>
+              <div class="ta-stat"><span>24h Change</span><b class="neg">-0.7835 / -2.58%</b></div>
+              <div class="ta-stat"><span>24h Volume</span><b>$50,867,772.59</b></div>
+              <div class="ta-stat"><span>Open Interest</span><b>$8,073,731,835.45</b></div>
+              <div class="ta-stat"><span>Funding / Countdown</span><b>-0.7835</b></div>
+            </div>
+
+            <div class="ta-grid">
+              <div class="ta-chart">
+                <div class="ta-chart-tools">
+                  <div class="ta-chart-tools-l">
+                    <button class="active">5m</button>
+                    <button>1h</button>
+                    <button>1d</button>
+                    <button class="ico">▾</button>
+                    <button class="ico">⏱</button>
+                    <span class="ta-nav-link">Indicators</span>
+                  </div>
+                  <div class="ta-chart-tools-r">
+                    <button class="ico">⌕</button>
+                    <button class="ico">⚙</button>
+                  </div>
+                </div>
+                <div class="ta-chart-body">
+                  <div class="ta-chart-rail">
+                    <span>＋</span><span>／</span><span>↗</span><span>⊞</span><span>⌗</span><span>T</span><span>⊙</span><span>⌫</span><span>⊕</span><span>⌂</span>
+                  </div>
+                  <div class="ta-chart-canvas">
+                    <svg class="ta-candles" viewBox="0 0 800 460" preserveAspectRatio="none" aria-hidden="true"></svg>
+                    <span class="ta-vol-label">Vol</span>
+                    <div class="ta-y-axis">
+                      <span>282.00</span><span>270.00</span><span>260.00</span><span>250.00</span><span>240.00</span><span>230.00</span><span>220.00</span><span>210.00</span><span>200.00</span>
+                    </div>
+                    <div class="ta-mark-tag">278.81</div>
+                    <div class="ta-vol-tag">17.6K</div>
+                    <div class="ta-x-axis">
+                      <span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>2026</span><span>Feb</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ta-book">
+                <div class="ta-tabs">
+                  <button class="active">Order Book</button>
+                  <button>Trades</button>
+                  <div class="ta-tab-spacer"></div>
+                  <button class="ico">⋯</button>
+                </div>
+                <div class="ta-book-tools">
+                  <button>Q1 ▾</button>
+                  <button>USDC ▾</button>
+                </div>
+                <div class="ta-book-head">
+                  <span>Price</span><span>Size (USDC)</span><span>Total (USDC)</span>
+                </div>
+                <ul class="ta-book-asks">
+                  <li><i style="--p:90%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:80%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:72%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:64%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:54%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:42%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:30%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                </ul>
+                <div class="ta-book-spread">
+                  <span>Spread</span><b>Q1</b><span class="muted">0.005%</span>
+                </div>
+                <ul class="ta-book-bids">
+                  <li><i style="--p:30%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:42%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:54%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:64%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:72%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:80%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                  <li><i style="--p:90%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
+                </ul>
+              </div>
+
+              <div class="ta-order">
+                <div class="ta-tabs ta-tabs-r">
+                  <button class="active">Market</button>
+                  <button>Limit</button>
+                </div>
+                <div class="ta-side-row">
+                  <button class="ta-side ta-buy">↑ BUY/LONG</button>
+                  <button class="ta-side ta-sell">↓ SELL/SHORT</button>
+                </div>
+                <div class="ta-meta">
+                  <div class="ta-row"><span>Available to Trade</span><b>143.95<em>USDC</em></b></div>
+                  <div class="ta-row"><span>Current Position</span><b class="muted">000.00<em>ETH</em></b></div>
+                </div>
+                <div class="ta-input-block">
+                  <label>Size</label>
+                  <div class="ta-input"><input type="text" value="100.00" readonly /><span>USDC</span></div>
+                </div>
+                <div class="ta-input-block">
+                  <label>Leverage</label>
+                  <div class="ta-slider">
+                    <div class="ta-slider-track">
+                      <div class="ta-slider-fill" style="width:25%"></div>
+                      <span class="ta-slider-tick" style="--p:0%"></span>
+                      <span class="ta-slider-tick" style="--p:50%"></span>
+                      <span class="ta-slider-tick" style="--p:100%"></span>
+                      <span class="ta-slider-thumb" style="--p:25%"></span>
+                    </div>
+                    <div class="ta-slider-marks"><span>1x</span><span>5x</span><span>20x</span></div>
+                  </div>
+                </div>
+                <div class="ta-check">
+                  <span class="ta-check-box"></span>
+                  <span>Take Profit / Stop Loss</span>
+                </div>
+                <button class="ta-place" type="button">▽ PLACE ORDER</button>
+                <div class="ta-meta">
+                  <div class="ta-row"><span>Liquidation Price</span><b class="muted">N/A</b></div>
+                  <div class="ta-row"><span>Order value</span><b class="muted">N/A</b></div>
+                  <div class="ta-row"><span>Margin Required</span><b class="muted">N/A</b></div>
+                  <div class="ta-row"><span>Slippage</span><b>8%<em>EDIT</em></b></div>
+                  <div class="ta-row"><span>Fees</span><b>0.17 / 0.14%</b></div>
+                </div>
+                <div class="ta-actions">
+                  <button>DEPOSIT</button>
+                  <button>TRANSFER</button>
+                  <button>WITHDRAW</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ta-positions">
+              <div class="ta-pos-tabs">
+                <button class="active">Positions <em>(1)</em></button>
+                <button>Open orders</button>
+                <button>Trade History</button>
+              </div>
+              <div class="ta-pos-table">
+                <div class="ta-pos-row ta-pos-head">
+                  <span>Coin</span><span>Size</span><span>Position Value <i>▾</i></span><span>Entry Price</span><span>Mark Price</span><span>PNL (ROE %)</span><span>Liq. Price</span><span>Margin</span><span>Funding</span><span>Close All</span>
+                </div>
+                <div class="ta-pos-row">
+                  <b>SOL <em>20x</em></b><span>0.81</span><span>0.86 <em>USDC</em></span><span>234.038</span><span>85.941</span><span class="ok">+$0.02 (+45.3%)</span><span>N/A</span><span>+$0.04 <em>(Cross)</em></span><span>+$0.00</span><span class="ta-close">Market</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="trade-caption">Native Hyperliquid execution. Your strategy stays off the radar.</p>
+      </div>
+    </section>
+
+    <!-- 2. STEPS / HOW IT WORKS -->
+    <section class="how" id="how">
+      <div class="container">
+        <header class="how-head">
+          <span class="eyebrow">How it works</span>
+          <h2 class="section-title" data-split>Three steps. Zero footprint.</h2>
+        </header>
+
+        <ol class="how-steps how-steps-3">
+          <li class="step step-card" data-step="01">
+            <div class="step-rail" aria-hidden="true">
+              <span class="step-num">Step 1</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-copy">
+              <h3>Add Funds</h3>
+              <p>Deposit from any chain via Nexus. Funds are secured by the ShieldTX vault on Arbitrum.</p>
+            </div>
+            <div class="step-media">
+              <div class="mock mock-connect">
+                <div class="mock-row"><span class="chip">Bridge</span><b>Nexus · any chain</b></div>
+                <div class="mock-row"><span class="chip">Vault</span><b>ShieldTX · Arbitrum</b></div>
+                <div class="mock-row"><span class="chip">Deposit</span><b><span class="step-counter" data-count-to="25000" data-suffix=" USDC">0</span></b></div>
+                <div class="mock-row ok"><span class="chip">Status</span><b>Secured</b></div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step step-card" data-step="02">
+            <div class="step-rail" aria-hidden="true">
+              <span class="step-num">Step 2</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-copy">
+              <h3>Open Trade</h3>
+              <p>Confidential trades placed from a fresh, unlinkable wallet on Hyperliquid.</p>
+            </div>
+            <div class="step-media">
+              <div class="mock mock-trade">
+                <div class="mock-tape">
+                  <div class="bar"></div><div class="bar tall"></div><div class="bar"></div>
+                  <div class="bar short"></div><div class="bar tall"></div><div class="bar"></div>
+                  <div class="bar tall"></div><div class="bar"></div><div class="bar short"></div>
+                </div>
+                <div class="mock-row"><span class="chip">Wallet</span><b>fresh · unlinkable</b></div>
+                <div class="mock-row ok"><span class="chip">Fill</span><b>$24.18 <em>(0 bps)</em></b></div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step step-card" data-step="03">
+            <div class="step-rail" aria-hidden="true">
+              <span class="step-num">Step 3</span>
+              <span class="step-line step-line-end"></span>
+            </div>
+            <div class="step-copy">
+              <h3>Close Trade</h3>
+              <p>Continue trading or re-shield balance for maximum unlinkability.</p>
+            </div>
+            <div class="step-media">
+              <div class="mock mock-settle">
+                <div class="mock-row"><span class="chip">PNL</span><b class="ok">+<span class="step-counter" data-count-to="18420" data-prefix="$">0</span></b></div>
+                <div class="mock-row"><span class="chip">Re-shield</span><b>Enabled</b></div>
+                <div class="mock-row ok"><span class="chip">Footprint</span><b>0 bps</b></div>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 10. COMPARISON -->
+    <section class="compare compare-dark" id="compare">
+      <div class="container">
+        <header class="compare-head">
+          <span class="eyebrow">Compare</span>
+          <h2 class="section-title" data-split>See how we're different.</h2>
+        </header>
+
+        <div class="compare-wrap" data-reveal>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col" class="col-shield">ShieldTX</th>
+                <th scope="col">Direct Hyperliquid</th>
+                <th scope="col">Multi-Wallet</th>
+                <th scope="col">CEX</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Position Confidentiality</th>
+                <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark yes">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Non-custodial</th>
+                <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark yes">✓</span></td>
+                <td><span class="mark yes">✓</span></td>
+                <td><span class="mark no">✕</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Copy-bot resistant</th>
+                <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark yes">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Wallet De-linked</th>
+                <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark no">✕</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Compliant by design</th>
+                <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark yes">✓</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark yes">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Operational Overhead</th>
+                <td class="cell-shield"><span class="pill-low">Low</span></td>
+                <td><span class="pill-low">Low</span></td>
+                <td><span class="pill-high">High</span></td>
+                <td><span class="pill-low">Low</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Q&A -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <header class="faq-head">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="section-title" data-split>Q&amp;A</h2>
+        </header>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>Is this like Tornado Cash?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>No. ShieldTX doesn't pool funds or obfuscate transactions. It executes natively on Hyperliquid: same order book, same counterparties, fully on-chain. The difference: Tornado Cash hides the transaction. ShieldTX shields your position data. Execution stays transparent. Your strategy doesn't.</p></div></div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>What pairs are supported?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>ETH, BTC, SOL, and HYPE perpetuals at launch. Same pairs as native Hyperliquid trading. More pairs are easy to add past this and will be added based on demand.</p></div></div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>Does shielding affect my fills?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>No. Execution is native HL: same order book, same liquidity. There is no slippage premium for shielding.</p></div></div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>Why not just use multiple wallets?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>Because Arkham and Nansen cluster them anyway. Temporal correlation analysis links wallets through on-chain behaviour: same asset, same direction, seconds apart is enough. ShieldTX breaks linkability at the source. One account, no clustering exposure.</p></div></div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>What does it cost?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>5bps on entry, 5bps on exit. Copy traders could take up to 100bps per trade from you. ShieldTX costs less than the leak it closes.</p></div></div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>Who controls the vault / my funds?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>You do. Funds are locked in a smart contract on Arbitrum. Core operations are permissionless and verified by zero-knowledge proofs, no admin key required. See the full breakdown in the trust model.</p></div></div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>Is there an API?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>API access is on the roadmap post-MVP. If you're running algo strategies, reach out directly. Early access conversations are open.</p></div></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 11. BREAKER · variant C — Beta access form (light grey, on-brand) -->
+    <!-- FINAL CTA — close + private beta -->
+    <section class="final-cta" id="beta">
+      <div class="final-cta-bg" aria-hidden="true"></div>
+      <div class="container final-cta-wrap">
+        <span class="eyebrow inv">Private beta</span>
+        <h2 class="final-cta-title" data-split>Join the private beta.</h2>
+        <p class="final-cta-sub" data-reveal>500 invites for the first cohort. Shipping now.</p>
+
+        <form class="beta-form final-cta-form" onsubmit="return false" data-reveal>
+          <label class="beta-label" for="invite">Invite Code:</label>
+          <input class="beta-input" id="invite" type="text" placeholder="x3…t99" spellcheck="false" autocomplete="off" />
+          <button class="btn-pill btn-primary" type="submit">Join</button>
+        </form>
+        <p class="beta-helper final-cta-helper" data-reveal>Don't have an invite code? <a href="#" class="beta-helper-link" data-modal-open="invite-modal">Request one →</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/ShieldTX_Logo.svg" alt="ShieldTX" class="footer-logo" />
+        <p class="footer-tagline">Trade with confidence.<br/>Powered by <span class="footer-avail">Avail</span>.</p>
+        <div class="status"><span class="dot live"></span> Live · build <span class="mono">v2.0.0</span></div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#compare">Compare</a>
+        <a href="#how">How it works</a>
+        <a href="#beta">Beta access</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#faq">FAQ</a>
+        <a href="#scan-tool">Scan</a>
+        <a href="#preview">Preview</a>
+        <a href="brand-document/">Brand book ↗</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Legal</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <span>© <span id="yr"></span> ShieldTX</span>
+      <span class="mono">All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Request-invite modal -->
+  <div class="modal" id="invite-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="invite-modal-title">
+    <div class="modal-overlay" data-modal-close></div>
+    <div class="modal-dialog" role="document">
+      <button class="modal-close" type="button" aria-label="Close" data-modal-close>×</button>
+      <div class="modal-body">
+        <span class="eyebrow">Request invite</span>
+        <h3 class="modal-title" id="invite-modal-title">Get on the ShieldTX list.</h3>
+        <p class="modal-sub">Drop your email and we'll send you an invite code when access opens up.</p>
+        <form class="modal-form" id="invite-request-form" onsubmit="return false">
+          <input class="modal-input" id="invite-email" type="email" placeholder="you@domain.com" required spellcheck="false" autocomplete="email" />
+          <button class="btn-pill btn-primary modal-send" type="submit">Send</button>
+        </form>
+        <p class="modal-success" data-modal-success hidden>Thanks. We'll be in touch.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libraries (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

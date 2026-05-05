@@ -1,0 +1,2587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ShieldTX · Brand Document V3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ===== TOKENS ===== */
+:root {
+  /* Brand blue (vivid azure from Figma node 94:12 hero gradient) */
+  --brand-blue: #3370ff;          /* primary "on brand" — main blue */
+  --brand-blue-bright: #5ba0ff;   /* lighter accent stop */
+  --brand-blue-deep: #1e3a8a;     /* darker stop for gradient depth */
+  --brand-gradient: linear-gradient(135deg, #1e3a8a 0%, #3370ff 50%, #5ba0ff 100%);
+
+  /* Blue ramp */
+  --blue-900: #1e3a8a;
+  --blue-800: #1e40af;
+  --blue-700: #1d4ed8;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-300: #93c5fd;
+  --blue-200: #bfdbfe;
+  --blue-100: #dbeafe;
+  --blue-50:  #eff6ff;
+
+  /* Neutrals */
+  --ink: #0f172a;
+  --charcoal: #1e293b;
+  --graphite: #475569;
+  --slate: #64748b;
+  --steel: #94a3b8;
+  --silver: #cbd5e1;
+  --mist: #e2e8f0;
+  --ice: #f1f5f9;
+  --snow: #f8fafc;
+  --white: #ffffff;
+
+  /* Semantic */
+  --ok: #16a34a;
+  --danger: #ef4444;
+  --buy: #3ad29f;
+  --sell: #f06767;
+
+  /* Geometry */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 9999px;
+  --ease: cubic-bezier(.22,1,.36,1);
+  --ease-out-expo: cubic-bezier(.16,1,.3,1);
+}
+
+/* ===== RESET ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; background: var(--snow); }
+body {
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+  background: var(--snow);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -.005em;
+}
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+button, input { font: inherit; color: inherit; }
+
+/* ===== SLIDE SYSTEM ===== */
+.slide {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+.frame {
+  width: min(96vw, 1440px);
+  aspect-ratio: 16 / 9;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--white);
+}
+.frame.dark { background: var(--ink); color: #fff; }
+.frame.brand { background: var(--brand-blue); color: #fff; }
+.frame.brand-bright { background: var(--brand-blue-bright); color: #fff; }
+.frame.brand-gradient { background: var(--brand-gradient); color: #fff; }
+.inner {
+  width: 100%;
+  height: 100%;
+  padding: 56px 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== AMBIENT GLOW (kept very subtle, no chrome) ===== */
+.glow { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.glow-light {
+  background:
+    radial-gradient(800px 500px at 12% 30%, rgba(51,112,255,.06), transparent 60%),
+    radial-gradient(700px 400px at 88% 70%, rgba(51,112,255,.04), transparent 60%);
+}
+.glow-bright {
+  background:
+    radial-gradient(900px 500px at 80% 20%, rgba(255,255,255,.18), transparent 60%),
+    radial-gradient(700px 400px at 12% 80%, rgba(30,58,138,.18), transparent 60%);
+}
+.frame > * { position: relative; z-index: 1; }
+
+/* ===== PROGRESS + COUNTER ===== */
+#progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; z-index: 999;
+  background: rgba(15,23,42,.06);
+}
+#progress-fill {
+  height: 100%;
+  background: var(--brand-blue);
+  transition: width .3s var(--ease);
+  width: 0%;
+}
+#counter {
+  position: fixed; bottom: 18px; right: 28px;
+  z-index: 999;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--slate);
+  background: rgba(255,255,255,.85);
+  padding: 6px 10px;
+  border-radius: var(--r-sm);
+  backdrop-filter: blur(8px);
+}
+
+/* ===== TYPOGRAPHY ===== */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+}
+.frame.dark .eyebrow,
+.frame.brand .eyebrow,
+.frame.brand-bright .eyebrow,
+.frame.brand-gradient .eyebrow { color: rgba(255,255,255,.7); }
+.h-xl {
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: clamp(56px, 6.4vw, 96px);
+  letter-spacing: -.025em;
+  line-height: 1.02;
+}
+.h-lg {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: clamp(40px, 4.6vw, 68px);
+  letter-spacing: -.022em;
+  line-height: 1.05;
+}
+.h-md {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: clamp(28px, 2.8vw, 40px);
+  letter-spacing: -.018em;
+  line-height: 1.15;
+}
+.h-sm {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+}
+.body {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--graphite);
+  max-width: 60ch;
+}
+.frame.dark .body,
+.frame.brand .body,
+.frame.brand-bright .body,
+.frame.brand-gradient .body { color: rgba(255,255,255,.78); }
+.body-sm {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--slate);
+  max-width: 56ch;
+}
+.frame.dark .body-sm,
+.frame.brand .body-sm,
+.frame.brand-bright .body-sm,
+.frame.brand-gradient .body-sm { color: rgba(255,255,255,.6); }
+.mono {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--slate);
+}
+.frame.dark .mono,
+.frame.brand .mono,
+.frame.brand-bright .mono,
+.frame.brand-gradient .mono { color: rgba(255,255,255,.55); }
+
+/* ===== LAYOUT HELPERS ===== */
+.cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.stack { display: flex; flex-direction: column; }
+.gap-1 { gap: 8px; } .gap-2 { gap: 16px; } .gap-3 { gap: 24px; } .gap-4 { gap: 32px; } .gap-5 { gap: 48px; }
+.mt-1 { margin-top: 8px; } .mt-2 { margin-top: 16px; } .mt-3 { margin-top: 24px; } .mt-4 { margin-top: 32px; } .mt-5 { margin-top: 48px; }
+
+.slide-head { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+
+/* ===== SLIDE 01 — COVER (logo + colors only) ===== */
+.brand-cover {
+  background: var(--brand-gradient);
+  display: grid;
+  place-items: center;
+}
+.brand-cover-logo {
+  width: clamp(280px, 36vw, 540px);
+  height: auto;
+  filter: brightness(0) invert(1);
+  display: block;
+}
+.brand-cover-strip {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 56px;
+}
+.brand-cover-strip span { display: block; }
+
+/* ===== SLIDE — REFERENCES (5-column film strip) ===== */
+.ref-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+.ref-img {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--ice);
+  min-height: 0;
+}
+.ref-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .6s var(--ease);
+}
+.ref-img:hover img { transform: scale(1.04); }
+.ref-label {
+  position: absolute;
+  bottom: 10px; left: 12px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px; letter-spacing: .14em;
+  color: rgba(255,255,255,.95);
+  background: rgba(15,23,42,.55);
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+}
+
+/* ===== SLIDE — BRAND IDEA (on bright brand blue) ===== */
+.brand-idea-quote {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: clamp(48px, 5.5vw, 92px);
+  line-height: 1.04;
+  letter-spacing: -.025em;
+  color: #fff;
+  max-width: 18ch;
+}
+
+/* ===== SLIDE — LOGO ===== */
+.logo-block {
+  background: var(--white);
+  border-radius: var(--r-md);
+  padding: 40px;
+  display: grid; place-items: center;
+  min-height: 200px;
+}
+.logo-block.dark { background: var(--ink); }
+.logo-block.brand { background: var(--brand-blue); }
+.logo-block img { max-height: 64px; width: auto; filter: brightness(0); }
+.logo-block.dark img,
+.logo-block.brand img { filter: brightness(0) invert(1); }
+.logo-block .logo-asset-mark { max-height: 84px; }
+.logo-block .logo-asset-type { max-height: 44px; }
+.logo-block .logo-asset-full { max-height: 60px; }
+.logo-spec {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--slate);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-top: 14px;
+}
+
+/* ===== LOGO MARK / LOGOTYPE / LOCKUP ===== */
+.logo-mark-svg {
+  width: 64px;
+  height: 64px;
+  color: var(--ink);
+}
+.logo-block.dark .logo-mark-svg,
+.logo-block.brand .logo-mark-svg { color: #fff; }
+.logo-type {
+  font-family: 'Geist', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.logo-type::after {
+  content: '';
+  display: inline;
+}
+.logo-block.dark .logo-type,
+.logo-block.brand .logo-type { color: #fff; }
+.logo-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-lockup .logo-mark-svg { width: 44px; height: 44px; }
+.logo-lockup .logo-type { font-size: 26px; }
+
+/* ===== BRAND NAME · DO/DON'T CARDS ===== */
+.name-card {
+  background: var(--white);
+  border-radius: var(--r-md);
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid var(--mist);
+  height: 100%;
+}
+.name-card-do { border-color: rgba(22, 163, 74, 0.32); }
+.name-card-dont { border-color: rgba(239, 68, 68, 0.24); }
+.name-pill {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.name-pill-do { color: #16a34a; background: rgba(22, 163, 74, 0.12); }
+.name-pill-dont { color: #dc2626; background: rgba(239, 68, 68, 0.12); }
+.name-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.name-list li {
+  font-family: 'Geist', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.name-card-do .name-list li b {
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  color: var(--brand-blue-deep);
+}
+.name-list li em {
+  font-style: normal;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--slate);
+  letter-spacing: .02em;
+  margin-left: 4px;
+}
+.name-mark {
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  flex-shrink: 0;
+  align-self: center;
+}
+.name-card-do .name-mark { color: #16a34a; background: rgba(22, 163, 74, 0.16); }
+.name-card-dont .name-mark { color: #dc2626; background: rgba(239, 68, 68, 0.14); }
+.name-note {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--slate);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--mist);
+}
+
+/* ===== COLOR SHOWCASE — SINGLE BIG SWATCH ===== */
+.color-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  width: 100%;
+  flex: 1;
+  align-items: center;
+}
+.color-block {
+  position: relative;
+  border-radius: var(--r-lg);
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+.color-block.tall { min-height: 540px; }
+.color-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.color-name {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: clamp(40px, 4.4vw, 64px);
+  letter-spacing: -.022em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.color-hex {
+  font-family: 'Geist Mono', monospace;
+  font-size: clamp(20px, 1.8vw, 28px);
+  letter-spacing: .04em;
+  color: var(--brand-blue);
+}
+.color-meta-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 24px;
+}
+.color-meta-list li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  font-size: 14px;
+  color: var(--graphite);
+  gap: 16px;
+}
+.color-meta-list li > b {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--slate);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ===== BRAND BLUE — gradient + solid pair ===== */
+.brand-blue-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+.bb-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  overflow: hidden;
+}
+.bb-block {
+  position: relative;
+  border-radius: var(--r-lg);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.bb-direction {
+  position: absolute;
+  top: 16px; right: 20px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: rgba(255,255,255,.85);
+  background: rgba(15,23,42,.32);
+  padding: 5px 10px;
+  border-radius: var(--r-pill);
+  backdrop-filter: blur(6px);
+}
+.bb-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.bb-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.bb-name {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: clamp(20px, 1.9vw, 26px);
+  letter-spacing: -.018em;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.bb-stops {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bb-stops li {
+  display: grid;
+  grid-template-columns: 18px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+}
+.bb-swatch {
+  display: block;
+  width: 18px; height: 18px;
+  border-radius: 5px;
+}
+.bb-stops li b {
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+.bb-stops li em {
+  font-style: normal;
+  color: var(--slate);
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+.bb-spec {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--graphite);
+  padding-top: 6px;
+  border-top: 1px solid var(--mist);
+  margin-top: 4px;
+}
+
+/* ===== COLOR RAMP STRIP ===== */
+.ramp-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+.ramp-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  border-radius: var(--r-sm);
+  min-height: 0;
+}
+.ramp-tile-name {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+}
+.ramp-tile-hex {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .04em;
+  opacity: .7;
+}
+
+/* ===== TYPOGRAPHY SLIDES ===== */
+.type-sample {
+  border-radius: var(--r-md);
+  padding: 32px;
+  background: var(--white);
+  display: flex; flex-direction: column;
+  gap: 14px;
+}
+.type-sample.alt { background: var(--ice); }
+.type-sample .type-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--slate);
+  text-transform: uppercase;
+}
+.glyph-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 18px;
+  color: var(--ink);
+}
+.glyph-grid span {
+  aspect-ratio: 1;
+  display: grid; place-items: center;
+  background: var(--ice);
+  border-radius: 6px;
+}
+.scale-row {
+  display: flex; align-items: baseline;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--mist);
+}
+.scale-row:last-child { border-bottom: none; }
+.scale-label {
+  width: 80px; flex-shrink: 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--slate);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.scale-spec {
+  width: 200px; flex-shrink: 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--steel);
+}
+
+/* ===== SPACING + RADIUS ===== */
+.space-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 8px 0;
+}
+.space-bar { background: var(--brand-blue); height: 18px; border-radius: 3px; }
+.space-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--ink);
+  width: 60px;
+}
+.space-token {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--slate);
+}
+.radius-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.radius-tile {
+  aspect-ratio: 1;
+  background: var(--blue-100);
+  display: grid; place-items: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--blue-900);
+}
+
+/* ===== VOICE ===== */
+.voice-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.voice-list li {
+  font-size: 16px;
+  padding-left: 22px;
+  position: relative;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.voice-list.use li::before {
+  content: '+';
+  position: absolute; left: 0; top: 0;
+  font-family: 'Geist Mono', monospace;
+  color: var(--ok);
+  font-weight: 600;
+}
+.voice-list.never li::before {
+  content: '×';
+  position: absolute; left: 0; top: 0;
+  font-family: 'Geist Mono', monospace;
+  color: var(--danger);
+  font-weight: 600;
+}
+.voice-col { display: flex; flex-direction: column; gap: 16px; }
+.voice-col-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.voice-col-label.use { color: var(--ok); }
+.voice-col-label.never { color: var(--danger); }
+
+/* ===== TONE ===== */
+.tone-card {
+  padding: 28px;
+  border-radius: var(--r-md);
+  background: var(--ice);
+  display: flex; flex-direction: column;
+  gap: 12px;
+}
+.tone-num {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--brand-blue);
+  letter-spacing: .12em;
+}
+
+/* ===== BUTTONS (interactive — borders kept) ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  height: 44px; padding: 0 22px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--silver);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 14px; font-weight: 500;
+  cursor: pointer;
+  transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+}
+.btn:focus-visible { outline: 2px solid var(--brand-blue); outline-offset: 2px; }
+.btn-primary {
+  background: var(--brand-blue);
+  color: #fff;
+  border-color: var(--brand-blue);
+}
+.btn-primary:hover { background: var(--blue-700); border-color: var(--blue-700); }
+.btn-ghost {
+  background: transparent;
+  border-color: var(--silver);
+  color: var(--ink);
+}
+.btn-ghost:hover { background: var(--snow); }
+.btn-ghost-inv {
+  background: transparent;
+  border-color: rgba(255,255,255,.35);
+  color: #fff;
+}
+.btn-ghost-inv:hover { background: rgba(255,255,255,.05); border-color: #fff; }
+.btn-hero-primary {
+  height: 48px; padding: 0 24px; font-size: 15px;
+  background: #fff; color: var(--brand-blue-deep); border-color: #fff;
+}
+.btn-hero-ghost {
+  height: 48px; padding: 0 22px; font-size: 15px;
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.22);
+  color: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+}
+.btn-grad {
+  border: 0;
+  border-radius: 12px;
+  height: 44px; padding: 0 22px;
+  background: linear-gradient(180deg, var(--blue-500), var(--blue-700));
+  color: #fff;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.15) inset,
+    0 8px 24px -8px rgba(59,130,246,.5);
+}
+.btn-row {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  padding: 24px;
+  border-radius: var(--r-md);
+  background: var(--ice);
+}
+.btn-row.dark { background: var(--ink); }
+.btn-row.brand { background: var(--brand-blue); }
+.btn-row-label {
+  width: 100%;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--slate);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.btn-row.dark .btn-row-label,
+.btn-row.brand .btn-row-label { color: rgba(255,255,255,.5); }
+
+/* ===== INPUTS (interactive — borders kept) ===== */
+.input-pill {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 6px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: var(--r-pill);
+  backdrop-filter: blur(10px);
+}
+.input-pill input {
+  flex: 1; height: 44px;
+  background: transparent; border: 0; outline: 0;
+  padding: 0 16px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  color: #fff;
+}
+.input-pill input::placeholder { color: rgba(255,255,255,.55); }
+.input-mono {
+  width: 100%; padding: 14px 18px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r-md);
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  color: #fff;
+}
+.input-mono:focus { outline: none; border-color: var(--brand-blue-bright); }
+.input-mono::placeholder { color: rgba(255,255,255,.4); }
+.input-light {
+  width: 100%; padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--mist);
+  border-radius: var(--r-md);
+  font-family: 'Geist Mono', monospace;
+  font-size: 15px;
+  color: var(--ink);
+}
+.input-light:focus { outline: none; border-color: var(--brand-blue); }
+.input-light::placeholder { color: var(--steel); }
+
+/* ===== CARDS (no borders — bg differentiation only) ===== */
+.feat-card,
+.nm-card,
+.ps-card,
+.tone-card,
+.motion-card,
+.section-tile {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  display: flex; flex-direction: column;
+  gap: 14px;
+}
+.feat-card { box-shadow: 0 1px 0 rgba(15,23,42,.04); }
+.feat-card { background: var(--ice); }
+.feat-card,
+.nm-card { background: var(--ice); }
+.feat-icon,
+.nm-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue-50), var(--blue-100));
+  color: var(--brand-blue);
+  display: grid; place-items: center;
+}
+.feat-icon svg, .nm-icon svg { width: 22px; height: 22px; }
+.feat-card h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin: 0; }
+.feat-card p, .nm-card p { font-size: 13px; line-height: 1.5; color: var(--graphite); margin: 0; }
+.nm-card p { color: var(--ink); font-weight: 500; }
+
+.ps-card {
+  background: var(--ice);
+  position: relative;
+  padding: 28px 22px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  height: 100%;
+  justify-content: space-between;
+}
+.ps-card-emph {
+  background: var(--brand-gradient);
+  color: #fff;
+}
+.ps-num {
+  display: block;
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: clamp(48px, 5vw, 80px);
+  line-height: .95;
+  letter-spacing: -.04em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.ps-card-emph .ps-num { color: #fff; }
+.ps-num sup {
+  font-size: .34em;
+  font-weight: 500;
+  vertical-align: top;
+  margin-left: 4px;
+  color: var(--brand-blue);
+  position: relative;
+  top: .6em;
+}
+.ps-card-emph .ps-num sup { color: var(--blue-300); }
+.ps-label { display: block; font-size: 12px; line-height: 1.4; color: var(--graphite); max-width: 22ch; }
+.ps-card-emph .ps-label { color: rgba(255,255,255,.78); }
+
+/* ===== HERO MARKET CARD MOCK (for cards demo + hero pattern slide) ===== */
+.hcm {
+  width: 100%;
+  max-width: 380px;
+  margin-left: auto;
+  padding: 22px 22px 20px;
+  border-radius: 20px;
+  background: rgba(15,30,75,.55);
+  box-shadow:
+    0 30px 80px -30px rgba(0,0,30,.6),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter: blur(18px) saturate(140%);
+  display: flex; flex-direction: column;
+  gap: 16px;
+}
+.hcm-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.hcm-pair { display: inline-flex; align-items: center; gap: 8px; }
+.hcm-symbol {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px; font-weight: 600;
+  color: #fff; letter-spacing: .02em;
+}
+.hcm-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .12em;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: rgba(96,165,250,.18);
+  color: var(--blue-300);
+}
+.hcm-price { text-align: right; display: flex; flex-direction: column; gap: 2px; }
+.hcm-px { font-size: 18px; font-weight: 600; color: #fff; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.hcm-delta { font-family: 'Geist Mono', monospace; font-size: 11px; font-variant-numeric: tabular-nums; color: var(--buy); }
+.hcm-spark { width: 100%; height: 80px; display: block; }
+.hcm-spark-path {
+  fill: none;
+  stroke: url(#hcmGrad);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--len, 1000);
+  stroke-dashoffset: var(--len, 1000);
+  animation: sparkDraw .9s .15s var(--ease-out-expo) forwards;
+}
+.hcm-spark-fill { fill: url(#hcmFill); opacity: 0; animation: sparkFade .6s .85s ease-out forwards; }
+@keyframes sparkDraw { to { stroke-dashoffset: 0; } }
+@keyframes sparkFade { to { opacity: 1; } }
+.hcm-status {
+  list-style: none;
+  padding-top: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.hcm-status li {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,.78);
+}
+.hcm-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-400); box-shadow: 0 0 0 3px rgba(96,165,250,.2); }
+.hcm-cta {
+  height: 44px; border: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--blue-500), var(--blue-700));
+  color: #fff;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.15) inset,
+    0 8px 24px -8px rgba(59,130,246,.5);
+}
+
+/* ===== BADGES + STATUS ===== */
+.badge-row {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  padding: 24px;
+  border-radius: var(--r-md);
+  background: var(--ice);
+}
+.badge-row.dark { background: var(--ink); }
+.tag-shielded {
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .12em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(96,165,250,.18);
+  color: var(--blue-300);
+}
+.chip {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  color: var(--graphite);
+}
+.pill-low {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px; letter-spacing: .08em;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  background: rgba(34,197,94,.12); color: var(--ok);
+}
+.pill-high {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px; letter-spacing: .08em;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  background: rgba(239,68,68,.12); color: var(--danger);
+}
+.mark-yes,
+.mark-no {
+  display: inline-grid; place-items: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  font-size: 14px; font-weight: 600;
+}
+.mark-yes { background: rgba(22,163,74,.12); color: var(--ok); }
+.mark-no { background: rgba(239,68,68,.1); color: var(--danger); }
+.dot-live {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px; color: var(--graphite);
+}
+.dot-live .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 rgba(22,163,74,.6);
+  animation: pulse 2.2s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(22,163,74,.6); }
+  70%  { box-shadow: 0 0 0 10px rgba(22,163,74,0); }
+  100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+}
+.badge-row.dark .dot-live { color: rgba(255,255,255,.78); }
+.badge-row.dark .chip { background: rgba(255,255,255,.05); color: rgba(255,255,255,.78); }
+
+/* ===== TABLE ===== */
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--white);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  font-size: 14px;
+}
+.compare-table th,
+.compare-table td {
+  padding: 16px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--mist);
+}
+.compare-table thead th {
+  font-size: 13px; font-weight: 500;
+  color: var(--graphite);
+  background: var(--snow);
+}
+.compare-table thead th.col-shield {
+  color: var(--brand-blue);
+  background: rgba(51,112,255,.06);
+  border-bottom: 2px solid var(--brand-blue);
+}
+.compare-table tbody tr:last-child td,
+.compare-table tbody tr:last-child th { border-bottom: none; }
+.compare-table tbody th { text-align: left; font-weight: 500; color: var(--ink); font-size: 14px; background: var(--white); }
+.compare-table td.cell-shield { background: rgba(51,112,255,.06); }
+
+/* ===== ACCORDION ===== */
+.faq {
+  background: var(--white);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.faq-item { border-bottom: 1px solid var(--mist); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q {
+  width: 100%;
+  background: transparent; border: 0;
+  padding: 22px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  font-size: 16px; font-weight: 500;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.faq-icon {
+  display: inline-grid; place-items: center;
+  width: 24px; height: 24px;
+  position: relative;
+}
+.faq-icon::before,
+.faq-icon::after { content: ''; position: absolute; background: var(--graphite); transition: transform .3s var(--ease); }
+.faq-icon::before { width: 12px; height: 1.5px; }
+.faq-icon::after { height: 12px; width: 1.5px; }
+.faq-item.is-open .faq-icon::after { transform: rotate(90deg); opacity: 0; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); }
+.faq-item.is-open .faq-a { max-height: 200px; }
+.faq-a-inner { padding: 0 24px 22px; font-size: 14px; line-height: 1.6; color: var(--graphite); }
+
+/* ===== NAV (kept border — interactive) ===== */
+.nav-demo {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  border: 1px solid var(--mist);
+  border-radius: var(--r-pill);
+  background: var(--white);
+}
+.nav-demo.dark {
+  background: rgba(15,23,42,.6);
+  border: 1px solid rgba(255,255,255,.1);
+  backdrop-filter: blur(14px);
+}
+.nav-logo-mark { font-weight: 600; font-size: 14px; letter-spacing: -.01em; color: var(--ink); }
+.nav-demo.dark .nav-logo-mark { color: #fff; }
+.nav-links-demo { display: flex; gap: 24px; font-size: 13px; color: var(--graphite); }
+.nav-demo.dark .nav-links-demo { color: rgba(255,255,255,.78); }
+.nav-cta-demo {
+  padding: 8px 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--silver);
+  font-size: 13px; font-weight: 500;
+  color: var(--ink);
+  background: var(--white);
+}
+.nav-demo.dark .nav-cta-demo { background: #fff; color: var(--brand-blue-deep); border-color: #fff; }
+
+/* ===== SECTION MAP ===== */
+.section-map {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+.section-tile {
+  background: var(--ice);
+  border-radius: var(--r-sm);
+  padding: 14px 10px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+  min-height: 220px;
+}
+.section-tile-num {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  color: var(--brand-blue);
+  letter-spacing: .08em;
+}
+.section-tile-name { font-size: 11px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.section-tile-headline { font-size: 10px; color: var(--graphite); line-height: 1.3; flex: 1; }
+.section-tile.brand { background: var(--brand-blue); }
+.section-tile.brand .section-tile-name,
+.section-tile.dark .section-tile-name { color: #fff; }
+.section-tile.brand .section-tile-headline,
+.section-tile.dark .section-tile-headline { color: rgba(255,255,255,.7); }
+.section-tile.brand .section-tile-num,
+.section-tile.dark .section-tile-num { color: var(--blue-300); }
+.section-tile.dark { background: var(--ink); }
+
+/* ===== HERO PATTERN ===== */
+.hero-pattern {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+}
+.hero-pattern h1 {
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: clamp(40px, 4.4vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -.025em;
+  color: #fff;
+  margin: 0;
+}
+.hero-pattern p {
+  font-size: 17px;
+  line-height: 1.5;
+  color: rgba(255,255,255,.78);
+  max-width: 50ch;
+  margin: 18px 0 24px;
+}
+.gradient-text {
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 60%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ===== TC-GRID + COMBO ===== */
+.tc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  flex: 1;
+  align-items: stretch;
+}
+.combo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  flex: 1;
+}
+.combo-hero-callout {
+  background: var(--ink);
+  border-radius: var(--r-lg);
+  padding: 40px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  gap: 16px;
+  color: #fff;
+}
+.combo-hero-callout h3 {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: 28px; letter-spacing: -.02em; line-height: 1.1;
+  max-width: 16ch;
+  margin: 0;
+}
+.combo-hero-callout p {
+  font-size: 14px;
+  color: rgba(255,255,255,.7);
+  max-width: 36ch;
+  margin: 0;
+}
+.combo-nm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ===== MOTION (Decode) ===== */
+.decode-spec-card,
+.decode-demo-card {
+  background: var(--ice);
+  border-radius: var(--r-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+.decode-demo-card {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.decode-spec-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 12px;
+}
+.decode-spec-list li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  align-items: baseline;
+}
+.decode-spec-list li b {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--brand-blue);
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+.decode-spec-list li span {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--graphite);
+}
+.decode-demo {
+  cursor: pointer;
+  user-select: none;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.decode-mono {
+  font-family: 'Geist Mono', monospace;
+}
+[data-decode] { visibility: hidden; }
+[data-decode].decoding { visibility: visible; }
+
+/* ===== CLOSING ===== */
+.closing-text {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: clamp(48px, 5.6vw, 92px);
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  color: #fff;
+  text-align: center;
+  max-width: 18ch;
+}
+.closing-avail {
+  background: linear-gradient(135deg, #93c5fd 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 600;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .frame { aspect-ratio: auto; min-height: 90vh; }
+  .inner { padding: 32px; }
+  .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; gap: 24px; }
+  .ramp-grid { grid-template-columns: repeat(5, 1fr); }
+  .ref-grid { grid-template-columns: repeat(2, 1fr); }
+  .ref-span-2 { grid-column: span 2; grid-row: auto; }
+  .section-map { grid-template-columns: repeat(3, 1fr); }
+  .tc-grid { grid-template-columns: 1fr; }
+  .combo { grid-template-columns: 1fr; }
+  .hero-pattern { grid-template-columns: 1fr; }
+  .color-showcase { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hcm-spark-path,
+  .hcm-spark-fill,
+  .dot-live .dot { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"><div id="progress-fill"></div></div>
+<div id="counter" aria-live="polite">01 / 28</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="hcmGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#93c5fd"/>
+      <stop offset="60%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="hcmFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(96,165,250,.35)"/>
+      <stop offset="100%" stop-color="rgba(96,165,250,0)"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ===== 01 — COVER (logo + brand colors only) ===== -->
+<section class="slide" id="s1">
+  <div class="frame brand-cover">
+    <img class="brand-cover-logo" src="assets/ShieldTX_Logo.svg" alt="ShieldTX" />
+    <div class="brand-cover-strip" aria-hidden="true">
+      <span style="background:#1e3a8a"></span>
+      <span style="background:#3370ff"></span>
+      <span style="background:#5ba0ff"></span>
+      <span style="background:#93c5fd"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 02 — REFERENCES ===== -->
+<section class="slide" id="s2">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">References</span>
+        <h2 class="h-lg">Visual references</h2>
+        <p class="body-sm">Moodboard for shielded data, financial information design, and protective UI patterns.</p>
+      </div>
+      <div class="ref-grid">
+        <div class="ref-img"><img src="assets/refs/ref-1.png" alt="Reference 1"><span class="ref-label">01</span></div>
+        <div class="ref-img"><img src="assets/refs/ref-2.png" alt="Reference 2"><span class="ref-label">02</span></div>
+        <div class="ref-img"><img src="assets/refs/ref-3.png" alt="Reference 3"><span class="ref-label">03</span></div>
+        <div class="ref-img"><img src="assets/refs/ref-4.png" alt="Reference 4"><span class="ref-label">04</span></div>
+        <div class="ref-img"><img src="assets/refs/ref-5.png" alt="Reference 5"><span class="ref-label">05</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 03 — BRAND IDEA (on brighter brand blue) ===== -->
+<section class="slide" id="s3">
+  <div class="frame brand-bright">
+    <div class="glow glow-bright"></div>
+    <div class="inner" style="justify-content: center; align-items: flex-start; gap: 0;">
+      <h2 class="brand-idea-quote">Shielded execution.<br/>Same fills, zero footprint.</h2>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04 — LOGO SYSTEM (Mark · Logotype · Logo) ===== -->
+<section class="slide" id="s4">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Identity</span>
+        <h2 class="h-lg">Logo system</h2>
+        <p class="body-sm">Three forms. Use the lockup (mark + logotype) by default. The mark stands alone in tight spaces; the logotype carries the brand in text-heavy contexts. Maintain 1× icon-height clear space. Minimum size: 24px digital.</p>
+      </div>
+      <div class="cols-3" style="flex: 1;">
+        <div class="stack gap-2">
+          <div class="logo-block">
+            <img class="logo-asset logo-asset-mark" src="assets/ShieldTX_LogoMark.svg" alt="ShieldTX logo mark" />
+          </div>
+          <p class="logo-spec">Logo mark · the symbol</p>
+        </div>
+        <div class="stack gap-2">
+          <div class="logo-block">
+            <img class="logo-asset logo-asset-type" src="assets/ShieldTX_LogoType.svg" alt="ShieldTX logotype" />
+          </div>
+          <p class="logo-spec">Logotype · the wordmark</p>
+        </div>
+        <div class="stack gap-2">
+          <div class="logo-block">
+            <img class="logo-asset logo-asset-full" src="assets/ShieldTX_Logo.svg" alt="ShieldTX logo lockup" />
+          </div>
+          <p class="logo-spec">Logo · mark + logotype lockup</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04b — LOGO ON SURFACES ===== -->
+<section class="slide" id="s4b">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Identity · surfaces</span>
+        <h2 class="h-lg">Logo on surfaces</h2>
+        <p class="body-sm">Use the white logo on Ink and on Brand. Use the inked logo on Snow. The logotype keeps its 'TX' set in regular weight (not bold) for visual balance.</p>
+      </div>
+      <div class="cols-3" style="flex: 1;">
+        <div class="stack gap-2">
+          <div class="logo-block"><img class="logo-asset logo-asset-full" src="assets/ShieldTX_Logo.svg" alt="ShieldTX logo on Snow" /></div>
+          <p class="logo-spec">On Snow · #f8fafc</p>
+        </div>
+        <div class="stack gap-2">
+          <div class="logo-block dark"><img class="logo-asset logo-asset-full" src="assets/ShieldTX_Logo.svg" alt="ShieldTX logo on Ink" /></div>
+          <p class="logo-spec">On Ink · #0f172a</p>
+        </div>
+        <div class="stack gap-2">
+          <div class="logo-block brand"><img class="logo-asset logo-asset-full" src="assets/ShieldTX_Logo.svg" alt="ShieldTX logo on Brand" /></div>
+          <p class="logo-spec">On Brand · #3370ff</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04c — BRAND NAME · DO'S AND DON'TS ===== -->
+<section class="slide" id="s4c">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Identity · naming</span>
+        <h2 class="h-lg">Always written as <strong>ShieldTX</strong></h2>
+        <p class="body-sm">The brand name is one word: capital S, capital T, capital X. No space, no hyphen, no lowercase x. Use the same form in body copy, headlines, code, and product UI.</p>
+      </div>
+      <div class="cols-2" style="flex: 1;">
+        <div class="name-card name-card-do">
+          <span class="name-pill name-pill-do">Do</span>
+          <ul class="name-list">
+            <li><span class="name-mark">✓</span> <b>ShieldTX</b></li>
+          </ul>
+          <p class="name-note">One word. Capital S, T, X. Lowercase 'hield'.</p>
+        </div>
+        <div class="name-card name-card-dont">
+          <span class="name-pill name-pill-dont">Don't</span>
+          <ul class="name-list">
+            <li><span class="name-mark">✕</span> Shield TX <em>(no space)</em></li>
+            <li><span class="name-mark">✕</span> ShieldTx <em>(lowercase x)</em></li>
+            <li><span class="name-mark">✕</span> Shield-TX <em>(no hyphen)</em></li>
+            <li><span class="name-mark">✕</span> shieldtx <em>(no all-lowercase)</em></li>
+            <li><span class="name-mark">✕</span> SHIELDTX <em>(no all-caps in prose)</em></li>
+            <li><span class="name-mark">✕</span> Shield Tx <em>(no title-case)</em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05 — BRAND BLUE (gradient + solid as two showcases) ===== -->
+<section class="slide" id="s5">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Colour · Primary</span>
+        <h2 class="h-lg">On Brand</h2>
+        <p class="body-sm">The brand expresses two ways: as a gradient (cover, manifesto, hero callout) and as a single tone (CTAs, focus rings, links).</p>
+      </div>
+      <div class="brand-blue-grid">
+        <!-- GRADIENT -->
+        <div class="bb-card">
+          <div class="bb-block" style="background: var(--brand-gradient);">
+            <span class="bb-direction">135°</span>
+          </div>
+          <div class="bb-meta">
+            <span class="bb-label">Gradient</span>
+            <div class="bb-name">Brand Gradient</div>
+            <ul class="bb-stops">
+              <li><span class="bb-swatch" style="background:#1e3a8a"></span><b>#1E3A8A</b><em>0%</em></li>
+              <li><span class="bb-swatch" style="background:#3370ff"></span><b>#3370FF</b><em>50%</em></li>
+              <li><span class="bb-swatch" style="background:#5ba0ff"></span><b>#5BA0FF</b><em>100%</em></li>
+            </ul>
+            <p class="bb-spec">Direction · 135° linear<br/>Use on cover, manifesto, hero callout</p>
+          </div>
+        </div>
+        <!-- SOLID -->
+        <div class="bb-card">
+          <div class="bb-block" style="background: #3370ff;"></div>
+          <div class="bb-meta">
+            <span class="bb-label">Single tone</span>
+            <div class="bb-name">Brand Blue</div>
+            <ul class="bb-stops">
+              <li><span class="bb-swatch" style="background:#3370ff"></span><b>#3370FF</b><em>solid</em></li>
+            </ul>
+            <p class="bb-spec">Token · <code style="font-family:'Geist Mono',monospace;font-size:13px;">--brand-blue</code><br/>Use on CTAs, focus rings, links, eyebrows</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05b — SECONDARY COLOUR (CYAN) ===== -->
+<section class="slide" id="s5b">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Colour · Secondary</span>
+        <h2 class="h-lg">Brand Cyan</h2>
+        <p class="body-sm">A single, restrained accent that pairs with Brand Blue Deep. Use sparingly: highlights, hover states, detail accents — never as a primary CTA. Works on Ink, on Brand, and as a tint on Snow.</p>
+      </div>
+      <div class="brand-blue-grid">
+        <!-- CYAN -->
+        <div class="bb-card">
+          <div class="bb-block" style="background: #4dd5e8;"></div>
+          <div class="bb-meta">
+            <span class="bb-label">Single tone</span>
+            <div class="bb-name">Brand Cyan</div>
+            <ul class="bb-stops">
+              <li><span class="bb-swatch" style="background:#4dd5e8"></span><b>#4DD5E8</b><em>solid</em></li>
+            </ul>
+            <p class="bb-spec">Token · <code style="font-family:'Geist Mono',monospace;font-size:13px;">--brand-cyan</code><br/>Use on accents, hover, prefill chips, secondary highlights</p>
+          </div>
+        </div>
+        <!-- CYAN ON INK -->
+        <div class="bb-card">
+          <div class="bb-block" style="background: var(--ink); display:flex;align-items:center;justify-content:center;">
+            <span style="color:#4dd5e8; font-family:'Geist Mono', monospace; font-size:14px; letter-spacing:.14em; text-transform:uppercase; padding: 6px 16px; border:1px solid rgba(77,213,232,.4); background: rgba(77,213,232,.16); border-radius:999px;">SHIELDED</span>
+          </div>
+          <div class="bb-meta">
+            <span class="bb-label">In context</span>
+            <div class="bb-name">Cyan on Ink</div>
+            <ul class="bb-stops">
+              <li><span class="bb-swatch" style="background:#4dd5e8"></span><b>#4DD5E8</b><em>16% bg, 100% text</em></li>
+            </ul>
+            <p class="bb-spec">Pair Brand Cyan with <code style="font-family:'Geist Mono',monospace;font-size:13px;">--ink</code> or <code style="font-family:'Geist Mono',monospace;font-size:13px;">--brand-blue-deep</code> for live-trade tags, pills, and trust marks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 06 — BLUE RAMP ===== -->
+<section class="slide" id="s6">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Colour · Ramp</span>
+        <h2 class="h-lg">Blue ramp</h2>
+        <p class="body-sm">Tints to shades. <code style="font-family:'Geist Mono',monospace;font-size:13px;">--blue-300 → --blue-500</code> drive the accent gradient on the hero focal word.</p>
+      </div>
+      <div class="ramp-grid">
+        <div class="ramp-tile" style="background:#eff6ff;color:#1e3a8a;"><span class="ramp-tile-name">50</span><span class="ramp-tile-hex">#eff6ff</span></div>
+        <div class="ramp-tile" style="background:#dbeafe;color:#1e3a8a;"><span class="ramp-tile-name">100</span><span class="ramp-tile-hex">#dbeafe</span></div>
+        <div class="ramp-tile" style="background:#bfdbfe;color:#1e3a8a;"><span class="ramp-tile-name">200</span><span class="ramp-tile-hex">#bfdbfe</span></div>
+        <div class="ramp-tile" style="background:#93c5fd;color:#1e3a8a;"><span class="ramp-tile-name">300</span><span class="ramp-tile-hex">#93c5fd</span></div>
+        <div class="ramp-tile" style="background:#60a5fa;color:#1e3a8a;"><span class="ramp-tile-name">400</span><span class="ramp-tile-hex">#60a5fa</span></div>
+        <div class="ramp-tile" style="background:#3b82f6;color:#fff;"><span class="ramp-tile-name">500</span><span class="ramp-tile-hex">#3b82f6</span></div>
+        <div class="ramp-tile" style="background:#2563eb;color:#fff;"><span class="ramp-tile-name">600</span><span class="ramp-tile-hex">#2563eb</span></div>
+        <div class="ramp-tile" style="background:#1d4ed8;color:#fff;"><span class="ramp-tile-name">700</span><span class="ramp-tile-hex">#1d4ed8</span></div>
+        <div class="ramp-tile" style="background:#1e40af;color:#fff;"><span class="ramp-tile-name">800</span><span class="ramp-tile-hex">#1e40af</span></div>
+        <div class="ramp-tile" style="background:#1e3a8a;color:#fff;"><span class="ramp-tile-name">900</span><span class="ramp-tile-hex">#1e3a8a</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 07 — NEUTRALS ===== -->
+<section class="slide" id="s7">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Colour · Neutrals</span>
+        <h2 class="h-lg">Neutrals</h2>
+        <p class="body-sm">Snow → Ink covers all surface and text needs. The full ramp is required for type contrast across light and dark contexts.</p>
+      </div>
+      <div class="ramp-grid">
+        <div class="ramp-tile" style="background:#ffffff;color:#0f172a;"><span class="ramp-tile-name">White</span><span class="ramp-tile-hex">#ffffff</span></div>
+        <div class="ramp-tile" style="background:#f8fafc;color:#0f172a;"><span class="ramp-tile-name">Snow</span><span class="ramp-tile-hex">#f8fafc</span></div>
+        <div class="ramp-tile" style="background:#f1f5f9;color:#0f172a;"><span class="ramp-tile-name">Ice</span><span class="ramp-tile-hex">#f1f5f9</span></div>
+        <div class="ramp-tile" style="background:#e2e8f0;color:#0f172a;"><span class="ramp-tile-name">Mist</span><span class="ramp-tile-hex">#e2e8f0</span></div>
+        <div class="ramp-tile" style="background:#cbd5e1;color:#0f172a;"><span class="ramp-tile-name">Silver</span><span class="ramp-tile-hex">#cbd5e1</span></div>
+        <div class="ramp-tile" style="background:#94a3b8;color:#fff;"><span class="ramp-tile-name">Steel</span><span class="ramp-tile-hex">#94a3b8</span></div>
+        <div class="ramp-tile" style="background:#64748b;color:#fff;"><span class="ramp-tile-name">Slate</span><span class="ramp-tile-hex">#64748b</span></div>
+        <div class="ramp-tile" style="background:#475569;color:#fff;"><span class="ramp-tile-name">Graphite</span><span class="ramp-tile-hex">#475569</span></div>
+        <div class="ramp-tile" style="background:#1e293b;color:#fff;"><span class="ramp-tile-name">Charcoal</span><span class="ramp-tile-hex">#1e293b</span></div>
+        <div class="ramp-tile" style="background:#0f172a;color:#fff;"><span class="ramp-tile-name">Ink</span><span class="ramp-tile-hex">#0f172a</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 08 — SUCCESS ===== -->
+<section class="slide" id="s8">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Colour · Semantic</span>
+        <h2 class="h-lg">Success</h2>
+      </div>
+      <div class="color-showcase">
+        <div class="color-block tall" style="background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);"></div>
+        <div class="color-meta">
+          <div>
+            <div class="color-name">OK · Positive</div>
+            <div class="color-hex" style="color:#16a34a; margin-top:8px;">#16A34A</div>
+          </div>
+          <ul class="color-meta-list">
+            <li><b>Token</b><span><code style="font-family:'Geist Mono',monospace;font-size:13px;">--ok</code></span></li>
+            <li><b>Role</b><span>Confirmation, success states, secured status.</span></li>
+            <li><b>Use on</b><span>Status pills · "Low" overhead · "Live" indicator dot · audit pass marks.</span></li>
+            <li><b>Contrast</b><span>Pairs with Snow, White, Ice. Tinted background <code style="font-family:'Geist Mono',monospace;font-size:13px;">rgba(22,163,74,.12)</code>.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 09 — DANGER ===== -->
+<section class="slide" id="s9">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Colour · Semantic</span>
+        <h2 class="h-lg">Danger</h2>
+      </div>
+      <div class="color-showcase">
+        <div class="color-block tall" style="background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);"></div>
+        <div class="color-meta">
+          <div>
+            <div class="color-name">Danger · Adverse</div>
+            <div class="color-hex" style="color:#ef4444; margin-top:8px;">#EF4444</div>
+          </div>
+          <ul class="color-meta-list">
+            <li><b>Token</b><span><code style="font-family:'Geist Mono',monospace;font-size:13px;">--danger</code></span></li>
+            <li><b>Role</b><span>Risk, leakage, exposure indicators. Use sparingly — reserved for adverse states.</span></li>
+            <li><b>Use on</b><span>"High" pills · cross marks · alpha leakage stat cards · stop-loss controls.</span></li>
+            <li><b>Contrast</b><span>Pairs with Snow, White, Ice. Tinted background <code style="font-family:'Geist Mono',monospace;font-size:13px;">rgba(239,68,68,.10)</code>.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10 — TRADING SEMANTIC (BUY / SELL) ===== -->
+<section class="slide" id="s10">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Colour · Trading</span>
+        <h2 class="h-lg">Buy / Sell</h2>
+        <p class="body-sm">Universal trading colours. Used only inside trading components — never as semantic ok/danger replacements.</p>
+      </div>
+      <div class="cols-2" style="flex: 1;">
+        <div class="stack gap-3">
+          <div class="color-block" style="background:#3ad29f; min-height:340px;"></div>
+          <div>
+            <div class="color-name" style="font-size:32px;">Buy · Long</div>
+            <div class="color-hex" style="color:#3ad29f; margin-top:6px; font-size:18px;">#3AD29F</div>
+            <p class="body-sm mt-2">Position deltas going up. Order side controls. <code style="font-family:'Geist Mono',monospace;font-size:13px;">--buy</code></p>
+          </div>
+        </div>
+        <div class="stack gap-3">
+          <div class="color-block" style="background:#f06767; min-height:340px;"></div>
+          <div>
+            <div class="color-name" style="font-size:32px;">Sell · Short</div>
+            <div class="color-hex" style="color:#f06767; margin-top:6px; font-size:18px;">#F06767</div>
+            <p class="body-sm mt-2">Position deltas going down. Order side controls. <code style="font-family:'Geist Mono',monospace;font-size:13px;">--sell</code></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 11 — TYPOGRAPHY: GEIST ===== -->
+<section class="slide" id="s11">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Typography</span>
+        <h2 class="h-lg">Geist — display + body</h2>
+        <p class="body-sm">Single neogrotesque used for everything from oversized headlines to body copy. Weights 400–600 in active use.</p>
+      </div>
+      <div class="cols-2" style="flex: 1;">
+        <div class="type-sample">
+          <span class="type-label">Display · 76px / 600 / -0.025em</span>
+          <p style="font-size:64px;font-weight:600;letter-spacing:-.025em;line-height:1.05;color:var(--ink);">Same fills, zero footprint.</p>
+        </div>
+        <div class="type-sample alt">
+          <span class="type-label">Body · 16px / 400 / 1.55</span>
+          <p style="font-size:16px;line-height:1.55;color:var(--graphite);">ShieldTX executes natively on Hyperliquid: same order book, same liquidity, same fills, without your positions surfacing on the public book.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 12 — TYPOGRAPHY: GEIST MONO ===== -->
+<section class="slide" id="s12">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Typography</span>
+        <h2 class="h-lg">Geist Mono — labels &amp; data</h2>
+        <p class="body-sm">Used for eyebrows, monospace UI labels, numeric data, and addresses. Letter-spacing 0.04em–0.14em depending on context.</p>
+      </div>
+      <div class="cols-2" style="flex: 1; gap: 32px;">
+        <div class="type-sample">
+          <span class="type-label">Eyebrow · 12px / 500 / 0.14em</span>
+          <p style="font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-blue);font-weight:500;">(01) Wallet lookup</p>
+          <span class="type-label" style="margin-top:16px;">Address · 14px / 500 / 0.04em</span>
+          <p style="font-family:'Geist Mono',monospace;font-size:14px;letter-spacing:.04em;color:var(--ink);">0x357f06a2d9e4423ac1ac2d77552954eb839aa3c4</p>
+        </div>
+        <div class="type-sample alt">
+          <span class="type-label">Glyph showcase</span>
+          <div class="glyph-grid">
+            <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+            <span>8</span><span>9</span><span>$</span><span>%</span><span>+</span><span>−</span><span>×</span><span>÷</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 13 — TYPE SCALE ===== -->
+<section class="slide" id="s13">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Typography</span>
+        <h2 class="h-lg">Type scale</h2>
+        <p class="body-sm">All headline tiers use clamp() for fluid responsive sizing — the values below are the desktop ceilings.</p>
+      </div>
+      <div class="stack" style="flex: 1;">
+        <div class="scale-row">
+          <span class="scale-label">H1 · Hero</span>
+          <span class="scale-spec">clamp(44px, 5.4vw, 76px)</span>
+          <span style="font-family:'Geist',sans-serif;font-size:60px;font-weight:600;letter-spacing:-.025em;line-height:1.05;">Same fills</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">H2 · Section</span>
+          <span class="scale-spec">clamp(40px, 5.5vw, 84px)</span>
+          <span style="font-family:'Geist',sans-serif;font-size:48px;font-weight:500;letter-spacing:-.025em;line-height:1.05;">Four steps</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">H3 · Card</span>
+          <span class="scale-spec">20–24px / 600</span>
+          <span style="font-family:'Geist',sans-serif;font-size:22px;font-weight:600;letter-spacing:-.018em;">Execution shielding</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">Body</span>
+          <span class="scale-spec">16px / 400 / 1.55</span>
+          <span style="font-size:16px;line-height:1.55;color:var(--graphite);">Same order book, same liquidity, same fills.</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">Eyebrow</span>
+          <span class="scale-spec">12–13px mono / 500 / 0.14em</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-blue);font-weight:500;">Features</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">Mono</span>
+          <span class="scale-spec">11–14px mono / 0.04em</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:.04em;color:var(--ink);">Mark · 278.81</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 14 — SPACING + RADIUS ===== -->
+<section class="slide" id="s14">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Foundations</span>
+        <h2 class="h-lg">Spacing &amp; radius</h2>
+        <p class="body-sm">8-point base spacing system. Five radii cover everything from input chips to oversized panels.</p>
+      </div>
+      <div class="cols-2" style="flex: 1;">
+        <div>
+          <span class="type-label" style="display:block;margin-bottom:12px;">Spacing · 4 → 64px</span>
+          <div class="space-row"><span class="space-label">4</span><div class="space-bar" style="width:4px"></div><span class="space-token">--s1</span></div>
+          <div class="space-row"><span class="space-label">8</span><div class="space-bar" style="width:8px"></div><span class="space-token">--s2</span></div>
+          <div class="space-row"><span class="space-label">12</span><div class="space-bar" style="width:12px"></div><span class="space-token">--s3</span></div>
+          <div class="space-row"><span class="space-label">16</span><div class="space-bar" style="width:16px"></div><span class="space-token">--s4</span></div>
+          <div class="space-row"><span class="space-label">24</span><div class="space-bar" style="width:24px"></div><span class="space-token">--s6</span></div>
+          <div class="space-row"><span class="space-label">32</span><div class="space-bar" style="width:32px"></div><span class="space-token">--s8</span></div>
+          <div class="space-row"><span class="space-label">40</span><div class="space-bar" style="width:40px"></div><span class="space-token">--s10</span></div>
+          <div class="space-row"><span class="space-label">48</span><div class="space-bar" style="width:48px"></div><span class="space-token">--s12</span></div>
+          <div class="space-row"><span class="space-label">64</span><div class="space-bar" style="width:64px"></div><span class="space-token">--s16</span></div>
+        </div>
+        <div>
+          <span class="type-label" style="display:block;margin-bottom:12px;">Radius · sm → pill</span>
+          <div class="radius-grid">
+            <div class="radius-tile" style="border-radius:10px">10</div>
+            <div class="radius-tile" style="border-radius:14px">14</div>
+            <div class="radius-tile" style="border-radius:20px">20</div>
+            <div class="radius-tile" style="border-radius:28px">28</div>
+            <div class="radius-tile" style="border-radius:9999px">pill</div>
+          </div>
+          <p class="body-sm mt-3" style="font-size:13px;">Tokens: <code style="font-family:'Geist Mono',monospace;font-size:12px;">--r-sm 10 · --r-md 14 · --r-lg 20 · --r-xl 28 · --r-pill 9999</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 15 — VOICE & VOCABULARY ===== -->
+<section class="slide" id="s15">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Voice</span>
+        <h2 class="h-lg">Vocabulary</h2>
+        <p class="body-sm">From the language guide. The "never use" column is non-negotiable — these terms trigger Tornado Cash / OFAC associations regardless of context.</p>
+      </div>
+      <div class="cols-2" style="flex: 1;">
+        <div class="voice-col">
+          <span class="voice-col-label use">Use</span>
+          <ul class="voice-list use">
+            <li>Shielded execution</li>
+            <li>Shielded positioning</li>
+            <li>Edge protection</li>
+            <li>Adversarial protection</li>
+            <li>Confidential positioning</li>
+            <li>Protect your order flow</li>
+            <li>Trade without telegraphing your strategy</li>
+            <li>Compliant by design</li>
+          </ul>
+        </div>
+        <div class="voice-col">
+          <span class="voice-col-label never">Never use</span>
+          <ul class="voice-list never">
+            <li>Privacy</li>
+            <li>Hide your trades</li>
+            <li>Anonymous trading</li>
+            <li>Untraceable</li>
+            <li>Private transactions</li>
+            <li>Dark pool (only as a single TradFi credibility line)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 16 — TONE ===== -->
+<section class="slide" id="s16">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Voice</span>
+        <h2 class="h-lg">Tone principles</h2>
+        <p class="body-sm">Three principles. Apply across outreach, copy, support, sales decks.</p>
+      </div>
+      <div class="cols-3" style="flex: 1;">
+        <div class="tone-card">
+          <span class="tone-num">01</span>
+          <h3 class="h-sm">Peer, not vendor</h3>
+          <p class="body-sm">Talk like a trader who built this for themselves. No marketing voice. They can smell a template.</p>
+        </div>
+        <div class="tone-card">
+          <span class="tone-num">02</span>
+          <h3 class="h-sm">Data first</h3>
+          <p class="body-sm">Lead with their own numbers. "You have [X] wallets copying your trades within 30 seconds." Specific beats generic.</p>
+        </div>
+        <div class="tone-card">
+          <span class="tone-num">03</span>
+          <h3 class="h-sm">Confident, not defensive</h3>
+          <p class="body-sm">Compliant by design. Say it once and move on. Don't apologise for shielded execution.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 17 — BUTTONS ===== -->
+<section class="slide" id="s17">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Components</span>
+        <h2 class="h-lg">Buttons</h2>
+        <p class="body-sm">Three surfaces × four variants. All buttons share the 44–48px height, pill or 12px-radius, Geist 14–15px / 500.</p>
+      </div>
+      <div class="stack gap-3">
+        <div class="btn-row">
+          <span class="btn-row-label">On Snow · default surface</span>
+          <button class="btn">.btn-pill</button>
+          <button class="btn btn-primary">.btn-primary</button>
+          <button class="btn btn-ghost">.btn-ghost</button>
+          <button class="btn-grad">.hcm-cta · gradient</button>
+        </div>
+        <div class="btn-row dark">
+          <span class="btn-row-label">On Ink · footer / scan-tool</span>
+          <button class="btn btn-primary">.btn-primary</button>
+          <button class="btn btn-ghost-inv">.btn-ghost.inv</button>
+          <button class="btn-grad">.hcm-cta · gradient</button>
+        </div>
+        <div class="btn-row brand">
+          <span class="btn-row-label">On Brand · hero / hero-callout</span>
+          <button class="btn btn-hero-primary">.hero-cta-primary</button>
+          <button class="btn btn-hero-ghost">.hero-cta-ghost</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 18 — FORM INPUTS ===== -->
+<section class="slide" id="s18">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Components</span>
+        <h2 class="h-lg">Form inputs</h2>
+        <p class="body-sm">Three input shapes — translucent pill (hero), monospace box (scan-tool), and light surface (beta form). Borders are the only chrome — they always remain visible to signal interactivity.</p>
+      </div>
+      <div class="cols-2" style="flex: 1;">
+        <div>
+          <span class="type-label" style="display:block;margin-bottom:12px;">Hero pill — .scan</span>
+          <div style="background:var(--brand-blue);padding:32px;border-radius:var(--r-md);">
+            <div class="input-pill">
+              <input type="text" placeholder="View your wallet's exposure" readonly>
+              <button class="btn btn-primary" style="background:#fff;color:var(--brand-blue-deep);border-color:#fff;">Scan</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="type-label" style="display:block;margin-bottom:12px;">Scan-tool — .scan-form-input on Ink</span>
+          <div style="background:var(--ink);padding:32px;border-radius:var(--r-md);">
+            <input class="input-mono" type="text" placeholder="Enter your wallet address." readonly>
+          </div>
+        </div>
+        <div>
+          <span class="type-label" style="display:block;margin-bottom:12px;">Beta form — .beta-input on Snow</span>
+          <div style="background:var(--snow);padding:32px;border-radius:var(--r-md);">
+            <input class="input-light" type="text" placeholder="x3…t99" readonly>
+          </div>
+        </div>
+        <div>
+          <span class="type-label" style="display:block;margin-bottom:12px;">Spec</span>
+          <p class="body-sm" style="font-size:13px;">All inputs: 44–48px height, Geist Mono 14–15px, focus state lifts border to <code style="font-family:'Geist Mono',monospace;font-size:12px;">var(--brand-blue)</code>. Placeholder text always at 55% opacity of body colour.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 19 — CARDS ===== -->
+<section class="slide" id="s19">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Components</span>
+        <h2 class="h-lg">Cards</h2>
+        <p class="body-sm">Four reusable card patterns — borderless. Surface differentiation via background tone (Ice / White / Brand gradient).</p>
+      </div>
+      <div class="cols-4" style="flex: 1; align-items: stretch;">
+        <div style="background:var(--brand-blue-deep);padding:18px;border-radius:var(--r-md);display:grid;place-items:center;">
+          <div class="hcm" style="max-width:none;margin:0;">
+            <header class="hcm-head">
+              <div class="hcm-pair">
+                <span class="hcm-symbol">BTC</span>
+                <span class="hcm-tag">SHIELDED</span>
+              </div>
+              <div class="hcm-price">
+                <span class="hcm-px">$67.8K</span>
+                <span class="hcm-delta">+1.42%</span>
+              </div>
+            </header>
+            <ul class="hcm-status" style="padding-top:0;">
+              <li><span class="hcm-dot"></span>ZK proof</li>
+              <li><span class="hcm-dot"></span>Avail</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L20 6 L20 13 C20 18 16 21 12 22 C8 21 4 18 4 13 L4 6 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12 L11 14 L15 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h4>Execution shielding</h4>
+          <p>Your entries, sizing, and liquidation levels stay off the radar.</p>
+          <span class="mono" style="margin-top:auto;">.feat-card</span>
+        </div>
+        <div class="ps-card ps-card-emph">
+          <span class="ps-num">12<sup>+</sup></span>
+          <span class="ps-label">Copy tools watching Hyperliquid wallets</span>
+        </div>
+        <div class="nm-card">
+          <div class="nm-icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12 L21 12 M12 3 C15 7 15 17 12 21 M12 3 C9 7 9 17 12 21" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <p>Geographic blocking</p>
+          <span class="mono" style="margin-top:auto;">.nm-card</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 20 — BADGES + STATUS ===== -->
+<section class="slide" id="s20">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Components</span>
+        <h2 class="h-lg">Badges, tags, chips, status</h2>
+        <p class="body-sm">Small inline elements that carry state. Always Geist Mono. Use sparingly — at most one per card.</p>
+      </div>
+      <div class="stack gap-3" style="flex: 1;">
+        <div class="badge-row">
+          <span class="btn-row-label">Tags &amp; chips · light surface</span>
+          <span class="tag-shielded">SHIELDED</span>
+          <span class="chip">Vault</span>
+          <span class="chip">Deposit</span>
+          <span class="chip">Status</span>
+          <span class="pill-low">Low</span>
+          <span class="pill-high">High</span>
+        </div>
+        <div class="badge-row dark">
+          <span class="btn-row-label">Tags &amp; chips · dark surface</span>
+          <span class="tag-shielded">SHIELDED</span>
+          <span class="chip">Wallet</span>
+          <span class="chip">Fill</span>
+          <span class="dot-live"><span class="dot"></span> Live · build v2.0.0</span>
+        </div>
+        <div class="badge-row">
+          <span class="btn-row-label">Status marks</span>
+          <span class="mark-yes">✓</span>
+          <span class="mark-no">✕</span>
+          <span class="dot-live"><span class="dot"></span> Live · 2026-04-27</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 21 — TABLE ===== -->
+<section class="slide" id="s21">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Components</span>
+        <h2 class="h-lg">Comparison table</h2>
+        <p class="body-sm">Used in the canonical Compare section. The ShieldTX column is anchored visually with a 2px brand-blue underline + tinted background.</p>
+      </div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col-shield">ShieldTX</th>
+            <th>Direct Hyperliquid</th>
+            <th>Multi-wallet Rotation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Execution Shielding</th>
+            <td class="cell-shield"><span class="mark-yes">✓</span></td>
+            <td><span class="mark-no">✕</span></td>
+            <td><span class="mark-no">✕</span></td>
+          </tr>
+          <tr>
+            <th>Copy-bot Resistance</th>
+            <td class="cell-shield"><span class="mark-yes">✓</span></td>
+            <td><span class="mark-no">✕</span></td>
+            <td><span class="mark-no">✕</span></td>
+          </tr>
+          <tr>
+            <th>Operational Overhead</th>
+            <td class="cell-shield"><span class="pill-low">Low</span></td>
+            <td><span class="pill-low">Low</span></td>
+            <td><span class="pill-high">High</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 22 — ACCORDION ===== -->
+<section class="slide" id="s22">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Components</span>
+        <h2 class="h-lg">Accordion · Q&amp;A</h2>
+        <p class="body-sm">Plus icon rotates 90° to dismiss. Pure CSS transition on max-height — no GSAP needed.</p>
+      </div>
+      <div class="faq" style="flex: 1; overflow-y: auto;">
+        <div class="faq-item is-open">
+          <button class="faq-q" type="button" aria-expanded="true">
+            <span>Is this like Tornado Cash?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">No. ShieldTX doesn't pool funds or obfuscate transactions. It executes natively on Hyperliquid: same order book, same counterparties, fully on-chain. The difference: Tornado Cash hides the transaction. ShieldTX shields your position data.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>Does shielding affect my fills?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">No. Execution is native HL — same order book, same liquidity. There is no slippage premium for shielding.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>What does it cost?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">5bps on entry, 5bps on exit. Copy traders could take up to 100bps per trade from you. ShieldTX costs less than the leak it closes.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 23 — NAV ===== -->
+<section class="slide" id="s23">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Components</span>
+        <h2 class="h-lg">Navigation</h2>
+        <p class="body-sm">Two states. Default sits on light surfaces. <code style="font-family:'Geist Mono',monospace;font-size:13px;">.is-over-dark</code> activates over hero / scan-tool / hero-callout / footer — link colour flips to white at 78% and CTA inverts to a white pill.</p>
+      </div>
+      <div class="stack gap-3" style="flex: 1;">
+        <div>
+          <span class="type-label" style="display:block;margin-bottom:12px;">Default — over light surface</span>
+          <div class="nav-demo">
+            <span class="nav-logo-mark">ShieldTX</span>
+            <div class="nav-links-demo">
+              <a>Scan</a><a>Features</a><a>How</a><a>Compare</a><a>FAQ</a><a>Roadmap</a>
+            </div>
+            <a class="nav-cta-demo">Request Access</a>
+          </div>
+        </div>
+        <div>
+          <span class="type-label" style="display:block;margin-bottom:12px;">.is-over-dark — over hero / dark sections</span>
+          <div style="background:var(--brand-blue);padding:18px;border-radius:var(--r-md);">
+            <div class="nav-demo dark">
+              <span class="nav-logo-mark">ShieldTX</span>
+              <div class="nav-links-demo">
+                <a>Scan</a><a>Features</a><a>How</a><a>Compare</a><a>FAQ</a><a>Roadmap</a>
+              </div>
+              <a class="nav-cta-demo">Request Access</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 24 — HERO PATTERN ===== -->
+<section class="slide" id="s25">
+  <div class="frame brand-gradient">
+    <div class="glow glow-bright"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Pattern · 01</span>
+        <h2 class="h-md" style="color:#fff;">Hero — single focal headline + product artifact</h2>
+      </div>
+      <div class="hero-pattern">
+        <div>
+          <h1>Your trades<br/>keep getting <span class="gradient-text">copied.</span></h1>
+          <p>Shield your perp trades on Hyperliquid. Same fills, zero footprint.</p>
+          <button class="btn btn-hero-primary">Request Beta Access</button>
+        </div>
+        <div>
+          <div class="hcm">
+            <header class="hcm-head">
+              <div class="hcm-pair">
+                <span class="hcm-symbol">BTC-PERP</span>
+                <span class="hcm-tag">SHIELDED</span>
+              </div>
+              <div class="hcm-price">
+                <span class="hcm-px">$67,842.10</span>
+                <span class="hcm-delta">+1.42%</span>
+              </div>
+            </header>
+            <ul class="hcm-status" style="padding-top:0;">
+              <li><span class="hcm-dot"></span>Encrypted via ZK proof</li>
+              <li><span class="hcm-dot"></span>Routed through Avail</li>
+              <li><span class="hcm-dot"></span>Settled on Hyperliquid</li>
+            </ul>
+            <button class="hcm-cta">Long · Shielded</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 26 — TOOLS CALLOUT ===== -->
+<section class="slide" id="s26">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Pattern · 03</span>
+        <h2 class="h-md">Tools callout — three big stats with emphasis</h2>
+        <p class="body-sm">Middle card always emphasized with the brand gradient + white type. Outer cards: light Ice surface.</p>
+      </div>
+      <div class="tc-grid">
+        <div class="ps-card">
+          <span class="ps-num">2–60<sup>s</sup></span>
+          <span class="ps-label">Time to copy your trades</span>
+        </div>
+        <div class="ps-card ps-card-emph">
+          <span class="ps-num"><span data-count-to="12">0</span><sup>+</sup></span>
+          <span class="ps-label">Copy tools watching Hyperliquid wallets</span>
+        </div>
+        <div class="ps-card">
+          <span class="ps-num"><span data-count-to="100">0</span><sup>bps</sup></span>
+          <span class="ps-label">Potential cost per trade</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 27 — HERO CALLOUT + NOT MIXER ===== -->
+<section class="slide" id="s27">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Patterns · 07 + 08</span>
+        <h2 class="h-md">Hero callout · Not-a-mixer grid</h2>
+        <p class="body-sm">Secondary CTA banner pairs with the 4-tile compliance grid to bridge the gap between proof and reassurance.</p>
+      </div>
+      <div class="combo">
+        <div class="combo-hero-callout">
+          <h3>The leak costs more than the fix.</h3>
+          <p>Copy traders could take up to 100bps per trade. ShieldTX costs 10bps round trip.</p>
+          <button class="btn btn-hero-primary">Request Beta Access</button>
+        </div>
+        <div class="combo-nm-grid">
+          <div class="nm-card">
+            <div class="nm-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L20 6 L20 13 C20 18 16 21 12 22 C8 21 4 18 4 13 L4 6 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+            <p>Sanctions screening</p>
+          </div>
+          <div class="nm-card">
+            <div class="nm-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12 L21 12" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <p>Geographic blocking</p>
+          </div>
+          <div class="nm-card">
+            <div class="nm-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="12" r="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <p>Verification optional</p>
+          </div>
+          <div class="nm-card">
+            <div class="nm-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M12 12 L21 12 M18 12 L18 16 M21 12 L21 15" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <p>Viewing keys</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 27 — MOTION (Decode) ===== -->
+<section class="slide" id="s28">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Motion</span>
+        <h2 class="h-lg">Decode motion.</h2>
+        <p class="body-sm">Text enters as randomised glyphs, then resolves left-to-right — a cipher decrypting in real time. Reinforces the brand metaphor: information exists but requires access to become legible.</p>
+      </div>
+      <div class="cols-2" style="flex:1;">
+        <div class="decode-spec-card">
+          <span class="bb-label">Specification</span>
+          <ul class="decode-spec-list">
+            <li><b>charset</b><span>A-Z, a-z, 0-9, @#$%&amp;*!?</span></li>
+            <li><b>scramble</b><span>60ms between frames, 6 cycles</span></li>
+            <li><b>resolve</b><span>30ms per character, left-to-right</span></li>
+            <li><b>trigger</b><span>on viewport entry (IntersectionObserver)</span></li>
+          </ul>
+        </div>
+        <div class="stack gap-3">
+          <div class="decode-demo-card">
+            <span class="bb-label">Click to replay</span>
+            <p class="h-lg decode-demo" id="decode-demo-1" data-decode>15bps leaked.</p>
+          </div>
+          <div class="decode-demo-card">
+            <span class="bb-label">Click to replay</span>
+            <p class="h-md decode-demo decode-mono" id="decode-demo-2" data-decode>0x7a3f...9e2b</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 29 — CLOSING ===== -->
+<section class="slide" id="s29">
+  <div class="frame brand-gradient">
+    <div class="glow glow-bright"></div>
+    <div class="inner" style="justify-content: center; align-items: center;">
+      <h1 class="closing-text">Trade with confidence.<br/>Powered by <span class="closing-avail">Avail</span>.</h1>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  'use strict';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const fill = document.getElementById('progress-fill');
+  const counter = document.getElementById('counter');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const updateProgress = () => {
+    const y = window.scrollY;
+    const max = (document.documentElement.scrollHeight - window.innerHeight) || 1;
+    fill.style.width = Math.min(100, (y / max) * 100) + '%';
+    const vh = window.innerHeight;
+    let active = 1;
+    slides.forEach((s, i) => {
+      const r = s.getBoundingClientRect();
+      if (r.top <= vh / 2 && r.bottom > vh / 2) active = i + 1;
+    });
+    counter.textContent = String(active).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  };
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+
+  document.querySelectorAll('.hcm-spark').forEach((spark) => {
+    const W = 360, H = 80;
+    const N = 48;
+    const series = [];
+    let v = 40;
+    for (let i = 0; i < N; i++) {
+      v += (Math.sin(i / 5) * 1.4) + (Math.random() - 0.45) * 4;
+      v = Math.max(8, Math.min(72, v));
+      series.push(v);
+    }
+    const stepX = W / (N - 1);
+    const pts = series.map((y, i) => [i * stepX, H - y]);
+    const linePath = pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
+    const fillPath = `${linePath} L${W},${H} L0,${H} Z`;
+    spark.innerHTML = `
+      <path class="hcm-spark-fill" d="${fillPath}"/>
+      <path class="hcm-spark-path" d="${linePath}"/>
+    `;
+    const path = spark.querySelector('.hcm-spark-path');
+    if (path && path.getTotalLength) {
+      path.style.setProperty('--len', path.getTotalLength());
+    }
+  });
+
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const btn = item.querySelector('.faq-q');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  const countUp = (el) => {
+    if (el.dataset.counted === '1') return;
+    const target = parseFloat(el.dataset.countTo);
+    const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals, 10) : 0;
+    if (reduceMotion) {
+      el.textContent = decimals === 0 ? Math.round(target) : target.toFixed(decimals);
+      el.dataset.counted = '1';
+      return;
+    }
+    const start = performance.now();
+    const dur = 1600;
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 2);
+      const val = target * eased;
+      el.textContent = decimals === 0 ? Math.round(val) : val.toFixed(decimals);
+      if (t < 1) requestAnimationFrame(tick);
+      else el.dataset.counted = '1';
+    };
+    requestAnimationFrame(tick);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) countUp(e.target);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count-to]').forEach((el) => io.observe(el));
+
+  // ===== DECODE MOTION =====
+  const DECODE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!?/\\|[]{}=+-_~^';
+  const SCRAMBLE_MS = 60;
+  const RESOLVE_MS = 30;
+  const CYCLES = 6;
+
+  function decode(el) {
+    if (el.classList.contains('decoding')) return;
+    const original = el.dataset.original || el.textContent;
+    el.dataset.original = original;
+    el.classList.add('decoding');
+
+    if (reduceMotion) {
+      el.textContent = original;
+      el.dataset.decoded = 'true';
+      return;
+    }
+
+    const chars = original.split('');
+    const resolved = new Array(chars.length).fill(false);
+    let current = chars.map(c => c === ' ' ? ' ' : DECODE_CHARS[Math.floor(Math.random() * DECODE_CHARS.length)]);
+    el.textContent = current.join('');
+
+    let cycle = 0;
+    const scramble = setInterval(() => {
+      cycle++;
+      for (let i = 0; i < chars.length; i++) {
+        if (!resolved[i] && chars[i] !== ' ') {
+          current[i] = DECODE_CHARS[Math.floor(Math.random() * DECODE_CHARS.length)];
+        }
+      }
+      el.textContent = current.join('');
+      if (cycle >= CYCLES) {
+        clearInterval(scramble);
+        let idx = 0;
+        const resolve = setInterval(() => {
+          while (idx < chars.length && chars[idx] === ' ') { resolved[idx] = true; idx++; }
+          if (idx >= chars.length) {
+            clearInterval(resolve);
+            el.textContent = chars.join('');
+            el.dataset.decoded = 'true';
+            return;
+          }
+          const batch = Math.min(3, chars.length - idx);
+          for (let b = 0; b < batch && idx < chars.length; b++, idx++) {
+            if (chars[idx] !== ' ') { resolved[idx] = true; current[idx] = chars[idx]; }
+          }
+          for (let i = idx; i < chars.length; i++) {
+            if (!resolved[i] && chars[i] !== ' ') current[i] = DECODE_CHARS[Math.floor(Math.random() * DECODE_CHARS.length)];
+          }
+          el.textContent = current.join('');
+        }, RESOLVE_MS);
+      }
+    }, SCRAMBLE_MS);
+  }
+
+  // Replay on click
+  document.querySelectorAll('.decode-demo').forEach((el) => {
+    el.addEventListener('click', () => {
+      el.classList.remove('decoding');
+      el.dataset.decoded = 'false';
+      decode(el);
+    });
+  });
+
+  // Trigger on viewport entry
+  const decodeIO = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.delay) || 0;
+        setTimeout(() => decode(el), delay);
+        decodeIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '0px 0px -10% 0px' });
+
+  document.querySelectorAll('[data-decode]').forEach((el) => {
+    el.dataset.original = el.textContent;
+    decodeIO.observe(el);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      e.preventDefault();
+      window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      window.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
