@@ -310,6 +310,54 @@ button, input { font: inherit; color: inherit; }
 .logo-block .logo-asset-mark { max-height: 84px; }
 .logo-block .logo-asset-type { max-height: 44px; }
 .logo-block .logo-asset-full { max-height: 60px; }
+
+/* Logo TX-treatment rule cards */
+.logo-rule-card {
+  background: var(--white);
+  border-radius: var(--r-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 24px 48px -28px rgba(15, 23, 42, 0.10);
+}
+.logo-rule-card .logo-block {
+  background: var(--snow);
+  border-radius: 12px;
+  padding: 32px 24px;
+  flex: 1;
+  display: grid; place-items: center;
+  min-height: 160px;
+}
+.logo-rule-pill {
+  display: inline-flex;
+  align-self: flex-start;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.logo-rule-pill-do {
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.12);
+}
+.logo-rule-pill-only {
+  color: var(--brand-blue-deep);
+  background: rgba(77, 213, 232, 0.18);
+}
+.logo-rule-note {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--graphite);
+}
+.logo-rule-note b {
+  color: var(--ink);
+  font-weight: 600;
+}
 .logo-spec {
   font-family: 'Geist Mono', monospace;
   font-size: 11px;
@@ -1398,27 +1446,6 @@ button, input { font: inherit; color: inherit; }
   </div>
 </section>
 
-<!-- ===== 02 — REFERENCES ===== -->
-<section class="slide" id="s2">
-  <div class="frame">
-    <div class="glow glow-light"></div>
-    <div class="inner">
-      <div class="slide-head">
-        <span class="eyebrow">References</span>
-        <h2 class="h-lg">Visual references</h2>
-        <p class="body-sm">Moodboard for shielded data, financial information design, and protective UI patterns.</p>
-      </div>
-      <div class="ref-grid">
-        <div class="ref-img"><img src="assets/refs/ref-1.png" alt="Reference 1"><span class="ref-label">01</span></div>
-        <div class="ref-img"><img src="assets/refs/ref-2.png" alt="Reference 2"><span class="ref-label">02</span></div>
-        <div class="ref-img"><img src="assets/refs/ref-3.png" alt="Reference 3"><span class="ref-label">03</span></div>
-        <div class="ref-img"><img src="assets/refs/ref-4.png" alt="Reference 4"><span class="ref-label">04</span></div>
-        <div class="ref-img"><img src="assets/refs/ref-5.png" alt="Reference 5"><span class="ref-label">05</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== 03 — BRAND IDEA (on brighter brand blue) ===== -->
 <section class="slide" id="s3">
   <div class="frame brand-bright">
@@ -1519,6 +1546,36 @@ button, input { font: inherit; color: inherit; }
             <li><span class="name-mark">✕</span> SHIELDTX <em>(no all-caps in prose)</em></li>
             <li><span class="name-mark">✕</span> Shield Tx <em>(no title-case)</em></li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04d — LOGO RULE: TX cross-line treatment ===== -->
+<section class="slide" id="s4d">
+  <div class="frame">
+    <div class="glow glow-light"></div>
+    <div class="inner">
+      <div class="slide-head">
+        <span class="eyebrow">Identity · TX treatment</span>
+        <h2 class="h-lg">One mark, two TX treatments</h2>
+        <p class="body-sm">The crossed-line decoration on the TX is a feature of the standalone logotype only. In the lockup (mark + logotype), TX is rendered as flat letterforms so the symbol carries the visual weight.</p>
+      </div>
+      <div class="cols-2" style="flex: 1;">
+        <div class="logo-rule-card">
+          <span class="logo-rule-pill logo-rule-pill-do">Do</span>
+          <div class="logo-block">
+            <img class="logo-asset logo-asset-full" src="assets/ShieldTX_Logo.svg" alt="ShieldTX lockup with flat TX" />
+          </div>
+          <p class="logo-rule-note"><b>Lockup</b> — TX rendered as flat letterforms. Use anywhere the mark accompanies the wordmark (nav, footer, app chrome).</p>
+        </div>
+        <div class="logo-rule-card">
+          <span class="logo-rule-pill logo-rule-pill-only">Logotype only</span>
+          <div class="logo-block">
+            <img class="logo-asset logo-asset-type" src="assets/ShieldTX_LogoType.svg" alt="ShieldTX logotype with crossed TX" />
+          </div>
+          <p class="logo-rule-note"><b>Standalone logotype</b> — the crossed-line TX appears only when the logotype runs without the mark (long marketing displays, signature blocks, brand-led visuals).</p>
         </div>
       </div>
     </div>
