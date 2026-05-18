@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · ShieldTX</title>
+  <meta name="description" content="Get in touch with the ShieldTX team. Beta access, integrations, partnerships, press." />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/ShieldTX_LogoMark.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css?v=49" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+</head>
+<body class="contact-body">
+  <!-- Simplified nav -->
+  <header class="nav">
+    <a class="nav-logo" href="../" aria-label="ShieldTX">
+      <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../">Home</a>
+      <a href="../#features">Features</a>
+      <a href="../trust-model/">Docs</a>
+    </nav>
+    <a class="nav-cta btn-pill" href="/app">Open App</a>
+    <div class="nav-progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="top">
+    <!-- Minimal centered contact form (Linear/Vercel style) -->
+    <section class="contact-min">
+      <div class="contact-min-wrap">
+        <header class="contact-min-head">
+          <span class="eyebrow">Contact</span>
+          <h1 class="contact-min-title">Talk to the team.</h1>
+          <p class="contact-min-sub">Most replies in a business day. For beta access, write <b>beta</b> in your message.</p>
+        </header>
+
+        <form class="contact-min-form" id="contact-form" data-state="idle" novalidate>
+          <div class="waitlist-honeypot" aria-hidden="true">
+            <label>Company URL<input type="text" name="company_url" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <label class="contact-min-field">
+            <span class="contact-min-label">Name</span>
+            <input class="contact-min-input" type="text" name="name" required autocomplete="name" placeholder="Jane Smith" />
+          </label>
+          <label class="contact-min-field">
+            <span class="contact-min-label">Email</span>
+            <input class="contact-min-input" type="email" name="email" required autocomplete="email" placeholder="you@domain.com" />
+          </label>
+          <label class="contact-min-field">
+            <span class="contact-min-label">Message</span>
+            <textarea class="contact-min-input contact-min-textarea" name="message" rows="5" required placeholder="A few sentences is plenty."></textarea>
+          </label>
+          <p class="contact-min-error" data-contact-error role="alert" aria-live="polite" hidden></p>
+          <button class="contact-min-submit btn-pill btn-primary" type="submit" data-contact-submit>
+            <span class="contact-min-submit-label">Send message</span>
+            <span aria-hidden="true">→</span>
+          </button>
+          <p class="contact-min-success" data-contact-success aria-live="polite" hidden>Thanks. We'll be in touch within one business day.</p>
+        </form>
+
+        <p class="contact-min-direct">
+          Prefer email?
+          <a href="mailto:beta@shieldtx.app">beta@shieldtx.app</a>
+          ·
+          <a href="mailto:partners@shieldtx.app">partners@shieldtx.app</a>
+          ·
+          <a href="mailto:press@shieldtx.app">press@shieldtx.app</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
+        <p class="footer-tagline">Trade with confidence.<br/>Powered by <span class="footer-avail">Avail</span>.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="../#features">Features</a>
+        <a href="../#compare">Compare</a>
+        <a href="../#how">How it works</a>
+        <a href="/app">Open App</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="../#faq">FAQ</a>
+        <a href="../trust-model/">Trust model ↗</a>
+        <a href="../brand-document/">Brand book ↗</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/request-access">Request access</a>
+        <a href="./">Contact ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <span>© <span id="yr"></span> ShieldTX</span>
+      <div class="footer-socials" aria-label="ShieldTX social links">
+        <a class="footer-social" href="#" aria-label="ShieldTX on X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.7l-6.92 7.91L22 21h-6.4l-5.01-6.55L4.84 21H1.66l7.4-8.46L1.5 3h6.56l4.53 5.99L17.53 3Zm-1.12 16.13h1.76L7.7 4.78H5.82l10.59 14.35Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Discord">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.27 5.33A18.6 18.6 0 0 0 14.86 4l-.22.45a16.6 16.6 0 0 1 4.06 1.27 14.5 14.5 0 0 0-12.4 0 16.6 16.6 0 0 1 4.06-1.27L10.14 4a18.6 18.6 0 0 0-4.41 1.33C2.83 9.45 2.04 13.46 2.43 17.4a18.7 18.7 0 0 0 5.71 2.86c.46-.62.87-1.28 1.21-1.97a12.1 12.1 0 0 1-1.91-.91l.47-.34a13.4 13.4 0 0 0 11.18 0l.47.34a12.1 12.1 0 0 1-1.91.91c.34.69.74 1.35 1.21 1.97a18.7 18.7 0 0 0 5.71-2.86c.46-4.55-.78-8.52-3.31-12.07ZM9.05 14.91c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Zm5.9 0c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.34a1 1 0 0 0-1.34-1.07L2.7 10.45c-.93.36-.86 1.7.1 1.97l4.32 1.21 1.7 5.22a1 1 0 0 0 1.66.42l2.46-2.39 4.6 3.4a1 1 0 0 0 1.58-.6l3.0-13.46c.04-.2.04-.4 0-.59ZM9.96 14.41 9.4 18l-1.32-4.05 9.74-7.21-7.86 7.67Z"/></svg>
+        </a>
+      </div>
+      <span class="mono">All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="/public-scripts/site-cursor.js?v=1"></script>
+  <script>
+    (function () {
+      const y = document.getElementById('yr');
+      if (y) y.textContent = new Date().getFullYear();
+
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+
+      const submitBtn = form.querySelector('[data-contact-submit]');
+      const submitLabel = form.querySelector('.contact-min-submit-label');
+      const errorEl = form.querySelector('[data-contact-error]');
+      const successEl = form.querySelector('[data-contact-success]');
+
+      function setState(state) {
+        form.dataset.state = state;
+        if (submitBtn) {
+          submitBtn.disabled = state === 'submitting';
+          submitBtn.classList.toggle('is-loading', state === 'submitting');
+        }
+        if (submitLabel) {
+          submitLabel.textContent = state === 'submitting' ? 'Sending…' : 'Send message';
+        }
+      }
+
+      function showError(msg) {
+        if (!errorEl) return;
+        if (msg) { errorEl.textContent = msg; errorEl.hidden = false; }
+        else { errorEl.textContent = ''; errorEl.hidden = true; }
+      }
+
+      form.addEventListener('input', () => {
+        if (errorEl && !errorEl.hidden) showError('');
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (form.dataset.state === 'submitting') return;
+
+        const fd = new FormData(form);
+        const payload = {
+          name: (fd.get('name') || '').toString().trim(),
+          email: (fd.get('email') || '').toString().trim(),
+          message: (fd.get('message') || '').toString().trim(),
+          company_url: fd.get('company_url') || '',
+        };
+
+        if (!payload.name || !payload.email || !payload.message) {
+          showError('Please fill in every field.');
+          return;
+        }
+
+        setState('submitting');
+        showError('');
+
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const json = await res.json().catch(() => ({}));
+          if (res.ok && json.ok) {
+            setState('success');
+            // Hide everything except the success card.
+            Array.from(form.children).forEach((child) => {
+              if (child !== successEl) child.style.display = 'none';
+            });
+            if (successEl) successEl.hidden = false;
+          } else {
+            setState('idle');
+            showError(json.error || 'Submission failed. Please try again.');
+          }
+        } catch (err) {
+          console.error('[contact] network error', err);
+          setState('idle');
+          showError('Network error. Please try again.');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

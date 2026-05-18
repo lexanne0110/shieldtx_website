@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trust model · ShieldTX</title>
+  <meta name="description" content="How your funds are protected on-chain with ShieldTX. Token flow, shielding guarantees, safety mechanisms, and trust summary." />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/ShieldTX_LogoMark.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="docs-body">
+  <!-- Simplified nav -->
+  <header class="nav nav-docs">
+    <a class="nav-logo" href="../" aria-label="ShieldTX">
+      <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../">Home</a>
+      <a href="../#features">Features</a>
+      <a href="./">Docs</a>
+    </nav>
+    <a class="nav-cta btn-pill" href="/app">Open App</a>
+    <div class="nav-progress" aria-hidden="true"></div>
+  </header>
+
+  <main class="docs-main" id="top">
+    <div class="docs-container">
+      <!-- Sticky TOC -->
+      <aside class="docs-toc" aria-label="On this page">
+        <details class="docs-toc-mobile">
+          <summary>On this page</summary>
+          <nav class="docs-toc-list">
+            <a href="#overview" class="docs-toc-link is-active">Overview</a>
+            <a href="#token-flow" class="docs-toc-link">Token flow</a>
+            <a href="#shielding-guarantees" class="docs-toc-link">Shielding guarantees</a>
+            <a href="#safety-mechanisms" class="docs-toc-link">Safety mechanisms</a>
+            <a href="#trust-summary" class="docs-toc-link">Trust summary</a>
+          </nav>
+        </details>
+        <nav class="docs-toc-list docs-toc-desktop" aria-label="Sections">
+          <span class="docs-toc-label">On this page</span>
+          <a href="#overview" class="docs-toc-link is-active">Overview</a>
+          <a href="#token-flow" class="docs-toc-link">Token flow</a>
+          <a href="#shielding-guarantees" class="docs-toc-link">Shielding guarantees</a>
+          <a href="#safety-mechanisms" class="docs-toc-link">Safety mechanisms</a>
+          <a href="#trust-summary" class="docs-toc-link">Trust summary</a>
+          <a href="../index.html" class="docs-toc-back">← Back to ShieldTX</a>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <article class="docs-content">
+        <header class="docs-header">
+          <span class="eyebrow">Trust model</span>
+          <h1 class="docs-title">How your funds are protected on-chain.</h1>
+          <p class="docs-lede">ShieldTX lets you trade perpetuals on-chain using Hyperliquid, with full execution shielding. Your deposits, positions, and withdrawals are protected on-chain, and shielded from copy-traders and competitors. You retain custody of your assets at every step.</p>
+        </header>
+
+        <section class="docs-section" id="overview">
+          <h2 class="docs-h2">Overview</h2>
+          <p>When you use ShieldTX, your tokens remain under your control, secured by your private keys, and stored securely in an on-chain vault with timeout protection. This document explains exactly what happens to your tokens at every step.</p>
+        </section>
+
+        <section class="docs-section" id="token-flow">
+          <h2 class="docs-h2">Token flow</h2>
+          <ol class="docs-steps">
+            <li class="docs-step">
+              <span class="docs-step-num">1</span>
+              <div class="docs-step-body">
+                <h3 class="docs-h3">Deposit</h3>
+                <p class="docs-step-flow"><b>Your funds</b> → <b>Vault contract</b> → <b>ShieldTX</b></p>
+                <p>ShieldTX accepts deposits directly from every major EVM chain. Your USDC is added to ShieldTX's on-chain vault on Arbitrum via Avail Nexus. The on-chain vault contract locks your USDC, and credits your ShieldTX account with a shielded, spendable balance that only you can see or spend.</p>
+                <ul class="docs-list">
+                  <li>Your USDC is secured on-chain by ZK proofs on Arbitrum and can only be released when you submit a signed transaction.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="docs-step">
+              <span class="docs-step-num">2</span>
+              <div class="docs-step-body">
+                <h3 class="docs-h3">Open position</h3>
+                <p class="docs-step-flow"><b>ShieldTX</b> → <b>Fresh Hyperliquid account</b></p>
+                <p>You choose a pair, direction, size, and leverage via the ShieldTX app. ShieldTX creates a brand-new Hyperliquid wallet on-chain, completely unlinkable to your deposit wallet or any previous on-chain trades. <b>Your trade gets placed on Hyperliquid from this fresh wallet.</b></p>
+                <ul class="docs-list">
+                  <li>You control the Hyperliquid position through ShieldTX using a wallet secured by Privy.</li>
+                  <li>When you place your open or close positions via ShieldTX, a separate on-chain smart contract executes the trade.</li>
+                  <li>If the funding process fails for any reason, your transaction reverts with automatic timeout protection. Your ShieldTX balance returns the full amount automatically.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="docs-step">
+              <span class="docs-step-num">3</span>
+              <div class="docs-step-body">
+                <h3 class="docs-h3">Close position</h3>
+                <p class="docs-step-flow"><b>Hyperliquid account</b> → <b>ShieldTX</b></p>
+                <p>Your position closes directly on Hyperliquid. Proceeds return to your ShieldTX balance, unlinkable to the Hyperliquid account used for the trade.</p>
+                <ul class="docs-list">
+                  <li>You must initiate the close on ShieldTX. No one else can close your position.</li>
+                  <li>The ShieldTX validator confirms the settlement has completed on-chain before crediting your ShieldTX balance.</li>
+                  <li>Settlement is guaranteed on-chain. If the process fails for any reason, timeout protection automatically returns your funds.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="docs-step">
+              <span class="docs-step-num">4</span>
+              <div class="docs-step-body">
+                <h3 class="docs-h3">Withdraw</h3>
+                <p class="docs-step-flow"><b>ShieldTX</b> → <b>Your wallet</b></p>
+                <p>Funds that are not part of an active trade can be claimed from the ShieldTX vault at any point, by signing a transaction on-chain. The vault verifies the transaction and automatically releases the funds to your designated wallet address.</p>
+                <ul class="docs-list">
+                  <li>You must initiate the withdrawal from ShieldTX. No one else can withdraw your funds.</li>
+                  <li>The vault automatically releases your funds once the ZK proof is verified on-chain.</li>
+                  <li>Double-spend prevention is enforced. Each withdrawal can only be claimed once.</li>
+                </ul>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="docs-section" id="shielding-guarantees">
+          <h2 class="docs-h2">Shielding guarantees</h2>
+          <div class="docs-table-wrap">
+            <table class="docs-table">
+              <thead>
+                <tr><th scope="col">What's shielded</th><th scope="col">From whom</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Your shielded balance</th><td>Everyone. Only you and ShieldTX can see your balance.</td></tr>
+                <tr><th scope="row">Your deposit and your trades</th><td>Public observers, copy-traders, and competitors cannot link your deposits to your trades.</td></tr>
+                <tr><th scope="row">Different positions</th><td>Use a fresh, unlinkable Hyperliquid account for each trade on ShieldTX, breaking the link between your trading activity.</td></tr>
+                <tr><th scope="row">Your trading P&amp;L and history</th><td>External observers. No one can look on-chain and decipher your entire P&amp;L or trading history when you use ShieldTX.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="docs-section" id="safety-mechanisms">
+          <h2 class="docs-h2">Safety mechanisms</h2>
+          <div class="docs-table-wrap">
+            <table class="docs-table">
+              <thead>
+                <tr><th scope="col">Mechanism</th><th scope="col">Protection</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Vault contract</th><td>Core operations are permissionless and ZK-verified. Funds only move when cryptographically proven on-chain.</td></tr>
+                <tr><th scope="row">Zero-knowledge proofs</th><td>Every state transition (deposit, transfer, withdrawal) is cryptographically proven before it takes effect.</td></tr>
+                <tr><th scope="row">Key management (Privy)</th><td>Privy manages keys client-side. The server never sees your private keys.</td></tr>
+                <tr><th scope="row">Escrow with timeout</th><td>Funds locked in escrow auto-release if the funding or settlement process fails. No funds can be permanently stuck.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="docs-section" id="trust-summary">
+          <h2 class="docs-h2">Trust summary</h2>
+          <div class="docs-table-wrap">
+            <table class="docs-table">
+              <thead>
+                <tr><th scope="col">Component</th><th scope="col">Trust level</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Vault contract</th><td><span class="docs-trust-pill">Permissionless</span> All core operations are ZK-verified on-chain. No admin keys required.</td></tr>
+                <tr><th scope="row">ShieldTX</th><td><span class="docs-trust-pill">Verifiable</span> Every state transition is ZK-proven and verified on-chain before L1 state advances.</td></tr>
+                <tr><th scope="row">Withdrawals</th><td><span class="docs-trust-pill">Trustless</span> ZK proof + inclusion proof verified on-chain, permissionless claiming.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="docs-cta">
+          <h3 class="docs-cta-title">Ready to trade with confidence?</h3>
+          <p class="docs-cta-sub">Beta access is limited. 500 invites for the first cohort.</p>
+          <a class="btn-pill btn-primary docs-cta-btn" href="../index.html?waitlist=1#beta">Request beta access <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer (mirrors main site) -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
+        <p class="footer-tagline">Trade with confidence.<br/>Powered by <span class="footer-avail">Avail</span>.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#compare">Compare</a>
+        <a href="../index.html#how">How it works</a>
+        <a href="../index.html?waitlist=1#beta">Beta access</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="../index.html#faq">FAQ</a>
+        <a href="../index.html#scan-tool">Scan</a>
+        <a href="../index.html#preview">Preview</a>
+        <a href="../trust-model/index.html">Trust model ↗</a>
+        <a href="../brand-document/index.html">Brand book ↗</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="../index.html#">About</a>
+        <a href="../contact/index.html">Contact ↗</a>
+        <a href="../index.html#">Legal</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <span>© <span id="yr"></span> ShieldTX</span>
+      <div class="footer-socials" aria-label="ShieldTX social links">
+        <a class="footer-social" href="#" aria-label="ShieldTX on X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.7l-6.92 7.91L22 21h-6.4l-5.01-6.55L4.84 21H1.66l7.4-8.46L1.5 3h6.56l4.53 5.99L17.53 3Zm-1.12 16.13h1.76L7.7 4.78H5.82l10.59 14.35Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Discord">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.27 5.33A18.6 18.6 0 0 0 14.86 4l-.22.45a16.6 16.6 0 0 1 4.06 1.27 14.5 14.5 0 0 0-12.4 0 16.6 16.6 0 0 1 4.06-1.27L10.14 4a18.6 18.6 0 0 0-4.41 1.33C2.83 9.45 2.04 13.46 2.43 17.4a18.7 18.7 0 0 0 5.71 2.86c.46-.62.87-1.28 1.21-1.97a12.1 12.1 0 0 1-1.91-.91l.47-.34a13.4 13.4 0 0 0 11.18 0l.47.34a12.1 12.1 0 0 1-1.91.91c.34.69.74 1.35 1.21 1.97a18.7 18.7 0 0 0 5.71-2.86c.46-4.55-.78-8.52-3.31-12.07ZM9.05 14.91c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Zm5.9 0c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.34a1 1 0 0 0-1.34-1.07L2.7 10.45c-.93.36-.86 1.7.1 1.97l4.32 1.21 1.7 5.22a1 1 0 0 0 1.66.42l2.46-2.39 4.6 3.4a1 1 0 0 0 1.58-.6l3.0-13.46c.04-.2.04-.4 0-.59ZM9.96 14.41 9.4 18l-1.32-4.05 9.74-7.21-7.86 7.67Z"/></svg>
+        </a>
+      </div>
+      <span class="mono">All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    const y = document.getElementById('yr');
+    if (y) y.textContent = new Date().getFullYear();
+
+    // TOC active state
+    const tocLinks = document.querySelectorAll('.docs-toc-desktop .docs-toc-link');
+    const sections = document.querySelectorAll('.docs-section');
+    const setActive = () => {
+      const probe = window.scrollY + 120;
+      let active = sections[0];
+      sections.forEach(s => { if (s.offsetTop <= probe) active = s; });
+      tocLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + active.id));
+    };
+    setActive();
+    window.addEventListener('scroll', setActive, { passive: true });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 88, behavior: 'smooth' });
+      });
+    });
+  </script>
+  <script src="/public-scripts/site-cursor.js?v=1"></script>
+</body>
+</html>

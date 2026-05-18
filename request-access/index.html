@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request access · ShieldTX</title>
+  <meta name="description" content="Request access to ShieldTX private beta. Shield your perp trades on Hyperliquid — same fills, zero footprint." />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/ShieldTX_LogoMark.svg" />
+
+  <meta property="og:title" content="Request access · ShieldTX" />
+  <meta property="og:description" content="Join the ShieldTX private beta. 500 invites for the first cohort." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shieldtx.app/request-access" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="request-access-body">
+  <!-- Simplified nav. Form markup below is duplicated in /app/index.html and
+       the hero modal in /index.html — keep them in sync when changing fields. -->
+  <header class="nav">
+    <a class="nav-logo" href="../" aria-label="ShieldTX">
+      <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../">Home</a>
+      <a href="../#features">Features</a>
+      <a href="../trust-model/">Docs</a>
+    </nav>
+    <a class="nav-cta btn-pill" href="/app">Open App</a>
+    <div class="nav-progress" aria-hidden="true"></div>
+  </header>
+
+  <main class="request-access-main" id="top">
+    <section class="request-access-section">
+      <div class="container request-access-wrap">
+        <header class="request-access-head">
+          <span class="eyebrow">Private beta</span>
+          <h1 class="request-access-title">Request access.</h1>
+          <p class="request-access-sub">500 invites for the first cohort. Three quick steps — we prioritise traders with the most to lose from copy-trading.</p>
+        </header>
+
+        <div class="waitlist-mount waitlist-page">
+          <div class="waitlist-progress" aria-hidden="true">
+            <div class="waitlist-progress-fill" data-waitlist-progress></div>
+          </div>
+
+          <form class="waitlist-form" id="waitlist-form" data-state="idle" novalidate>
+            <div class="waitlist-honeypot" aria-hidden="true">
+              <label>Company URL<input type="text" name="company_url" tabindex="-1" autocomplete="off" /></label>
+            </div>
+
+            <section class="waitlist-step is-active" data-step="1">
+              <span class="eyebrow">Step 1 of 3</span>
+              <h2 class="waitlist-title">Your email.</h2>
+              <p class="waitlist-sub">We'll send your invite to this address.</p>
+              <label class="waitlist-field">
+                <span class="waitlist-label">Email</span>
+                <input class="waitlist-input" type="email" name="email" placeholder="you@domain.com" required spellcheck="false" autocomplete="email" />
+              </label>
+            </section>
+
+            <section class="waitlist-step" data-step="2">
+              <span class="eyebrow">Step 2 of 3</span>
+              <h2 class="waitlist-title">Tell us about your trading.</h2>
+
+              <div class="waitlist-question">
+                <p class="waitlist-question-title">What do you primarily trade?</p>
+                <div class="waitlist-dropdown" data-dropdown>
+                  <select class="waitlist-dropdown-native" name="trade-type" required aria-hidden="true" tabindex="-1">
+                    <option value="" disabled selected hidden>Choose one…</option>
+                    <option value="perps-only">Perps only</option>
+                    <option value="mostly-perps">Mostly perps, some spot</option>
+                    <option value="mix">Mix of perps and spot</option>
+                    <option value="mostly-spot">Mostly spot</option>
+                  </select>
+                  <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                    <span class="waitlist-dropdown-label is-placeholder">Choose one…</span>
+                    <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+                  </button>
+                  <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox"></div>
+                </div>
+              </div>
+
+              <div class="waitlist-question">
+                <p class="waitlist-question-title">Which platforms do you actively trade on? <span class="waitlist-question-hint">Select all that apply</span></p>
+                <div class="waitlist-dropdown" data-dropdown>
+                  <select class="waitlist-dropdown-native" name="platforms" multiple required aria-hidden="true" tabindex="-1">
+                    <option value="hyperliquid">Hyperliquid</option>
+                    <option value="dydx">dYdX</option>
+                    <option value="gmx">GMX / GNS</option>
+                    <option value="cex">Binance / Bybit (CEX)</option>
+                    <option value="other-dex">Other DEX</option>
+                  </select>
+                  <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                    <span class="waitlist-dropdown-label is-placeholder">Select platforms…</span>
+                    <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+                  </button>
+                  <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox" aria-multiselectable="true"></div>
+                </div>
+              </div>
+
+              <div class="waitlist-question">
+                <p class="waitlist-question-title">Average monthly trading volume?</p>
+                <div class="waitlist-dropdown" data-dropdown>
+                  <select class="waitlist-dropdown-native" name="volume" required aria-hidden="true" tabindex="-1">
+                    <option value="" disabled selected hidden>Choose one…</option>
+                    <option value="lt-50k">&lt; $50K</option>
+                    <option value="50k-250k">$50K – $250K</option>
+                    <option value="250k-1m">$250K – $1M</option>
+                    <option value="1m-5m">$1M – $5M</option>
+                    <option value="5m-plus">$5M+</option>
+                  </select>
+                  <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                    <span class="waitlist-dropdown-label is-placeholder">Choose one…</span>
+                    <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+                  </button>
+                  <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="waitlist-step" data-step="3">
+              <span class="eyebrow">Step 3 of 3</span>
+              <h2 class="waitlist-title">Your shielding needs.</h2>
+
+              <div class="waitlist-question">
+                <p class="waitlist-question-title">Have you been copied or front-run before?</p>
+                <div class="waitlist-dropdown" data-dropdown>
+                  <select class="waitlist-dropdown-native" name="pain" required aria-hidden="true" tabindex="-1">
+                    <option value="" disabled selected hidden>Choose one…</option>
+                    <option value="recurring">Yes — it's a recurring problem</option>
+                    <option value="few-times">Yes — it's happened a few times</option>
+                    <option value="suspect">I suspect so but can't confirm</option>
+                    <option value="no">No / not sure</option>
+                  </select>
+                  <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                    <span class="waitlist-dropdown-label is-placeholder">Choose one…</span>
+                    <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+                  </button>
+                  <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox"></div>
+                </div>
+              </div>
+
+              <div class="waitlist-question">
+                <p class="waitlist-question-title">How do you currently protect your trades? <span class="waitlist-question-hint">Select all that apply</span></p>
+                <div class="waitlist-dropdown" data-dropdown>
+                  <select class="waitlist-dropdown-native" name="protection" multiple required aria-hidden="true" tabindex="-1">
+                    <option value="multi-wallet">Multiple wallets</option>
+                    <option value="timing">Timing obfuscation (odd hours, delayed entries)</option>
+                    <option value="smaller">Smaller position sizes</option>
+                    <option value="private-rpc">Private RPCs / MEV protection</option>
+                    <option value="nothing">Nothing — I just accept the leakage</option>
+                  </select>
+                  <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                    <span class="waitlist-dropdown-label is-placeholder">Select protections…</span>
+                    <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+                  </button>
+                  <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox" aria-multiselectable="true"></div>
+                </div>
+              </div>
+
+              <div class="waitlist-question">
+                <p class="waitlist-question-title">How soon do you need shielded execution?</p>
+                <div class="waitlist-dropdown" data-dropdown>
+                  <select class="waitlist-dropdown-native" name="urgency" required aria-hidden="true" tabindex="-1">
+                    <option value="" disabled selected hidden>Choose one…</option>
+                    <option value="now">Immediately — I'm losing alpha now</option>
+                    <option value="month">Within a month</option>
+                    <option value="exploring">Exploring, no rush</option>
+                  </select>
+                  <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                    <span class="waitlist-dropdown-label is-placeholder">Choose one…</span>
+                    <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+                  </button>
+                  <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="waitlist-step waitlist-result" data-step="result">
+              <span class="eyebrow" data-result-eyebrow>You're on the list</span>
+              <h2 class="waitlist-title" data-result-title>Thanks — request received.</h2>
+              <p class="waitlist-sub" data-result-sub>We'll reach out from <b>beta@shieldtx.app</b> when access opens up.</p>
+            </section>
+
+            <p class="waitlist-error" data-form-error role="alert" aria-live="polite" hidden></p>
+
+            <div class="waitlist-nav">
+              <button type="button" class="waitlist-back" data-waitlist-back hidden>← Back</button>
+              <button type="button" class="btn-pill btn-primary waitlist-next" data-waitlist-next>Continue <span aria-hidden="true">→</span></button>
+              <button type="submit" class="btn-pill btn-primary waitlist-submit" data-waitlist-submit hidden>Submit application <span aria-hidden="true">→</span></button>
+              <button type="button" class="btn-pill btn-primary waitlist-done" data-waitlist-done hidden>Done</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
+        <p class="footer-tagline">Trade with confidence.<br/>Powered by <span class="footer-avail">Avail</span>.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="../#features">Features</a>
+        <a href="../#compare">Compare</a>
+        <a href="../#how">How it works</a>
+        <a href="/app">Open App</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="../#faq">FAQ</a>
+        <a href="../trust-model/">Trust model ↗</a>
+        <a href="../brand-document/">Brand book ↗</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="../contact/">Contact ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <span>© <span id="yr"></span> ShieldTX</span>
+      <span class="mono">All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="/public-scripts/site-cursor.js?v=1"></script>
+  <script src="/public-scripts/request-access-form.js?v=3"></script>
+  <script>
+    (function () {
+      const y = document.getElementById('yr');
+      if (y) y.textContent = new Date().getFullYear();
+      const form = document.getElementById('waitlist-form');
+      if (form && window.ShieldTX && window.ShieldTX.bindRequestAccessForm) {
+        window.ShieldTX.bindRequestAccessForm(form, { mode: 'page' });
+      }
+    })();
+  </script>
+</body>
+</html>
