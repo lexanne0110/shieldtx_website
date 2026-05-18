@@ -1,0 +1,13 @@
+{
+  "name": "shieldtx-site",
+  "version": "2.0.0",
+  "private": true,
+  "description": "ShieldTX marketing site + invite gate. Static HTML/CSS/JS with Vercel serverless functions in /api.",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel deploy --prod"
+  }
+}

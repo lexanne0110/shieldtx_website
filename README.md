@@ -1,74 +1,110 @@
-# Shield TX — Landing Page
+# ShieldTX — Marketing site
 
-Marketing landing page for Shield TX — shielded execution for Hyperliquid perp trading.
-
-Static site, no build step. Plain HTML/CSS/JS with Lenis (smooth scroll) and GSAP + ScrollTrigger (animations) loaded from CDN.
+Marketing site for ShieldTX. Static HTML/CSS/JS plus Vercel serverless functions for forms and the invite-code gate.
 
 ## Run locally
 
 ```bash
-# Any static server works. Examples:
-python3 -m http.server 8000
-# or
-npx serve .
+# Static-only preview (forms won't POST, but layout works):
+python3 -m http.server 3000
+
+# Full stack (forms + /api routes):
+npx vercel dev
 ```
 
-Then open http://localhost:8000.
+Open <http://localhost:3000>.
 
 ## Project structure
 
 ```
 .
-├── index.html              # Landing page
-├── styles.css              # All styles (brand tokens at the top)
-├── script.js               # Lenis + ScrollTrigger animations, hero chart, modal, FAQ
-├── assets/
-│   └── logo.svg            # Shield TX logo
-├── brand-document/         # Internal brand spec (V3 — colors, type, voice)
-│   ├── index.html
-│   └── assets/
-│       ├── logo.svg
-│       └── refs/           # Reference imagery for the moodboard
-├── CONTENT.md              # Source-of-truth copy + section order
-├── .gitignore
+├── api/                          # Vercel serverless functions
+│   ├── request-access.js         # POST submissions from the hero modal + /request-access
+│   ├── contact.js                # POST submissions from /contact
+│   ├── validate-invite.js        # POST invite-code check used by /app
+│   └── _shared.js                # tiny req/res helpers
+├── lib/                          # Server-only helpers (Node)
+│   ├── db.js                     # DB adapter — in-memory stub; swap for Supabase/Neon later
+│   ├── validate.js               # Input validation + sanitization
+│   ├── rate-limit.js             # In-memory IP rate limiter
+│   └── crypto.js                 # IP hashing + signed invite token
+├── public-scripts/               # Browser-served JS (shared across pages)
+│   ├── request-access-form.js    # bindRequestAccessForm — multi-step screener + brand dropdowns
+│   └── invite-gate.js            # /app gate behavior
+├── assets/                       # Logos + demo video
+├── app/                          # /app — blurred preview + invite-gate modal
+├── request-access/               # /request-access — full-page permalink for the form
+├── contact/                      # /contact — name/email/message form (POSTs to /api/contact)
+├── trust-model/                  # /trust-model — on-chain trust docs
+├── brand-document/               # Internal brand spec (not linked from public nav)
+├── index.html                    # Landing page (hero, features, FAQ, modal)
+├── styles.css                    # All styles (brand tokens at the top)
+├── script.js                     # Lenis + ScrollTrigger, hero chart, modal open/close
+├── vercel.json                   # Headers, clean URLs
+├── package.json                  # Minimal — Node 20 engine, no build step
+├── .env.example                  # Required env vars
+├── robots.txt                    # Excludes /app, /api, /brand-document
+├── sitemap.xml
 └── README.md
 ```
 
-## Sections
+## Routes
 
-1. **Hero** — Brand-gradient background. Live chart widget (HYPE-USDC) with auto-ticking price + hover crosshair.
-2. **Steps** — Three-step "How it works" with rail line, animated counters, tape-pulse on the active step.
-3. **Breaker A** — Brand-gradient band with invite-code form. "Request one" opens the email modal.
-4. **Preview** — Full live trading UI inside a `shieldtx.app/trade` browser frame.
-5. **Problem** — "Your wallet exposes everything." 3-card layout.
-6. **What you do today** — 4-card grid of failed workarounds.
-7. **See your exposure** — Wallet scan tool. Dark band wraps the form; results panel reveals on-brand light cards on submit.
-8. **Breaker B** — Flat brand-blue band with invite-code form (visual variation of A).
-9. **Features** — Pinned horizontal scroll through 6 cards, each with a unique CSS-built visual placeholder.
-10. **Compare** — Light grey table comparing Shield TX vs Direct Hyperliquid / Multi-Wallet / CEX.
-11. **Beta breaker** — Light blue band, "Stop broadcasting. Start shielding." + invite-code form.
-12. **FAQ** — Accordion.
-13. **Footer** — Brand-blue-deep base with brand-blue radial blooms.
+- `/` — Landing
+- `/request-access` — Form permalink (also embedded in the landing modal)
+- `/app` — Invite gate. On valid code, redirects to `APP_URL` (set in env, e.g. `https://beta.shieldtx.xyz/`)
+- `/contact` — General contact form
+- `/trust-model` — On-chain trust docs
+- `/brand-document` — Internal brand spec (excluded from robots + sitemap)
+
+## Env vars
+
+See [.env.example](./.env.example). Copy to `.env.local` for `vercel dev`. Required in production:
+- `APP_URL` — where the gate redirects on a valid code
+- `INVITE_CODE_SECRET` — 32+ random bytes; signs the short-lived gate cookie
+- `IP_HASH_PEPPER` — 32+ random bytes; peppers stored IP hashes
+- `DATABASE_URL` — left blank for the in-memory stub; fill when wiring a real DB
+
+For local dev with a seeded invite code, set `DEV_SEED_INVITE_CODES=SHIELD-DEV`.
+
+## Forms
+
+Three forms, three endpoints. All do real validation, IP-keyed rate limiting, a hidden honeypot field, and ship idle / submitting / success / error states.
+
+| Form                          | Endpoint                | Source of truth for markup                                  |
+| ----------------------------- | ----------------------- | ------------------------------------------------------------- |
+| Hero modal "Request Access"   | `POST /api/request-access` | `index.html` (mirrored in `/request-access` and `/app` modal) |
+| Permalink page                | `POST /api/request-access` | `request-access/index.html`                                   |
+| Contact                       | `POST /api/contact`        | `contact/index.html`                                           |
+| Invite gate                   | `POST /api/validate-invite`| `app/index.html`                                              |
+
+The Request Access form markup is duplicated across three pages. Behavior is shared via `public-scripts/request-access-form.js → ShieldTX.bindRequestAccessForm(formEl, { mode })`. When editing fields, update all three HTML copies.
+
+## DB
+
+`lib/db.js` is the only place that touches storage. It exports four functions used by every API handler:
+
+```js
+insertRequestAccess(payload)  // → { id }
+insertContact(payload)        // → { id }
+lookupInviteCode(code)        // → { status, expires_at, max_uses, used_count } | null
+recordInviteUse(code, meta)
+```
+
+Today's implementation is an in-memory stub (lost on cold start) seeded from `DEV_SEED_INVITE_CODES`. To wire a real DB (Supabase / Neon / Vercel Postgres), replace those four function bodies — the API handlers don't reach inside.
+
+Schema proposal is in the plan doc.
 
 ## Brand tokens
 
-Defined in `:root` of `styles.css` per Brand Document V3:
+Defined in `:root` of `styles.css`:
 
-- `--brand-blue: #3370ff` — primary
+- `--brand-blue: #3370ff`
 - `--brand-blue-bright: #5ba0ff`
 - `--brand-blue-deep: #1e3a8a`
-- `--brand-gradient: linear-gradient(135deg, #1e3a8a 0%, #3370ff 50%, #5ba0ff 100%)` — used on hero, breaker A, manifesto-class surfaces
-- Geist + Geist Mono — Google Fonts
+- `--brand-gradient` — hero + final-cta
+- Geist + Geist Mono via Google Fonts
 
-## Animation behavior
+## Animation
 
-All animations gate on `prefers-reduced-motion`. Lenis smooth scroll, GSAP triggers, hero chart ticker, hover crosshair, custom cursor, and the Features pinned horizontal scroll all fall back gracefully when reduced motion is set.
-
-## Modal
-
-The "Request one" link in any of the three invite-code forms opens a single shared modal (`#invite-modal`). Closes via overlay click, × button, or Escape key. Body scroll locks while open.
-
-## Notes
-
-- No backend. Form submits are intercepted (`onsubmit="return false"`); the modal shows a static success state.
-- Reference imagery in `brand-document/assets/refs/*.png` is large (~13 MB total) and only used by the brand spec moodboard. Safe to swap or delete if you don't need the brand document.
+Subdued by design. All animations respect `prefers-reduced-motion`. The custom morphing cursor, page-wide grain, tilt cards, and char-by-char headline splits were removed during the v2.0 refactor — the OS pointer and a single fade reveal carry the motion budget.
