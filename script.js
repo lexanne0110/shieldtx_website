@@ -70,21 +70,9 @@
   window.addEventListener('scroll', updateNav, { passive: true });
   window.addEventListener('resize', updateNav);
 
-  // -------- Text splitting (chars / words) --------
-  const splitChars = (el) => {
-    const text = el.textContent;
-    el.textContent = '';
-    const frag = document.createDocumentFragment();
-    text.split('').forEach((ch) => {
-      if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
-      const span = document.createElement('span');
-      span.className = 'split-char';
-      span.textContent = ch;
-      frag.appendChild(span);
-    });
-    el.appendChild(frag);
-  };
-
+  // -------- Word splitting for headline reveals --------
+  // splitChars + deepSplit were removed when char-by-char animations were
+  // retired. Word splitting is kept for the subtle [data-split-words] fade.
   const splitWords = (el) => {
     const text = el.textContent;
     el.textContent = '';
@@ -99,81 +87,41 @@
     el.appendChild(frag);
   };
 
-  const deepSplit = (root) => {
-    // Split text into words → chars, so inline-block chars never break mid-word.
-    // Preserve child elements like <br/> and <span class="accent">.
-    const nodes = Array.from(root.childNodes);
-    nodes.forEach((node) => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        const text = node.textContent;
-        if (!text.trim()) return;
-        const frag = document.createDocumentFragment();
-        text.split(/(\s+)/).forEach((token) => {
-          if (!token) return;
-          if (/^\s+$/.test(token)) { frag.appendChild(document.createTextNode(' ')); return; }
-          const wordWrap = document.createElement('span');
-          wordWrap.className = 'split-word-wrap';
-          token.split('').forEach((ch) => {
-            const span = document.createElement('span');
-            span.className = 'split-char';
-            span.textContent = ch;
-            wordWrap.appendChild(span);
-          });
-          frag.appendChild(wordWrap);
-        });
-        root.replaceChild(frag, node);
-      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'BR') {
-        deepSplit(node);
-      }
-    });
-  };
-
-  document.querySelectorAll('[data-split]').forEach(deepSplit);
   document.querySelectorAll('[data-split-words]').forEach((el) => splitWords(el));
 
   // -------- GSAP reveal animations --------
   if (window.gsap && window.ScrollTrigger && !reduceMotion) {
 
-    // Generic reveal
+    // Generic reveal (calmer: shorter duration + snappier easing)
     gsap.utils.toArray('[data-reveal]').forEach((el) => {
       gsap.fromTo(el,
-        { y: 22, opacity: 0 },
+        { y: 14, opacity: 0 },
         {
-          y: 0, opacity: 1, duration: 0.9, ease: 'expo.out',
+          y: 0, opacity: 1, duration: 0.5, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 85%', once: true },
         }
       );
     });
 
-    // Char-split reveals
-    gsap.utils.toArray('[data-split]').forEach((el) => {
-      const chars = el.querySelectorAll('.split-char');
-      if (!chars.length) return;
-      gsap.fromTo(chars,
-        { y: '110%', opacity: 0 },
-        {
-          y: '0%', opacity: 1, duration: 1, ease: 'expo.out', stagger: 0.012,
-          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-        }
-      );
-    });
+    // Char-split reveals were removed — they read as gimmicky and slow
+    // readability. Headlines now fade in via the generic reveal above.
 
-    // Word-split reveals (blur in)
+    // Word-split reveals (fade + tiny rise; no blur)
     gsap.utils.toArray('[data-split-words]').forEach((el) => {
       const words = el.querySelectorAll('.split-word');
       if (!words.length) return;
       gsap.fromTo(words,
-        { y: 14, opacity: 0, filter: 'blur(6px)' },
+        { y: 8, opacity: 0 },
         {
-          y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out', stagger: 0.015,
+          y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', stagger: 0.012,
           scrollTrigger: { trigger: el, start: 'top 80%', once: true },
         }
       );
     });
 
-    // Phone parallax
+    // Parallax — reduced depth (was 15%) for a calmer scroll feel.
     gsap.utils.toArray('[data-parallax]').forEach((el) => {
-      const amt = parseFloat(el.dataset.parallax) || 0.15;
+      const amt = parseFloat(el.dataset.parallax) || 0.06;
       gsap.to(el, {
         y: () => -window.innerHeight * amt,
         ease: 'none',
@@ -181,12 +129,12 @@
       });
     });
 
-    // How-it-works: stagger reveal each step + activate (rail draws, tape pulses, counters run)
+    // How-it-works: stagger reveal each step + activate
     gsap.utils.toArray('.step').forEach((step) => {
       gsap.fromTo(step,
-        { y: 60, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
-          y: 0, opacity: 1, duration: 0.9, ease: 'expo.out',
+          y: 0, opacity: 1, duration: 0.5, ease: 'power3.out',
           scrollTrigger: {
             trigger: step,
             start: 'top 80%',
@@ -258,42 +206,8 @@
     });
   }
 
-  // -------- Custom cursor --------
-  if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-    const cursor = document.querySelector('.cursor');
-    if (cursor) {
-      let tx = 0, ty = 0, cx = 0, cy = 0;
-      document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
-      const loop = () => {
-        cx += (tx - cx) * 0.18;
-        cy += (ty - cy) * 0.18;
-        cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
-        requestAnimationFrame(loop);
-      };
-      requestAnimationFrame(loop);
-
-      document.querySelectorAll('a, button, input, [data-magnetic], [data-tilt]').forEach((el) => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
-      });
-    }
-  }
-
-  // -------- Tilt cards --------
-  if (!reduceMotion) {
-    document.querySelectorAll('[data-tilt]').forEach((card) => {
-      const max = 6;
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(1000px) rotateX(${-py * max}deg) rotateY(${px * max}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-  }
+  // Custom cursor + tilt cards were removed for a calmer, premium-fintech
+  // surface (see plan §5). The OS pointer reads correctly on text and cards.
 
   // -------- Hero market card sparkline (one-shot SVG) --------
   const heroCard = document.querySelector('.hero-card-mini');
@@ -404,10 +318,39 @@
     setTimeout(runStatsCountUps, 220);
   }
 
+  // Scan form validation — empty submit shows an inline error rather than
+  // silently revealing the stats panel.
+  const scanError = document.getElementById('scan-error');
+  const setScanInvalid = (invalid) => {
+    if (!scanToolForm) return;
+    scanToolForm.classList.toggle('is-invalid', invalid);
+    if (scanAddrInput) scanAddrInput.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+    if (scanError) {
+      if (invalid) scanError.removeAttribute('hidden');
+      else scanError.setAttribute('hidden', '');
+    }
+  };
+
   if (scanToolForm) {
     scanToolForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      const value = scanAddrInput ? scanAddrInput.value.trim() : '';
+      if (!value) {
+        setScanInvalid(true);
+        if (scanAddrInput) scanAddrInput.focus();
+        return;
+      }
+      setScanInvalid(false);
       revealStats({ scroll: true });
+    });
+  }
+  if (scanAddrInput) {
+    // Clear the error state as soon as the user starts typing.
+    // Note: don't clear on `focus` — the submit handler programmatically
+    // focuses the field when empty, which would race-cancel the error we
+    // just raised.
+    scanAddrInput.addEventListener('input', () => {
+      if (scanAddrInput.value.trim()) setScanInvalid(false);
     });
   }
 
@@ -416,6 +359,7 @@
     chip.addEventListener('click', () => {
       const addr = chip.dataset.prefill;
       if (scanAddrInput && addr) scanAddrInput.value = addr;
+      setScanInvalid(false);
       revealStats({ scroll: true });
     });
   });
@@ -681,12 +625,204 @@
     document.querySelectorAll('.modal.is-open').forEach(closeModal);
   });
 
-  const inviteForm = document.getElementById('invite-request-form');
-  if (inviteForm) {
-    inviteForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const success = inviteForm.parentElement.querySelector('[data-modal-success]');
-      if (success) success.hidden = false;
-    });
+  // -------- Request Access form binding --------
+  // The brand-styled dropdown component and the multi-step waitlist form
+  // logic now live in /public-scripts/request-access-form.js (shared with
+  // /request-access and /app). We just hand the in-page modal form to it.
+  if (window.ShieldTX && window.ShieldTX.bindRequestAccessForm) {
+    const inPageForm = document.getElementById('waitlist-form');
+    if (inPageForm) {
+      window.ShieldTX.bindRequestAccessForm(inPageForm, { mode: 'modal' });
+    }
   }
+
+  // The legacy brand-dropdown / multi-step / scoring code below was removed
+  // when the form was extracted. Keeping the placeholder so future readers
+  // looking at git blame find this note.
+  /* removed-in-refactor: initDropdown + waitlist-form scoring */
+
+  // -------- Cross-page deep-link to waitlist (?waitlist=1) --------
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('waitlist') === '1') {
+      setTimeout(() => {
+        const trigger = document.querySelector('[data-modal-open="invite-modal"]');
+        if (trigger) trigger.click();
+        // Strip query so refresh doesn't re-open
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+        }
+      }, 250);
+    }
+  } catch (_) {}
+
+  // -------- Hero flow auto-cycle (Connect → Authorize → Issued → Trade) --------
+  const flow = document.getElementById('hero-flow');
+  if (flow) {
+    const cards = Array.from(flow.querySelectorAll('.hero-flow-card'));
+    const dots = Array.from(flow.querySelectorAll('.hero-flow-dot'));
+    let active = 0;
+    let timer = null;
+    const INTERVAL = 3500;
+
+    function setActive(i) {
+      active = ((i % cards.length) + cards.length) % cards.length;
+      cards.forEach((c, idx) => c.classList.toggle('is-active', idx === active));
+      dots.forEach((d, idx) => d.classList.toggle('is-active', idx === active));
+    }
+
+    function start() {
+      stop();
+      timer = window.setInterval(() => setActive(active + 1), INTERVAL);
+    }
+    function stop() {
+      if (timer) { window.clearInterval(timer); timer = null; }
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const step = parseInt(dot.dataset.flowJump, 10);
+        if (!isNaN(step)) {
+          setActive(step - 1);
+          start(); // reset cadence after manual jump
+        }
+      });
+    });
+
+    // Pause on hover for a more deliberate read
+    flow.addEventListener('mouseenter', stop);
+    flow.addEventListener('mouseleave', start);
+
+    // Pause when offscreen to save cycles
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { e.isIntersecting ? start() : stop(); });
+      }, { threshold: 0.2 });
+      io.observe(flow);
+    } else {
+      start();
+    }
+  }
+
+  // -------- Hero stage — 5-beat looping shielded-wallet onboarding --------
+  // Cycles `data-stage` through 1→2→3→4→5→1 on a ~12s loop. CTAs are
+  // clickable to advance manually (via [data-hero-step]). Paused when
+  // off-screen via IntersectionObserver. Reduced motion → static beat 5.
+  //
+  // Slower, breathier timings so each beat lands and the cursor easing
+  // (0.8s→1.2s) reads as intentional rather than rushed.
+  (function initHeroStage() {
+    const stage = document.querySelector('.hero-stage');
+    if (!stage) return;
+    if (reduceMotion) { stage.setAttribute('data-stage', '5'); return; }
+
+    // Beat 6 = post-deposit success ("Funds shielded"). It pauses longer
+    // than the action beats so the success registers before restart.
+    const TIMINGS = { 1: 2400, 2: 2200, 3: 2600, 4: 2800, 5: 2600, 6: 4200 };
+    const LAST_BEAT = 6;
+
+    let current = 1, timeoutId = null, running = false, manual = false;
+
+    // Demo cursor — animated SVG pointer that walks the viewer through each
+    // beat. We resolve a CSS selector for each stage to a bounding rect and
+    // park the cursor there. Beats with an actionable CTA get a click pulse
+    // shortly before the auto-advance.
+    const demoCursor = stage.querySelector('.hero-stage-demo-cursor');
+    const TARGETS = {
+      1: '.hero-stage-beat-1 .hero-stage-cta',                  // Connect to ShieldTX
+      2: '.hero-stage-beat-2 .hero-stage-cta',                  // Continue
+      3: '.hero-stage-beat-3 .hero-stage-field',                // Shielded wallet readout
+      4: '.hsa-deposit',                                        // Deposit button in trading UI (triggers overlay)
+      5: '.hero-stage-overlay .hero-stage-cta',                 // Deposit CTA in overlay
+      6: '.hero-stage-confirm-icon',                            // Success checkmark (no click)
+    };
+    const CLICK_BEATS = new Set([1, 2, 4, 5]);
+    let clickTimer = null;
+
+    function moveCursorTo(n) {
+      if (!demoCursor) return;
+      const sel = TARGETS[n];
+      const target = sel && stage.querySelector(sel);
+      if (!target) return;
+      // Compute the target's center relative to the stage's content box.
+      const stageRect = stage.getBoundingClientRect();
+      const r = target.getBoundingClientRect();
+      const cx = r.left - stageRect.left + r.width / 2;
+      const cy = r.top  - stageRect.top  + r.height / 2;
+      demoCursor.style.setProperty('--hsc-x', cx + 'px');
+      demoCursor.style.setProperty('--hsc-y', cy + 'px');
+
+      // Click pulse — fires near the end of beats that have a real CTA so
+      // the visual "click" lines up with the auto-advance. Adds a press
+      // class to the target element so the button visibly reacts too.
+      clearTimeout(clickTimer);
+      if (CLICK_BEATS.has(n)) {
+        const dur = TIMINGS[n] || 2400;
+        clickTimer = setTimeout(() => {
+          demoCursor.classList.add('is-clicking');
+          target.classList.add('is-pressed-by-cursor');
+          setTimeout(() => {
+            demoCursor.classList.remove('is-clicking');
+            target.classList.remove('is-pressed-by-cursor');
+          }, 450);
+        }, Math.max(300, dur * 0.65));
+      }
+    }
+
+    function setStage(n) {
+      current = n;
+      stage.setAttribute('data-stage', String(n));
+      moveCursorTo(n);
+    }
+    function schedule() {
+      clearTimeout(timeoutId);
+      const dur = TIMINGS[current] || 1500;
+      timeoutId = setTimeout(() => {
+        const next = current === LAST_BEAT ? 1 : current + 1;
+        setStage(next);
+        schedule();
+      }, dur);
+    }
+    function start() {
+      if (running || manual) return;
+      running = true;
+      schedule();
+    }
+    function stop() {
+      running = false;
+      clearTimeout(timeoutId);
+      clearTimeout(clickTimer);
+    }
+    function resumeAfter(delay) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => { manual = false; running = false; start(); }, delay);
+    }
+
+    stage.querySelectorAll('[data-hero-step]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = parseInt(btn.dataset.heroStep, 10);
+        if (Number.isNaN(target)) return;
+        manual = true;
+        stop();
+        setStage(target);
+        resumeAfter(4500);
+      });
+    });
+
+    // Re-anchor the cursor on resize — beat targets shift with layout.
+    window.addEventListener('resize', () => moveCursorTo(current), { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => (e.isIntersecting ? start() : stop()));
+      }, { threshold: 0.1 });
+      io.observe(stage);
+    } else {
+      start();
+    }
+
+    // Park the cursor on beat 1 immediately so it doesn't pop in at (0,0).
+    requestAnimationFrame(() => moveCursorTo(1));
+  })();
 })();

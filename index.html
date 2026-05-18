@@ -6,42 +6,36 @@
   <title>ShieldTX · Stop trading in public</title>
   <meta name="description" content="Shield your perp trades on Hyperliquid. Same fills, zero footprint." />
 
+  <link rel="icon" type="image/svg+xml" href="assets/ShieldTX_LogoMark.svg" />
+  <link rel="apple-touch-icon" href="assets/ShieldTX_LogoMark.svg" />
+
+  <meta property="og:title" content="ShieldTX · Stop trading in public" />
+  <meta property="og:description" content="Shield your perp trades on Hyperliquid. Same fills, zero footprint." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shieldtx.app/" />
+  <meta property="og:image" content="https://shieldtx.app/assets/demo/poster.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ShieldTX · Stop trading in public" />
+  <meta name="twitter:description" content="Shield your perp trades on Hyperliquid. Same fills, zero footprint." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=51" />
 </head>
 <body>
-  <!-- Inline SVG filters (grain) -->
-  <svg class="sr-only" aria-hidden="true" width="0" height="0" style="position:absolute">
-    <filter id="grain">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
-      <feColorMatrix type="saturate" values="0"/>
-    </filter>
-  </svg>
-
-  <!-- Global grain overlay -->
-  <div class="grain" aria-hidden="true"></div>
-
-  <!-- Custom cursor -->
-  <div class="cursor" aria-hidden="true">
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-  </div>
-
-  <!-- Fixed nav -->
-  <header class="nav" data-reveal>
+  <!-- Simplified nav: Home · Features · Docs · [Open App] -->
+  <header class="nav">
     <a class="nav-logo" href="#top" aria-label="ShieldTX">
-      <img src="assets/ShieldTX_Logo.svg" alt="ShieldTX" />
+      <img src="assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" />
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#features">Product</a>
-      <a href="#compare">Compare</a>
-      <a href="#faq">FAQ</a>
-      <a href="#scan-tool">Scan your wallet</a>
+      <a href="#top">Home</a>
+      <a href="#features">Features</a>
+      <a href="trust-model/">Docs</a>
     </nav>
-    <a class="nav-cta btn-pill" href="#beta">Request access</a>
+    <a class="nav-cta btn-pill" href="/app">Open App</a>
     <div class="nav-progress" aria-hidden="true"></div>
   </header>
 
@@ -60,176 +54,269 @@
       <div class="hero-grid hero-grid-split container">
         <div class="hero-copy">
           <h1 class="hero-title" data-split>
-            Stop Trading In <span class="accent">Public.</span>
+            Trade without exposing<br/>your <span class="accent">wallet.</span>
           </h1>
           <p class="hero-sub" data-reveal>
-            Your Hyperliquid positions are live on 12+ copy bot feeds in seconds. ShieldTX breaks the signal. Same fills, zero footprint.
+            ShieldTX issues a private trading address before you deposit, helping you keep your main wallet separate from every transaction.
           </p>
           <div class="hero-ctas" data-reveal>
-            <a class="btn-pill btn-primary hero-cta-primary" href="#scan-tool">
-              Scan your wallet
+            <a class="btn-pill btn-primary hero-cta-primary" href="/request-access" data-modal-open="invite-modal">
+              Request Access
               <span class="hero-cta-arrow" aria-hidden="true">→</span>
             </a>
-            <a class="hero-cta-secondary" href="#beta">Request beta access</a>
+            <a class="hero-cta-secondary" href="/app">Open App</a>
           </div>
         </div>
 
-        <div class="hero-image" data-reveal>
-          <div class="trade-frame trade-frame-hero">
-            <div class="tfb">
-              <div class="tfb-dots"><span></span><span></span><span></span></div>
-              <span class="tfb-url"><i class="tfb-lock">●</i> shieldtx.app<span class="tfb-path">/trade</span></span>
-              <span class="tfb-tag">SHIELDED</span>
+        <!-- Hero stage — 5-beat looping onboarding flow.
+             Stage 1: solo "Connect to ShieldTX" CTA on glass surface.
+             Stage 2: glass card with "Shield your wallet address" + checkbox.
+             Stage 3: shielded wallet address + "Shielded Wallet Issued" success.
+             Stage 4: fictional trading-app UI revealed.
+             Stage 5: trade app blurred + dark overlay with "Start now" + "Deposit". -->
+        <div class="hero-image hero-image-video hero-stage" data-reveal data-stage="1">
+          <!-- Premium glass-surface background (always present) -->
+          <div class="hero-stage-surface" aria-hidden="true">
+            <span class="hero-stage-grain"></span>
+            <span class="hero-stage-glow hero-stage-glow-a"></span>
+            <span class="hero-stage-glow hero-stage-glow-b"></span>
+          </div>
+
+          <!-- BEAT 1 — solo Connect CTA on the glass surface, no card -->
+          <div class="hero-stage-beat hero-stage-beat-1">
+            <button class="hero-stage-cta hero-stage-cta-grad" type="button" data-hero-step="2" aria-label="Connect to ShieldTX">
+              Connect to ShieldTX
+            </button>
+          </div>
+
+          <!-- BEATS 2 & 3 — the glass onboarding card -->
+          <div class="hero-stage-card" aria-hidden="true">
+            <!-- Branded card header — ShieldTX logomark sits at the top of every
+                 onboarding screen so the surface reads as the product. -->
+            <div class="hero-stage-card-brand" aria-hidden="true">
+              <img src="assets/ShieldTX_LogoMark.svg" alt="" class="hero-stage-card-mark" />
+              <span class="hero-stage-card-name">ShieldTX</span>
             </div>
 
-            <div class="trade-app">
-              <div class="ta-nav">
-                <div class="ta-nav-l">
-                  <span class="ta-logo">avail</span>
-                  <a class="ta-nav-link active" href="#">Trade</a>
-                  <a class="ta-nav-link" href="#">Leaderboard</a>
-                  <a class="ta-nav-link" href="#">Docs</a>
-                </div>
-                <div class="ta-nav-r">
-                  <span class="ta-balance"><span class="ta-shield">♥</span>$143.95<span class="ta-caret">▾</span></span>
-                  <span class="ta-user">FARADAY<span class="ta-caret">▾</span></span>
-                </div>
+            <div class="hero-stage-beat hero-stage-beat-2">
+              <span class="hero-stage-eyebrow">Confirm</span>
+              <label class="hero-stage-check">
+                <span class="hero-stage-check-box" aria-hidden="true">
+                  <svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke-linecap="round" /></svg>
+                </span>
+                <span class="hero-stage-check-label">Shield your wallet address</span>
+              </label>
+              <button class="hero-stage-cta hero-stage-cta-grad hero-stage-cta-small" type="button" data-hero-step="3">Continue</button>
+            </div>
+
+            <div class="hero-stage-beat hero-stage-beat-3">
+              <span class="hero-stage-eyebrow">New address</span>
+              <span class="hero-stage-field-label">Your shielded wallet</span>
+              <div class="hero-stage-field" role="textbox" aria-readonly="true">
+                <span class="hero-stage-field-value">0x7A9F••••••••3C21</span>
+                <span class="hero-stage-field-copy" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4.5" y="4.5" width="8" height="8" rx="1.5"/><path d="M3 11.5V3.5A1 1 0 0 1 4 2.5h8"/></svg>
+                </span>
               </div>
-
-              <div class="ta-pair">
-                <div class="ta-pair-name">
-                  <span class="ta-coin"></span>
-                  <b>HYPE-USDC</b>
-                  <span class="ta-pair-caret">▾</span>
-                  <span class="ta-lev">10x</span>
-                </div>
-                <div class="ta-stat"><span>Mark</span><b>278.81</b></div>
-                <div class="ta-stat"><span>Oracle</span><b>278.01</b></div>
-                <div class="ta-stat"><span>24h Change</span><b class="neg">-0.7835 / -2.58%</b></div>
-                <div class="ta-stat"><span>24h Volume</span><b>$50,867,772</b></div>
-                <div class="ta-stat"><span>Open Interest</span><b>$8,073,731,835</b></div>
-                <div class="ta-stat"><span>Funding</span><b>-0.7835</b></div>
+              <div class="hero-stage-success" role="status">
+                <span class="hero-stage-success-icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke-linecap="round"/></svg>
+                </span>
+                <span>Shielded Wallet Issued</span>
               </div>
+            </div>
+          </div>
 
-              <div class="ta-grid">
-                <div class="ta-chart">
-                  <div class="ta-chart-tools">
-                    <div class="ta-chart-tools-l">
-                      <button class="active">5m</button>
-                      <button>1h</button>
-                      <button>1d</button>
-                      <button class="ico">▾</button>
-                      <button class="ico">⏱</button>
-                      <span class="ta-nav-link">Indicators</span>
-                    </div>
-                    <div class="ta-chart-tools-r">
-                      <button class="ico">⌕</button>
-                      <button class="ico">⚙</button>
-                    </div>
-                  </div>
-                  <div class="ta-chart-body">
-                    <div class="ta-chart-rail">
-                      <span>＋</span><span>／</span><span>↗</span><span>⊞</span><span>⌗</span><span>T</span><span>⊙</span><span>⌫</span><span>⊕</span><span>⌂</span>
-                    </div>
-                    <div class="ta-chart-canvas">
-                      <svg class="ta-candles" viewBox="0 0 800 460" preserveAspectRatio="none" aria-hidden="true"></svg>
-                      <span class="ta-vol-label">Vol</span>
-                      <div class="ta-y-axis">
-                        <span>282.00</span><span>270.00</span><span>260.00</span><span>250.00</span><span>240.00</span><span>230.00</span><span>220.00</span><span>210.00</span><span>200.00</span>
-                      </div>
-                      <div class="ta-mark-tag">278.81</div>
-                      <div class="ta-vol-tag">17.6K</div>
-                      <div class="ta-x-axis">
-                        <span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>2026</span><span>Feb</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="ta-book">
-                  <div class="ta-tabs">
-                    <button class="active">Order Book</button>
-                    <button>Trades</button>
-                    <div class="ta-tab-spacer"></div>
-                    <button class="ico">⋯</button>
-                  </div>
-                  <div class="ta-book-tools">
-                    <button>Q1 ▾</button>
-                    <button>USDC ▾</button>
-                  </div>
-                  <div class="ta-book-head">
-                    <span>Price</span><span>Size (USDC)</span><span>Total (USDC)</span>
-                  </div>
-                  <ul class="ta-book-asks">
-                    <li><i style="--p:90%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:80%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:72%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:64%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:54%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:42%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:30%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  </ul>
-                  <div class="ta-book-spread">
-                    <span>Spread</span><b>Q1</b><span class="muted">0.005%</span>
-                  </div>
-                  <ul class="ta-book-bids">
-                    <li><i style="--p:30%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:42%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:54%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:64%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:72%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:80%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                    <li><i style="--p:90%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  </ul>
-                </div>
-
-                <div class="ta-order">
-                  <div class="ta-tabs ta-tabs-r">
-                    <button class="active">Market</button>
-                    <button>Limit</button>
-                  </div>
-                  <div class="ta-side-row">
-                    <button class="ta-side ta-buy">↑ BUY/LONG</button>
-                    <button class="ta-side ta-sell">↓ SELL/SHORT</button>
-                  </div>
-                  <div class="ta-meta">
-                    <div class="ta-row"><span>Available</span><b>143.95<em>USDC</em></b></div>
-                    <div class="ta-row"><span>Position</span><b class="muted">000.00<em>ETH</em></b></div>
-                  </div>
-                  <div class="ta-input-block">
-                    <label>Size</label>
-                    <div class="ta-input"><input type="text" value="100.00" readonly /><span>USDC</span></div>
-                  </div>
-                  <div class="ta-input-block">
-                    <label>Leverage</label>
-                    <div class="ta-slider">
-                      <div class="ta-slider-track">
-                        <div class="ta-slider-fill" style="width:25%"></div>
-                        <span class="ta-slider-tick" style="--p:0%"></span>
-                        <span class="ta-slider-tick" style="--p:50%"></span>
-                        <span class="ta-slider-tick" style="--p:100%"></span>
-                        <span class="ta-slider-thumb" style="--p:25%"></span>
-                      </div>
-                      <div class="ta-slider-marks"><span>1x</span><span>5x</span><span>10x</span></div>
-                    </div>
-                  </div>
-                  <button class="ta-place" type="button">▽ PLACE ORDER</button>
-                </div>
+          <!-- BEATS 4 & 5 — fictional mini trading app -->
+          <div class="hero-stage-app" aria-hidden="true">
+            <!-- Top header: pair, leverage, key stats -->
+            <div class="hsa-header">
+              <div class="hsa-header-left">
+                <button class="hsa-pair" type="button" tabindex="-1">
+                  <span class="hsa-pair-icon" aria-hidden="true"></span>
+                  <span class="hsa-pair-name">HYPE-USDC</span>
+                  <span class="hsa-pair-caret" aria-hidden="true">▾</span>
+                </button>
+                <span class="hsa-leverage">10x</span>
               </div>
-
-              <div class="ta-positions">
-                <div class="ta-pos-tabs">
-                  <button class="active">Positions <em>(1)</em></button>
-                  <button>Open orders</button>
-                  <button>Trade History</button>
+              <div class="hsa-stats">
+                <div class="hsa-stat">
+                  <span class="hsa-stat-label">Mark</span>
+                  <span class="hsa-stat-value">40.18</span>
                 </div>
-                <div class="ta-pos-table">
-                  <div class="ta-pos-row">
-                    <b>SOL <em>10x</em></b><span>0.81</span><span>0.86 <em>USDC</em></span><span>234.038</span><span>85.941</span><span class="ok">+$0.02 (+45.3%)</span><span>N/A</span><span>+$0.04 <em>(Cross)</em></span><span>+$0.00</span><span class="ta-close">Market</span>
-                  </div>
+                <div class="hsa-stat">
+                  <span class="hsa-stat-label">24h</span>
+                  <span class="hsa-stat-value hsa-stat-down">-2.39%</span>
+                </div>
+                <div class="hsa-stat">
+                  <span class="hsa-stat-label">Funding</span>
+                  <span class="hsa-stat-value hsa-stat-down">-0.0012%</span>
                 </div>
               </div>
             </div>
+
+            <!-- Timeframe row -->
+            <div class="hsa-toolbar">
+              <div class="hsa-timeframes" role="tablist">
+                <span class="hsa-tf">5m</span>
+                <span class="hsa-tf">1h</span>
+                <span class="hsa-tf hsa-tf-active" role="tab" aria-selected="true">1D</span>
+              </div>
+              <div class="hsa-toolbar-right">
+                <span class="hsa-indicator">
+                  <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 9 L4 5.5 L6.5 7.5 L10.5 2.5" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Indicators
+                </span>
+                <button class="hsa-deposit" type="button" data-hero-step="5" aria-label="Deposit">
+                  <span class="hsa-deposit-plus" aria-hidden="true">+</span>
+                  Deposit
+                </button>
+              </div>
+            </div>
+
+            <!-- Candlestick chart -->
+            <div class="hsa-chart-wrap">
+              <div class="hsa-chart-meta">
+                <span class="hsa-chart-symbol">HYPEUSDT · 1D · Bybit</span>
+                <span class="hsa-chart-vol">Vol · HYPE <b>685.38K</b></span>
+              </div>
+              <div class="hsa-chart-stage">
+                <svg class="hsa-candles" viewBox="0 0 280 140" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="0" y1="17.6" x2="280" y2="17.6" stroke="rgba(255,255,255,0.045)" stroke-width="0.5" stroke-dasharray="2 3"/>
+          <line x1="0" y1="35.2" x2="280" y2="35.2" stroke="rgba(255,255,255,0.045)" stroke-width="0.5" stroke-dasharray="2 3"/>
+          <line x1="0" y1="52.8" x2="280" y2="52.8" stroke="rgba(255,255,255,0.045)" stroke-width="0.5" stroke-dasharray="2 3"/>
+          <line x1="0" y1="70.4" x2="280" y2="70.4" stroke="rgba(255,255,255,0.045)" stroke-width="0.5" stroke-dasharray="2 3"/>
+          <line x1="0" y1="98" x2="280" y2="98" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <line x1="8" y1="79.2" x2="8" y2="90.6" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="18" y1="73.9" x2="18" y2="84.5" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="28" y1="74.8" x2="28" y2="81.0" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="38" y1="65.1" x2="38" y2="80.1" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="48" y1="57.2" x2="48" y2="68.6" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="58" y1="43.1" x2="58" y2="59.8" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="68" y1="29.0" x2="68" y2="47.5" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="78" y1="18.5" x2="78" y2="33.4" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="88" y1="17.6" x2="88" y2="25.5" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="98" y1="15.0" x2="98" y2="26.4" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="108" y1="11.4" x2="108" y2="20.2" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="118" y1="12.3" x2="118" y2="20.2" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="128" y1="16.7" x2="128" y2="31.7" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="138" y1="27.3" x2="138" y2="42.2" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="148" y1="31.7" x2="148" y2="41.4" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="158" y1="32.6" x2="158" y2="40.5" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="168" y1="37.8" x2="168" y2="51.0" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="178" y1="41.4" x2="178" y2="48.4" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="188" y1="29.9" x2="188" y2="44.9" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="198" y1="29.0" x2="198" y2="39.6" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="208" y1="23.8" x2="208" y2="38.7" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="218" y1="24.6" x2="218" y2="35.2" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="228" y1="30.8" x2="228" y2="47.5" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="238" y1="42.2" x2="238" y2="51.9" stroke="#f06767" stroke-width="0.9"/>
+          <line x1="248" y1="44.9" x2="248" y2="52.8" stroke="#3ad29f" stroke-width="0.9"/>
+          <line x1="258" y1="42.2" x2="258" y2="49.3" stroke="#3ad29f" stroke-width="0.9"/>
+          <rect x="5.5" y="82.7" width="5" height="5.3" fill="#3ad29f"/>
+          <rect x="15.5" y="75.7" width="5" height="7.0" fill="#3ad29f"/>
+          <rect x="25.5" y="75.7" width="5" height="3.5" fill="#f06767"/>
+          <rect x="35.5" y="66.9" width="5" height="12.3" fill="#3ad29f"/>
+          <rect x="45.5" y="59.0" width="5" height="7.9" fill="#3ad29f"/>
+          <rect x="55.5" y="45.8" width="5" height="13.2" fill="#3ad29f"/>
+          <rect x="65.5" y="31.7" width="5" height="14.1" fill="#3ad29f"/>
+          <rect x="75.5" y="20.2" width="5" height="11.4" fill="#3ad29f"/>
+          <rect x="85.5" y="20.2" width="5" height="3.5" fill="#f06767"/>
+          <rect x="95.5" y="17.6" width="5" height="6.2" fill="#3ad29f"/>
+          <rect x="105.5" y="13.2" width="5" height="4.4" fill="#3ad29f"/>
+          <rect x="115.5" y="13.2" width="5" height="4.4" fill="#f06767"/>
+          <rect x="125.5" y="17.6" width="5" height="10.6" fill="#f06767"/>
+          <rect x="135.5" y="28.2" width="5" height="11.4" fill="#f06767"/>
+          <rect x="145.5" y="34.3" width="5" height="5.3" fill="#3ad29f"/>
+          <rect x="155.5" y="34.3" width="5" height="4.4" fill="#f06767"/>
+          <rect x="165.5" y="38.7" width="5" height="8.8" fill="#f06767"/>
+          <rect x="175.5" y="44.0" width="5" height="3.5" fill="#3ad29f"/>
+          <rect x="185.5" y="31.7" width="5" height="12.3" fill="#3ad29f"/>
+          <rect x="195.5" y="31.7" width="5" height="6.2" fill="#f06767"/>
+          <rect x="205.5" y="26.4" width="5" height="11.4" fill="#3ad29f"/>
+          <rect x="215.5" y="26.4" width="5" height="5.3" fill="#f06767"/>
+          <rect x="225.5" y="31.7" width="5" height="12.3" fill="#f06767"/>
+          <rect x="235.5" y="44.0" width="5" height="4.4" fill="#f06767"/>
+          <rect x="245.5" y="46.6" width="5" height="1.8" fill="#3ad29f"/>
+          <rect x="255.5" y="44.0" width="5" height="2.6" fill="#3ad29f"/>
+          <rect x="5.5" y="118" width="5" height="12" fill="#3ad29f" opacity="0.55"/>
+          <rect x="15.5" y="114" width="5" height="16" fill="#3ad29f" opacity="0.55"/>
+          <rect x="25.5" y="122" width="5" height="8" fill="#f06767" opacity="0.55"/>
+          <rect x="35.5" y="116" width="5" height="14" fill="#3ad29f" opacity="0.55"/>
+          <rect x="45.5" y="118" width="5" height="12" fill="#3ad29f" opacity="0.55"/>
+          <rect x="55.5" y="112" width="5" height="18" fill="#3ad29f" opacity="0.55"/>
+          <rect x="65.5" y="116" width="5" height="14" fill="#3ad29f" opacity="0.55"/>
+          <rect x="75.5" y="108" width="5" height="22" fill="#3ad29f" opacity="0.55"/>
+          <rect x="85.5" y="114" width="5" height="16" fill="#f06767" opacity="0.55"/>
+          <rect x="95.5" y="118" width="5" height="12" fill="#3ad29f" opacity="0.55"/>
+          <rect x="105.5" y="116" width="5" height="14" fill="#3ad29f" opacity="0.55"/>
+          <rect x="115.5" y="118" width="5" height="12" fill="#f06767" opacity="0.55"/>
+          <rect x="125.5" y="104" width="5" height="26" fill="#f06767" opacity="0.55"/>
+          <rect x="135.5" y="106" width="5" height="24" fill="#f06767" opacity="0.55"/>
+          <rect x="145.5" y="110" width="5" height="20" fill="#3ad29f" opacity="0.55"/>
+          <rect x="155.5" y="112" width="5" height="18" fill="#f06767" opacity="0.55"/>
+          <rect x="165.5" y="108" width="5" height="22" fill="#f06767" opacity="0.55"/>
+          <rect x="175.5" y="108" width="5" height="22" fill="#3ad29f" opacity="0.55"/>
+          <rect x="185.5" y="114" width="5" height="16" fill="#3ad29f" opacity="0.55"/>
+          <rect x="195.5" y="110" width="5" height="20" fill="#f06767" opacity="0.55"/>
+          <rect x="205.5" y="112" width="5" height="18" fill="#3ad29f" opacity="0.55"/>
+          <rect x="215.5" y="114" width="5" height="16" fill="#f06767" opacity="0.55"/>
+          <rect x="225.5" y="116" width="5" height="14" fill="#f06767" opacity="0.55"/>
+          <rect x="235.5" y="112" width="5" height="18" fill="#f06767" opacity="0.55"/>
+          <rect x="245.5" y="118" width="5" height="12" fill="#3ad29f" opacity="0.55"/>
+          <rect x="255.5" y="120" width="5" height="10" fill="#3ad29f" opacity="0.55"/>
+          <line x1="0" y1="44.0" x2="280" y2="44.0" stroke="rgba(58, 210, 159, 0.55)" stroke-width="0.6" stroke-dasharray="3 2"/>
+        </svg>
+                <div class="hsa-chart-yaxis" aria-hidden="true">
+                  <span>44.000</span><span>42.000</span><span>40.000</span><span>38.000</span>
+                </div>
+                <span class="hsa-chart-price" aria-hidden="true">40.188</span>
+              </div>
+              <div class="hsa-chart-xaxis" aria-hidden="true">
+                <span>5</span><span>9</span><span>13</span><span>17</span><span>21</span><span>25</span><span>May</span><span>5</span><span>9</span><span>13</span>
+              </div>
+            </div>
+
+            <!-- Bottom: wallet status pill + tabs -->
+            <div class="hsa-footer">
+              <span class="hsa-wallet-pill">
+                <span class="hsa-wallet-dot" aria-hidden="true"></span>
+                0x7A9F•••3C21
+              </span>
+              <div class="hsa-bottom-tabs" role="tablist">
+                <span class="hsa-bt hsa-bt-active" role="tab" aria-selected="true">Positions</span>
+                <span class="hsa-bt">Open orders</span>
+                <span class="hsa-bt">Trade History</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BEAT 5 — overlay with Start now + Deposit -->
+          <div class="hero-stage-overlay" aria-hidden="true">
+            <span class="hero-stage-eyebrow">Start now</span>
+            <p class="hero-stage-msg hero-stage-msg-overlay">Fund your shielded wallet to begin trading.</p>
+            <button class="hero-stage-cta hero-stage-cta-grad" type="button" data-hero-step="1">Deposit</button>
+          </div>
+
+          <!-- BEAT 6 — deposit success state. Pauses longer than other beats
+               so the success registers before the loop restarts. -->
+          <div class="hero-stage-confirm" aria-hidden="true">
+            <span class="hero-stage-confirm-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+                <path d="M10 16.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="hero-stage-eyebrow">Deposit confirmed</span>
+            <p class="hero-stage-confirm-title">Funds shielded.</p>
+          </div>
+
+          <!-- Demo cursor that walks the viewer through each beat. -->
+          <div class="hero-stage-demo-cursor" aria-hidden="true">
+            <svg viewBox="0 0 22 22" fill="none">
+              <path d="M3 2 L3 17 L7.5 13 L10.5 19.5 L12.8 18.6 L9.7 12.1 L15.5 12.1 Z"
+                    fill="#fff" stroke="#0b1226" stroke-width="1.3" stroke-linejoin="round"/>
+            </svg>
           </div>
         </div>
       </div>
@@ -268,7 +355,9 @@
       <div class="container">
         <header class="today-head">
           <span class="eyebrow">What you do today</span>
-          <h2 class="section-title" data-split>Today's workarounds fail.</h2>
+          <div class="today-head-row">
+            <h2 class="section-title" data-split>Today's workarounds<br />fail.</h2>
+          </div>
         </header>
         <ul class="today-rows">
           <li class="today-row" data-reveal>
@@ -301,14 +390,15 @@
         <div class="container">
           <header class="scan-head">
             <span class="eyebrow inv">Scan your wallet</span>
-            <h2 class="section-title inv" data-split>See what you're broadcasting.</h2>
+            <h2 class="section-title inv" data-split>See the wallet data you're exposing.</h2>
             <p class="scan-sub" data-reveal>Paste any Hyperliquid wallet. We'll show you which bots are copying it, how fast they follow, and what it's costing in bps. No wallet connection or sign-in required.</p>
           </header>
 
-          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal>
-            <input class="scan-form-input" id="scan-addr" type="text" placeholder="0x… your Hyperliquid address" spellcheck="false" autocomplete="off" />
+          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate>
+            <input class="scan-form-input" id="scan-addr" type="text" placeholder="0x… your Hyperliquid address" spellcheck="false" autocomplete="off" aria-describedby="scan-error" />
             <button class="btn-pill btn-primary" id="scan-run" type="submit">Scan</button>
           </form>
+          <p class="scan-form-error" id="scan-error" role="alert" hidden>Enter a wallet address to scan.</p>
 
           <div class="scan-prefill" data-reveal>
             <span class="scan-prefill-label">Don't have an address?</span>
@@ -338,7 +428,7 @@
                 <div class="stat-bar"><span style="--p:62%"></span></div>
               </article>
               <article class="stat-card">
-                <div class="stat-label">Cost per round trip</div>
+                <div class="stat-label">Cost to You</div>
                 <div class="stat-val"><span class="stat-num" data-count-to="12">0</span><sub>bps</sub></div>
                 <div class="stat-meta">Slippage from copy traders front-running you</div>
                 <div class="stat-bar"><span style="--p:72%"></span></div>
@@ -359,11 +449,11 @@
             <div class="wallets-panel">
               <div class="wp-head">Top wallets copying you</div>
               <ul class="wp-list">
-                <li><span class="wp-addr">0x741e…b852</span><span class="wp-bar" style="--p:100%"></span><span class="wp-trades">47 copy fills</span></li>
-                <li><span class="wp-addr">0xeb85…2fc9</span><span class="wp-bar" style="--p:92%"></span><span class="wp-trades">43 copy fills</span></li>
-                <li><span class="wp-addr">0xc963…0da7</span><span class="wp-bar" style="--p:83%"></span><span class="wp-trades">39 copy fills</span></li>
-                <li><span class="wp-addr">0x0da7…41eb</span><span class="wp-bar" style="--p:68%"></span><span class="wp-trades">32 copy fills</span></li>
-                <li><span class="wp-addr">0x52fc…9630</span><span class="wp-bar" style="--p:36%"></span><span class="wp-trades">17 copy fills</span></li>
+                <li><span class="wp-addr">0x741e…b852</span><span class="wp-bar" style="--p:100%"></span><span class="wp-trades">47x</span></li>
+                <li><span class="wp-addr">0xeb85…2fc9</span><span class="wp-bar" style="--p:92%"></span><span class="wp-trades">43x</span></li>
+                <li><span class="wp-addr">0xc963…0da7</span><span class="wp-bar" style="--p:83%"></span><span class="wp-trades">39x</span></li>
+                <li><span class="wp-addr">0x0da7…41eb</span><span class="wp-bar" style="--p:68%"></span><span class="wp-trades">32x</span></li>
+                <li><span class="wp-addr">0x52fc…9630</span><span class="wp-bar" style="--p:36%"></span><span class="wp-trades">17x</span></li>
               </ul>
             </div>
           </div>
@@ -377,14 +467,13 @@
         <header class="features-head">
           <span class="eyebrow">Features</span>
           <h2 class="section-title" data-split>Same trade. No broadcast.</h2>
-          <p class="features-lede" data-reveal>Confidential execution on Hyperliquid, with the compliance and custody desks need.</p>
+          <p class="features-lede" data-reveal>Confidential execution on Hyperliquid, with the compliance institutional desks need.</p>
         </header>
 
         <ol class="features-list">
           <li class="feat-card" data-reveal>
             <div class="feat-card-meta">
               <span class="feat-num">01</span>
-              <span class="feat-tag">Shielding</span>
             </div>
             <div class="feat-card-body">
               <h3 class="feat-title">Execution shielding</h3>
@@ -405,7 +494,6 @@
           <li class="feat-card" data-reveal>
             <div class="feat-card-meta">
               <span class="feat-num">02</span>
-              <span class="feat-tag">Hyperliquid native</span>
             </div>
             <div class="feat-card-body">
               <h3 class="feat-title">Hyperliquid fill parity</h3>
@@ -430,11 +518,10 @@
           <li class="feat-card" data-reveal>
             <div class="feat-card-meta">
               <span class="feat-num">03</span>
-              <span class="feat-tag">Institutions</span>
             </div>
             <div class="feat-card-body">
               <h3 class="feat-title">Compliant by design</h3>
-              <p class="feat-body">Deposit screening, geo-blocking, and sanction compliance are built in. Desks and vaults get the highest compliance bar so size can move on-venue without exposure.</p>
+              <p class="feat-body">ShieldTX is built for compliant minded traders. Desks and vaults can move large volumes onchain with compliance built-in.</p>
             </div>
             <div class="feat-visual feat-visual-block" aria-hidden="true">
               <div class="fv-globe">
@@ -454,11 +541,10 @@
           <li class="feat-card" data-reveal>
             <div class="feat-card-meta">
               <span class="feat-num">04</span>
-              <span class="feat-tag">Self-custody</span>
             </div>
             <div class="feat-card-body">
               <h3 class="feat-title">You hold the keys</h3>
-              <p class="feat-body">Non-custodial vault on Arbitrum. Withdrawals are permissionless and verifiable. No admin key, no lockups, no counterparty risk.</p>
+              <p class="feat-body">ShieldTX does not take custody of your assets. Your withdrawals are permissionless and verified onchain without gate-keepers, ensuring you maintain control of your assets at each step.</p>
             </div>
             <div class="feat-visual feat-visual-flow" aria-hidden="true">
               <div class="fv-flow-card">
@@ -477,194 +563,23 @@
     </section>
 
     <!-- 4. PREVIEW — animated demo -->
+    <!-- PREVIEW — bare video, viewport-fit -->
     <section class="preview" id="preview">
-      <div class="container">
+      <div class="container preview-stack">
         <header class="preview-head">
           <span class="eyebrow">Preview</span>
-          <h2 class="section-title" data-split>Trade on Hyperliquid</h2>
-          <p class="preview-sub" data-reveal>It's perp trading on Hyperliquid, minus the broadcast.</p>
+          <h2 class="section-title" data-split>Same Hyperliquid. Zero footprint.</h2>
+          <p class="preview-sub" data-reveal>Watch a shielded trade open, settle on chain, and close — end to end. Same fills, no on-chain trail back to you.</p>
         </header>
-
-        <div class="trade-frame" data-reveal>
-          <div class="tfb">
-            <div class="tfb-dots"><span></span><span></span><span></span></div>
-            <span class="tfb-url"><i class="tfb-lock">●</i> shieldtx.app<span class="tfb-path">/trade</span></span>
-            <span class="tfb-tag">SHIELDED</span>
-          </div>
-
-          <div class="trade-app">
-            <div class="ta-nav">
-              <div class="ta-nav-l">
-                <span class="ta-logo">avail</span>
-                <a class="ta-nav-link active" href="#">Trade</a>
-                <a class="ta-nav-link" href="#">Leaderboard</a>
-                <a class="ta-nav-link" href="#">Docs</a>
-              </div>
-              <div class="ta-nav-r">
-                <span class="ta-balance"><span class="ta-shield">♥</span>$143.95<span class="ta-caret">▾</span></span>
-                <span class="ta-user">FARADAY<span class="ta-caret">▾</span></span>
-              </div>
-            </div>
-
-            <div class="ta-pair">
-              <div class="ta-pair-name">
-                <span class="ta-coin"></span>
-                <b>HYPE-USDC</b>
-                <span class="ta-pair-caret">▾</span>
-                <span class="ta-lev">25x</span>
-              </div>
-              <div class="ta-stat"><span>Mark</span><b>278.81</b></div>
-              <div class="ta-stat"><span>Oracle</span><b>278.01</b></div>
-              <div class="ta-stat"><span>24h Change</span><b class="neg">-0.7835 / -2.58%</b></div>
-              <div class="ta-stat"><span>24h Volume</span><b>$50,867,772.59</b></div>
-              <div class="ta-stat"><span>Open Interest</span><b>$8,073,731,835.45</b></div>
-              <div class="ta-stat"><span>Funding / Countdown</span><b>-0.7835</b></div>
-            </div>
-
-            <div class="ta-grid">
-              <div class="ta-chart">
-                <div class="ta-chart-tools">
-                  <div class="ta-chart-tools-l">
-                    <button class="active">5m</button>
-                    <button>1h</button>
-                    <button>1d</button>
-                    <button class="ico">▾</button>
-                    <button class="ico">⏱</button>
-                    <span class="ta-nav-link">Indicators</span>
-                  </div>
-                  <div class="ta-chart-tools-r">
-                    <button class="ico">⌕</button>
-                    <button class="ico">⚙</button>
-                  </div>
-                </div>
-                <div class="ta-chart-body">
-                  <div class="ta-chart-rail">
-                    <span>＋</span><span>／</span><span>↗</span><span>⊞</span><span>⌗</span><span>T</span><span>⊙</span><span>⌫</span><span>⊕</span><span>⌂</span>
-                  </div>
-                  <div class="ta-chart-canvas">
-                    <svg class="ta-candles" viewBox="0 0 800 460" preserveAspectRatio="none" aria-hidden="true"></svg>
-                    <span class="ta-vol-label">Vol</span>
-                    <div class="ta-y-axis">
-                      <span>282.00</span><span>270.00</span><span>260.00</span><span>250.00</span><span>240.00</span><span>230.00</span><span>220.00</span><span>210.00</span><span>200.00</span>
-                    </div>
-                    <div class="ta-mark-tag">278.81</div>
-                    <div class="ta-vol-tag">17.6K</div>
-                    <div class="ta-x-axis">
-                      <span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>2026</span><span>Feb</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="ta-book">
-                <div class="ta-tabs">
-                  <button class="active">Order Book</button>
-                  <button>Trades</button>
-                  <div class="ta-tab-spacer"></div>
-                  <button class="ico">⋯</button>
-                </div>
-                <div class="ta-book-tools">
-                  <button>Q1 ▾</button>
-                  <button>USDC ▾</button>
-                </div>
-                <div class="ta-book-head">
-                  <span>Price</span><span>Size (USDC)</span><span>Total (USDC)</span>
-                </div>
-                <ul class="ta-book-asks">
-                  <li><i style="--p:90%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:80%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:72%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:64%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:54%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:42%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:30%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                </ul>
-                <div class="ta-book-spread">
-                  <span>Spread</span><b>Q1</b><span class="muted">0.005%</span>
-                </div>
-                <ul class="ta-book-bids">
-                  <li><i style="--p:30%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:42%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:54%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:64%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:72%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:80%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                  <li><i style="--p:90%"></i><span>1,946.8</span><span>47,825</span><span>3,993,619</span></li>
-                </ul>
-              </div>
-
-              <div class="ta-order">
-                <div class="ta-tabs ta-tabs-r">
-                  <button class="active">Market</button>
-                  <button>Limit</button>
-                </div>
-                <div class="ta-side-row">
-                  <button class="ta-side ta-buy">↑ BUY/LONG</button>
-                  <button class="ta-side ta-sell">↓ SELL/SHORT</button>
-                </div>
-                <div class="ta-meta">
-                  <div class="ta-row"><span>Available to Trade</span><b>143.95<em>USDC</em></b></div>
-                  <div class="ta-row"><span>Current Position</span><b class="muted">000.00<em>ETH</em></b></div>
-                </div>
-                <div class="ta-input-block">
-                  <label>Size</label>
-                  <div class="ta-input"><input type="text" value="100.00" readonly /><span>USDC</span></div>
-                </div>
-                <div class="ta-input-block">
-                  <label>Leverage</label>
-                  <div class="ta-slider">
-                    <div class="ta-slider-track">
-                      <div class="ta-slider-fill" style="width:25%"></div>
-                      <span class="ta-slider-tick" style="--p:0%"></span>
-                      <span class="ta-slider-tick" style="--p:50%"></span>
-                      <span class="ta-slider-tick" style="--p:100%"></span>
-                      <span class="ta-slider-thumb" style="--p:25%"></span>
-                    </div>
-                    <div class="ta-slider-marks"><span>1x</span><span>5x</span><span>20x</span></div>
-                  </div>
-                </div>
-                <div class="ta-check">
-                  <span class="ta-check-box"></span>
-                  <span>Take Profit / Stop Loss</span>
-                </div>
-                <button class="ta-place" type="button">▽ PLACE ORDER</button>
-                <div class="ta-meta">
-                  <div class="ta-row"><span>Liquidation Price</span><b class="muted">N/A</b></div>
-                  <div class="ta-row"><span>Order value</span><b class="muted">N/A</b></div>
-                  <div class="ta-row"><span>Margin Required</span><b class="muted">N/A</b></div>
-                  <div class="ta-row"><span>Slippage</span><b>8%<em>EDIT</em></b></div>
-                  <div class="ta-row"><span>Fees</span><b>0.17 / 0.14%</b></div>
-                </div>
-                <div class="ta-actions">
-                  <button>DEPOSIT</button>
-                  <button>TRANSFER</button>
-                  <button>WITHDRAW</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="ta-positions">
-              <div class="ta-pos-tabs">
-                <button class="active">Positions <em>(1)</em></button>
-                <button>Open orders</button>
-                <button>Trade History</button>
-              </div>
-              <div class="ta-pos-table">
-                <div class="ta-pos-row ta-pos-head">
-                  <span>Coin</span><span>Size</span><span>Position Value <i>▾</i></span><span>Entry Price</span><span>Mark Price</span><span>PNL (ROE %)</span><span>Liq. Price</span><span>Margin</span><span>Funding</span><span>Close All</span>
-                </div>
-                <div class="ta-pos-row">
-                  <b>SOL <em>20x</em></b><span>0.81</span><span>0.86 <em>USDC</em></span><span>234.038</span><span>85.941</span><span class="ok">+$0.02 (+45.3%)</span><span>N/A</span><span>+$0.04 <em>(Cross)</em></span><span>+$0.00</span><span class="ta-close">Market</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <p class="trade-caption">Native Hyperliquid execution. Your strategy stays off the radar.</p>
+        <video class="preview-video"
+               src="assets/demo/preview.mp4"
+               autoplay loop muted playsinline preload="metadata"
+               poster="assets/demo/poster.jpg"
+               aria-label="ShieldTX demo: log in, deposit, trade, close — shielded end to end"></video>
       </div>
     </section>
 
-    <!-- 2. STEPS / HOW IT WORKS -->
+    <!-- HOW IT WORKS — original 3-card horizontal layout -->
     <section class="how" id="how">
       <div class="container">
         <header class="how-head">
@@ -683,7 +598,7 @@
               <p>Deposit from any chain via Nexus. Funds are secured by the ShieldTX vault on Arbitrum.</p>
             </div>
             <div class="step-media">
-              <div class="mock mock-connect">
+              <div class="mock mock-connect" aria-hidden="true">
                 <div class="mock-row"><span class="chip">Bridge</span><b>Nexus · any chain</b></div>
                 <div class="mock-row"><span class="chip">Vault</span><b>ShieldTX · Arbitrum</b></div>
                 <div class="mock-row"><span class="chip">Deposit</span><b><span class="step-counter" data-count-to="25000" data-suffix=" USDC">0</span></b></div>
@@ -702,7 +617,7 @@
               <p>Confidential trades placed from a fresh, unlinkable wallet on Hyperliquid.</p>
             </div>
             <div class="step-media">
-              <div class="mock mock-trade">
+              <div class="mock mock-trade" aria-hidden="true">
                 <div class="mock-tape">
                   <div class="bar"></div><div class="bar tall"></div><div class="bar"></div>
                   <div class="bar short"></div><div class="bar tall"></div><div class="bar"></div>
@@ -724,7 +639,7 @@
               <p>Continue trading or re-shield balance for maximum unlinkability.</p>
             </div>
             <div class="step-media">
-              <div class="mock mock-settle">
+              <div class="mock mock-settle" aria-hidden="true">
                 <div class="mock-row"><span class="chip">PNL</span><b class="ok">+<span class="step-counter" data-count-to="18420" data-prefix="$">0</span></b></div>
                 <div class="mock-row"><span class="chip">Re-shield</span><b>Enabled</b></div>
                 <div class="mock-row ok"><span class="chip">Footprint</span><b>0 bps</b></div>
@@ -816,14 +731,21 @@
               <span>Is this like Tornado Cash?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>No. ShieldTX doesn't pool funds or obfuscate transactions. It executes natively on Hyperliquid: same order book, same counterparties, fully on-chain. The difference: Tornado Cash hides the transaction. ShieldTX shields your position data. Execution stays transparent. Your strategy doesn't.</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p>No. ShieldTX is a compliant trading solution for Hyperliquid traders looking to protect against copy-bots, competitors and adversaries.</p></div></div>
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
               <span>What pairs are supported?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>ETH, BTC, SOL, and HYPE perpetuals at launch. Same pairs as native Hyperliquid trading. More pairs are easy to add past this and will be added based on demand.</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p>ETH, BTC, SOL, and HYPE are currently supported with new pairs being added all the time. If you have a specific pair that you would like to add just get in touch.</p></div></div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>What is the maximum leverage available?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>The maximum leverage on ShieldTX is the same as Hyperliquid.</p></div></div>
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
@@ -834,31 +756,70 @@
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
-              <span>Why not just use multiple wallets?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Because Arkham and Nansen cluster them anyway. Temporal correlation analysis links wallets through on-chain behaviour: same asset, same direction, seconds apart is enough. ShieldTX breaks linkability at the source. One account, no clustering exposure.</p></div></div>
-          </li>
-          <li class="faq-item">
-            <button class="faq-q" aria-expanded="false" type="button">
               <span>What does it cost?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>5bps on entry, 5bps on exit. Copy traders could take up to 100bps per trade from you. ShieldTX costs less than the leak it closes.</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner">
+              <p>Private beta access members get discounted pricing.</p>
+              <div class="pricing-card">
+                <div class="pricing-group">
+                  <span class="pricing-group-label">Trading</span>
+                  <ul class="pricing-rows">
+                    <li class="pricing-row">
+                      <span class="pricing-row-label">Open Position (Market)</span>
+                      <span class="pricing-row-value">5 bps of notional <span class="pricing-row-add">+ $1</span></span>
+                    </li>
+                    <li class="pricing-row">
+                      <span class="pricing-row-label">Open Position (Limit)</span>
+                      <span class="pricing-row-value">5 bps of notional <span class="pricing-row-add">+ $1</span> <span class="pricing-row-note">refunded if unfilled</span></span>
+                    </li>
+                    <li class="pricing-row">
+                      <span class="pricing-row-label">Close Position</span>
+                      <span class="pricing-row-value">5 bps of notional <span class="pricing-row-add">+ ~$1 gas</span></span>
+                    </li>
+                    <li class="pricing-row">
+                      <span class="pricing-row-label">Close Position (skip shielding)</span>
+                      <span class="pricing-pill pricing-pill-free">Free</span>
+                    </li>
+                    <li class="pricing-row">
+                      <span class="pricing-row-label">Liquidation</span>
+                      <span class="pricing-pill pricing-pill-none">None</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="pricing-group">
+                  <span class="pricing-group-label">Account</span>
+                  <ul class="pricing-rows">
+                    <li class="pricing-row">
+                      <span class="pricing-row-label">Deposit</span>
+                      <span class="pricing-pill pricing-pill-free">Free</span>
+                    </li>
+                    <li class="pricing-row">
+                      <span class="pricing-row-label">Withdraw to external wallet</span>
+                      <span class="pricing-row-value">$2</span>
+                    </li>
+                    <li class="pricing-row">
+                      <span class="pricing-row-label">Private transfer (within ShieldTX)</span>
+                      <span class="pricing-pill pricing-pill-free">Free</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div></div>
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
               <span>Who controls the vault / my funds?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>You do. Funds are locked in a smart contract on Arbitrum. Core operations are permissionless and verified by zero-knowledge proofs, no admin key required. See the full breakdown in the trust model.</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p>You do. Funds are locked in a smart contract on Arbitrum. Core operations are permissionless and verified by zero-knowledge proofs, no admin key required. See the full breakdown in <a class="faq-link" href="trust-model/index.html">the trust model</a>.</p></div></div>
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
               <span>Is there an API?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>API access is on the roadmap post-MVP. If you're running algo strategies, reach out directly. Early access conversations are open.</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p>API access is on the roadmap post-MVP. If you're running algo strategies, <a class="faq-link" href="contact/index.html">reach out directly</a>. Early access conversations are open.</p></div></div>
           </li>
         </ul>
       </div>
@@ -873,12 +834,13 @@
         <h2 class="final-cta-title" data-split>Join the private beta.</h2>
         <p class="final-cta-sub" data-reveal>500 invites for the first cohort. Shipping now.</p>
 
-        <form class="beta-form final-cta-form" onsubmit="return false" data-reveal>
-          <label class="beta-label" for="invite">Invite Code:</label>
-          <input class="beta-input" id="invite" type="text" placeholder="x3…t99" spellcheck="false" autocomplete="off" />
-          <button class="btn-pill btn-primary" type="submit">Join</button>
-        </form>
-        <p class="beta-helper final-cta-helper" data-reveal>Don't have an invite code? <a href="#" class="beta-helper-link" data-modal-open="invite-modal">Request one →</a></p>
+        <div class="final-cta-actions" data-reveal>
+          <a class="btn-pill btn-primary final-cta-btn" href="/request-access" data-modal-open="invite-modal">
+            Request Access
+            <span class="hero-cta-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <p class="beta-helper final-cta-helper" data-reveal>Already invited? <a class="faq-link" href="/app">Enter your code →</a></p>
       </div>
     </section>
 
@@ -888,52 +850,215 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <img src="assets/ShieldTX_Logo.svg" alt="ShieldTX" class="footer-logo" />
+        <img src="assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
         <p class="footer-tagline">Trade with confidence.<br/>Powered by <span class="footer-avail">Avail</span>.</p>
-        <div class="status"><span class="dot live"></span> Live · build <span class="mono">v2.0.0</span></div>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
         <a href="#features">Features</a>
         <a href="#compare">Compare</a>
         <a href="#how">How it works</a>
-        <a href="#beta">Beta access</a>
+        <a href="/app">Open App</a>
       </div>
       <div class="footer-col">
         <h4>Resources</h4>
         <a href="#faq">FAQ</a>
         <a href="#scan-tool">Scan</a>
         <a href="#preview">Preview</a>
+        <a href="trust-model/">Trust model ↗</a>
         <a href="brand-document/">Brand book ↗</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a href="#">Legal</a>
+        <a href="/request-access">Request access</a>
+        <a href="contact/">Contact ↗</a>
       </div>
     </div>
     <div class="footer-bottom container">
       <span>© <span id="yr"></span> ShieldTX</span>
+      <div class="footer-socials" aria-label="ShieldTX social links">
+        <a class="footer-social" href="#" aria-label="ShieldTX on X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.7l-6.92 7.91L22 21h-6.4l-5.01-6.55L4.84 21H1.66l7.4-8.46L1.5 3h6.56l4.53 5.99L17.53 3Zm-1.12 16.13h1.76L7.7 4.78H5.82l10.59 14.35Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Discord">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.27 5.33A18.6 18.6 0 0 0 14.86 4l-.22.45a16.6 16.6 0 0 1 4.06 1.27 14.5 14.5 0 0 0-12.4 0 16.6 16.6 0 0 1 4.06-1.27L10.14 4a18.6 18.6 0 0 0-4.41 1.33C2.83 9.45 2.04 13.46 2.43 17.4a18.7 18.7 0 0 0 5.71 2.86c.46-.62.87-1.28 1.21-1.97a12.1 12.1 0 0 1-1.91-.91l.47-.34a13.4 13.4 0 0 0 11.18 0l.47.34a12.1 12.1 0 0 1-1.91.91c.34.69.74 1.35 1.21 1.97a18.7 18.7 0 0 0 5.71-2.86c.46-4.55-.78-8.52-3.31-12.07ZM9.05 14.91c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Zm5.9 0c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.34a1 1 0 0 0-1.34-1.07L2.7 10.45c-.93.36-.86 1.7.1 1.97l4.32 1.21 1.7 5.22a1 1 0 0 0 1.66.42l2.46-2.39 4.6 3.4a1 1 0 0 0 1.58-.6l3.0-13.46c.04-.2.04-.4 0-.59ZM9.96 14.41 9.4 18l-1.32-4.05 9.74-7.21-7.86 7.67Z"/></svg>
+        </a>
+      </div>
       <span class="mono">All rights reserved.</span>
     </div>
   </footer>
 
-  <!-- Request-invite modal -->
-  <div class="modal" id="invite-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="invite-modal-title">
+  <!-- Request Access modal — multi-step screener. The same form markup lives
+       on /request-access (full-page) and /app (secondary action). Keep them
+       in sync when editing fields. Behavior wired by /public-scripts/
+       request-access-form.js → ShieldTX.bindRequestAccessForm. -->
+  <div class="modal waitlist-modal" id="invite-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="waitlist-title">
     <div class="modal-overlay" data-modal-close></div>
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog waitlist-dialog waitlist-mount" role="document">
       <button class="modal-close" type="button" aria-label="Close" data-modal-close>×</button>
-      <div class="modal-body">
-        <span class="eyebrow">Request invite</span>
-        <h3 class="modal-title" id="invite-modal-title">Get on the ShieldTX list.</h3>
-        <p class="modal-sub">Drop your email and we'll send you an invite code when access opens up.</p>
-        <form class="modal-form" id="invite-request-form" onsubmit="return false">
-          <input class="modal-input" id="invite-email" type="email" placeholder="you@domain.com" required spellcheck="false" autocomplete="email" />
-          <button class="btn-pill btn-primary modal-send" type="submit">Send</button>
-        </form>
-        <p class="modal-success" data-modal-success hidden>Thanks. We'll be in touch.</p>
+
+      <!-- Progress -->
+      <div class="waitlist-progress" aria-hidden="true">
+        <div class="waitlist-progress-fill" data-waitlist-progress></div>
       </div>
+
+      <form class="waitlist-form" id="waitlist-form" data-state="idle" novalidate>
+        <div class="waitlist-honeypot" aria-hidden="true">
+          <label>Company URL<input type="text" name="company_url" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <!-- Step 1 — Email -->
+        <section class="waitlist-step is-active" data-step="1">
+          <span class="eyebrow">Private beta · Step 1 of 3</span>
+          <h3 class="waitlist-title" id="waitlist-title">Request beta access.</h3>
+          <p class="waitlist-sub">500 invites for the first cohort. Three quick steps — we prioritise traders with the most to lose from copy-trading.</p>
+          <label class="waitlist-field">
+            <span class="waitlist-label">Email</span>
+            <input class="waitlist-input" type="email" name="email" placeholder="you@domain.com" required spellcheck="false" autocomplete="email" />
+          </label>
+        </section>
+
+        <!-- Step 2 — Trader profile -->
+        <section class="waitlist-step" data-step="2">
+          <span class="eyebrow">Step 2 of 3</span>
+          <h3 class="waitlist-title">Tell us about your trading.</h3>
+
+          <div class="waitlist-question">
+            <p class="waitlist-question-title">What do you primarily trade?</p>
+            <div class="waitlist-dropdown" data-dropdown>
+              <select class="waitlist-dropdown-native" name="trade-type" required aria-hidden="true" tabindex="-1">
+                <option value="" disabled selected hidden>Choose one…</option>
+                <option value="perps-only">Perps only</option>
+                <option value="mostly-perps">Mostly perps, some spot</option>
+                <option value="mix">Mix of perps and spot</option>
+                <option value="mostly-spot">Mostly spot</option>
+              </select>
+              <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                <span class="waitlist-dropdown-label is-placeholder">Choose one…</span>
+                <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+              </button>
+              <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox"></div>
+            </div>
+          </div>
+
+          <div class="waitlist-question">
+            <p class="waitlist-question-title">Which platforms do you actively trade on? <span class="waitlist-question-hint">Select all that apply</span></p>
+            <div class="waitlist-dropdown" data-dropdown>
+              <select class="waitlist-dropdown-native" name="platforms" multiple required aria-hidden="true" tabindex="-1">
+                <option value="hyperliquid">Hyperliquid</option>
+                <option value="dydx">dYdX</option>
+                <option value="gmx">GMX / GNS</option>
+                <option value="cex">Binance / Bybit (CEX)</option>
+                <option value="other-dex">Other DEX</option>
+              </select>
+              <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                <span class="waitlist-dropdown-label is-placeholder">Select platforms…</span>
+                <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+              </button>
+              <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox" aria-multiselectable="true"></div>
+            </div>
+          </div>
+
+          <div class="waitlist-question">
+            <p class="waitlist-question-title">Average monthly trading volume?</p>
+            <div class="waitlist-dropdown" data-dropdown>
+              <select class="waitlist-dropdown-native" name="volume" required aria-hidden="true" tabindex="-1">
+                <option value="" disabled selected hidden>Choose one…</option>
+                <option value="lt-50k">&lt; $50K</option>
+                <option value="50k-250k">$50K – $250K</option>
+                <option value="250k-1m">$250K – $1M</option>
+                <option value="1m-5m">$1M – $5M</option>
+                <option value="5m-plus">$5M+</option>
+              </select>
+              <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                <span class="waitlist-dropdown-label is-placeholder">Choose one…</span>
+                <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+              </button>
+              <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 3 — Pain & urgency -->
+        <section class="waitlist-step" data-step="3">
+          <span class="eyebrow">Step 3 of 3</span>
+          <h3 class="waitlist-title">Your shielding needs.</h3>
+
+          <div class="waitlist-question">
+            <p class="waitlist-question-title">Have you been copied or front-run before?</p>
+            <div class="waitlist-dropdown" data-dropdown>
+              <select class="waitlist-dropdown-native" name="pain" required aria-hidden="true" tabindex="-1">
+                <option value="" disabled selected hidden>Choose one…</option>
+                <option value="recurring">Yes — it's a recurring problem</option>
+                <option value="few-times">Yes — it's happened a few times</option>
+                <option value="suspect">I suspect so but can't confirm</option>
+                <option value="no">No / not sure</option>
+              </select>
+              <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                <span class="waitlist-dropdown-label is-placeholder">Choose one…</span>
+                <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+              </button>
+              <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox"></div>
+            </div>
+          </div>
+
+          <div class="waitlist-question">
+            <p class="waitlist-question-title">How do you currently protect your trades? <span class="waitlist-question-hint">Select all that apply</span></p>
+            <div class="waitlist-dropdown" data-dropdown>
+              <select class="waitlist-dropdown-native" name="protection" multiple required aria-hidden="true" tabindex="-1">
+                <option value="multi-wallet">Multiple wallets</option>
+                <option value="timing">Timing obfuscation (odd hours, delayed entries)</option>
+                <option value="smaller">Smaller position sizes</option>
+                <option value="private-rpc">Private RPCs / MEV protection</option>
+                <option value="nothing">Nothing — I just accept the leakage</option>
+              </select>
+              <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                <span class="waitlist-dropdown-label is-placeholder">Select protections…</span>
+                <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+              </button>
+              <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox" aria-multiselectable="true"></div>
+            </div>
+          </div>
+
+          <div class="waitlist-question">
+            <p class="waitlist-question-title">How soon do you need shielded execution?</p>
+            <div class="waitlist-dropdown" data-dropdown>
+              <select class="waitlist-dropdown-native" name="urgency" required aria-hidden="true" tabindex="-1">
+                <option value="" disabled selected hidden>Choose one…</option>
+                <option value="now">Immediately — I'm losing alpha now</option>
+                <option value="month">Within a month</option>
+                <option value="exploring">Exploring, no rush</option>
+              </select>
+              <button type="button" class="waitlist-dropdown-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false">
+                <span class="waitlist-dropdown-label is-placeholder">Choose one…</span>
+                <span class="waitlist-dropdown-caret" aria-hidden="true"></span>
+              </button>
+              <div class="waitlist-dropdown-panel" data-dropdown-panel hidden role="listbox"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Result -->
+        <section class="waitlist-step waitlist-result" data-step="result">
+          <span class="eyebrow" data-result-eyebrow>You're on the list</span>
+          <h3 class="waitlist-title" data-result-title>Thanks — request received.</h3>
+          <p class="waitlist-sub" data-result-sub>We'll reach out from <b>beta@shieldtx.app</b> when access opens up.</p>
+        </section>
+
+        <!-- Error -->
+        <p class="waitlist-error" data-form-error role="alert" aria-live="polite" hidden></p>
+
+        <!-- Footer nav -->
+        <div class="waitlist-nav">
+          <button type="button" class="waitlist-back" data-waitlist-back hidden>← Back</button>
+          <button type="button" class="btn-pill btn-primary waitlist-next" data-waitlist-next>Continue <span aria-hidden="true">→</span></button>
+          <button type="submit" class="btn-pill btn-primary waitlist-submit" data-waitlist-submit hidden>Submit application <span aria-hidden="true">→</span></button>
+          <button type="button" class="btn-pill btn-primary waitlist-done" data-waitlist-done hidden>Done</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -941,6 +1066,8 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+  <script src="/public-scripts/site-cursor.js?v=3"></script>
+  <script src="/public-scripts/request-access-form.js?v=3"></script>
+  <script src="script.js?v=31"></script>
 </body>
 </html>
