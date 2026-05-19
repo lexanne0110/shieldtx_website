@@ -302,10 +302,13 @@
   letter-spacing: -0.018em;
   color: #fff;
 }
-.docs-cta-sub {
+/* Scoped under .docs-cta because the generic .docs-content p rule has
+   higher specificity (0,1,1) than a single class selector. */
+.docs-cta .docs-cta-sub {
   margin: 0 0 24px;
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
 }
 .docs-cta-btn {
   display: inline-flex;
