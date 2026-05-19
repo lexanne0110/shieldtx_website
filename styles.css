@@ -60,6 +60,17 @@
   --radius-xl: 40px;
   --radius-pill: 999px;
 
+  /* Short-hand radius tokens used throughout the hero stage. Previously
+     undefined — every var(--r-*) fell back to 0, so child elements with
+     "border-radius: inherit" silently inherited a sharp corner. Defining
+     the scale here also enforces visual consistency across the hero. */
+  --r-xs:   6px;   /* tiny indicators, checkmarks */
+  --r-sm:   10px;  /* small chips, timeframe pills, tag rows */
+  --r-md:   14px;  /* fields, status pills, inputs */
+  --r-lg:   20px;  /* cards, glass panels */
+  --r-xl:   28px;  /* outer hero-stage container */
+  --r-pill: 999px; /* CTAs, wallet pills, fully-rounded shapes */
+
   --shadow-1: 0 1px 0 rgba(15,23,42,.03) inset, 0 10px 30px -18px rgba(15,23,42,.2);
   --shadow-2: 0 40px 120px -40px rgba(15,23,42,.25);
 
@@ -516,38 +527,114 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   background: var(--brand-gradient);
 }
 .hero .eyebrow { color: rgba(255,255,255,.78); }
+
+/* Hero background — pure CSS recreation of the painterly Header.png.
+   Two distinctive features of the original:
+   1. A bright cyan band that runs the full height of the LEFT edge
+      (not just a corner glow).
+   2. A diagonal "light beam" sweeping from upper-right toward
+      lower-middle, brighter in the middle of its length, soft at both ends.
+   The base linear gradient establishes the cyan→royal→navy flow; the
+   stacked radials carve in the corner weights; the blob + beam layers
+   sit on top with mix-blend-mode: screen for the breathing motion. */
 .hero-bg {
   position: absolute; inset: 0;
   z-index: -1;
-  background: var(--brand-gradient);
+  background:
+    /* Bright cyan band along the entire left edge */
+    radial-gradient(45% 110% at -10% 50%, rgba(170, 220, 255, 0.55) 0%, rgba(120, 195, 255, 0.25) 40%, transparent 70%),
+    /* Slightly brighter zone at lower-left */
+    radial-gradient(40% 40% at 12% 88%, rgba(140, 200, 245, 0.42) 0%, transparent 65%),
+    /* Deep navy weight at bottom-right */
+    radial-gradient(70% 80% at 100% 100%, rgba(5, 18, 60, 0.85) 0%, transparent 65%),
+    /* Subtle darker top-right corner */
+    radial-gradient(55% 55% at 100% 0%, rgba(15, 36, 95, 0.55) 0%, transparent 65%),
+    /* Base diagonal foundation */
+    linear-gradient(155deg, #5ba0ff 0%, #3a78e0 25%, #2456be 50%, #163d99 75%, #0a1e5a 100%);
 }
-.hero-shader { position: absolute; inset: 0; filter: blur(80px); opacity: .38; }
+/* Animated overlay layers — slow drift gives a 'breathing' quality. */
+.hero-shader { position: absolute; inset: 0; overflow: hidden; }
 .blob {
-  position: absolute; border-radius: 50%;
+  position: absolute;
   mix-blend-mode: screen;
   will-change: transform;
-  animation: blob 80s ease-in-out infinite alternate;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
 }
 .blob.b1 {
-  width: 900px; height: 900px;
-  right: -12vw; top: -10vh;
-  background: var(--brand-blue-bright); opacity: .32;
-  animation-duration: 80s;
+  /* Bright cyan highlight that drifts along the left edge */
+  width: 700px; height: 900px;
+  left: -18vw; top: -10vh;
+  border-radius: 50%;
+  filter: blur(80px);
+  background: radial-gradient(circle, rgba(180, 225, 255, 0.85) 0%, rgba(100, 175, 255, 0.5) 35%, transparent 70%);
+  opacity: .55;
+  animation-name: blob-1;
+  animation-duration: 38s;
 }
 .blob.b2 {
-  width: 600px; height: 600px;
-  left: -8vw; bottom: -10vh;
-  background: var(--brand-blue-deep); opacity: .32;
-  animation-duration: 90s;
+  /* Deep navy weight at lower-right, opposite drift */
+  width: 720px; height: 720px;
+  right: -12vw; bottom: -18vh;
+  border-radius: 50%;
+  filter: blur(80px);
+  background: radial-gradient(circle, rgba(15, 30, 90, 0.9) 0%, rgba(8, 22, 70, 0.55) 40%, transparent 70%);
+  opacity: .7;
+  animation-name: blob-2;
+  animation-duration: 46s;
 }
-@keyframes blob {
-  0%   { transform: translate3d(0,0,0) scale(1); }
-  50%  { transform: translate3d(3px,-2px,0) scale(1.015); }
-  100% { transform: translate3d(-2px,2px,0) scale(.99); }
+.blob.b3 {
+  /* The signature diagonal light beam. Tall narrow strip with a soft
+     mid-length highlight, rotated ~28° so it sweeps from upper-right
+     toward lower-center like the original Header.png. */
+  width: 280px; height: 1300px;
+  right: 14%; top: -22%;
+  border-radius: 999px;
+  filter: blur(70px);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(190, 230, 255, 0.45) 28%,
+    rgba(165, 215, 250, 0.55) 50%,
+    rgba(140, 200, 245, 0.30) 72%,
+    transparent 100%
+  );
+  transform: rotate(28deg);
+  transform-origin: 50% 50%;
+  opacity: .65;
+  animation-name: blob-3;
+  animation-duration: 52s;
 }
+
+@keyframes blob-1 {
+  0%   { transform: translate3d(0, 0, 0)        scale(1); }
+  50%  { transform: translate3d(50px, 80px, 0)  scale(1.06); }
+  100% { transform: translate3d(20px, -30px, 0) scale(0.96); }
+}
+@keyframes blob-2 {
+  0%   { transform: translate3d(0, 0, 0)         scale(1); }
+  50%  { transform: translate3d(-60px, -50px, 0) scale(1.05); }
+  100% { transform: translate3d(-20px, 25px, 0)  scale(0.97); }
+}
+/* For b3, the beam keeps its 28° tilt across the animation while
+   sliding diagonally — gives the streak a sense of slow weather drift. */
+@keyframes blob-3 {
+  0%   { transform: translate3d(0, 0, 0)         rotate(28deg) scale(1); }
+  50%  { transform: translate3d(-30px, 60px, 0)  rotate(30deg) scale(1.04); }
+  100% { transform: translate3d(20px, -20px, 0)  rotate(27deg) scale(0.97); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
+}
+
+/* Soft top + bottom darkening so the nav reads on lighter regions and
+   hero copy stays high-contrast over the painterly base. */
 .hero-vignette {
   position: absolute; inset: 0;
-  background: radial-gradient(1200px 800px at 50% 50%, transparent 0%, rgba(0,0,0,.35) 100%);
+  background:
+    linear-gradient(180deg, rgba(8,14,32,0.22) 0%, transparent 16%, transparent 76%, rgba(8,14,32,0.38) 100%);
   pointer-events: none;
 }
 
@@ -1194,7 +1281,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .hero-stage-check-box {
   flex: 0 0 22px;
   width: 22px; height: 22px;
-  border-radius: 6px;
+  border-radius: var(--r-xs);
   display: grid; place-items: center;
   background: rgba(255, 255, 255, 0.08);
   transition: background .3s var(--ease), box-shadow .3s var(--ease);
@@ -1249,7 +1336,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .hero-stage-field-copy {
   width: 28px; height: 28px;
   display: grid; place-items: center;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0.55);
 }
@@ -1261,7 +1348,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   align-items: center;
   gap: 8px;
   padding: 8px 14px 8px 10px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: rgba(22, 163, 74, 0.16);
   color: #69d18e;
   font-size: 13px;
@@ -1335,7 +1422,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   font-family: 'Geist Mono', ui-monospace, monospace;
   font-size: 10px; font-weight: 600;
   padding: 2px 6px;
-  border-radius: 5px;
+  border-radius: var(--r-xs);
   background: rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.75);
 }
@@ -1364,7 +1451,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   font-size: 11px; font-weight: 500;
   color: rgba(255, 255, 255, 0.4);
   padding: 4px 8px;
-  border-radius: 5px;
+  border-radius: var(--r-xs);
   letter-spacing: 0.02em;
 }
 .hsa-tf-active { color: #fff; background: rgba(255, 255, 255, 0.06); }
@@ -1400,7 +1487,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   color: #fff;
   background: linear-gradient(135deg, #3370ff 0%, #5ba0ff 100%);
   border: none;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   cursor: pointer;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
