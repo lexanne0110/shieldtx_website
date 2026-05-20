@@ -3123,24 +3123,36 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .footer-col a { font-size: 14px; color: rgba(255,255,255,.65); transition: color .2s var(--ease); }
 .footer-col a:hover { color: var(--white); }
 
+/* Footer-bottom — Stripe-inspired two-group layout. The LEFT group
+   holds the copyright + inline legal links (they belong together
+   semantically); socials anchor the RIGHT. Wraps cleanly on mobile. */
 .footer-bottom {
   padding-top: 28px;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 12px; color: rgba(255,255,255,.45);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
 }
-
-/* Inline legal links sitting next to copyright. The footer background is
-   dark, so links read as 60% white at rest and brighten on hover. */
+.footer-bottom-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.footer-bottom-left > span {
+  color: rgba(255, 255, 255, 0.7);
+}
 .footer-bottom-legal {
   display: inline-flex;
   align-items: center;
-  gap: 18px;
+  gap: 22px;
 }
 .footer-bottom-legal a {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
   transition: color .2s var(--ease);
 }
 .footer-bottom-legal a:hover { color: #fff; }
