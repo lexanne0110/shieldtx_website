@@ -119,6 +119,46 @@
   max-width: 64ch;
 }
 
+/* Page metadata line — "Last updated 4 May 2026" etc. Sits below the
+   .docs-title and above any .docs-callout. */
+.docs-meta {
+  margin: 0 0 24px;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--fg-muted);
+}
+
+/* Attention callout — used at the top of legal pages to flag the
+   "please read" preamble. Subtle left border + muted background so it
+   doesn't compete with the title. */
+.docs-callout {
+  margin: 8px 0 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--brand-blue);
+  background: rgba(51, 112, 255, 0.06);
+  border-radius: 0 12px 12px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg-secondary);
+  max-width: 64ch;
+}
+
+/* Inline link inside docs prose. The default .docs-content a styling
+   may be missing or too subtle; this gives external links a clear
+   underlined treatment without making them shouty. */
+.docs-link {
+  color: var(--brand-blue);
+  text-decoration: underline;
+  text-decoration-color: rgba(51, 112, 255, 0.4);
+  text-underline-offset: 3px;
+  transition: text-decoration-color .2s var(--ease), color .2s var(--ease);
+}
+.docs-link:hover {
+  color: var(--brand-blue-deep);
+  text-decoration-color: var(--brand-blue);
+}
+
 .docs-section {
   margin-top: 48px;
   padding-top: 32px;

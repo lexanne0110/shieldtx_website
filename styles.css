@@ -3131,6 +3131,20 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   gap: 16px;
 }
 
+/* Inline legal links sitting next to copyright. The footer background is
+   dark, so links read as 60% white at rest and brighten on hover. */
+.footer-bottom-legal {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+.footer-bottom-legal a {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  transition: color .2s var(--ease);
+}
+.footer-bottom-legal a:hover { color: #fff; }
+
 /* Footer socials --------------------------------------------------------- */
 .footer-socials {
   display: inline-flex;
