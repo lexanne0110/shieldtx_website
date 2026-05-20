@@ -392,6 +392,14 @@
   .docs-toc-mobile summary::-webkit-details-marker { display: none; }
   .docs-toc-mobile[open] summary { margin-bottom: 12px; }
   .docs-toc-mobile .docs-toc-list { gap: 4px; }
+
+  /* Legal pages (Terms, Privacy) hide the TOC entirely on narrow viewports.
+     Legal copy reads sequentially top-to-bottom; a dropdown TOC adds noise
+     for a use case where users typically scroll through the whole document.
+     Trust-model keeps its mobile TOC because its numbered steps + tables
+     benefit from in-page navigation. */
+  body.legal-body .docs-toc { display: none; }
+
   .docs-step {
     grid-template-columns: 36px minmax(0, 1fr);
     gap: 14px;
