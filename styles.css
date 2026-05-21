@@ -128,12 +128,12 @@ button, input { font: inherit; color: inherit; }
    ring) is added below; mounted by /public-scripts/site-cursor.js.
    ========================================================================= */
 
-/* Hide the OS pointer once the JS cursor is mounted. Inputs keep the
-   native text caret for usability. */
-html.has-shield-cursor,
-html.has-shield-cursor body { cursor: none; }
-html.has-shield-cursor input,
-html.has-shield-cursor textarea { cursor: text; }
+/* OS cursor stays visible underneath the custom ring. Previously we hid
+   it with cursor: none, but that left users with no cursor at all when
+   Brave/Safari compositor quirks prevented our ring from painting over
+   isolated stacking contexts (hero-stage uses isolation:isolate plus
+   backdrop-filter children). Now the OS pointer is the guaranteed
+   fallback and the ring sits on top as a branded overlay. */
 
 .shield-cursor-dot,
 .shield-cursor-ring {
@@ -1094,11 +1094,14 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   isolation: isolate;
   background: transparent;
   border-radius: var(--r-xl);
-  /* Safari needs overflow:hidden on the rounded parent to clip
+  /* Safari's overflow:hidden alone wasn't strong enough to clip the
      backdrop-filter children (.hero-stage-card uses backdrop-filter).
-     Without this, Safari paints child backgrounds outside the rounded
-     corners. Chromium browsers clipped correctly without it. */
+     clip-path with inset(round) forces a hard geometric clip that
+     Safari respects unconditionally — even when children use filters,
+     transforms, or backdrop-filter. */
   overflow: hidden;
+  clip-path: inset(0 round var(--r-xl));
+  -webkit-clip-path: inset(0 round var(--r-xl));
 }
 
 /* --- Premium glass surface (always-on background of the stage) --- */
