@@ -140,10 +140,17 @@ html.has-shield-cursor textarea { cursor: text; }
   position: fixed;
   top: 0; left: 0;
   pointer-events: none;
-  z-index: 9999;
+  /* Maximum z-index — must beat every isolated stacking context on
+     the page (e.g. .hero-stage uses isolation: isolate). Some
+     browsers, notably Brave, do not always elevate fixed-position
+     elements above isolated stacks if z-index is "merely" 9999. */
+  z-index: 2147483647;
   opacity: 0;
   will-change: transform, width, height;
   transition: opacity .15s ease;
+  /* Force a separate composited layer so the cursor renders on top
+     even when sibling content uses backdrop-filter or transforms. */
+  transform: translateZ(0);
 }
 .shield-cursor-dot.is-visible,
 .shield-cursor-ring.is-visible { opacity: 1; }
@@ -1087,6 +1094,11 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   isolation: isolate;
   background: transparent;
   border-radius: var(--r-xl);
+  /* Safari needs overflow:hidden on the rounded parent to clip
+     backdrop-filter children (.hero-stage-card uses backdrop-filter).
+     Without this, Safari paints child backgrounds outside the rounded
+     corners. Chromium browsers clipped correctly without it. */
+  overflow: hidden;
 }
 
 /* --- Premium glass surface (always-on background of the stage) --- */
