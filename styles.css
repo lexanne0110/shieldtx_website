@@ -3,7 +3,15 @@
    Tokens from Figma (node 94:12, file hhotG5KLlXdu2tJBPTTxtE)
    ========================================================================= */
 
+/* Explicit color-scheme: the marketing site is designed to work on light
+   AND dark surfaces deliberately (hero is dark gradient, body sections are
+   light). Without this declaration, Chromium-based browsers (including
+   Brave) with prefers-color-scheme: dark or Auto Dark Theme enabled will
+   try to auto-darken the page, overriding our explicit colors and making
+   text unreadable on the hero. 'only light' opts out of auto-darkening. */
 :root {
+  color-scheme: only light;
+
   /* Brand · ShieldTX (per Brand Document V3) */
   --brand-blue:        #3370ff;  /* primary on-brand */
   --brand-blue-bright: #5ba0ff;  /* lighter accent stop */
@@ -34,7 +42,7 @@
   --mist: #e2e8f0;
   --ice: #f1f5f9;
   --snow: #f8fafc;
-  --white: var(--white);
+  --white: #ffffff;
 
   /* Semantic */
   --bg-primary: var(--snow);
@@ -377,16 +385,20 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   -webkit-backdrop-filter: blur(10px) saturate(125%);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
 }
-.nav.is-over-dark .nav-links a { color: rgba(255,255,255,.92); }
-.nav.is-over-dark .nav-links a:hover { color: var(--white); }
-.nav.is-over-dark .nav-logo img { filter: brightness(0) invert(1); }
+/* Over-dark nav link/logo overrides — were being undercut by browser
+   auto-darkening (since fixed via color-scheme) AND by cascade order
+   (the .nav-links a rule below in the file was overriding by
+   specificity). Forcing !important here keeps the override unambiguous
+   regardless of source order or downstream rules. */
+.nav.is-over-dark .nav-links a { color: rgba(255,255,255,.92) !important; }
+.nav.is-over-dark .nav-links a:hover { color: var(--white) !important; }
+.nav.is-over-dark .nav-logo img { filter: brightness(0) invert(1) !important; }
 .nav.is-over-dark .nav-cta {
   background: var(--white);
   color: var(--brand-blue-deep);
 }
 .nav.is-over-dark .nav-cta:hover { background: var(--brand-cyan); color: var(--brand-blue-deep); }
 .nav-logo img { filter: brightness(0); transition: filter .2s var(--ease); }
-.nav.is-over-dark .nav-logo img { filter: brightness(0) invert(1); }
 .nav-logo { display: inline-flex; align-items: center; height: 32px; }
 /* Full ShieldTX lockup (mark + wordmark). 22px keeps the wordmark legible
    without overpowering the nav row. */
@@ -7327,4 +7339,7 @@ body.modal-locked { overflow: hidden; }
   .app-gate-form.is-shake { animation: none; }
   .btn-pill.is-loading::after { animation: none; }
 }
+
+
+
 
