@@ -4093,10 +4093,13 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .features-list .feat-card {
   width: 100%;
   display: grid;
-  grid-template-columns: 110px minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 32px;
-  align-items: start;
-  padding: 40px 44px;
+  /* Body column + visual column. Number was previously a separate
+     left column with a display-sized numeral — now sits inline above
+     the title to match .problem-card and .today-row patterns. */
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  padding: 36px 40px;
   background: var(--white);
   border: none;
   border-radius: 24px;
@@ -4113,24 +4116,21 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
     0 40px 100px -40px rgba(51, 112, 255, 0.32);
   transform: translateY(-2px);
 }
-/* Number column — large display numeral, top-aligned with the title. */
-.features-list .feat-card-meta {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-top: 4px;
-}
+/* Small monospace section number — matches .problem-card-num exactly
+   for a consistent numbering treatment across Problem / Today /
+   Features sections. */
 .features-list .feat-num {
+  display: block;
   font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: clamp(40px, 4.2vw, 64px);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  color: var(--brand-blue-deep);
-  font-weight: 400;
-  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--brand-blue);
+  font-weight: 500;
+  margin-bottom: 14px;
 }
-/* Legacy tag pill — element removed from markup. Keeping a fallback
-   "no-op" rule so a stray future tag doesn't break the layout. */
+/* Legacy meta wrapper + tag pill — both removed from markup. Keeping
+   fallback no-op rules so stray elements don't break the layout. */
+.features-list .feat-card-meta { display: contents; }
 .features-list .feat-tag { display: none; }
 .features-list .feat-card-body {
   display: flex; flex-direction: column; gap: 12px;
