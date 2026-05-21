@@ -3245,8 +3245,8 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .workarounds {
   padding: 120px 0 110px;
   background: var(--bg-elev);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  /* No section borders — generous padding + background tone shift carry
+     the section break (Stripe/Linear pattern). */
 }
 .workarounds-grid {
   display: grid;
@@ -3853,8 +3853,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .problem {
   padding: 120px 0 100px;
   background: var(--white);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  /* Section borders removed — padding + tone shift handle separation. */
 }
 .problem-head {
   max-width: 760px;
@@ -4061,8 +4060,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .features {
   position: relative;
   background: linear-gradient(180deg, var(--snow) 0%, var(--white) 100%);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  /* Section borders removed — gradient + padding carry the transition. */
   --features-edge: max(28px, calc((100vw - var(--container)) / 2 + 28px));
 }
 .features-vertical {
@@ -4557,7 +4555,8 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .compare {
   padding: 120px 0 120px;
   background: var(--bg-primary);
-  border-bottom: 1px solid var(--border);
+  /* Section border removed — padding + background variation handle
+     the seam (Stripe/Linear pattern). */
 }
 .compare-head {
   max-width: 780px;
@@ -4673,8 +4672,8 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 /* ========== COMPARE — light grey variant (brand --ice) ========== */
 .compare.compare-dark {
   background: var(--ice);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  /* Section borders removed — background tone shift handles the
+     separation (Stripe/Linear pattern). */
 }
 .compare.compare-dark .compare-head .eyebrow { color: var(--brand-blue); }
 .compare.compare-dark .section-title { color: var(--fg-primary); }
@@ -4831,7 +4830,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .beta {
   padding: 120px 0 140px;
   background: linear-gradient(180deg, var(--snow) 0%, var(--white) 100%);
-  border-top: 1px solid var(--border);
+  /* Section border removed — gradient + padding handle the transition. */
   position: relative;
   overflow: hidden;
 }
@@ -5009,7 +5008,8 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .faq {
   background: var(--snow);
   padding: 140px 0 160px;
-  border-top: 1px solid var(--border);
+  /* Section border removed — Snow background + 140px padding handle
+     the seam from the preceding Compare section. */
   color: var(--ink);
 }
 .faq-head {
