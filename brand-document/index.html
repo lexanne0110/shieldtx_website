@@ -67,7 +67,7 @@
 
 /* ===== RESET ===== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-snap-type: y mandatory; scroll-behavior: smooth; background: var(--snow); }
+html { scroll-behavior: smooth; background: var(--snow); }
 body {
   font-family: 'Geist', system-ui, -apple-system, sans-serif;
   background: var(--snow);
@@ -80,21 +80,22 @@ a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
 button, input { font: inherit; color: inherit; }
 
-/* ===== SLIDE SYSTEM ===== */
+/* ===== SECTION SYSTEM =====
+   Originally a 16:9 slide deck (one section = one viewport).
+   Converted to a continuous-scroll content page so the brand book
+   reads as part of the website. Sections now flow at natural height
+   based on content, with a consistent vertical rhythm between them. */
 .slide {
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  scroll-snap-align: start;
   position: relative;
-  overflow: hidden;
-  padding: 24px;
+  padding: 72px 24px;
 }
+.slide + .slide { padding-top: 24px; }  /* tighter gap between sequential sections */
 .frame {
-  width: min(96vw, 1440px);
-  aspect-ratio: 16 / 9;
+  width: min(96vw, 1240px);
   position: relative;
   display: flex;
   align-items: stretch;
@@ -102,6 +103,10 @@ button, input { font: inherit; color: inherit; }
   overflow: hidden;
   border-radius: var(--r-lg);
   background: var(--white);
+  /* No more aspect-ratio: frames grow to fit their content. A min-height
+     keeps short sections (like the cover or a single quote) feeling
+     substantial without being viewport-tall. */
+  min-height: 420px;
 }
 .frame.dark { background: var(--ink); color: #fff; }
 .frame.brand { background: var(--brand-blue); color: #fff; }
@@ -561,8 +566,10 @@ button, input { font: inherit; color: inherit; }
 .bb-block {
   position: relative;
   border-radius: var(--r-lg);
-  flex: 1;
-  min-height: 0;
+  /* Fixed aspect-ratio so both cards in a row are exactly the same
+     block height — bb-meta labels below then align horizontally. */
+  aspect-ratio: 16 / 9;
+  width: 100%;
   overflow: hidden;
 }
 .bb-direction {
@@ -1440,8 +1447,9 @@ button, input { font: inherit; color: inherit; }
   <a class="nav-cta btn-pill" href="/app">Open App</a>
 </header>
 
-<div id="progress"><div id="progress-fill"></div></div>
-<div id="counter" aria-live="polite">01 / 28</div>
+<!-- The slide-deck progress bar and "01 / 28" counter were removed
+     when this page was converted from a presentation to a regular
+     content page. Their CSS rules remain dead but harmless. -->
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -2477,25 +2485,31 @@ button, input { font: inherit; color: inherit; }
   'use strict';
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Slide progress + counter — only runs if the deck UI elements exist.
+  // After this page was converted from a slide deck to a content page,
+  // the #progress-fill and #counter elements were removed, so this block
+  // becomes a no-op. Guarded so the rest of the script still runs.
   const fill = document.getElementById('progress-fill');
   const counter = document.getElementById('counter');
-  const slides = Array.from(document.querySelectorAll('.slide'));
-  const total = slides.length;
-  const updateProgress = () => {
-    const y = window.scrollY;
-    const max = (document.documentElement.scrollHeight - window.innerHeight) || 1;
-    fill.style.width = Math.min(100, (y / max) * 100) + '%';
-    const vh = window.innerHeight;
-    let active = 1;
-    slides.forEach((s, i) => {
-      const r = s.getBoundingClientRect();
-      if (r.top <= vh / 2 && r.bottom > vh / 2) active = i + 1;
-    });
-    counter.textContent = String(active).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
-  };
-  updateProgress();
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress);
+  if (fill && counter) {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    const updateProgress = () => {
+      const y = window.scrollY;
+      const max = (document.documentElement.scrollHeight - window.innerHeight) || 1;
+      fill.style.width = Math.min(100, (y / max) * 100) + '%';
+      const vh = window.innerHeight;
+      let active = 1;
+      slides.forEach((s, i) => {
+        const r = s.getBoundingClientRect();
+        if (r.top <= vh / 2 && r.bottom > vh / 2) active = i + 1;
+      });
+      counter.textContent = String(active).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    };
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+  }
 
   document.querySelectorAll('.hcm-spark').forEach((spark) => {
     const W = 360, H = 80;
