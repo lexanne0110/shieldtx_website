@@ -349,23 +349,23 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   background: rgba(248,250,252,.86);
   backdrop-filter: blur(8px) saturate(120%);
   -webkit-backdrop-filter: blur(8px) saturate(120%);
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
-  transition: background .2s var(--ease), box-shadow .2s var(--ease);
+  /* No bottom hairline — the backdrop-filter blur already separates
+     the nav from content beneath. The hairline read as a section
+     seam line just below the fixed header. */
+  transition: background .2s var(--ease);
 }
 .nav.is-scrolled {
   background: rgba(248,250,252,.92);
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.08);
 }
 .nav-links a { color: var(--graphite); }
 .nav-links a:hover { color: var(--ink); }
 
 /* Over-dark mode (hero, scan-tool, beta-breaker, footer) */
-.nav.is-over-dark { background: rgba(15,23,42,.45); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+.nav.is-over-dark { background: rgba(15,23,42,.45); }
 .nav.is-over-dark.is-scrolled {
   background: rgba(15,23,42,.6);
   backdrop-filter: blur(8px) saturate(120%);
   -webkit-backdrop-filter: blur(8px) saturate(120%);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* Over-hero — transparent at the very top so the hero reads open
@@ -383,7 +383,6 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   background: rgba(8, 14, 32, 0.32);
   backdrop-filter: blur(10px) saturate(125%);
   -webkit-backdrop-filter: blur(10px) saturate(125%);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 /* Over-dark nav link/logo overrides — were being undercut by browser
    auto-darkening (since fixed via color-scheme) AND by cascade order
@@ -6631,12 +6630,14 @@ body.modal-locked { overflow: hidden; }
    PREVIEW — bare-video section, fits within one viewport on any device
    ========================================================================= */
 .preview {
+  /* TEMPORARILY HIDDEN — bring back once the updated demo video lands.
+     To re-enable: change `display: none` to `display: flex`. */
+  display: none;
   /* Section fits within one viewport on every viewport — title sits on top,
      video below. Vertical reserve keeps the video from clipping out. */
   min-height: calc(100vh - var(--nav-h));
   padding: 56px 0 64px;
   background: var(--bg-primary);
-  display: flex;
   align-items: center;
 }
 .preview-stack {
