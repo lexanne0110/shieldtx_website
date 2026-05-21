@@ -236,26 +236,20 @@ button, input { font: inherit; color: inherit; }
 
 .slide-head { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
 
-/* ===== SLIDE 01 — COVER (logo + colors only) ===== */
+/* ===== SLIDE 01 — COVER (logo on brand gradient) ===== */
 .brand-cover {
   background: var(--brand-gradient);
   display: grid;
   place-items: center;
 }
 .brand-cover-logo {
-  width: clamp(280px, 36vw, 540px);
+  /* Bumped slightly larger now that the bottom color strip is gone
+     and the cover has more vertical room. */
+  width: clamp(320px, 42vw, 600px);
   height: auto;
   filter: brightness(0) invert(1);
   display: block;
 }
-.brand-cover-strip {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  height: 56px;
-}
-.brand-cover-strip span { display: block; }
 
 /* ===== SLIDE — REFERENCES (5-column film strip) ===== */
 .ref-grid {
@@ -1467,12 +1461,6 @@ button, input { font: inherit; color: inherit; }
 <section class="slide" id="s1">
   <div class="frame brand-cover">
     <img class="brand-cover-logo" src="assets/ShieldTX_Logo.svg" alt="ShieldTX" />
-    <div class="brand-cover-strip" aria-hidden="true">
-      <span style="background:#1e3a8a"></span>
-      <span style="background:#3370ff"></span>
-      <span style="background:#5ba0ff"></span>
-      <span style="background:#93c5fd"></span>
-    </div>
   </div>
 </section>
 
