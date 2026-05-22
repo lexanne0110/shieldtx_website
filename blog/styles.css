@@ -227,37 +227,32 @@
   color: var(--fg-primary);
 }
 
-/* Back link — tertiary button per brand book (brand-document §17
-   Buttons): 44px pill, no border, no fill, brand-blue text, ice hover.
-   Pinned to the left of the reading column on desktop via position:fixed;
-   collapses to inline on mobile. */
+/* Back link — text-style nav link (not a button). Pinned to the left
+   of the reading column on desktop via position:fixed; collapses to
+   inline on mobile. Chrome stripped so the link top-aligns with the
+   eyebrow that sits next to it in the column header row. */
 .blog-post-back {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  height: 44px;
-  padding: 0 12px;
-  border-radius: var(--r-pill);
-  border: 1px solid transparent;
-  background: transparent;
   color: var(--brand-blue);
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   margin-bottom: 32px;
-  transition: background .25s var(--ease), color .25s var(--ease);
+  transition: color .25s var(--ease);
 }
 .blog-post-back:hover {
-  background: var(--ice);
   color: var(--brand-blue-deep);
 }
 
-/* Desktop only: pin to the left of the centered reading column. */
+/* Desktop only: pin to the left of the centered reading column. The
+   `top` matches .blog-post padding-top so the link's top edge aligns
+   with the eyebrow's top edge inside the column. */
 @media (min-width: 880px) {
   .blog-post-back {
     position: fixed;
-    top: calc(var(--nav-h) + 32px);
+    top: calc(var(--nav-h) + 48px);
     right: calc(50% + 340px + 24px);
     margin-bottom: 0;
     z-index: 10;
