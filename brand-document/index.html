@@ -15,7 +15,7 @@
 <!-- Site shell (nav, footer, cursor) shared with the rest of ShieldTX.
      The embedded slide-deck CSS below overrides slide-specific selectors;
      site styles only affect the shared chrome (.nav, .footer, .btn-pill). -->
-<link rel="stylesheet" href="/styles.css?v=63" />
+<link rel="stylesheet" href="/styles.css?v=64" />
 <style>
 /* ===== TOKENS ===== */
 :root {
@@ -838,6 +838,20 @@ button, input { font: inherit; color: inherit; }
   color: #fff;
 }
 .btn-ghost-inv:hover { background: rgba(255,255,255,.05); border-color: #fff; }
+.btn-tertiary {
+  background: transparent;
+  border-color: transparent;
+  color: var(--brand-blue);
+  padding: 0 12px;
+}
+.btn-tertiary:hover { background: var(--ice); color: var(--brand-blue-deep); }
+.btn-tertiary-inv {
+  background: transparent;
+  border-color: transparent;
+  color: rgba(255,255,255,.85);
+  padding: 0 12px;
+}
+.btn-tertiary-inv:hover { background: rgba(255,255,255,.08); color: #fff; }
 .btn-hero-primary {
   height: 48px; padding: 0 24px; font-size: 15px;
   background: #fff; color: var(--brand-blue-deep); border-color: #fff;
@@ -2041,7 +2055,7 @@ button, input { font: inherit; color: inherit; }
       <div class="slide-head">
         <span class="eyebrow">Components</span>
         <h2 class="h-lg">Buttons</h2>
-        <p class="body-sm">Three surfaces × four variants. All buttons share the 44–48px height, pill or 12px-radius, Geist 14–15px / 500.</p>
+        <p class="body-sm">Three surfaces × three hierarchies (primary → secondary → tertiary) plus accents. All buttons share the 44–48px height, pill or 12px-radius, Geist 14–15px / 500. Tertiary drops the border for low-priority actions (back links, "see more", in-text affordances) and supports an optional leading or trailing icon.</p>
       </div>
       <div class="stack gap-3">
         <div class="btn-row">
@@ -2049,12 +2063,17 @@ button, input { font: inherit; color: inherit; }
           <button class="btn">.btn-pill</button>
           <button class="btn btn-primary">.btn-primary</button>
           <button class="btn btn-ghost">.btn-ghost</button>
+          <button class="btn btn-tertiary">.btn-tertiary</button>
+          <button class="btn btn-tertiary"><span aria-hidden="true">←</span> Back to blog</button>
+          <button class="btn btn-tertiary">Learn more <span aria-hidden="true">→</span></button>
           <button class="btn-grad">.hcm-cta · gradient</button>
         </div>
         <div class="btn-row dark">
           <span class="btn-row-label">On Ink · footer / scan-tool</span>
           <button class="btn btn-primary">.btn-primary</button>
           <button class="btn btn-ghost-inv">.btn-ghost.inv</button>
+          <button class="btn btn-tertiary-inv">.btn-tertiary.inv</button>
+          <button class="btn btn-tertiary-inv">View docs <span aria-hidden="true">→</span></button>
           <button class="btn-grad">.hcm-cta · gradient</button>
         </div>
         <div class="btn-row brand">
