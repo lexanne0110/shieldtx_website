@@ -14,9 +14,10 @@
 .blog-body .grain,
 .blog-body .cursor { display: none; }
 
-/* Nav adapted for blog: solid white surface, no hairline */
+/* Nav adapted for blog: matches body --snow so there's no visible seam
+   between the fixed nav and the page on first scroll. */
 .nav-blog {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(248, 250, 252, 0.85);
   backdrop-filter: blur(8px) saturate(120%);
   -webkit-backdrop-filter: blur(8px) saturate(120%);
 }
@@ -61,25 +62,26 @@
   max-width: 56ch;
 }
 
-/* Two-column layout: featured card (left) + recent posts sidebar (right).
-   Collapses to a single column under 880px. */
-.blog-index-layout {
+/* Posts grid — Stripe / Vercel / Linear blog pattern.
+   Three equal cards on desktop, two on tablet, one on mobile. */
+.blog-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 32px;
-  align-items: start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+@media (max-width: 1024px) {
+  .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .blog-grid { grid-template-columns: 1fr; gap: 20px; }
 }
 
-/* ----- Featured card ---------------------------------------------------
-   Desktop: horizontal layout — banner on the left, title/lede/CTA on
-   the right — so the banner image AND the post title are both visible
-   without scrolling.
-   Mobile: stacks to vertical (banner on top, body below) below 720px.
+/* ----- Post card --------------------------------------------------------
+   Vertical: image-on-top + body-below. Consistent across the grid.
    --------------------------------------------------------------------- */
 .blog-card {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
+  flex-direction: column;
   background: var(--white);
   border-radius: 16px;
   box-shadow:
@@ -88,7 +90,7 @@
   transition: transform .25s var(--ease), box-shadow .25s var(--ease);
   color: inherit;
   text-decoration: none;
-  overflow: hidden;  /* keep .blog-card-banner clipped to the card radius */
+  overflow: hidden;  /* clip banner to the card radius */
 }
 .blog-card:hover {
   transform: translateY(-2px);
@@ -97,81 +99,94 @@
     0 32px 64px -28px rgba(15, 23, 42, 0.16);
 }
 
-/* Banner — 55% of card width on desktop, full-width on mobile.
-   `object-fit: contain` shows the FULL image without cropping. The 16:9
-   aspect-ratio determines the banner's natural height; the body flexes
-   to match that height (so image and text sit edge-to-edge vertically).
-
-   Notes:
-   - White background blends the pillarbox bars (when the image isn't
-     exactly 16:9) into the card surface.
-   - `height: auto` is essential — IMG has the HTML `height` attribute
-     for CLS prevention, which would otherwise block CSS aspect-ratio. */
+/* Banner — 16:9 image flush with the top of the card. `object-fit: cover`
+   fills the box; for the only post with a non-16:9 source banner the
+   center crop is still readable because the key visual sits centered.
+   `height: auto` is essential — neutralizes the HTML height attribute
+   so CSS aspect-ratio computes. */
 .blog-card-banner {
   display: block;
-  width: 55%;
-  flex-shrink: 0;
+  width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
-  background: var(--white);
+  background: var(--bg-elev);
+}
+
+/* Placeholder banner for posts without a real image: brand gradient
+   with the ShieldTX logomark centered. Keeps the grid rhythm consistent
+   across cards. */
+.blog-card-banner-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(120% 100% at 100% 0%, rgba(91, 160, 255, 0.35) 0%, transparent 60%),
+    linear-gradient(135deg, var(--brand-blue-deep) 0%, var(--brand-blue) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.blog-card-mark {
+  width: 56px;
+  height: 56px;
+  opacity: 0.85;
+  filter: brightness(0) invert(1);  /* logo mark → solid white */
 }
 
 .blog-card-body {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* center text vertically against the banner */
-  gap: 14px;
-  padding: 36px;
-}
-
-/* Stack vertically on narrow viewports — banner on top, body below,
-   matching the recent-posts sidebar collapse breakpoint at 880px. */
-@media (max-width: 880px) {
-  .blog-card { flex-direction: column; }
-  .blog-card-banner { width: 100%; }
-  .blog-card-body { padding: 28px; justify-content: flex-start; }
+  gap: 12px;
+  padding: 24px;
+  flex: 1;  /* equal-height cards across the row */
 }
 
 .blog-card-meta {
   font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--fg-muted);
 }
+
 .blog-card-title {
   margin: 0;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  /* Brand book: brand-blue is the primary on-brand color; brand-cyan is
-     reserved for secondary accents on dark backgrounds. Card titles sit
-     on a white card surface, so use brand-blue for legibility + brand. */
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  /* Brand book: brand-blue is primary on-brand color. */
   color: var(--brand-blue);
   transition: color .2s var(--ease);
+  /* Cap the title at 3 lines to keep card heights even-ish across the row. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .blog-card:hover .blog-card-title { color: var(--brand-blue-deep); }
+
 .blog-card-lede {
   margin: 0;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--fg-secondary);
+  /* Cap the lede at 3 lines to enforce visual rhythm in the grid. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Tertiary CTA — brand-blue (matches title hue; brand-cyan lacks
-   contrast on white). Underline pulls on hover for the affordance. */
 .blog-card-cta {
-  margin-top: 4px;
+  margin-top: auto;
+  padding-top: 4px;
   align-self: flex-start;
   font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  letter-spacing: 0.06em;
   color: var(--brand-blue);
-  padding: 6px 0;
   border-bottom: 1.5px solid transparent;
   transition: border-color .2s var(--ease), color .2s var(--ease);
 }
@@ -179,60 +194,6 @@
   color: var(--brand-blue-deep);
   border-bottom-color: var(--brand-blue);
 }
-
-/* ----- Recent posts sidebar ------------------------------------------- */
-.blog-recent {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  background: var(--white);
-  border-radius: 16px;
-  padding: 20px 24px 24px;
-  box-shadow:
-    0 1px 0 rgba(15, 23, 42, 0.04),
-    0 24px 48px -28px rgba(15, 23, 42, 0.08);
-  position: sticky;
-  top: calc(var(--nav-h) + 24px);
-}
-.blog-recent-heading {
-  margin: 0 0 8px;
-  padding-bottom: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.08);
-}
-.blog-recent-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 14px 0;
-  color: inherit;
-  text-decoration: none;
-  transition: color .2s var(--ease);
-  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.06);
-}
-.blog-recent-item:last-child { box-shadow: none; }
-.blog-recent-meta {
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-}
-.blog-recent-title {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  color: var(--fg-primary);
-  transition: color .2s var(--ease);
-}
-.blog-recent-item:hover .blog-recent-title { color: var(--brand-blue); }
 
 .blog-index-empty {
   grid-column: 1 / -1;
@@ -300,13 +261,13 @@
   }
 }
 
-/* Per-post eyebrow uses brand blue. Overrides the global .eyebrow which
-   defaults to --fg-muted (the section-eyebrow style elsewhere on the
-   site). On the blog, brand-blue eyebrows mark the post's category. */
+/* Per-post eyebrow stays on the site's default --fg-muted slate so it
+   reads as supporting taxonomy rather than competing with the brand-blue
+   back link that sits on the same baseline. */
 .blog-post-wrap .eyebrow {
   display: inline-block;
   margin-bottom: 16px;
-  color: var(--brand-blue);
+  color: var(--fg-muted);
 }
 
 .blog-post-wrap h1 {
