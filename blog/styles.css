@@ -91,13 +91,24 @@
     0 32px 64px -28px rgba(15, 23, 42, 0.16);
 }
 
-/* Banner sits flush with the top of the card at a true 16:9 ratio. */
+/* Banner sits flush with the top of the card at a true 16:9 ratio.
+   `object-fit: contain` shows the FULL image without cropping. When the
+   source image is not exactly 16:9 (e.g. 1200x761 source ≈ 1.577) the
+   container shows thin pillarbox strips on the sides. White background
+   keeps the strips reading as part of the card surface — no fighting
+   the brand-blue left edge or the dark photo right edge of the banner. */
 .blog-card-banner {
   display: block;
   width: 100%;
+  /* `height: auto` is critical: the IMG element has `height="675"` HTML
+     attributes (for CLS prevention), which acts as a default presentation
+     hint and blocks `aspect-ratio` from computing height. Forcing height:
+     auto here lets aspect-ratio: 16/9 actually take effect. */
+  height: auto;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: var(--bg-elev);
+  object-fit: contain;
+  object-position: center;
+  background: var(--white);
 }
 
 .blog-card-body {
@@ -235,21 +246,42 @@
   color: var(--fg-primary);
 }
 
-/* Tertiary CTA — brand blue (primary on-brand color per brand book).
-   Brand cyan is reserved for secondary accents on dark backgrounds; on
-   white surfaces it lacks contrast. Eyebrow + back-link share the same
-   blue so they cluster as same-tier UI. */
+/* Back link — secondary (ghost) button per brand book (brand-document
+   §17 Buttons): 44px pill, silver border, ink text, transparent fill.
+   Pinned to the left of the reading column on desktop via position:fixed;
+   collapses to inline on mobile. */
 .blog-post-back {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--silver);
+  background: transparent;
+  color: var(--ink);
   font-size: 14px;
-  color: var(--brand-blue);
+  font-weight: 500;
   text-decoration: none;
   margin-bottom: 32px;
-  transition: color .2s var(--ease);
+  transition: background .25s var(--ease), border-color .25s var(--ease);
 }
-.blog-post-back:hover { color: var(--brand-blue-deep); }
+.blog-post-back:hover {
+  background: var(--white);
+  border-color: var(--ink);
+}
+
+/* Desktop only: pin to the left of the centered reading column. */
+@media (min-width: 880px) {
+  .blog-post-back {
+    position: fixed;
+    top: calc(var(--nav-h) + 32px);
+    right: calc(50% + 340px + 24px);
+    margin-bottom: 0;
+    z-index: 10;
+  }
+}
 
 /* Per-post eyebrow uses brand blue. Overrides the global .eyebrow which
    defaults to --fg-muted (the section-eyebrow style elsewhere on the
