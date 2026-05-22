@@ -15,7 +15,7 @@
 <!-- Site shell (nav, footer, cursor) shared with the rest of ShieldTX.
      The embedded slide-deck CSS below overrides slide-specific selectors;
      site styles only affect the shared chrome (.nav, .footer, .btn-pill). -->
-<link rel="stylesheet" href="/styles.css?v=64" />
+<link rel="stylesheet" href="/styles.css?v=69" />
 <style>
 /* ===== TOKENS ===== */
 :root {
@@ -2687,7 +2687,7 @@ button, input { font: inherit; color: inherit; }
   <div class="container footer-grid">
     <div class="footer-brand">
       <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
-      <p class="footer-tagline">Trade with confidence.<br/>Powered by <span class="footer-avail">Avail</span>.</p>
+      <p class="footer-tagline">Trade without exposing your wallet.</p>
     </div>
     <div class="footer-col">
       <h4>Product</h4>
@@ -2715,8 +2715,12 @@ button, input { font: inherit; color: inherit; }
         <a href="/terms">Terms</a>
         <a href="/privacy">Privacy</a>
       </nav>
-    </div>
-    <div class="footer-socials" aria-label="ShieldTX social links">
+      </div>
+      <a class="footer-avail-link" href="https://availproject.org/" target="_blank" rel="noopener noreferrer" aria-label="Powered by Avail">
+        <span>Powered by</span>
+        <img class="footer-avail-logo" src="/assets/avail-logo.svg" alt="Avail" />
+      </a>
+      <div class="footer-socials" aria-label="ShieldTX social links">
       <a class="footer-social" href="#" aria-label="ShieldTX on X (Twitter)">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.7l-6.92 7.91L22 21h-6.4l-5.01-6.55L4.84 21H1.66l7.4-8.46L1.5 3h6.56l4.53 5.99L17.53 3Zm-1.12 16.13h1.76L7.7 4.78H5.82l10.59 14.35Z"/></svg>
       </a>

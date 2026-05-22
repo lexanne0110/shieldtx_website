@@ -392,11 +392,10 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .nav.is-over-dark .nav-links a { color: rgba(255,255,255,.92) !important; }
 .nav.is-over-dark .nav-links a:hover { color: var(--white) !important; }
 .nav.is-over-dark .nav-logo img { filter: brightness(0) invert(1) !important; }
-.nav.is-over-dark .nav-cta {
-  background: var(--white);
-  color: var(--brand-blue-deep);
-}
-.nav.is-over-dark .nav-cta:hover { background: var(--brand-cyan); color: var(--brand-blue-deep); }
+/* Over-dark nav: the glass pill defined below is the single source of
+   truth — applies whether the nav is at-top or scrolled. The previous
+   white-solid variant for the scrolled state was retired (felt heavy
+   against the brand-blue body, broke continuity with the hero state). */
 .nav-logo img { filter: brightness(0); transition: filter .2s var(--ease); }
 .nav-logo { display: inline-flex; align-items: center; height: 32px; }
 /* Full ShieldTX lockup (mark + wordmark). 22px keeps the wordmark legible
@@ -470,20 +469,44 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 }
 .btn-ghost:hover { background: var(--bg-surface); }
 
-/* Nav CTA — glass pill ONLY when the nav is over a dark surface (e.g.
-   landing hero). On light pages (contact, request-access, trust-model)
-   the over-dark class never gets set and the CTA falls back to the
-   solid white pill defined by .nav.is-over-dark .nav-cta below. */
-.nav.is-over-dark:not(.is-scrolled) .nav-cta {
+/* Default nav CTA on light-surface navs: solid brand-blue pill so it
+   reads as the primary action against the --snow nav surface. Placed
+   after .btn-pill so the same-specificity (0,0,1,0) base button rules
+   don't override it via source order. Higher-specificity overrides
+   stay in charge:
+   - `.nav.is-over-dark .nav-cta` keeps the hero's glass/white pill.
+   - `.contact-body .nav-cta` keeps the contact page's ink pill.
+   Hover darkens to --brand-blue-deep rather than lightening — keeps the
+   white text legible (white on --brand-blue-bright is below AA contrast). */
+.nav-cta {
+  background: var(--brand-blue);
+  color: var(--white);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+}
+.nav-cta:hover {
+  background: var(--brand-blue-deep);
+  color: var(--white);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06), 0 0 0 6px rgba(51, 112, 255, 0.18);
+}
+.nav-cta:active { filter: brightness(0.96); }
+
+/* Nav CTA — glass pill whenever the nav is over a dark surface (hero,
+   landing dark sections). No border/outline — the translucent fill +
+   backdrop blur do the lifting against the dark background. Applies at
+   both at-top and scrolled states for visual continuity.
+   On light pages (contact, request-access, trust-model) the over-dark
+   class never gets set, so the CTA falls back to the solid brand-blue
+   pill defined by `.nav-cta` above. */
+.nav.is-over-dark .nav-cta {
   background: rgba(255,255,255,.14);
   color: var(--white);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+  box-shadow: none;
 }
-.nav.is-over-dark:not(.is-scrolled) .nav-cta:hover {
+.nav.is-over-dark .nav-cta:hover {
   background: rgba(255,255,255,.24);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.40);
+  box-shadow: none;
 }
 
 /* =========================================================================
@@ -3118,24 +3141,26 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 60px;
-  padding-bottom: 60px;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
   border-bottom: 1px solid rgba(255,255,255,.10);
 }
 .footer-brand p { font-size: 14px; margin: 24px 0 20px; max-width: 320px; line-height: 1.6; color: rgba(255,255,255,.65); }
+/* Simple brand tagline — secondary weight so it supports the logo without
+   competing with it. Avail attribution moved to the bottom utility bar. */
 .footer-tagline {
-  font-size: 18px !important;
-  line-height: 1.35 !important;
-  color: var(--white) !important;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  margin: 22px 0 22px !important;
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  color: rgba(255,255,255,.65) !important;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin: 20px 0 0 !important;
+  max-width: 280px;
 }
-.footer-avail {
-  color: var(--brand-blue-bright);
-  font-weight: 600;
-}
+/* Legacy span — hidden now that Avail moved to the bottom bar. Kept the
+   selector so old markup in untouched pages does not leak through. */
+.footer-avail { display: none; }
 .footer-logo { height: 22px; width: auto; filter: brightness(0) invert(1); }
 .status {
   display: inline-flex; align-items: center; gap: 8px;
@@ -3156,42 +3181,80 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .footer-col a { font-size: 14px; color: rgba(255,255,255,.65); transition: color .2s var(--ease); }
 .footer-col a:hover { color: var(--white); }
 
-/* Footer-bottom — Stripe-inspired two-group layout. The LEFT group
-   holds the copyright + inline legal links (they belong together
-   semantically); socials anchor the RIGHT. Wraps cleanly on mobile. */
+/* Footer-bottom — 3-zone utility bar (Stripe / Linear pattern).
+   LEFT: copyright + legal links (promoted to brighter color for visibility).
+   CENTER: partner attribution (Avail).
+   RIGHT: socials. Collapses gracefully on narrow screens. */
 .footer-bottom {
   padding-top: 28px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  font-size: 13px;
+  gap: 24px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.55);
-  flex-wrap: wrap;
-  gap: 20px;
 }
 .footer-bottom-left {
+  justify-self: start;
   display: inline-flex;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
   flex-wrap: wrap;
 }
 .footer-bottom-left > span {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.78);
 }
 .footer-bottom-legal {
   display: inline-flex;
   align-items: center;
-  gap: 22px;
+  gap: 20px;
 }
 .footer-bottom-legal a {
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 13px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
   transition: color .2s var(--ease);
 }
 .footer-bottom-legal a:hover { color: var(--white); }
 
+/* Partner attribution — "Powered by [brand]" pattern. The label is the
+   subordinate element (small, muted, no decoration); the brand mark is
+   the visual anchor. Sits in the center zone so it does not compete
+   with copyright or socials. */
+.footer-avail-link {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  text-decoration: none;
+  transition: opacity .2s var(--ease);
+}
+.footer-avail-link span {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color .2s var(--ease);
+}
+.footer-avail-link:hover span { color: rgba(255, 255, 255, 0.75); }
+.footer-avail-logo {
+  /* Avail wordmark is wide (≈ 1.92:1). At 24px tall it renders ~46px
+     wide — gives the brand mark visual primacy over the "Powered by"
+     label without overpowering the surrounding copyright/socials. */
+  height: 24px;
+  width: auto;
+  display: block;
+  opacity: 0.85;
+  transition: opacity .2s var(--ease);
+  /* Source SVG fills are #FDFDFD (off-white). Normalize to pure white
+     via brightness(0) → black → invert(1) → #fff for max contrast on
+     the ink footer. Idempotent if the source asset ever changes color. */
+  filter: brightness(0) invert(1);
+}
+.footer-avail-link:hover .footer-avail-logo { opacity: 1; }
+
 /* Footer socials --------------------------------------------------------- */
 .footer-socials {
+  justify-self: end;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -3231,6 +3294,17 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   .step { grid-template-columns: 1fr; border-radius: 28px; padding: 24px; }
   .step-copy { padding: 0; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  /* Bottom bar reflows to a stacked layout so the center zone does not
+     get squeezed into nothing on narrow screens. */
+  .footer-bottom {
+    grid-template-columns: 1fr auto;
+    row-gap: 16px;
+  }
+  .footer-avail-link {
+    grid-column: 1 / -1;
+    justify-self: start;
+    order: 3;
+  }
 }
 
 @media (max-width: 560px) {
