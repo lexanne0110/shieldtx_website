@@ -156,8 +156,11 @@
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.3;
-  /* Brand book: brand-blue is primary on-brand color. */
-  color: var(--brand-blue);
+  /* Default = brand-blue-deep (anchored, calm); hover = brand-blue
+     (lights up to signal the link is active). The inverse of the
+     bright-by-default pattern — easier on the eye in a grid where
+     every card has a title, and the hover affordance is unmistakable. */
+  color: var(--brand-blue-deep);
   transition: color .2s var(--ease);
   /* Cap the title at 3 lines to keep card heights even-ish across the row. */
   display: -webkit-box;
@@ -165,7 +168,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.blog-card:hover .blog-card-title { color: var(--brand-blue-deep); }
+.blog-card:hover .blog-card-title { color: var(--brand-blue); }
 
 .blog-card-lede {
   margin: 0;
