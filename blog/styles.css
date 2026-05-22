@@ -70,17 +70,18 @@
   align-items: start;
 }
 
-/* ----- Featured card --------------------------------------------------- */
+/* ----- Featured card ---------------------------------------------------
+   Desktop: horizontal layout — banner on the left, title/lede/CTA on
+   the right — so the banner image AND the post title are both visible
+   without scrolling.
+   Mobile: stacks to vertical (banner on top, body below) below 720px.
+   --------------------------------------------------------------------- */
 .blog-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: stretch;
   background: var(--white);
   border-radius: 16px;
-  /* Top padding gives the banner breathing room from the card's top edge.
-     Horizontal stays 0 because the banner uses object-fit: contain — its
-     natural pillarbox bars already serve as side gutters. Bottom is owned
-     by .blog-card-body's padding. */
-  padding-top: 24px;
   box-shadow:
     0 1px 0 rgba(15, 23, 42, 0.04),
     0 24px 48px -28px rgba(15, 23, 42, 0.08);
@@ -96,19 +97,20 @@
     0 32px 64px -28px rgba(15, 23, 42, 0.16);
 }
 
-/* Banner sits flush with the top of the card at a true 16:9 ratio.
-   `object-fit: contain` shows the FULL image without cropping. When the
-   source image is not exactly 16:9 (e.g. 1200x761 source ≈ 1.577) the
-   container shows thin pillarbox strips on the sides. White background
-   keeps the strips reading as part of the card surface — no fighting
-   the brand-blue left edge or the dark photo right edge of the banner. */
+/* Banner — 55% of card width on desktop, full-width on mobile.
+   `object-fit: contain` shows the FULL image without cropping. The 16:9
+   aspect-ratio determines the banner's natural height; the body flexes
+   to match that height (so image and text sit edge-to-edge vertically).
+
+   Notes:
+   - White background blends the pillarbox bars (when the image isn't
+     exactly 16:9) into the card surface.
+   - `height: auto` is essential — IMG has the HTML `height` attribute
+     for CLS prevention, which would otherwise block CSS aspect-ratio. */
 .blog-card-banner {
   display: block;
-  width: 100%;
-  /* `height: auto` is critical: the IMG element has `height="675"` HTML
-     attributes (for CLS prevention), which acts as a default presentation
-     hint and blocks `aspect-ratio` from computing height. Forcing height:
-     auto here lets aspect-ratio: 16/9 actually take effect. */
+  width: 55%;
+  flex-shrink: 0;
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: contain;
@@ -117,10 +119,20 @@
 }
 
 .blog-card-body {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;  /* center text vertically against the banner */
   gap: 14px;
-  padding: 32px;
+  padding: 36px;
+}
+
+/* Stack vertically on narrow viewports — banner on top, body below,
+   matching the recent-posts sidebar collapse breakpoint at 880px. */
+@media (max-width: 880px) {
+  .blog-card { flex-direction: column; }
+  .blog-card-banner { width: 100%; }
+  .blog-card-body { padding: 28px; justify-content: flex-start; }
 }
 
 .blog-card-meta {
