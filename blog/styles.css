@@ -61,17 +61,19 @@
   max-width: 56ch;
 }
 
-.blog-index-grid {
+/* Two-column layout: featured card (left) + recent posts sidebar (right).
+   Collapses to a single column under 880px. */
+.blog-index-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 32px;
+  align-items: start;
 }
 
+/* ----- Featured card --------------------------------------------------- */
 .blog-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 28px;
   background: var(--white);
   border-radius: 16px;
   box-shadow:
@@ -82,31 +84,29 @@
   text-decoration: none;
   overflow: hidden;  /* keep .blog-card-banner clipped to the card radius */
 }
-
-/* Optional banner thumbnail. Sits flush with the top of the card and
-   nudges the padding/gap so the content below reads correctly. */
-.blog-card:has(.blog-card-banner) { padding: 0; gap: 0; }
-.blog-card-banner {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1200 / 761;
-  object-fit: cover;
-  background: var(--bg-elev);
-}
-.blog-card:has(.blog-card-banner) .blog-card-meta,
-.blog-card:has(.blog-card-banner) .blog-card-title,
-.blog-card:has(.blog-card-banner) .blog-card-lede,
-.blog-card:has(.blog-card-banner) .blog-card-cta { margin-left: 28px; margin-right: 28px; }
-.blog-card:has(.blog-card-banner) .blog-card-meta { margin-top: 24px; }
-.blog-card:has(.blog-card-banner) .blog-card-cta { margin-bottom: 28px; }
-.blog-card:has(.blog-card-banner) .blog-card-title { margin-top: 8px; }
-.blog-card:has(.blog-card-banner) .blog-card-lede { margin-top: 8px; }
 .blog-card:hover {
   transform: translateY(-2px);
   box-shadow:
     0 1px 0 rgba(15, 23, 42, 0.04),
     0 32px 64px -28px rgba(15, 23, 42, 0.16);
 }
+
+/* Banner sits flush with the top of the card at a true 16:9 ratio. */
+.blog-card-banner {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-elev);
+}
+
+.blog-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px;
+}
+
 .blog-card-meta {
   font-family: 'Geist Mono', ui-monospace, monospace;
   font-size: 12px;
@@ -116,24 +116,95 @@
 }
 .blog-card-title {
   margin: 0;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.25;
-  color: var(--fg-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  /* Brand book: brand-blue is the primary on-brand color; brand-cyan is
+     reserved for secondary accents on dark backgrounds. Card titles sit
+     on a white card surface, so use brand-blue for legibility + brand. */
+  color: var(--brand-blue);
+  transition: color .2s var(--ease);
 }
+.blog-card:hover .blog-card-title { color: var(--brand-blue-deep); }
 .blog-card-lede {
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--fg-secondary);
 }
+
+/* Tertiary CTA — brand-blue (matches title hue; brand-cyan lacks
+   contrast on white). Underline pulls on hover for the affordance. */
 .blog-card-cta {
-  margin-top: auto;
+  margin-top: 4px;
+  align-self: flex-start;
   font-family: 'Geist Mono', ui-monospace, monospace;
   font-size: 13px;
+  letter-spacing: 0.04em;
   color: var(--brand-blue);
+  padding: 6px 0;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color .2s var(--ease), color .2s var(--ease);
 }
+.blog-card:hover .blog-card-cta {
+  color: var(--brand-blue-deep);
+  border-bottom-color: var(--brand-blue);
+}
+
+/* ----- Recent posts sidebar ------------------------------------------- */
+.blog-recent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px 24px 24px;
+  box-shadow:
+    0 1px 0 rgba(15, 23, 42, 0.04),
+    0 24px 48px -28px rgba(15, 23, 42, 0.08);
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+.blog-recent-heading {
+  margin: 0 0 8px;
+  padding-bottom: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.08);
+}
+.blog-recent-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 0;
+  color: inherit;
+  text-decoration: none;
+  transition: color .2s var(--ease);
+  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.06);
+}
+.blog-recent-item:last-child { box-shadow: none; }
+.blog-recent-meta {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.blog-recent-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--fg-primary);
+  transition: color .2s var(--ease);
+}
+.blog-recent-item:hover .blog-recent-title { color: var(--brand-blue); }
 
 .blog-index-empty {
   grid-column: 1 / -1;
@@ -164,28 +235,29 @@
   color: var(--fg-primary);
 }
 
-/* Tertiary CTA — brand cyan. Same affordance as the eyebrow color: this
-   anchor belongs to the same "metadata" tier as the eyebrow, so they
-   share a hue and signal that they're part of the same UI layer. */
+/* Tertiary CTA — brand blue (primary on-brand color per brand book).
+   Brand cyan is reserved for secondary accents on dark backgrounds; on
+   white surfaces it lacks contrast. Eyebrow + back-link share the same
+   blue so they cluster as same-tier UI. */
 .blog-post-back {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  color: var(--brand-cyan);
+  color: var(--brand-blue);
   text-decoration: none;
   margin-bottom: 32px;
   transition: color .2s var(--ease);
 }
-.blog-post-back:hover { color: var(--brand-blue); }
+.blog-post-back:hover { color: var(--brand-blue-deep); }
 
-/* Per-post eyebrow uses brand cyan. Overrides the global .eyebrow which
-   defaults to --fg-muted (used for section eyebrows elsewhere on the
-   site, where the brand-blue eyebrow elsewhere would compete with H2s). */
+/* Per-post eyebrow uses brand blue. Overrides the global .eyebrow which
+   defaults to --fg-muted (the section-eyebrow style elsewhere on the
+   site). On the blog, brand-blue eyebrows mark the post's category. */
 .blog-post-wrap .eyebrow {
   display: inline-block;
   margin-bottom: 16px;
-  color: var(--brand-cyan);
+  color: var(--brand-blue);
 }
 
 .blog-post-wrap h1 {
@@ -350,11 +422,15 @@
 .blog-post-wrap .cta:hover { opacity: 0.9; }
 
 /* Responsive -------------------------------------------------------------- */
+@media (max-width: 880px) {
+  .blog-index-layout { grid-template-columns: 1fr; gap: 24px; }
+  .blog-recent { position: static; }
+}
 @media (max-width: 720px) {
   .blog-index { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 56px; }
   .blog-index-head { margin-bottom: 40px; }
-  .blog-index-grid { gap: 20px; }
-  .blog-card { padding: 24px; }
+  .blog-card-body { padding: 24px; gap: 12px; }
+  .blog-card-title { font-size: 22px; }
   .blog-post { padding-top: calc(var(--nav-h) + 24px); padding-bottom: 56px; }
   .blog-post-wrap { font-size: 16px; }
   .blog-post-wrap h2 { font-size: 22px; }

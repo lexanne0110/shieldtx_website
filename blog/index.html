@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="/styles.css?v=63" />
-  <link rel="stylesheet" href="/blog/styles.css?v=4" />
+  <link rel="stylesheet" href="/blog/styles.css?v=5" />
 </head>
 <body class="blog-body">
   <!-- Simplified nav: Home · Features · Scan wallet · [Open App] -->
@@ -49,30 +49,32 @@
           <p class="blog-index-sub">Notes on private trading, threat models, and how we're building ShieldTX.</p>
         </header>
 
-        <!-- POSTS GRID — newest first. -->
-        <div class="blog-index-grid">
+        <!-- POSTS LAYOUT — featured (with banner) + recent sidebar. -->
+        <div class="blog-index-layout">
 
-          <a class="blog-card" href="/blog/what-is-copy-trade-protection">
-            <span class="blog-card-meta">22 May 2026 · 7 min read</span>
-            <h2 class="blog-card-title">What Is Copy Trade Protection? A Trader's Guide to Keeping Your Strategy Yours</h2>
-            <p class="blog-card-lede">Copy trade protection shields your on-chain trading activity from being copied, mirrored, or analyzed. What it means, how it works, and why it matters for Hyperliquid traders.</p>
-            <span class="blog-card-cta">Read →</span>
+          <a class="blog-card blog-card--featured" href="/blog/how-copy-traders-are-stealing-your-edge">
+            <img class="blog-card-banner" src="/blog/how-copy-traders-are-stealing-your-edge/banner.jpg" alt="Every trade you make is being watched — ShieldTX" width="1200" height="675" loading="lazy" />
+            <div class="blog-card-body">
+              <span class="blog-card-meta">8 May 2026 · 6 min read</span>
+              <h2 class="blog-card-title">How Copy Traders Are Stealing Your Edge on Hyperliquid</h2>
+              <p class="blog-card-lede">Your Hyperliquid trades are public. How copy trading bots track your positions in real time, and how to trade without exposing your strategy.</p>
+              <span class="blog-card-cta">Read →</span>
+            </div>
           </a>
 
-          <a class="blog-card" href="/blog/hyperbot-dexly-hyperdash-copy-trading-tools">
-            <span class="blog-card-meta">15 May 2026 · 9 min read</span>
-            <h2 class="blog-card-title">Hyperbot, Dexly &amp; HyperDash: Are They Copying Your Trades?</h2>
-            <p class="blog-card-lede">Hyperbot, Dexly, and HyperDash are actively copying Hyperliquid traders. How each tool works, why they're a problem, and what you can actually do about it.</p>
-            <span class="blog-card-cta">Read →</span>
-          </a>
+          <aside class="blog-recent" aria-label="Recent posts">
+            <h2 class="blog-recent-heading">Recent Posts</h2>
 
-          <a class="blog-card" href="/blog/how-copy-traders-are-stealing-your-edge">
-            <img class="blog-card-banner" src="/blog/how-copy-traders-are-stealing-your-edge/banner.jpg" alt="Every trade you make is being watched — ShieldTX" width="1200" height="761" loading="lazy" />
-            <span class="blog-card-meta">8 May 2026 · 6 min read</span>
-            <h2 class="blog-card-title">How Copy Traders Are Stealing Your Edge on Hyperliquid</h2>
-            <p class="blog-card-lede">Your Hyperliquid trades are public. How copy trading bots track your positions in real time, and how to trade without exposing your strategy.</p>
-            <span class="blog-card-cta">Read →</span>
-          </a>
+            <a class="blog-recent-item" href="/blog/what-is-copy-trade-protection">
+              <span class="blog-recent-meta">22 May 2026 · 7 min read</span>
+              <h3 class="blog-recent-title">What Is Copy Trade Protection? A Trader's Guide to Keeping Your Strategy Yours</h3>
+            </a>
+
+            <a class="blog-recent-item" href="/blog/hyperbot-dexly-hyperdash-copy-trading-tools">
+              <span class="blog-recent-meta">15 May 2026 · 9 min read</span>
+              <h3 class="blog-recent-title">Hyperbot, Dexly &amp; HyperDash: Are They Copying Your Trades?</h3>
+            </a>
+          </aside>
 
         </div>
       </div>
