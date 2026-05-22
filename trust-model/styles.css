@@ -12,9 +12,10 @@
 .docs-body .grain,
 .docs-body .cursor { display: none; }
 
-/* Nav adapted for docs: solid white surface, soft hairline below (no stroke) */
+/* Nav adapted for docs: matches body --snow so there's no visible seam
+   between the fixed nav and the page on first scroll. */
 .nav-docs {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(248, 250, 252, 0.85);
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
