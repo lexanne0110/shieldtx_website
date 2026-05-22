@@ -4,4 +4,4 @@ Disallow: /app
 Disallow: /api/
 Disallow: /brand-document/
 
-Sitemap: https://shieldtx.app/sitemap.xml
+Sitemap: https://shieldtx.xyz/sitemap.xml
