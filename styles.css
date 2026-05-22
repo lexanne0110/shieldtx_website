@@ -503,14 +503,23 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
    Net effect: a stable, brand-blue-tinted glass pill across at-top,
    scrolled, and any dark section the nav passes over. */
 .nav.is-over-dark .nav-cta {
-  background: rgba(255, 255, 255, 0.22);
+  /* Layered fill: brand-blue-bright tint anchors the color identity so
+     the pill reads as "blue glass" regardless of backdrop, plus a top-
+     to-bottom white sheen gives it depth. White-only translucent fills
+     visibly darken when the nav adds its own dark scroll layer; this
+     blue-tinted fill is bright enough to dominate at any scroll state. */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04)),
+    rgba(91, 160, 255, 0.34);
   color: var(--white);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
   box-shadow: none;
 }
 .nav.is-over-dark .nav-cta:hover {
-  background: rgba(255, 255, 255, 0.32);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.06)),
+    rgba(91, 160, 255, 0.46);
   box-shadow: none;
 }
 
@@ -3273,13 +3282,11 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   border-radius: 999px;
   color: rgba(255, 255, 255, 0.72);
   background: rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-  transition: background .2s var(--ease), color .2s var(--ease), box-shadow .2s var(--ease), transform .2s var(--ease);
+  transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
 }
 .footer-social:hover {
   color: var(--white);
   background: rgba(77, 213, 232, 0.18);
-  box-shadow: inset 0 0 0 1px rgba(77, 213, 232, 0.4);
   transform: translateY(-1px);
 }
 .footer-social svg {
