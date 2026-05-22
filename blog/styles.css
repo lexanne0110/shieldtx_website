@@ -76,6 +76,11 @@
   flex-direction: column;
   background: var(--white);
   border-radius: 16px;
+  /* Top padding gives the banner breathing room from the card's top edge.
+     Horizontal stays 0 because the banner uses object-fit: contain — its
+     natural pillarbox bars already serve as side gutters. Bottom is owned
+     by .blog-card-body's padding. */
+  padding-top: 24px;
   box-shadow:
     0 1px 0 rgba(15, 23, 42, 0.04),
     0 24px 48px -28px rgba(15, 23, 42, 0.08);
@@ -246,8 +251,8 @@
   color: var(--fg-primary);
 }
 
-/* Back link — secondary (ghost) button per brand book (brand-document
-   §17 Buttons): 44px pill, silver border, ink text, transparent fill.
+/* Back link — tertiary button per brand book (brand-document §17
+   Buttons): 44px pill, no border, no fill, brand-blue text, ice hover.
    Pinned to the left of the reading column on desktop via position:fixed;
    collapses to inline on mobile. */
 .blog-post-back {
@@ -256,20 +261,20 @@
   justify-content: center;
   gap: 8px;
   height: 44px;
-  padding: 0 20px;
+  padding: 0 12px;
   border-radius: var(--r-pill);
-  border: 1px solid var(--silver);
+  border: 1px solid transparent;
   background: transparent;
-  color: var(--ink);
+  color: var(--brand-blue);
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   margin-bottom: 32px;
-  transition: background .25s var(--ease), border-color .25s var(--ease);
+  transition: background .25s var(--ease), color .25s var(--ease);
 }
 .blog-post-back:hover {
-  background: var(--white);
-  border-color: var(--ink);
+  background: var(--ice);
+  color: var(--brand-blue-deep);
 }
 
 /* Desktop only: pin to the left of the centered reading column. */
