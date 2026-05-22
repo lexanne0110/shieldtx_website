@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyperbot, Dexly & HyperDash: Are They Copying Your Trades? · ShieldTX</title>
+  <meta name="description" content="Hyperbot, Dexly, and HyperDash are actively copying Hyperliquid traders. Here is how each tool works, why they are a problem, and what you can actually do about it." />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/ShieldTX_LogoMark.svg" />
+  <link rel="apple-touch-icon" href="/assets/ShieldTX_LogoMark.svg" />
+
+  <meta property="og:title" content="Hyperbot, Dexly & HyperDash: Are They Copying Your Trades? · ShieldTX" />
+  <meta property="og:description" content="Hyperbot, Dexly, and HyperDash are actively copying Hyperliquid traders. Here is how each tool works, why they are a problem, and what you can actually do about it." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.app/blog/hyperbot-dexly-hyperdash-copy-trading-tools" />
+  <meta property="og:image" content="https://shieldtx.app/assets/demo/poster.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hyperbot, Dexly & HyperDash: Are They Copying Your Trades? · ShieldTX" />
+  <meta name="twitter:description" content="Hyperbot, Dexly, and HyperDash are actively copying Hyperliquid traders. Here is how each tool works, why they are a problem, and what you can actually do about it." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/styles.css?v=63" />
+  <link rel="stylesheet" href="/blog/styles.css?v=2" />
+</head>
+<body class="blog-body">
+  <!-- Simplified nav: Home · Features · Scan wallet · [Open App] -->
+  <header class="nav nav-blog">
+    <a class="nav-logo" href="/" aria-label="ShieldTX">
+      <img src="/assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/#features">Features</a>
+      <a href="/#scan-tool">Scan wallet</a>
+    </nav>
+    <a class="nav-cta btn-pill" href="https://beta.shieldtx.xyz">Open App</a>
+    <div class="nav-progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="top">
+    <article class="blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <p class="blog-post-meta">
+          <span>15 May 2026</span>
+          <span>9 min read</span>
+        </p>
+<div class="eyebrow">Hyperbot, Dexly & HyperDash</div>
+    <h1>Hyperbot, Dexly & HyperDash: Are They Copying Your Trades?</h1>
+
+    <p class="intro">Every trade you have ever made on Hyperliquid is visible to the public. Not just to the exchange but to anyone, anywhere.</p>
+
+    <p>They can see exactly what you are trading, when you are trading it, and how much you are winning or losing. The blockchain does not hide this information and it never has.</p>
+
+    <p>This transparency is what makes Hyperliquid powerful as an on-chain trading destination. But it has also created an ecosystem where services have emerged around monitoring your trading activity, analyzing your positions, and replicating your strategies, often without your knowledge or consent.</p>
+
+    <p>Hyperbot, Dexly, and HyperDash are the three most widely used copy trading and whale tracking tools on Hyperliquid today. Between them, they have attracted thousands of users who monitor, mirror, and profit from other traders' positions and research in real time. If you have been profitable on Hyperliquid, chances are high that your trading activity has been noticed.</p>
+
+    <p>This article breaks down exactly how each tool works, why they are a problem for traders that value their edge, and what you can actually do about it.</p>
+
+    <h2 id="knowing-is-not-sufficient">Why Knowing These Tools Exist Is Not Sufficient<a href="#knowing-is-not-sufficient" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+    <h3 id="transparency-problem">The Transparency Problem<a href="#transparency-problem" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Hyperliquid is a decentralized exchange built on transparency. Every position, every trade, every margin update is recorded on-chain. There is no private order book, no delayed disclosures, no anonymous trading. Your wallet address is your identity, and everything you do is visible to anyone who knows where to look.</p>
+
+    <p>This is not a flaw, it is by design. On-chain exchanges rely on this transparency for settlement and liquidation mechanics, however this means the same data that powers the protocol also powers the tools designed to exploit your positions.</p>
+
+    <p>You do not need to be a whale to be targeted. Even small retail traders with consistent strategies get picked up by trackers. The moment you begin to show repeatability, entering similar positions on the same pairs, maintaining a positive win rate, hitting funding payments predictably, then you become a wallet worth tracking.</p>
+
+    <h3 id="being-copied">What "Being Copied" Actually Means<a href="#being-copied" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Copy trading in the Hyperliquid context is not just "following along." It is real-time position mirroring that happens within seconds, sometimes milliseconds, after your execution. When you open a position, copy bots mirror that same position instantly. When you close, they close. The gap between your trade and theirs is small enough to move markets against you.</p>
+
+    <p>This creates two immediate problems:</p>
+
+    <p><strong>Front-running pressure:</strong> When multiple bots replicate your entry simultaneously, they push the price against you before your order fully fills. Your slippage becomes their profit margin.</p>
+
+    <p><strong>Signal leakage:</strong> Once copy traders know your exit points, they can anticipate your closes and front-run those too. Your risk management becomes their alpha.</p>
+
+    <p>The economics are brutal. Even if you are a profitable trader earning 2R per trade, copy traders mirroring your positions may extract enough value through slippage and front-running that your edge evaporates, not because your strategy changed, but because it is not just yours alone.</p>
+
+    <h3 id="who-tools-target">Who These Tools Target<a href="#who-tools-target" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Hyperbot, Dexly, and HyperDash target anyone with a trackable position history. The tools vary in sophistication, some cater to whales, others are designed for anyone copying anyone. But the underlying mechanism is the same. If you have traded on Hyperliquid, your address is visible, your positions are trackable, and your strategies are quantifiable.</p>
+
+    <p>The painful truth is that the more consistent and profitable you are, the more attractive you become to these tools. It is not just about size, it is about consistency and demonstrating you have an edge.</p>
+
+    <h2 id="hyperbot">Hyperbot - Zero-Latency Mirroring with AI Signals<a href="#hyperbot" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+    <h3 id="hyperbot-what">What Hyperbot Is<a href="#hyperbot-what" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Hyperbot is the most aggressive copy trading product in the Hyperliquid ecosystem. Built around a zero-latency mirror engine, Hyperbot copies positions from any tracked wallet in near-instant time, executing the same trades as the source trader at the moment they occur.</p>
+
+    <p>Hyperbot targets whales, but functions for any tracked address. It includes Telegram integration for alerts, whale tracker integration for discovery, and AI-powered signal generation that goes beyond simple mirroring.</p>
+
+    <h3 id="hyperbot-mirror">How the Mirror Engine Works<a href="#hyperbot-mirror" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Hyperbot monitors on-chain Hyperliquid activity for wallet addresses specified by its users. When the source trader executes a long or short position on any pair, of any size, Hyperbot replicates that position on the follower's account.</p>
+
+    <p>The key differentiator is execution speed. Hyperbot's Mirror Engine is designed to minimize the gap between source execution and mirror execution. This matters because even a half-second delay creates slippage that erodes profitability. The faster the mirror, the more closely the copy follows the original signal, and the more pressure there is on the original trader's fills.</p>
+
+    <p>Any Hyperliquid address can be selected as a source. There is no minimum track record and no threshold for inclusion. If someone is trading on Hyperliquid, their address can be tracked and mirrored.</p>
+
+    <h3 id="hyperbot-ai">AI Signals Feature<a href="#hyperbot-ai" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Beyond mirroring, Hyperbot offers AI-powered signal generation. The system analyzes tracked wallets and generates predictive insights. It is not just "copy this trader" but "this trader is likely to enter an ETH perp position based on their historical behavior."</p>
+
+    <p>This amplifies the problem significantly. It means even traders without huge followings get analyzed. The AI identifies patterns in your trading behavior, entry timing, pair preferences, leverage tendencies, and signals those patterns to followers. Your edge becomes signal for others.</p>
+
+    <h3 id="hyperbot-why">Why It Matters<a href="#hyperbot-why" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>If you are a profitable trader on Hyperliquid, Hyperbot has likely already indexed your address. Your consistent trades have made you a target. The more obvious your profitability, the more attractive you are to copy bots, and the more you lose to slippage and front-running without even realising.</p>
+
+    <p>The product is marketed as a tool for followers. But for the original trader it simply erodes your edge.</p>
+
+    <h2 id="hyperdash">HyperDash - Institutional Analytics with One-Click Copy Trading<a href="#hyperdash" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+    <h3 id="hyperdash-what">What HyperDash Is<a href="#hyperdash-what" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>HyperDash is positioned as an institutional-grade analytics terminal for Hyperliquid traders. Where Hyperbot focuses on mirroring, HyperDash focuses on deep analytics, performance tracking, and one-click copy trading.</p>
+
+    <p>The platform has undergone significant iterations, with a revamped trading terminal that includes features like the Cohorts tab (group-based trader selection), TWAP (time-weighted average price) execution, and Chase Orders (algorithmic follow-up strategies).</p>
+
+    <h3 id="hyperdash-copy">Copy Trading Feature<a href="#hyperdash-copy" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Rather than simple mirroring, it offers one-click copy trading with customizable position sizing, automatic rebalancing, and cohort-based following.</p>
+
+    <p>The key difference from Hyperbot: HyperDash is more analytics-forward. You do not just pick a wallet and mirror everything, you analyze performance across different market conditions, evaluate Sharpe ratios, and follow groups of traders rather than individuals.</p>
+
+    <p>This makes it more sophisticated but also more dangerous. The depth of analytics means copy traders can filter for exactly the strategies they want to replicate, selecting traders with specific profiles (low drawdown, high win rate, and specific pair preferences).</p>
+
+    <h3 id="hyperdash-analytics">Analytics Capabilities<a href="#hyperdash-analytics" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>HyperDash tracks:</p>
+
+    <ul>
+      <li>Real-time position monitoring across all tracked wallets</li>
+      <li>Performance metrics: PnL, win rate, Sharpe ratio, maximum drawdown</li>
+      <li>Historical analysis across different market conditions</li>
+      <li>Risk-adjusted return comparisons</li>
+      <li>Funding payment tracking</li>
+    </ul>
+
+    <p>The platform makes every aspect of your trading visible to anyone. It looks at your leverage usage, your funding costs, and your risk management decisions. Everything gets exposed.</p>
+
+    <h3 id="hyperdash-why">Why It Matters<a href="#hyperdash-why" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>HyperDash's analytics depth means copy traders do not just see what you are doing, they see in detail how well you are doing it. They can filter for exactly the strategies that work, identify the traders worth copying, and replicate with precision.</p>
+
+    <p>The "one-click copy" feature lowers the barrier for anyone to follow your trades. You do not need to be a professional to copy a professional. HyperDash handles the execution.</p>
+
+    <p>The result is professional-grade exploitation of your edge, available to anyone with a HyperDash account.</p>
+
+    <h2 id="dexly">Dexly - The Explorer That Shows Everything for Free<a href="#dexly" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+    <h3 id="dexly-what">What Dexly Is<a href="#dexly-what" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Dexly is a wallet explorer that tracks any Hyperliquid address in real time, for free. Unlike Hyperbot which offers paid mirroring, and HyperDash with its institutional tier, Dexly offers core tracking functionality at no cost.</p>
+
+    <p>This accessibility is what makes Dexly particularly dangerous for serious traders. You do not need to pay to watch someone's trades. You do not need a premium subscription. You only need a browser.</p>
+
+    <h3 id="dexly-tracks">What Dexly Tracks<a href="#dexly-tracks" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Dexly provides complete visibility into any tracked wallet:</p>
+
+    <ul>
+      <li>Real-time PnL</li>
+      <li>Full position history with every open and closed position</li>
+      <li>Leverage usage including current multiplier and historical range</li>
+      <li>Funding payments, both historic and ongoing</li>
+      <li>Complete trading history with timestamps</li>
+    </ul>
+
+    <p>There is no paywall between strangers and your trading data. Everything is visible, right now.</p>
+
+    <h3 id="dexly-leaderboard">Leaderboard Feature<a href="#dexly-leaderboard" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Dexly's leaderboard makes the "who should I copy?" question trivial. Traders are ranked by PnL, win rate, volume, and other metrics. The platform surfaces the most profitable addresses for easy copying.</p>
+
+    <p>This creates a discovery mechanism that amplifies the problem. Top traders are not just visible, they are ranked, rated, and recommended to Dexly's users. The leaderboard incentivizes visibility while punishing privacy.</p>
+
+    <h3 id="dexly-why">Why It Matters<a href="#dexly-why" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Dexly's free access means anyone can watch your every move for free. Your trading history, your position sizes, your funding payments are all public.</p>
+
+    <p>The leaderboard further punishes transparency-conscious traders by making "being visible" part of the ecosystem's incentive structure. If you are a profitable trader on Hyperliquid, Dexly has already ranked you.</p>
+
+    <h2 id="what-they-have-in-common">What These Tools Have in Common - And What That Means for You<a href="#what-they-have-in-common" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+    <h3 id="shared-mechanism">Shared Mechanism<a href="#shared-mechanism" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>All three of these tools operate on the same fundamental mechanism. They monitor on-chain Hyperliquid activity and translate that data into something actionable for their users.</p>
+
+    <p>None of them require your permission, and nor do they have to ask for your address directly. They simply read the blockchain, parse the data, and present it in formats designed for copying, tracking, or analysis. You are being watched by people who are using tools to erode your trading advantage.</p>
+
+    <h3 id="asymmetry">The Asymmetry Problem<a href="#asymmetry" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>This creates a fundamental asymmetry. You have no idea who is copying you. You cannot see who is actively tracking you and you have no visibility into how many wallets are mirroring your positions, or how many traders are studying your exits.</p>
+
+    <p>You simply execute your trades on a transparent exchange and others act on your data without your knowledge. The dynamic is working against you, and you are losing profit without even knowing it.</p>
+
+    <h3 id="real-cost">The Real Cost<a href="#real-cost" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>The cost is both financial and strategic:</p>
+
+    <p><strong>Front-running slippage:</strong> Every copy trader mirroring your entry pushes price against you. Your fills get worse as more people follow.</p>
+
+    <p><strong>Signal degradation:</strong> Once your strategy is known, it stops working. The edge existed because only you knew how you traded. Now everyone does.</p>
+
+    <p><strong>Emotional weight:</strong> Knowing you are being watched changes how you trade. It creates hesitation, second-guessing, and self-consciousness that erodes performance.</p>
+
+    <p>This is not theoretical. It is already happening to every profitable Hyperliquid trader.</p>
+
+    <h2 id="what-to-do">What You Can Do About It - From Workarounds to Real Privacy<a href="#what-to-do" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+    <h3 id="workarounds-dont-work">Workarounds That Do Not Fully Work<a href="#workarounds-dont-work" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>Traders have developed various workarounds to reduce being copied:</p>
+
+    <p><strong>Multi-wallet rotation:</strong> Using different wallets for different trades. This creates operational complexity as you start tracking positions across wallets, managing margin across addresses, and still, it does not prevent eventual discovery. On-chain forensics can link wallets through common trading patterns, funding transfers, and wallet grouping.</p>
+
+    <p><strong>Smaller position sizes:</strong> Reduces the market impact of your trades, making you less attractive to whale trackers. It also reduces your profitability and you end up sacrificing returns to reduce your visibility.</p>
+
+    <p><strong>Trading less obvious pairs:</strong> Avoiding heavily tracked pairs (BTC, ETH, SOL) reduces immediate visibility. But it also limits your opportunities.</p>
+
+    <p>None of these solutions address the root cause of the problem, that your trading data is public, and there is no native mechanism on Hyperliquid to protect it.</p>
+
+    <h3 id="advanced-traders">What Advanced Traders Are Actually Doing<a href="#advanced-traders" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>The only real solution is purpose-built infrastructure for shielded trading on Hyperliquid, not generic workarounds, but compliant confidentiality tools designed specifically for solving this problem.</p>
+
+    <p>This means executing trades through a vault or infrastructure layer that isolates your address from exposure to the on-chain activity that makes you a target, while maintaining compatibility with Hyperliquid. Your trades still settle on Hyperliquid, but your wallet address is not publicly associated with the trade. This way, you get to maintain the benefits of trading on Hyperliquid, without the public broadcast.</p>
+
+    <p>Advanced traders are moving towards this shielded model. That is because it is the only solution that does not require sacrificing profitability, or having to accept operational complexity, or giving up the benefits of trading on-chain.</p>
+
+    <h3 id="future-state">The Future State<a href="#future-state" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>On-chain privacy is rapidly becoming a widely recognized need in DeFi. As more traders experience the pain of signal leakage and front-running, demand for compliant privacy solutions is growing. The tools in this article are a known problem with well-known solutions that are insufficient, so the market is responding.</p>
+
+    <p>For long-term strategy preservation, the choice is clear. You either accept being copied, or you need to find infrastructure that protects your edge.</p>
+
+    <h3 id="evaluate-solutions">How to Evaluate Solutions<a href="#evaluate-solutions" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
+
+    <p>If you are considering a shielded trading solution, ask these questions:</p>
+
+    <p><strong>Is it compliant?</strong> Avoid anything that creates regulatory exposure. This is non-negotiable.</p>
+
+    <p><strong>Does it break Hyperliquid compatibility?</strong> Your trades need to settle on Hyperliquid. If the solution does not integrate natively, it does not solve the problem.</p>
+
+    <p><strong>Is it operationally complex?</strong> Workarounds that add friction are not solutions. The best infrastructure is invisible.</p>
+
+    <p><strong>Is it built for this specific problem?</strong> Generic privacy tools are not designed for perp trading. Purpose-built solutions outperform generalist approaches.</p>
+
+    <p>Red flags: anything promising untraceable transactions while creating regulatory risk.</p>
+
+    <p>Green flags: institutional-grade security, compliance-first design, purpose-built for Hyperliquid.</p>
+
+    <h2 id="conclusion">Conclusion<a href="#conclusion" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+    <p>Hyperbot, Dexly, and HyperDash are actively copying and tracking Hyperliquid traders. This is not a theory or a future threat, it is the current reality. Every profitable trader on Hyperliquid is being monitored, analyzed, and replicated by hundreds of unknown wallets.</p>
+
+    <p>The problem is structural. It cannot be solved by behavior changes, address rotation, or ignoring the tools. On-chain perps are transparent by design, and that transparency is what powers these tools.</p>
+
+    <p>Workarounds are insufficient. The only real answer is purpose-built infrastructure for shielded trading, solutions that maintain your Hyperliquid integration while eliminating your visibility to copy traders and whale trackers.</p>
+
+    <p>If you are serious about protecting your edge, the math is simple. Every day that you trade without shielded infrastructure is a day your strategies are being leaked to strangers and your profitability eroded. The solutions already exist.</p>
+
+    <div class="faq" id="faq">
+      <h2>Frequently Asked Questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+      <div class="faq-item">
+        <h3>What is Hyperbot, and how does it copy my Hyperliquid trades?</h3>
+        <p>Hyperbot is a copy trading platform with a Zero-Latency Mirror Engine that monitors on-chain Hyperliquid activity. When a tracked wallet executes a trade, Hyperbot replicates that position on follower accounts in near-instant time. It also offers AI-powered signal generation that predicts trader behavior.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How does HyperDash's copy trading feature work?</h3>
+        <p>HyperDash offers one-click copy functionality with deep analytics. Traders can follow individual wallets or cohorts (groups of traders), with customizable position sizing and automatic rebalancing. Performance metrics including PnL, win rate, and Sharpe ratio are tracked for informed selection.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can Dexly Explorer see my wallet's full trading history?</h3>
+        <p>Yes. Dexly provides complete visibility into any tracked Hyperliquid wallet with real-time PnL, full position history, leverage usage, funding payments, and complete trading history with timestamps. This is available for free, with no paywall.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Are these copy trading tools legal to use on Hyperliquid?</h3>
+        <p>Yes. All three tools operate by reading public on-chain data, which is inherently visible on Hyperliquid. They are legal to use.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How do I stop copy trading bots from following my Hyperliquid positions?</h3>
+        <p>Workarounds like multi-wallet rotation and smaller positions are insufficient and operationally painful. The only real solution is purpose-built shielded trading infrastructure that isolates your address from direct on-chain execution while maintaining Hyperliquid compatibility.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does using ShieldTX break compatibility with Hyperliquid?</h3>
+        <p>No. ShieldTX is built to maintain full Hyperliquid compatibility while providing shielded execution. Your trades settle on Hyperliquid, the difference is that your wallet address is not directly associated with the execution, eliminating visibility to copy bots and whale trackers.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is the difference between a whale tracker and a copy trading bot?</h3>
+        <p>A whale tracker (like Dexly) monitors and analyzes wallet activity, PnL, positions, performance metrics. A copy trading bot (like Hyperbot) actively replicates positions in real time. Both are problematic for traders being monitored, but they serve different functions: analytics vs. execution.</p>
+      </div>
+    </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="/assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
+        <p class="footer-tagline">Trade with confidence.<br/>Powered by <span class="footer-avail">Avail</span>.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="/#features">Features</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#how">How it works</a>
+        <a href="https://beta.shieldtx.xyz">Open App</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/#faq">FAQ</a>
+        <a href="/trust-model">Trust model ↗</a>
+        <a href="/brand-document">Brand book ↗</a>
+        <a href="/blog">Blog ↗</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/request-access">Request access</a>
+        <a href="/contact">Contact ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <div class="footer-bottom-left">
+        <span>© <span id="yr"></span> ShieldTX</span>
+        <nav class="footer-bottom-legal" aria-label="Legal">
+          <a href="/terms">Terms</a>
+          <a href="/privacy">Privacy</a>
+        </nav>
+      </div>
+      <div class="footer-socials" aria-label="ShieldTX social links">
+        <a class="footer-social" href="#" aria-label="ShieldTX on X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.7l-6.92 7.91L22 21h-6.4l-5.01-6.55L4.84 21H1.66l7.4-8.46L1.5 3h6.56l4.53 5.99L17.53 3Zm-1.12 16.13h1.76L7.7 4.78H5.82l10.59 14.35Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Discord">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.27 5.33A18.6 18.6 0 0 0 14.86 4l-.22.45a16.6 16.6 0 0 1 4.06 1.27 14.5 14.5 0 0 0-12.4 0 16.6 16.6 0 0 1 4.06-1.27L10.14 4a18.6 18.6 0 0 0-4.41 1.33C2.83 9.45 2.04 13.46 2.43 17.4a18.7 18.7 0 0 0 5.71 2.86c.46-.62.87-1.28 1.21-1.97a12.1 12.1 0 0 1-1.91-.91l.47-.34a13.4 13.4 0 0 0 11.18 0l.47.34a12.1 12.1 0 0 1-1.91.91c.34.69.74 1.35 1.21 1.97a18.7 18.7 0 0 0 5.71-2.86c.46-4.55-.78-8.52-3.31-12.07ZM9.05 14.91c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Zm5.9 0c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.34a1 1 0 0 0-1.34-1.07L2.7 10.45c-.93.36-.86 1.7.1 1.97l4.32 1.21 1.7 5.22a1 1 0 0 0 1.66.42l2.46-2.39 4.6 3.4a1 1 0 0 0 1.58-.6l3.0-13.46c.04-.2.04-.4 0-.59ZM9.96 14.41 9.4 18l-1.32-4.05 9.74-7.21-7.86 7.67Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const y = document.getElementById('yr');
+      if (y) y.textContent = new Date().getFullYear();
+
+      // Copy-link anchor behavior (preserves the source post's interaction)
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

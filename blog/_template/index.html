@@ -1,0 +1,218 @@
+<!--
+  ============================================================================
+  BLOG POST TEMPLATE
+  ============================================================================
+  Copy this entire folder to create a new post:
+
+      cp -r blog/_template blog/your-post-slug
+      # then edit blog/your-post-slug/index.html
+
+  The folder name becomes the URL:
+      blog/your-post-slug/  →  /blog/your-post-slug
+
+  Slug rules: lowercase, hyphen-separated, no spaces, no underscores.
+
+  Things to update in this file (search for "TEMPLATE:"):
+    1. <title> and meta description
+    2. OG + Twitter tags (og:url, og:image, og:title, og:description)
+    3. <h1 class="docs-title"> — post title
+    4. <p class="blog-post-meta"> — date + reading time
+    5. Sections: anchor IDs, h2 text, body copy
+    6. TOC links (must match section IDs)
+    7. Add the post to /blog/index.html as a new <a class="blog-card">
+    8. Add the post URL to /sitemap.xml
+
+  Layout uses the .docs-* prose system from /trust-model/styles.css.
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- TEMPLATE: replace title + description -->
+  <title>Post title · ShieldTX</title>
+  <meta name="description" content="One-sentence summary of the post." />
+
+  <!-- TEMPLATE: while this is the unfilled template file, keep noindex.
+       DELETE this meta tag when you copy this file to a real post folder. -->
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/ShieldTX_LogoMark.svg" />
+  <link rel="apple-touch-icon" href="/assets/ShieldTX_LogoMark.svg" />
+
+  <!-- TEMPLATE: replace OG + Twitter tags -->
+  <meta property="og:title" content="Post title · ShieldTX" />
+  <meta property="og:description" content="One-sentence summary of the post." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.app/blog/your-post-slug" />
+  <meta property="og:image" content="https://shieldtx.app/assets/demo/poster.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Post title · ShieldTX" />
+  <meta name="twitter:description" content="One-sentence summary of the post." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Global tokens + .docs-* prose system + blog-specific tweaks -->
+  <link rel="stylesheet" href="/styles.css?v=63" />
+  <link rel="stylesheet" href="/trust-model/styles.css?v=7" />
+  <link rel="stylesheet" href="/blog/styles.css?v=1" />
+</head>
+<body class="docs-body blog-body">
+  <!-- Simplified nav -->
+  <header class="nav nav-docs">
+    <a class="nav-logo" href="/" aria-label="ShieldTX">
+      <img src="/assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/#features">Features</a>
+      <a href="/#scan-tool">Scan wallet</a>
+    </nav>
+    <a class="nav-cta btn-pill" href="https://beta.shieldtx.xyz">Open App</a>
+    <div class="nav-progress" aria-hidden="true"></div>
+  </header>
+
+  <main class="docs-main" id="top">
+    <div class="docs-container">
+      <!-- Sticky TOC ----------------------------------------------------- -->
+      <aside class="docs-toc" aria-label="On this page">
+        <details class="docs-toc-mobile">
+          <summary>On this page</summary>
+          <nav class="docs-toc-list">
+            <!-- TEMPLATE: match these to your section ids -->
+            <a href="#section-one" class="docs-toc-link is-active">Section one</a>
+            <a href="#section-two" class="docs-toc-link">Section two</a>
+            <a href="#section-three" class="docs-toc-link">Section three</a>
+          </nav>
+        </details>
+        <nav class="docs-toc-list docs-toc-desktop" aria-label="Sections">
+          <span class="docs-toc-label">On this page</span>
+          <!-- TEMPLATE: match these to your section ids -->
+          <a href="#section-one" class="docs-toc-link is-active">Section one</a>
+          <a href="#section-two" class="docs-toc-link">Section two</a>
+          <a href="#section-three" class="docs-toc-link">Section three</a>
+          <a href="/blog" class="blog-back">← Back to blog</a>
+        </nav>
+      </aside>
+
+      <!-- Content -------------------------------------------------------- -->
+      <article class="docs-content">
+        <header class="docs-header">
+          <span class="eyebrow">Blog</span>
+          <!-- TEMPLATE: title + meta -->
+          <h1 class="docs-title">Post title goes here.</h1>
+          <p class="blog-post-meta">
+            <span>22 May 2026</span>
+            <span>4 min read</span>
+          </p>
+          <p class="docs-lede">A short lede paragraph that previews the post. Keep it to one or two sentences — this is what people scan before deciding to read on.</p>
+        </header>
+
+        <!-- TEMPLATE: replace every <section> below. Section ids must match the TOC links above. -->
+
+        <section class="docs-section" id="section-one">
+          <h2 class="docs-h2">Section one</h2>
+          <p>Opening paragraph. Use <b>bold</b> for emphasis, <a class="docs-link" href="/">inline links</a> as needed.</p>
+          <p>Second paragraph.</p>
+          <ul class="docs-list">
+            <li>List item one</li>
+            <li>List item two</li>
+          </ul>
+        </section>
+
+        <section class="docs-section" id="section-two">
+          <h2 class="docs-h2">Section two</h2>
+          <p>Body copy.</p>
+        </section>
+
+        <section class="docs-section" id="section-three">
+          <h2 class="docs-h2">Section three</h2>
+          <p>Body copy.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="/assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
+        <p class="footer-tagline">Trade with confidence.<br/>Powered by <span class="footer-avail">Avail</span>.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="/#features">Features</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#how">How it works</a>
+        <a href="https://beta.shieldtx.xyz">Open App</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/#faq">FAQ</a>
+        <a href="/trust-model">Trust model ↗</a>
+        <a href="/brand-document">Brand book ↗</a>
+        <a href="/blog">Blog ↗</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/request-access">Request access</a>
+        <a href="/contact">Contact ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <div class="footer-bottom-left">
+        <span>© <span id="yr"></span> ShieldTX</span>
+        <nav class="footer-bottom-legal" aria-label="Legal">
+          <a href="/terms">Terms</a>
+          <a href="/privacy">Privacy</a>
+        </nav>
+      </div>
+      <div class="footer-socials" aria-label="ShieldTX social links">
+        <a class="footer-social" href="#" aria-label="ShieldTX on X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.7l-6.92 7.91L22 21h-6.4l-5.01-6.55L4.84 21H1.66l7.4-8.46L1.5 3h6.56l4.53 5.99L17.53 3Zm-1.12 16.13h1.76L7.7 4.78H5.82l10.59 14.35Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Discord">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.27 5.33A18.6 18.6 0 0 0 14.86 4l-.22.45a16.6 16.6 0 0 1 4.06 1.27 14.5 14.5 0 0 0-12.4 0 16.6 16.6 0 0 1 4.06-1.27L10.14 4a18.6 18.6 0 0 0-4.41 1.33C2.83 9.45 2.04 13.46 2.43 17.4a18.7 18.7 0 0 0 5.71 2.86c.46-.62.87-1.28 1.21-1.97a12.1 12.1 0 0 1-1.91-.91l.47-.34a13.4 13.4 0 0 0 11.18 0l.47.34a12.1 12.1 0 0 1-1.91.91c.34.69.74 1.35 1.21 1.97a18.7 18.7 0 0 0 5.71-2.86c.46-4.55-.78-8.52-3.31-12.07ZM9.05 14.91c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Zm5.9 0c-1.1 0-2-1.01-2-2.25s.88-2.25 2-2.25 2.02 1.01 2 2.25c0 1.24-.88 2.25-2 2.25Z"/></svg>
+        </a>
+        <a class="footer-social" href="#" aria-label="ShieldTX on Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.34a1 1 0 0 0-1.34-1.07L2.7 10.45c-.93.36-.86 1.7.1 1.97l4.32 1.21 1.7 5.22a1 1 0 0 0 1.66.42l2.46-2.39 4.6 3.4a1 1 0 0 0 1.58-.6l3.0-13.46c.04-.2.04-.4 0-.59ZM9.96 14.41 9.4 18l-1.32-4.05 9.74-7.21-7.86 7.67Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const y = document.getElementById('yr');
+      if (y) y.textContent = new Date().getFullYear();
+
+      // Highlight the currently-visible section in the desktop TOC.
+      const links = document.querySelectorAll('.docs-toc-desktop .docs-toc-link');
+      const sections = Array.from(document.querySelectorAll('.docs-section[id]'));
+      if (!links.length || !sections.length || !('IntersectionObserver' in window)) return;
+
+      const byId = new Map();
+      links.forEach((a) => {
+        const id = (a.getAttribute('href') || '').replace('#', '');
+        if (id) byId.set(id, a);
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          links.forEach((a) => a.classList.remove('is-active'));
+          const active = byId.get(id);
+          if (active) active.classList.add('is-active');
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+
+      sections.forEach((s) => observer.observe(s));
+    })();
+  </script>
+</body>
+</html>
