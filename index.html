@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=63" />
+  <link rel="stylesheet" href="styles.css?v=64" />
 </head>
 <body>
   <!-- Simplified nav: Home · Features · Scan wallet · [Open App] -->
@@ -390,22 +390,22 @@
         </div>
         <div class="container">
           <header class="scan-head">
-            <span class="eyebrow inv">Scan your wallet</span>
-            <h2 class="section-title inv" data-split>See the wallet data you're exposing.</h2>
-            <p class="scan-sub" data-reveal>Paste any Hyperliquid wallet. We'll show you which bots are copying it, how fast they follow, and what it's costing in bps. No wallet connection or sign-in required.</p>
+            <span class="eyebrow inv">Scanner preview</span>
+            <h2 class="section-title inv" data-split>See what your wallet broadcasts.</h2>
+            <p class="scan-sub" data-reveal>Paste any Hyperliquid wallet for a short exposure preview. Join the ShieldTX waitlist to open the full scanner report.</p>
           </header>
 
-          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate>
+          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate data-scanner-url="https://intelligence.themuse.one/">
             <input class="scan-form-input" id="scan-addr" type="text" placeholder="0x… your Hyperliquid address" spellcheck="false" autocomplete="off" aria-describedby="scan-error" />
-            <button class="btn-pill btn-primary" id="scan-run" type="submit">Scan</button>
+            <button class="btn-pill btn-primary" id="scan-run" type="submit">Preview scan</button>
           </form>
-          <p class="scan-form-error" id="scan-error" role="alert" hidden>Enter a wallet address to scan.</p>
+          <p class="scan-form-error" id="scan-error" role="alert" hidden>Enter a valid wallet address starting with 0x.</p>
 
           <div class="scan-prefill" data-reveal>
             <span class="scan-prefill-label">Don't have an address?</span>
-            <button class="scan-prefill-chip" type="button" data-prefill="0x741e8c52f3a4d6b9c2e1f0a8d3b7e9c5f2a1b6d8">Try sample whale</button>
-            <button class="scan-prefill-chip" type="button" data-prefill="0xeb85a2fc97d3b1e6c4a9f0d8b2e5c7a3f1d6b9e2">Try sample alpha trader</button>
-            <button class="scan-prefill-chip" type="button" data-prefill="0xc9630da7e1b4f2a8d6c3b9e5f7a1d2c8e4b6f3a9">Try sample leaderboard</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0x8050706eb79e2e1128a3a96b50ece6e74e1428de">Try sample whale</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0x357f06a2d9e4423ac1ac2d77552954eb839aa3c4">Try sample alpha trader</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0xa9881f6f5493fed3ce3346c5cb1a1e9ba80f7060">Try sample leaderboard</button>
           </div>
         </div>
       </div>
@@ -456,6 +456,19 @@
                 <li><span class="wp-addr">0x0da7…41eb</span><span class="wp-bar" style="--p:68%"></span><span class="wp-trades">32x</span></li>
                 <li><span class="wp-addr">0x52fc…9630</span><span class="wp-bar" style="--p:36%"></span><span class="wp-trades">17x</span></li>
               </ul>
+            </div>
+
+            <div class="scan-unlock-panel">
+              <div class="scan-unlock-copy">
+                <span class="eyebrow">Full scanner</span>
+                <h3>Open the detailed wallet report.</h3>
+                <p>Join the ShieldTX waitlist and continue to the full scanner with this wallet preloaded.</p>
+              </div>
+              <form class="scan-unlock-form" id="scan-unlock-form" novalidate>
+                <input class="scan-unlock-input" id="scan-unlock-email" type="email" name="email" placeholder="you@domain.com" autocomplete="email" spellcheck="false" required />
+                <button class="btn-pill btn-primary" type="submit">Get full scan <span aria-hidden="true">→</span></button>
+                <p class="scan-unlock-error" id="scan-unlock-error" role="alert" hidden></p>
+              </form>
             </div>
           </div>
         </div>
@@ -1066,6 +1079,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="/public-scripts/site-cursor.js?v=3"></script>
   <script src="/public-scripts/request-access-form.js?v=3"></script>
-  <script src="script.js?v=31"></script>
+  <script src="script.js?v=32"></script>
 </body>
 </html>

@@ -273,7 +273,13 @@
   const statsPanel = document.getElementById('stats-panel');
   const scanToolForm = document.getElementById('scan-form');
   const scanAddrInput = document.getElementById('scan-addr');
+  const scanUnlockForm = document.getElementById('scan-unlock-form');
+  const scanUnlockEmail = document.getElementById('scan-unlock-email');
+  const scanUnlockError = document.getElementById('scan-unlock-error');
   const heroScanForm = document.querySelector('.hero .scan');
+  const walletRe = /^0x[0-9a-f]{40}$/i;
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  let lastScannedWallet = '';
 
   function runStatsCountUps() {
     if (!statsPanel) return;
@@ -334,12 +340,13 @@
   if (scanToolForm) {
     scanToolForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const value = scanAddrInput ? scanAddrInput.value.trim() : '';
-      if (!value) {
+      const value = scanAddrInput ? scanAddrInput.value.trim().toLowerCase() : '';
+      if (!walletRe.test(value)) {
         setScanInvalid(true);
         if (scanAddrInput) scanAddrInput.focus();
         return;
       }
+      lastScannedWallet = value;
       setScanInvalid(false);
       revealStats({ scroll: true });
     });
@@ -359,16 +366,77 @@
     chip.addEventListener('click', () => {
       const addr = chip.dataset.prefill;
       if (scanAddrInput && addr) scanAddrInput.value = addr;
+      if (addr && walletRe.test(addr)) lastScannedWallet = addr.toLowerCase();
       setScanInvalid(false);
       revealStats({ scroll: true });
     });
   });
+
+  function fullScannerUrl() {
+    const base = (scanToolForm && scanToolForm.dataset.scannerUrl) || 'https://intelligence.themuse.one/';
+    const cleanBase = base.replace(/\/+$/, '');
+    const wallet = lastScannedWallet || (scanAddrInput && scanAddrInput.value.trim().toLowerCase()) || '';
+    return walletRe.test(wallet)
+      ? `${cleanBase}/#scan/${encodeURIComponent(wallet)}`
+      : `${cleanBase}/`;
+  }
+
+  function setUnlockError(message) {
+    if (!scanUnlockError) return;
+    if (message) {
+      scanUnlockError.textContent = message;
+      scanUnlockError.removeAttribute('hidden');
+    } else {
+      scanUnlockError.textContent = '';
+      scanUnlockError.setAttribute('hidden', '');
+    }
+  }
+
+  if (scanUnlockForm) {
+    scanUnlockForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = scanUnlockEmail ? scanUnlockEmail.value.trim() : '';
+      if (!emailRe.test(email)) {
+        setUnlockError('Enter a valid email to continue.');
+        if (scanUnlockEmail) scanUnlockEmail.focus();
+        return;
+      }
+
+      setUnlockError('');
+      scanUnlockForm.classList.add('is-submitting');
+
+      try {
+        const res = await fetch('/api/request-access', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            platforms: ['hyperliquid'],
+            protection: ['nothing'],
+          }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || !json.ok) {
+          throw new Error(json.error || 'Submission failed. Please try again.');
+        }
+        window.location.assign(fullScannerUrl());
+      } catch (err) {
+        scanUnlockForm.classList.remove('is-submitting');
+        setUnlockError(err && err.message ? err.message : 'Network error. Please try again.');
+      }
+    });
+
+    if (scanUnlockEmail) {
+      scanUnlockEmail.addEventListener('input', () => setUnlockError(''));
+    }
+  }
 
   if (heroScanForm) {
     heroScanForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const v = heroScanForm.querySelector('.scan-input')?.value?.trim();
       if (v && scanAddrInput) scanAddrInput.value = v;
+      if (v && walletRe.test(v)) lastScannedWallet = v.toLowerCase();
       if (scanTool) {
         if (lenis) lenis.scrollTo(scanTool, { offset: -72 });
         else scanTool.scrollIntoView({ behavior: 'smooth', block: 'start' });
