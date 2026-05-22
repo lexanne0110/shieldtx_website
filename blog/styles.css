@@ -164,21 +164,28 @@
   color: var(--fg-primary);
 }
 
+/* Tertiary CTA — brand cyan. Same affordance as the eyebrow color: this
+   anchor belongs to the same "metadata" tier as the eyebrow, so they
+   share a hue and signal that they're part of the same UI layer. */
 .blog-post-back {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  color: var(--fg-muted);
+  color: var(--brand-cyan);
   text-decoration: none;
   margin-bottom: 32px;
   transition: color .2s var(--ease);
 }
 .blog-post-back:hover { color: var(--brand-blue); }
 
+/* Per-post eyebrow uses brand cyan. Overrides the global .eyebrow which
+   defaults to --fg-muted (used for section eyebrows elsewhere on the
+   site, where the brand-blue eyebrow elsewhere would compete with H2s). */
 .blog-post-wrap .eyebrow {
   display: inline-block;
   margin-bottom: 16px;
+  color: var(--brand-cyan);
 }
 
 .blog-post-wrap h1 {
@@ -207,7 +214,15 @@
   margin-right: 12px;
 }
 
+/* IMPORTANT: the global `.intro` class is a SECTION container with
+   `padding: 140px 0 160px` and `background: var(--snow)`. Our blog
+   posts use `.intro` as a typography modifier for the lede paragraph,
+   so we need to neutralize the global section-level rules explicitly.
+   Resetting padding + background here keeps the post lede from
+   inheriting the landing-page intro section's huge top/bottom padding. */
 .blog-post-wrap .intro {
+  padding: 0;
+  background: transparent;
   font-size: 19px;
   line-height: 1.6;
   color: var(--fg-secondary);
