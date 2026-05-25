@@ -35,3 +35,6 @@ yarn-error.log*
 demo-source/
 *.mp4
 !/assets/demo/preview.mp4
+
+# Local Claude Code config (debugger launch, etc.)
+.claude/

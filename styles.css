@@ -3301,6 +3301,8 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 
 @media (max-width: 960px) {
   .nav-links { display: none; }
+  /* With .nav-links hidden, the right-push was lost — re-anchor the CTA. */
+  .nav-cta { margin-left: auto; }
   .hero-grid, .intro-grid { grid-template-columns: 1fr; }
   .hero-card { order: 2; }
   .step { grid-template-columns: 1fr; border-radius: 28px; padding: 24px; }
