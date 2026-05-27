@@ -586,44 +586,12 @@
   });
 
   // -------- Request-invite modal --------
-  const openModal = (id) => {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-locked');
-    if (lenis && typeof lenis.stop === 'function') lenis.stop();
-    const firstInput = modal.querySelector('input, button');
-    if (firstInput) setTimeout(() => firstInput.focus(), 60);
-  };
-  const closeModal = (modal) => {
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-locked');
-    if (lenis && typeof lenis.start === 'function') lenis.start();
-    // Reset success state for next open
-    const success = modal.querySelector('[data-modal-success]');
-    if (success) success.hidden = true;
-    const form = modal.querySelector('form');
-    if (form) form.reset();
-  };
-
-  document.querySelectorAll('[data-modal-open]').forEach((trigger) => {
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal(trigger.getAttribute('data-modal-open'));
-    });
-  });
-  document.querySelectorAll('[data-modal-close]').forEach((el) => {
-    el.addEventListener('click', () => {
-      closeModal(el.closest('.modal'));
-    });
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    document.querySelectorAll('.modal.is-open').forEach(closeModal);
-  });
+  // Modal open/close + URL sync lives in /public-scripts/modal.js. Expose
+  // lenis so the shared module can stop/start it.
+  window.lenis = lenis;
+  if (window.ShieldTX && window.ShieldTX.modal) {
+    window.ShieldTX.modal.init();
+  }
 
   // -------- Request Access form binding --------
   // The brand-styled dropdown component and the multi-step waitlist form
@@ -641,16 +609,19 @@
   // looking at git blame find this note.
   /* removed-in-refactor: initDropdown + waitlist-form scoring */
 
-  // -------- Cross-page deep-link to waitlist (?waitlist=1) --------
+  // -------- Legacy ?waitlist=1 deep-link (back-compat) --------
+  // Old share links still exist in the wild. Strip the query from the
+  // current history entry so we land on a clean "/", then open the modal
+  // normally so closing it falls back to "/" (not to ?waitlist=1).
   try {
     const params = new URLSearchParams(window.location.search);
     if (params.get('waitlist') === '1') {
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState({}, '', '/' + window.location.hash);
+      }
       setTimeout(() => {
-        const trigger = document.querySelector('[data-modal-open="invite-modal"]');
-        if (trigger) trigger.click();
-        // Strip query so refresh doesn't re-open
-        if (window.history && window.history.replaceState) {
-          window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+        if (window.ShieldTX && window.ShieldTX.modal) {
+          window.ShieldTX.modal.open('invite-modal');
         }
       }, 250);
     }

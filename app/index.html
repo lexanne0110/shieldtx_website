@@ -309,49 +309,18 @@
   </div>
 
   <script src="/public-scripts/site-cursor.js?v=1"></script>
+  <script src="/public-scripts/modal.js?v=1"></script>
   <script src="/public-scripts/request-access-form.js?v=3"></script>
   <script src="/public-scripts/invite-gate.js?v=2"></script>
   <script>
-    // Wire up Request Access form on this page + minimal modal open/close.
     (function () {
       const form = document.getElementById('waitlist-form');
       if (form && window.ShieldTX && window.ShieldTX.bindRequestAccessForm) {
         window.ShieldTX.bindRequestAccessForm(form, { mode: 'modal' });
       }
-
-      document.querySelectorAll('[data-modal-open]').forEach((trigger) => {
-        trigger.addEventListener('click', (e) => {
-          // If we're not already on this page, let the link navigate.
-          const id = trigger.getAttribute('data-modal-open');
-          const modal = document.getElementById(id);
-          if (!modal) return;
-          e.preventDefault();
-          modal.classList.add('is-open');
-          modal.setAttribute('aria-hidden', 'false');
-          document.body.classList.add('modal-locked');
-          const firstInput = modal.querySelector('input, button');
-          if (firstInput) setTimeout(() => firstInput.focus(), 60);
-        });
-      });
-      document.querySelectorAll('[data-modal-close]').forEach((el) => {
-        el.addEventListener('click', () => {
-          const modal = el.closest('.modal');
-          if (!modal) return;
-          modal.classList.remove('is-open');
-          modal.setAttribute('aria-hidden', 'true');
-          document.body.classList.remove('modal-locked');
-          const f = modal.querySelector('form');
-          if (f) f.reset();
-        });
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key !== 'Escape') return;
-        const open = document.querySelector('.modal.is-open');
-        if (open) {
-          const btn = open.querySelector('[data-modal-close]');
-          if (btn) btn.click();
-        }
-      });
+      if (window.ShieldTX && window.ShieldTX.modal) {
+        window.ShieldTX.modal.init();
+      }
     })();
   </script>
 </body>
