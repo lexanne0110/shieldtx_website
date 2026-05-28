@@ -367,7 +367,10 @@
 
     if (previewEls.summary) {
       const label = data.privacy_score_label ? `${data.privacy_score_label} exposure` : 'scanner preview';
-      previewEls.summary.innerHTML = `Preview for <b>${shortAddress(data.address || lastScannedWallet)}</b> · ${label}.`;
+      previewEls.summary.textContent = 'Preview for ';
+      const addressEl = document.createElement('b');
+      addressEl.textContent = shortAddress(data.address || lastScannedWallet);
+      previewEls.summary.append(addressEl, ` · ${label}.`);
     }
 
     setCountTarget(previewEls.score, score, 0);
