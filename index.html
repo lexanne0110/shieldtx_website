@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=74" />
+  <link rel="stylesheet" href="styles.css?v=75" />
 </head>
 <body>
   <!-- Simplified nav: Home · Features · Blog · [Open App] -->
@@ -392,22 +392,22 @@
         </div>
         <div class="container">
           <header class="scan-head">
-            <span class="eyebrow inv">Scan your wallet</span>
-            <h2 class="section-title inv" data-split>See the wallet data you're exposing.</h2>
-            <p class="scan-sub" data-reveal>Paste any Hyperliquid wallet. We'll show you which bots are copying it, how fast they follow, and what it's costing in bps. No wallet connection or sign-in required.</p>
+            <span class="eyebrow inv">Scanner preview</span>
+            <h2 class="section-title inv" data-split>See what your wallet broadcasts.</h2>
+            <p class="scan-sub" data-reveal>Paste any Hyperliquid wallet for a short exposure preview. Join the ShieldTX waitlist to open the full scanner report.</p>
           </header>
 
-          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate>
+          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate data-scanner-url="https://intelligence.themuse.one/" data-preview-endpoint="/api/scanner-preview">
             <input class="scan-form-input" id="scan-addr" type="text" placeholder="0x… your Hyperliquid address" spellcheck="false" autocomplete="off" aria-describedby="scan-error" />
-            <button class="btn-pill btn-primary" id="scan-run" type="submit">Scan</button>
+            <button class="btn-pill btn-primary" id="scan-run" type="submit">Preview scan</button>
           </form>
-          <p class="scan-form-error" id="scan-error" role="alert" hidden>Enter a wallet address to scan.</p>
+          <p class="scan-form-error" id="scan-error" role="alert" hidden>Enter a valid wallet address starting with 0x.</p>
 
           <div class="scan-prefill" data-reveal>
             <span class="scan-prefill-label">Don't have an address?</span>
-            <button class="scan-prefill-chip" type="button" data-prefill="0x741e8c52f3a4d6b9c2e1f0a8d3b7e9c5f2a1b6d8">Try sample whale</button>
-            <button class="scan-prefill-chip" type="button" data-prefill="0xeb85a2fc97d3b1e6c4a9f0d8b2e5c7a3f1d6b9e2">Try sample alpha trader</button>
-            <button class="scan-prefill-chip" type="button" data-prefill="0xc9630da7e1b4f2a8d6c3b9e5f7a1d2c8e4b6f3a9">Try sample leaderboard</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0x8050706eb79e2e1128a3a96b50ece6e74e1428de">Try sample whale</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0x357f06a2d9e4423ac1ac2d77552954eb839aa3c4">Try sample alpha trader</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0xa9881f6f5493fed3ce3346c5cb1a1e9ba80f7060">Try sample leaderboard</button>
           </div>
         </div>
       </div>
@@ -415,49 +415,66 @@
       <div class="scan-results" id="scan-results">
         <div class="container">
           <div class="stats-panel" id="stats-panel" aria-hidden="true">
-            <p class="stats-footnote" data-reveal>Based on <b id="stats-fills">847</b> fills over the past <b id="stats-days">30</b> days.</p>
+            <p class="stats-footnote" data-reveal id="preview-summary">Live scanner preview. Full report unlocks after waitlist capture.</p>
 
             <div class="stats-grid">
               <article class="stat-card">
-                <div class="stat-label">Bots copying this wallet</div>
-                <div class="stat-val"><span class="stat-num" data-count-to="13">0</span></div>
-                <div class="stat-meta">HyperDash, Dexly, +11 others</div>
-                <div class="stat-bar"><span style="--p:82%"></span></div>
+                <div class="stat-label">Exposure score</div>
+                <div class="stat-val"><span class="stat-num" id="preview-score" data-count-to="0">0</span><sub>/100</sub></div>
+                <div class="stat-meta" id="preview-score-meta">Higher means easier to track.</div>
+                <div class="stat-bar"><span id="preview-score-bar" style="--p:0%"></span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-label">Copy traders</div>
+                <div class="stat-val"><span class="stat-num" id="preview-copiers" data-count-to="0">0</span></div>
+                <div class="stat-meta" id="preview-copiers-meta">Wallets detected mirroring this address.</div>
+                <div class="stat-bar"><span id="preview-copiers-bar" style="--p:0%"></span></div>
               </article>
               <article class="stat-card">
                 <div class="stat-label">Avg follow speed</div>
-                <div class="stat-val"><span class="stat-num" data-count-to="3.6" data-decimals="1">0.0</span><sub>s</sub></div>
-                <div class="stat-meta">From your fill to copy bot fill</div>
-                <div class="stat-bar"><span style="--p:62%"></span></div>
+                <div class="stat-val"><span class="stat-num" id="preview-delay" data-count-to="0" data-decimals="1">0.0</span><sub>s</sub></div>
+                <div class="stat-meta">From target fill to copier fill.</div>
+                <div class="stat-bar"><span id="preview-delay-bar" style="--p:0%"></span></div>
               </article>
               <article class="stat-card">
-                <div class="stat-label">Cost to You</div>
-                <div class="stat-val"><span class="stat-num" data-count-to="12">0</span><sub>bps</sub></div>
-                <div class="stat-meta">Slippage from copy traders front-running you</div>
-                <div class="stat-bar"><span style="--p:72%"></span></div>
+                <div class="stat-label">Estimated leakage</div>
+                <div class="stat-val"><span class="stat-num stat-num-money" id="preview-leakage">$0</span></div>
+                <div class="stat-meta">30-day copier PnL linked to this wallet.</div>
+                <div class="stat-bar"><span id="preview-leakage-bar" style="--p:0%"></span></div>
               </article>
             </div>
 
             <div class="wallets-panel">
-              <div class="wp-head">What's being published from this wallet</div>
+              <div class="wp-head">What this wallet broadcasts</div>
               <ul class="wp-published">
-                <li><span class="wp-pub-k">Position size</span><span class="wp-pub-v">Visible in real time</span></li>
-                <li><span class="wp-pub-k">Entry & exit prices</span><span class="wp-pub-v">Visible in real time</span></li>
-                <li><span class="wp-pub-k">Liquidation level</span><span class="wp-pub-v">Visible in real time</span></li>
-                <li><span class="wp-pub-k">Account balance</span><span class="wp-pub-v">Visible in real time</span></li>
-                <li><span class="wp-pub-k">Full trade history</span><span class="wp-pub-v">Visible in real time</span></li>
+                <li><span class="wp-pub-k">Visible positions</span><span class="wp-pub-v" id="preview-positions">Checking</span></li>
+                <li><span class="wp-pub-k">Account value</span><span class="wp-pub-v" id="preview-account">Checking</span></li>
+                <li><span class="wp-pub-k">Most copied coin</span><span class="wp-pub-v" id="preview-top-coin">Checking</span></li>
+                <li><span class="wp-pub-k">Identity signals</span><span class="wp-pub-v" id="preview-identity">Checking</span></li>
               </ul>
             </div>
 
             <div class="wallets-panel">
-              <div class="wp-head">Top wallets copying you</div>
-              <ul class="wp-list">
-                <li><span class="wp-addr">0x741e…b852</span><span class="wp-bar" style="--p:100%"></span><span class="wp-trades">47x</span></li>
-                <li><span class="wp-addr">0xeb85…2fc9</span><span class="wp-bar" style="--p:92%"></span><span class="wp-trades">43x</span></li>
-                <li><span class="wp-addr">0xc963…0da7</span><span class="wp-bar" style="--p:83%"></span><span class="wp-trades">39x</span></li>
-                <li><span class="wp-addr">0x0da7…41eb</span><span class="wp-bar" style="--p:68%"></span><span class="wp-trades">32x</span></li>
-                <li><span class="wp-addr">0x52fc…9630</span><span class="wp-bar" style="--p:36%"></span><span class="wp-trades">17x</span></li>
+              <div class="wp-head">Full scanner unlocks</div>
+              <ul class="wp-published">
+                <li><span class="wp-pub-k">Copy-trader addresses</span><span class="wp-pub-v">Gated</span></li>
+                <li><span class="wp-pub-k">Coin + hour copy map</span><span class="wp-pub-v">Gated</span></li>
+                <li><span class="wp-pub-k">Behavior fingerprint</span><span class="wp-pub-v">Gated</span></li>
+                <li><span class="wp-pub-k">Similar wallets</span><span class="wp-pub-v">Gated</span></li>
               </ul>
+            </div>
+
+            <div class="scan-unlock-panel">
+              <div class="scan-unlock-copy">
+                <span class="eyebrow">Full scanner</span>
+                <h3>Open the detailed wallet report.</h3>
+                <p>Join the ShieldTX waitlist and continue to the full scanner with this wallet preloaded.</p>
+              </div>
+              <form class="scan-unlock-form" id="scan-unlock-form" novalidate>
+                <input class="scan-unlock-input" id="scan-unlock-email" type="email" name="email" placeholder="you@domain.com" autocomplete="email" spellcheck="false" required />
+                <button class="btn-pill btn-primary" type="submit">Get full scan <span aria-hidden="true">→</span></button>
+                <p class="scan-unlock-error" id="scan-unlock-error" role="alert" hidden></p>
+              </form>
             </div>
           </div>
         </div>
