@@ -273,6 +273,7 @@
   const statsPanel = document.getElementById('stats-panel');
   const scanToolForm = document.getElementById('scan-form');
   const scanAddrInput = document.getElementById('scan-addr');
+  const scanRunButton = document.getElementById('scan-run');
   const scanUnlockForm = document.getElementById('scan-unlock-form');
   const scanUnlockEmail = document.getElementById('scan-unlock-email');
   const scanUnlockError = document.getElementById('scan-unlock-error');
@@ -280,6 +281,171 @@
   const walletRe = /^0x[0-9a-f]{40}$/i;
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   let lastScannedWallet = '';
+  let previewAbort = null;
+
+  const previewEls = {
+    summary: document.getElementById('preview-summary'),
+    score: document.getElementById('preview-score'),
+    scoreMeta: document.getElementById('preview-score-meta'),
+    scoreBar: document.getElementById('preview-score-bar'),
+    copiers: document.getElementById('preview-copiers'),
+    copiersMeta: document.getElementById('preview-copiers-meta'),
+    copiersBar: document.getElementById('preview-copiers-bar'),
+    delay: document.getElementById('preview-delay'),
+    delayBar: document.getElementById('preview-delay-bar'),
+    leakage: document.getElementById('preview-leakage'),
+    leakageBar: document.getElementById('preview-leakage-bar'),
+    positions: document.getElementById('preview-positions'),
+    account: document.getElementById('preview-account'),
+    topCoin: document.getElementById('preview-top-coin'),
+    identity: document.getElementById('preview-identity'),
+  };
+
+  function scannerPreviewEndpoint() {
+    return (scanToolForm && scanToolForm.dataset.previewEndpoint) || '/api/scanner-preview';
+  }
+
+  function setScanLoading(isLoading) {
+    if (!scanToolForm || !scanRunButton) return;
+    scanToolForm.classList.toggle('is-loading', isLoading);
+    scanRunButton.disabled = isLoading;
+    scanRunButton.textContent = isLoading ? 'Scanning…' : 'Preview scan';
+  }
+
+  function formatCompactNumber(n) {
+    const value = Number(n || 0);
+    return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: value >= 1000 ? 1 : 0 }).format(value);
+  }
+
+  function formatMoney(n) {
+    const value = Number(n || 0);
+    if (value <= 0) return '$0';
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      notation: value >= 10000 ? 'compact' : 'standard',
+      maximumFractionDigits: value >= 1000 ? 1 : 0,
+    }).format(value);
+  }
+
+  function shortAddress(addr) {
+    return addr && addr.length > 12 ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : addr || '';
+  }
+
+  function identityLabel(identity) {
+    if (!identity) return 'None found';
+    const labels = [];
+    if (identity.display_name) labels.push('HL name');
+    if (identity.ens) labels.push('ENS');
+    if (identity.twitter_handle) labels.push('Twitter');
+    if (identity.farcaster_username) labels.push('Farcaster');
+    if (identity.arkham_label) labels.push('Arkham');
+    return labels.length ? labels.slice(0, 2).join(' + ') : 'None found';
+  }
+
+  function setCountTarget(el, value, decimals = 0) {
+    if (!el) return;
+    el.dataset.countTo = String(value);
+    if (decimals > 0) el.dataset.decimals = String(decimals);
+    else delete el.dataset.decimals;
+    delete el.dataset.counted;
+    el.textContent = decimals > 0 ? Number(value).toFixed(decimals) : '0';
+  }
+
+  function setBar(el, pct) {
+    if (!el) return;
+    const clamped = Math.max(0, Math.min(100, Math.round(pct)));
+    el.style.setProperty('--p', `${clamped}%`);
+  }
+
+  function updatePreview(data) {
+    const score = typeof data.privacy_score === 'number' ? data.privacy_score : 0;
+    const copiers = Number(data.copier_count || 0);
+    const delaySec = typeof data.avg_copier_delay_ms === 'number' ? data.avg_copier_delay_ms / 1000 : null;
+    const leakage = Number(data.alpha_leakage_usd_30d || 0);
+    const topCoin = data.most_copied_coins && data.most_copied_coins[0];
+
+    if (previewEls.summary) {
+      const label = data.privacy_score_label ? `${data.privacy_score_label} exposure` : 'scanner preview';
+      previewEls.summary.innerHTML = `Preview for <b>${shortAddress(data.address || lastScannedWallet)}</b> · ${label}.`;
+    }
+
+    setCountTarget(previewEls.score, score, 0);
+    setBar(previewEls.scoreBar, score);
+    if (previewEls.scoreMeta) {
+      previewEls.scoreMeta.textContent = score > 70
+        ? 'Critical tracking surface detected.'
+        : score > 40
+          ? 'Meaningful tracking surface detected.'
+          : 'Lower exposure, but still public.';
+    }
+
+    setCountTarget(previewEls.copiers, copiers, 0);
+    setBar(previewEls.copiersBar, Math.min(100, copiers * 4));
+    if (previewEls.copiersMeta) {
+      previewEls.copiersMeta.textContent = copiers === 1
+        ? '1 wallet detected mirroring this address.'
+        : `${formatCompactNumber(copiers)} wallets detected mirroring this address.`;
+    }
+
+    if (delaySec === null) {
+      if (previewEls.delay) {
+        previewEls.delay.textContent = '—';
+        previewEls.delay.removeAttribute('data-count-to');
+        delete previewEls.delay.dataset.counted;
+      }
+      setBar(previewEls.delayBar, 0);
+    } else {
+      setCountTarget(previewEls.delay, delaySec, 1);
+      setBar(previewEls.delayBar, Math.max(12, 100 - Math.min(delaySec, 20) * 5));
+    }
+
+    if (previewEls.leakage) previewEls.leakage.textContent = formatMoney(leakage);
+    setBar(previewEls.leakageBar, Math.min(100, Math.log10(Math.max(leakage, 1)) * 18));
+
+    if (previewEls.positions) previewEls.positions.textContent = `${Number(data.position_count || 0)} open`;
+    if (previewEls.account) previewEls.account.textContent = data.account_value ? formatMoney(Number(data.account_value)) : 'Not cached';
+    if (previewEls.topCoin) previewEls.topCoin.textContent = topCoin ? `${topCoin.coin} · ${formatCompactNumber(topCoin.matching_fills)} matches` : 'None detected';
+    if (previewEls.identity) previewEls.identity.textContent = identityLabel(data.identity);
+  }
+
+  async function fetchScannerPreview(address) {
+    if (previewAbort) previewAbort.abort();
+    previewAbort = new AbortController();
+    const url = `${scannerPreviewEndpoint()}?address=${encodeURIComponent(address)}`;
+    const res = await fetch(url, {
+      headers: { Accept: 'application/json' },
+      signal: previewAbort.signal,
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(json.error || 'No scanner preview is available for this wallet yet.');
+    }
+    return json;
+  }
+
+  async function runScannerPreview(address, { scroll = true } = {}) {
+    const value = (address || '').trim().toLowerCase();
+    if (!walletRe.test(value)) {
+      setScanInvalid(true);
+      if (scanAddrInput) scanAddrInput.focus();
+      return;
+    }
+
+    lastScannedWallet = value;
+    setScanInvalid(false);
+    setScanLoading(true);
+    try {
+      const data = await fetchScannerPreview(value);
+      updatePreview(data);
+      revealStats({ scroll });
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;
+      setScanInvalid(true, err && err.message ? err.message : 'Preview failed. Try another wallet.');
+    } finally {
+      setScanLoading(false);
+    }
+  }
 
   function runStatsCountUps() {
     if (!statsPanel) return;
@@ -327,13 +493,18 @@
   // Scan form validation — empty submit shows an inline error rather than
   // silently revealing the stats panel.
   const scanError = document.getElementById('scan-error');
-  const setScanInvalid = (invalid) => {
+  const setScanInvalid = (invalid, message = 'Enter a valid wallet address starting with 0x.') => {
     if (!scanToolForm) return;
     scanToolForm.classList.toggle('is-invalid', invalid);
     if (scanAddrInput) scanAddrInput.setAttribute('aria-invalid', invalid ? 'true' : 'false');
     if (scanError) {
-      if (invalid) scanError.removeAttribute('hidden');
-      else scanError.setAttribute('hidden', '');
+      if (invalid) {
+        scanError.textContent = message;
+        scanError.removeAttribute('hidden');
+      } else {
+        scanError.textContent = '';
+        scanError.setAttribute('hidden', '');
+      }
     }
   };
 
@@ -341,14 +512,7 @@
     scanToolForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const value = scanAddrInput ? scanAddrInput.value.trim().toLowerCase() : '';
-      if (!walletRe.test(value)) {
-        setScanInvalid(true);
-        if (scanAddrInput) scanAddrInput.focus();
-        return;
-      }
-      lastScannedWallet = value;
-      setScanInvalid(false);
-      revealStats({ scroll: true });
+      runScannerPreview(value);
     });
   }
   if (scanAddrInput) {
@@ -366,9 +530,7 @@
     chip.addEventListener('click', () => {
       const addr = chip.dataset.prefill;
       if (scanAddrInput && addr) scanAddrInput.value = addr;
-      if (addr && walletRe.test(addr)) lastScannedWallet = addr.toLowerCase();
-      setScanInvalid(false);
-      revealStats({ scroll: true });
+      runScannerPreview(addr || '');
     });
   });
 

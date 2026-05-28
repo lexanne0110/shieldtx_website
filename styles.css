@@ -3683,6 +3683,10 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   background: rgba(255, 255, 255, 0.10);
   box-shadow: inset 0 0 0 2px var(--brand-cyan), 0 0 0 4px rgba(77, 213, 232, 0.20);
 }
+.scan-form.is-loading {
+  opacity: 0.88;
+  pointer-events: none;
+}
 .scan-form-input {
   appearance: none;
   border: none;
@@ -3703,6 +3707,10 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   border-radius: var(--radius-pill);
   letter-spacing: .02em;
   font-weight: 600;
+}
+.scan-form .btn-primary:disabled {
+  cursor: wait;
+  opacity: 0.78;
 }
 /* Validation state — swap the cyan focus ring for a soft danger ring. */
 .scan-form.is-invalid {
@@ -3743,7 +3751,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 }
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -3787,6 +3795,9 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   letter-spacing: -0.025em;
   color: var(--brand-blue-deep);
   font-variant-numeric: tabular-nums;
+}
+.stat-num-money {
+  font-size: clamp(32px, 4vw, 50px);
 }
 .stat-val sub {
   font-family: 'Geist', sans-serif;
@@ -7523,5 +7534,4 @@ body.modal-locked { overflow: hidden; }
   .app-gate-form.is-shake { animation: none; }
   .btn-pill.is-loading::after { animation: none; }
 }
-
 
