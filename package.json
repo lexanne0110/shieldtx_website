@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "vercel dev",
-    "deploy": "vercel deploy --prod"
+    "deploy": "vercel deploy --prod",
+    "sync": "python3 scripts/sync-partials.py"
   }
 }

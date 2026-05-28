@@ -23,18 +23,20 @@
 <body class="request-access-body">
   <!-- Simplified nav. Form markup below is duplicated in /app/index.html and
        the hero modal in /index.html — keep them in sync when changing fields. -->
-  <header class="nav">
-    <a class="nav-logo" href="../" aria-label="ShieldTX">
-      <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" />
+  <!-- @partial nav -->
+  <header class="nav ">
+    <a class="nav-logo" href="/" aria-label="ShieldTX">
+      <img src="/assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" />
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="../">Home</a>
-      <a href="../#features">Features</a>
+      <a href="/">Home</a>
+      <a href="/#features">Features</a>
       <a href="/blog">Blog</a>
     </nav>
-    <a class="nav-cta btn-pill" href="https://beta.shieldtx.xyz">Open App</a>
+    <a class="nav-cta btn-pill" href="https://beta.shieldtx.xyz" target="_blank" rel="noopener noreferrer">Open App</a>
     <div class="nav-progress" aria-hidden="true"></div>
   </header>
+  <!-- /@partial nav -->
 
   <main class="request-access-main" id="top">
     <section class="request-access-section">
@@ -203,29 +205,32 @@
     </section>
   </main>
 
+  <!-- @partial footer -->
   <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <img src="../assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
+        <img src="/assets/ShieldTX_Logo.svg?v=2" alt="ShieldTX" class="footer-logo" />
         <p class="footer-tagline">Trade without exposing your wallet.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
-        <a href="../#features">Features</a>
-        <a href="../#compare">Compare</a>
-        <a href="../#how">How it works</a>
-        <a href="https://beta.shieldtx.xyz">Open App</a>
+        <a href="/#features">Features</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#how">How it works</a>
+        <a href="https://beta.shieldtx.xyz" target="_blank" rel="noopener noreferrer">Open App</a>
       </div>
       <div class="footer-col">
         <h4>Resources</h4>
-        <a href="../#faq">FAQ</a>
-        <a href="../trust-model/">Trust model ↗</a>
-        <a href="../brand-document/">Brand book ↗</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#scan-tool">Scan</a>
+        <a href="/trust-model/">Trust model ↗</a>
+        <a href="/brand-document/">Brand book ↗</a>
         <a href="/blog">Blog ↗</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="../contact/">Contact ↗</a>
+        <a href="/request-access">Request access</a>
+        <a href="/contact/">Contact ↗</a>
       </div>
     </div>
     <div class="footer-bottom container">
@@ -236,8 +241,18 @@
           <a href="/privacy">Privacy</a>
         </nav>
       </div>
+      <a class="footer-avail-link" href="https://availproject.org/" target="_blank" rel="noopener noreferrer" aria-label="Powered by Avail">
+        <span>Powered by</span>
+        <img class="footer-avail-logo" src="/assets/avail-logo.svg" alt="Avail" />
+      </a>
+      <div class="footer-socials" aria-label="ShieldTX social links">
+        <a class="footer-social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener noreferrer" aria-label="ShieldTX on X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.7l-6.92 7.91L22 21h-6.4l-5.01-6.55L4.84 21H1.66l7.4-8.46L1.5 3h6.56l4.53 5.99L17.53 3Zm-1.12 16.13h1.76L7.7 4.78H5.82l10.59 14.35Z"/></svg>
+        </a>
+      </div>
     </div>
   </footer>
+  <!-- /@partial footer -->
 
   <script src="/public-scripts/site-cursor.js?v=1"></script>
   <script src="/public-scripts/request-access-form.js?v=3"></script>
