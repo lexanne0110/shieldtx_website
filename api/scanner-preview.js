@@ -6,7 +6,7 @@ const { sendJson, methodNotAllowed } = require('./_shared');
 const walletRe = /^0x[0-9a-f]{40}$/i;
 
 function scannerApiBase() {
-  return (process.env.SCANNER_API_BASE || 'https://intelligence.themuse.one').replace(/\/+$/, '');
+  return (process.env.SCANNER_API_BASE || 'https://scanner-api-canary.shieldtx.avail.tools').replace(/\/+$/, '');
 }
 
 function firstArrayItem(value) {
