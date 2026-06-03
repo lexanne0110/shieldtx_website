@@ -538,7 +538,7 @@
   });
 
   function fullScannerUrl() {
-    const base = (scanToolForm && scanToolForm.dataset.scannerUrl) || 'https://intelligence.themuse.one/';
+    const base = (scanToolForm && scanToolForm.dataset.scannerUrl) || 'https://scanner-canary.shieldtx.avail.tools/';
     const cleanBase = base.replace(/\/+$/, '');
     const wallet = lastScannedWallet || (scanAddrInput && scanAddrInput.value.trim().toLowerCase()) || '';
     return walletRe.test(wallet)
