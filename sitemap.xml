@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://shieldtx.xyz/</loc>
+    <loc>https://www.shieldtx.xyz/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/request-access</loc>
+    <loc>https://www.shieldtx.xyz/request-access</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/trust-model</loc>
+    <loc>https://www.shieldtx.xyz/trust-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/contact</loc>
+    <loc>https://www.shieldtx.xyz/contact</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/terms</loc>
+    <loc>https://www.shieldtx.xyz/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/privacy</loc>
+    <loc>https://www.shieldtx.xyz/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/blog</loc>
+    <loc>https://www.shieldtx.xyz/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/blog/what-is-copy-trade-protection</loc>
+    <loc>https://www.shieldtx.xyz/blog/what-is-copy-trade-protection</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/blog/hyperbot-dexly-hyperdash-copy-trading-tools</loc>
+    <loc>https://www.shieldtx.xyz/blog/hyperbot-dexly-hyperdash-copy-trading-tools</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://shieldtx.xyz/blog/how-copy-traders-are-stealing-your-edge</loc>
+    <loc>https://www.shieldtx.xyz/blog/how-copy-traders-are-stealing-your-edge</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
