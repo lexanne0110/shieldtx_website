@@ -397,7 +397,7 @@
             <p class="scan-sub" data-reveal>Paste any Hyperliquid wallet for a short exposure preview. Join the ShieldTX waitlist to open the full scanner report.</p>
           </header>
 
-          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate data-scanner-url="https://scanner-canary.shieldtx.avail.tools/" data-preview-endpoint="/api/scanner-preview">
+          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate data-scanner-url="https://scanner-canary.shieldtx.avail.tools/" data-preview-endpoint="/api/scanner-preview" data-report-endpoint="/api/scanner-report">
             <input class="scan-form-input" id="scan-addr" type="text" placeholder="0x… your Hyperliquid address" spellcheck="false" autocomplete="off" aria-describedby="scan-error" />
             <button class="btn-pill btn-primary" id="scan-run" type="submit">Preview scan</button>
           </form>
@@ -467,12 +467,12 @@
             <div class="scan-unlock-panel">
               <div class="scan-unlock-copy">
                 <span class="eyebrow">Full scanner</span>
-                <h3>Open the detailed wallet report.</h3>
-                <p>Join the ShieldTX waitlist and continue to the full scanner with this wallet preloaded.</p>
+                <h3>Email the detailed wallet report.</h3>
+                <p>Get the full report in your inbox and continue to the scanner with this wallet preloaded.</p>
               </div>
               <form class="scan-unlock-form" id="scan-unlock-form" novalidate>
                 <input class="scan-unlock-input" id="scan-unlock-email" type="email" name="email" placeholder="you@domain.com" autocomplete="email" spellcheck="false" required />
-                <button class="btn-pill btn-primary" type="submit">Get full scan <span aria-hidden="true">→</span></button>
+                <button class="btn-pill btn-primary" type="submit">Email full report <span aria-hidden="true">→</span></button>
                 <p class="scan-unlock-error" id="scan-unlock-error" role="alert" hidden></p>
               </form>
             </div>

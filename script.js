@@ -305,6 +305,10 @@
     return (scanToolForm && scanToolForm.dataset.previewEndpoint) || '/api/scanner-preview';
   }
 
+  function scannerReportEndpoint() {
+    return (scanToolForm && scanToolForm.dataset.reportEndpoint) || '/api/scanner-report';
+  }
+
   function setScanLoading(isLoading) {
     if (!scanToolForm || !scanRunButton) return;
     scanToolForm.classList.toggle('is-loading', isLoading);
@@ -561,9 +565,15 @@
     scanUnlockForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = scanUnlockEmail ? scanUnlockEmail.value.trim() : '';
+      const wallet = lastScannedWallet || (scanAddrInput && scanAddrInput.value.trim().toLowerCase()) || '';
       if (!emailRe.test(email)) {
         setUnlockError('Enter a valid email to continue.');
         if (scanUnlockEmail) scanUnlockEmail.focus();
+        return;
+      }
+      if (!walletRe.test(wallet)) {
+        setUnlockError('Preview a valid wallet before requesting the report.');
+        if (scanAddrInput) scanAddrInput.focus();
         return;
       }
 
@@ -571,11 +581,12 @@
       scanUnlockForm.classList.add('is-submitting');
 
       try {
-        const res = await fetch('/api/request-access', {
+        const res = await fetch(scannerReportEndpoint(), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email,
+            address: wallet,
             platforms: ['hyperliquid'],
             protection: ['nothing'],
           }),
@@ -584,7 +595,7 @@
         if (!res.ok || !json.ok) {
           throw new Error(json.error || 'Submission failed. Please try again.');
         }
-        window.location.assign(fullScannerUrl());
+        window.location.assign(json.scan_detail_url || fullScannerUrl());
       } catch (err) {
         scanUnlockForm.classList.remove('is-submitting');
         setUnlockError(err && err.message ? err.message : 'Network error. Please try again.');
