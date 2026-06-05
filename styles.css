@@ -391,16 +391,18 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
    regardless of source order or downstream rules. */
 .nav.is-over-dark .nav-links a { color: rgba(255,255,255,.92) !important; }
 .nav.is-over-dark .nav-links a:hover { color: var(--white) !important; }
-.nav.is-over-dark .nav-logo img { filter: brightness(0) invert(1) !important; }
+.nav.is-over-dark .nav-logo { color: #fff !important; }
 /* Over-dark nav: the glass pill defined below is the single source of
    truth — applies whether the nav is at-top or scrolled. The previous
    white-solid variant for the scrolled state was retired (felt heavy
    against the brand-blue body, broke continuity with the hero state). */
-.nav-logo img { filter: brightness(0); transition: filter .2s var(--ease); }
+.nav-logo { color: #000; transition: color .2s var(--ease); }
 .nav-logo { display: inline-flex; align-items: center; height: 32px; }
 /* Full ShieldTX lockup (mark + wordmark). 22px keeps the wordmark legible
-   without overpowering the nav row. */
-.nav-logo img { height: 22px; width: auto; }
+   without overpowering the nav row. The inline <svg> inherits color via
+   fill="currentColor"; recoloring via CSS color avoids the rasterize-on-
+   filter blur that an <img>+filter approach causes on high-DPI displays. */
+.nav-logo svg { height: 22px; width: auto; display: block; }
 .nav-links {
   display: flex; align-items: center; gap: 28px;
   margin-left: auto; margin-right: 8px;
@@ -3175,7 +3177,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 /* Legacy span — hidden now that Avail moved to the bottom bar. Kept the
    selector so old markup in untouched pages does not leak through. */
 .footer-avail { display: none; }
-.footer-logo { height: 22px; width: auto; filter: brightness(0) invert(1); }
+.footer-logo { height: 22px; width: auto; color: #fff; display: block; }
 .status {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: 'Geist Mono', monospace;
@@ -7412,7 +7414,8 @@ body.modal-locked { overflow: hidden; }
   align-items: center;
   height: 32px;
 }
-.app-gate-home img { height: 22px; filter: brightness(0) invert(1); }
+.app-gate-home { color: #fff; }
+.app-gate-home svg { height: 22px; width: auto; display: block; }
 
 .app-gate {
   position: relative;
