@@ -21,6 +21,7 @@
     6. TOC links (must match section IDs)
     7. Add the post to /blog/index.html as a new <a class="blog-card">
     8. Add the post URL to /sitemap.xml
+    9. Update the canonical tag with a self referencing domain.
 
   Layout uses the .docs-* prose system from /trust-model/styles.css.
   ============================================================================
@@ -33,6 +34,7 @@
   <!-- TEMPLATE: replace title + description -->
   <title>Post title · ShieldTX</title>
   <meta name="description" content="One-sentence summary of the post." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/_template" />
 
   <!-- TEMPLATE: while this is the unfilled template file, keep noindex.
        DELETE this meta tag when you copy this file to a real post folder. -->
