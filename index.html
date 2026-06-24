@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- PREVIEW BUILD: assets pulled from https://www.shieldtx.xyz (needs internet). Canonical copy source = shieldtx-landing-confidential.html -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShieldTX | Confidential Perps on Hyperliquid</title>
-  <meta name="description" content="Trade every Hyperliquid perp with the same order book, same liquidity, and same fills, while your positions, PnL, liquidation levels, and trading wallets stay off the public trail." />
-  <link rel="canonical" href="https://www.shieldtx.xyz/" />
+  <title>ShieldTX - Shielded Perps on Hyperliquid</title>
+  <meta name="description" content="ShieldTX lets you trade perps on Hyperliquid with full execution shielding. Same fills, zero footprint, compliant by design." />
+  <link rel="canonical" href="https://www.shieldtx.xyz" />
 
-  <link rel="icon" type="image/svg+xml" href="https://www.shieldtx.xyz/assets/ShieldTX_LogoMark.svg" />
-  <link rel="apple-touch-icon" href="https://www.shieldtx.xyz/assets/ShieldTX_LogoMark.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/ShieldTX_LogoMark.svg" />
+  <link rel="apple-touch-icon" href="assets/ShieldTX_LogoMark.svg" />
 
-  <meta property="og:title" content="ShieldTX | Confidential Perps on Hyperliquid" />
-  <meta property="og:description" content="ShieldTX routes trades to Hyperliquid underneath while shielding the public wallet trail copy bots use to follow your book." />
+  <meta property="og:title" content="ShieldTX - Shielded Perps on Hyperliquid" />
+  <meta property="og:description" content="ShieldTX lets you trade perps on Hyperliquid with full execution shielding. Same fills, zero footprint, compliant by design." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://shieldtx.xyz/" />
-  <meta property="og:image" content="https://shieldtx.xyz/assets/demo/poster.jpg" />
+  <meta property="og:image" content="https://shieldtx.xyz/assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ShieldTX | Confidential Perps on Hyperliquid" />
-  <meta name="twitter:description" content="ShieldTX routes trades to Hyperliquid underneath while shielding the public wallet trail copy bots use to follow your book." />
+  <meta name="twitter:title" content="ShieldTX - Shielded Perps on Hyperliquid" />
+  <meta name="twitter:description" content="ShieldTX lets you trade perps on Hyperliquid with full execution shielding. Same fills, zero footprint, compliant by design." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="https://www.shieldtx.xyz/styles.css?v=75" />
+  <link rel="stylesheet" href="styles.css?v=75" />
 </head>
 <body>
   <!-- Simplified nav: Home · Features · Blog · [Open App] -->
@@ -59,16 +58,17 @@
       <div class="hero-grid hero-grid-split container">
         <div class="hero-copy">
           <h1 class="hero-title" data-split>
-            <span class="accent">Shield</span> your Hyperliquid trades.
+            Trade without exposing<br/>your <span class="accent">wallet.</span>
           </h1>
           <p class="hero-sub" data-reveal>
-          Manage your public exposure with ShieldTX. Place isolated perp trades on Hyperliquid and control your footprint.</p>
+            ShieldTX issues a private trading address before you deposit, helping you keep your main wallet separate from every transaction.
+          </p>
           <div class="hero-ctas" data-reveal>
             <a class="btn-pill btn-primary hero-cta-primary" href="/request-access" data-modal-open="invite-modal">
               Request Access
               <span class="hero-cta-arrow" aria-hidden="true">→</span>
             </a>
-            <a class="hero-cta-secondary" href="#scan-tool">Scan your wallet</a>
+            <a class="hero-cta-secondary" href="#scan-tool">Scan wallet</a>
           </div>
         </div>
 
@@ -98,7 +98,7 @@
             <!-- Branded card header — ShieldTX logomark sits at the top of every
                  onboarding screen so the surface reads as the product. -->
             <div class="hero-stage-card-brand" aria-hidden="true">
-              <img src="https://www.shieldtx.xyz/assets/ShieldTX_LogoMark.svg" alt="" class="hero-stage-card-mark" />
+              <img src="assets/ShieldTX_LogoMark.svg" alt="" class="hero-stage-card-mark" />
               <span class="hero-stage-card-name">ShieldTX</span>
             </div>
 
@@ -331,24 +331,24 @@
     <section class="problem" id="problem">
       <div class="container">
         <header class="problem-head">
-          <span class="eyebrow">The problem</span>
-          <h2 class="section-title" data-split>Whale hunters follow you.</h2>
+          <span class="eyebrow">The Problem</span>
+          <h2 class="section-title" data-split>Your wallet exposes everything.</h2>
         </header>
         <ul class="problem-cards">
           <li class="problem-card" data-reveal>
             <span class="problem-card-num">01</span>
-            <h3 class="problem-card-title">Your PnL emits a signal</h3>
-            <p class="problem-card-body">Your success attracts whale hunters that follow you.</p>
+            <h3 class="problem-card-title">Everything is public</h3>
+            <p class="problem-card-body">Your full P&amp;L, position history, and account size are visible to everyone the moment you place a trade.</p>
           </li>
           <li class="problem-card" data-reveal>
             <span class="problem-card-num">02</span>
-            <h3 class="problem-card-title">Bots skim your profits</h3>
-            <p class="problem-card-body">The moment your wallet trades, bots mirror and skim your profits.</p>
+            <h3 class="problem-card-title">Profits leak to copy traders</h3>
+            <p class="problem-card-body">Tools like HyperDash and Dexly mirror your trades within seconds of execution and copy traders erode your profitability.</p>
           </li>
           <li class="problem-card" data-reveal>
             <span class="problem-card-num">03</span>
-            <h3 class="problem-card-title">You become a target</h3>
-            <p class="problem-card-body">Whale hunters are prevalent and getting more sophisticated tools.</p>
+            <h3 class="problem-card-title">Enterprises are left out</h3>
+            <p class="problem-card-body">Trading desks and vaults with substantial size cannot use a venue where competitors read your book, every hour of every day.</p>
           </li>
         </ul>
       </div>
@@ -358,26 +358,26 @@
     <section class="today" id="today">
       <div class="container">
         <header class="today-head">
-          <span class="eyebrow">Why workarounds fail</span>
+          <span class="eyebrow">What you do today</span>
           <div class="today-head-row">
-            <h2 class="section-title" data-split>Manual wallet rotation<br />doesn't stop the leak.</h2>
+            <h2 class="section-title" data-split>Today's workarounds<br />fail.</h2>
           </div>
         </header>
         <ul class="today-rows">
           <li class="today-row" data-reveal>
             <span class="today-row-num">01</span>
             <h3 class="today-row-title">Multiple wallets</h3>
-            <p class="today-row-body">More wallets means more balances, funding paths, and risk. Clustering tools still link them through timing, amounts, and behavior.</p>
+            <p class="today-row-body">Fractures your workflow. Managing gas, seed phrases, and transaction history across wallets adds operational overhead with no upside.</p>
           </li>
           <li class="today-row" data-reveal>
             <span class="today-row-num">02</span>
-            <h3 class="today-row-title">CEX routing</h3>
-            <p class="today-row-body">A centralized exchange hides the position but pulls you off Hyperliquid, the venue you actually want.</p>
+            <h3 class="today-row-title">Wallet clustering still wins</h3>
+            <p class="today-row-body">Arkham and Nansen cluster your different wallets through temporal correlation. Same asset, same direction, seconds apart is enough to link them.</p>
           </li>
           <li class="today-row" data-reveal>
             <span class="today-row-num">03</span>
-            <h3 class="today-row-title">Status quo</h3>
-            <p class="today-row-body">Keep trading in public and your performance becomes a feed anyone can follow.</p>
+            <h3 class="today-row-title">CEX routing</h3>
+            <p class="today-row-body">Hands over custody of your assets and leaves the venue. You lose self-custody and on-chain composability for shielding that should be native.</p>
           </li>
         </ul>
       </div>
@@ -393,20 +393,22 @@
         </div>
         <div class="container">
           <header class="scan-head">
-            <span class="eyebrow inv">Scan your wallet</span>
-            <h2 class="section-title inv" data-split>See who's following your Hyperliquid activity.</h2>
-            <p class="scan-sub" data-reveal>See what copy traders can access using only public data. Identify the wallets following you today. Paste your Hyperliquid trading address below.</p>
+            <span class="eyebrow inv">Scanner preview</span>
+            <h2 class="section-title inv" data-split>See what your wallet broadcasts.</h2>
+            <p class="scan-sub" data-reveal>Paste any Hyperliquid wallet for a short exposure preview. Join the ShieldTX waitlist to open the full scanner report.</p>
           </header>
 
           <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate data-scanner-url="https://scanner-canary.shieldtx.avail.tools/" data-preview-endpoint="/api/scanner-preview" data-report-endpoint="/api/scanner-report">
             <input class="scan-form-input" id="scan-addr" type="text" placeholder="0x… your Hyperliquid address" spellcheck="false" autocomplete="off" aria-describedby="scan-error" />
-            <button class="btn-pill btn-primary" id="scan-run" type="submit">Check exposure</button>
+            <button class="btn-pill btn-primary" id="scan-run" type="submit">Preview scan</button>
           </form>
           <p class="scan-form-error" id="scan-error" role="alert" hidden>Enter a valid wallet address starting with 0x.</p>
 
           <div class="scan-prefill" data-reveal>
             <span class="scan-prefill-label">Don't have an address?</span>
-            <button class="scan-prefill-chip" type="button" data-prefill="0x8050706eb79e2e1128a3a96b50ece6e74e1428de">Try a sample</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0x8050706eb79e2e1128a3a96b50ece6e74e1428de">Try sample whale</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0x357f06a2d9e4423ac1ac2d77552954eb839aa3c4">Try sample alpha trader</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0xa9881f6f5493fed3ce3346c5cb1a1e9ba80f7060">Try sample leaderboard</button>
           </div>
         </div>
       </div>
@@ -480,92 +482,21 @@
       </div>
     </section>
 
-    <!-- HOW IT WORKS — original 3-card horizontal layout -->
-    <section class="how" id="how">
-      <div class="container">
-        <header class="how-head">
-          <span class="eyebrow">How it works</span>
-          <h2 class="section-title" data-split>Three steps. Same fills.</h2>
-        </header>
-
-        <ol class="how-steps how-steps-3">
-          <li class="step step-card" data-step="01">
-            <div class="step-rail" aria-hidden="true">
-              <span class="step-num">Step 1</span>
-              <span class="step-line"></span>
-            </div>
-            <div class="step-copy">
-              <h3>Fund your ShieldTX balance</h3>
-              <p>Deposit USDC into ShieldTX. Observers see the deposit, not the trades.</p>
-            </div>
-            <div class="step-media">
-              <div class="mock mock-connect" aria-hidden="true">
-                <div class="mock-row"><span class="chip">Bridge</span><b>Nexus · any chain</b></div>
-                <div class="mock-row"><span class="chip">Vault</span><b>ShieldTX · Arbitrum</b></div>
-                <div class="mock-row"><span class="chip">Deposit</span><b><span class="step-counter" data-count-to="25000" data-suffix=" USDC">0</span></b></div>
-                <div class="mock-row ok"><span class="chip">Status</span><b>Secured</b></div>
-              </div>
-            </div>
-          </li>
-
-          <li class="step step-card" data-step="02">
-            <div class="step-rail" aria-hidden="true">
-              <span class="step-num">Step 2</span>
-              <span class="step-line"></span>
-            </div>
-            <div class="step-copy">
-              <h3>Open a Hyperliquid perp</h3>
-              <p>Place the trade inside ShieldTX. A fresh wallet is funded for it and the order routes to Hyperliquid's book.</p>
-            </div>
-            <div class="step-media">
-              <div class="mock mock-trade" aria-hidden="true">
-                <div class="mock-tape">
-                  <div class="bar"></div><div class="bar tall"></div><div class="bar"></div>
-                  <div class="bar short"></div><div class="bar tall"></div><div class="bar"></div>
-                  <div class="bar tall"></div><div class="bar"></div><div class="bar short"></div>
-                </div>
-                <div class="mock-row"><span class="chip">Wallet</span><b>fresh · funded</b></div>
-                <div class="mock-row ok"><span class="chip">Fill</span><b>$24.18 <em>(0 bps)</em></b></div>
-              </div>
-            </div>
-          </li>
-
-          <li class="step step-card" data-step="03">
-            <div class="step-rail" aria-hidden="true">
-              <span class="step-num">Step 3</span>
-              <span class="step-line step-line-end"></span>
-            </div>
-            <div class="step-copy">
-              <h3>Close and settle</h3>
-              <p>Close through ShieldTX. Proceeds return to your shielded balance, separate from the wallet that traded on Hyperliquid.</p>
-            </div>
-            <div class="step-media">
-              <div class="mock mock-settle" aria-hidden="true">
-                <div class="mock-row"><span class="chip">PNL</span><b class="ok">+<span class="step-counter" data-count-to="18420" data-prefix="$">0</span></b></div>
-                <div class="mock-row"><span class="chip">Re-shield</span><b>Enabled</b></div>
-                <div class="mock-row ok"><span class="chip">Trail</span><b>Shielded</b></div>
-              </div>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
     <!-- FEATURES — vertical layout, 4 focused cards -->
     <section class="features features-vertical" id="features">
       <div class="container">
         <header class="features-head">
-          <span class="eyebrow">The product</span>
-          <h2 class="section-title" data-split>Why use ShieldTX?</h2>
-          <p class="features-lede" data-reveal>Manage your public exposure efficiently with shielded wallets on-demand, while trading on Hyperliquid's orderbook.</p>
+          <span class="eyebrow">Features</span>
+          <h2 class="section-title" data-split>Same trade. No broadcast.</h2>
+          <p class="features-lede" data-reveal>Confidential execution on Hyperliquid, with the compliance institutional desks need.</p>
         </header>
 
         <ol class="features-list">
           <li class="feat-card" data-reveal>
             <div class="feat-card-body">
               <span class="feat-num">01</span>
-              <h3 class="feat-title">Your PnL moves offchain</h3>
-              <p class="feat-body">Your positions, PnL, and liquidation levels are not publicly linked to the wallet you funded from.</p>
+              <h3 class="feat-title">Execution shielding</h3>
+              <p class="feat-body">Your position size, entry, and liquidation levels stay off the radar. Nothing on-chain links your trades to you, so copy bots have nothing to follow.</p>
             </div>
             <div class="feat-visual feat-visual-mask" aria-hidden="true">
               <div class="fv-mask-card">
@@ -582,8 +513,8 @@
           <li class="feat-card" data-reveal>
             <div class="feat-card-body">
               <span class="feat-num">02</span>
-              <h3 class="feat-title">Trades execute on Hyperliquid</h3>
-              <p class="feat-body">Every order routes to Hyperliquid's order book with the same liquidity and fills, across every perp market.</p>
+              <h3 class="feat-title">Hyperliquid fill parity</h3>
+              <p class="feat-body">Trades route to the native HL order book. Fills match direct Hyperliquid execution. Same liquidity, same fill quality, no routing tax.</p>
             </div>
             <div class="feat-visual feat-visual-spark" aria-hidden="true">
               <svg class="fv-spark" viewBox="0 0 320 120" preserveAspectRatio="none">
@@ -604,8 +535,8 @@
           <li class="feat-card" data-reveal>
             <div class="feat-card-body">
               <span class="feat-num">03</span>
-              <h3 class="feat-title">Built for serious flow</h3>
-              <p class="feat-body">Confidential onchain trading with viewing keys to fulfill compliance obligations for prefessional traders.</p>
+              <h3 class="feat-title">Compliant by design</h3>
+              <p class="feat-body">ShieldTX is built for compliant minded traders. Desks and vaults can move large volumes onchain with compliance built-in.</p>
             </div>
             <div class="feat-visual feat-visual-block" aria-hidden="true">
               <div class="fv-globe">
@@ -625,23 +556,18 @@
           <li class="feat-card" data-reveal>
             <div class="feat-card-body">
               <span class="feat-num">04</span>
-              <h3 class="feat-title">Shielded wallets on-demand</h3>
-              <p class="feat-body">Control your wallet's exposure. Observers see temporary wallets, not links to your main wallet.</p>
+              <h3 class="feat-title">You hold the keys</h3>
+              <p class="feat-body">ShieldTX does not take custody of your assets. Your withdrawals are permissionless and verified onchain without gate-keepers, ensuring you maintain control of your assets at each step.</p>
             </div>
             <div class="feat-visual feat-visual-flow" aria-hidden="true">
               <div class="fv-flow-card">
-                <span class="fv-flow-label">ShieldTX balance</span>
-                <span class="fv-flow-amount">Shielded</span>
-              </div>
-              <span class="fv-flow-arrow"></span>
-              <div class="fv-flow-card">
-                <span class="fv-flow-label">Fresh wallet</span>
-                <span class="fv-flow-amount">Per trade</span>
+                <span class="fv-flow-label">Vault</span>
+                <span class="fv-flow-amount">25,000<em>USDC</em></span>
               </div>
               <span class="fv-flow-arrow"></span>
               <div class="fv-flow-card fv-flow-card-out">
-                <span class="fv-flow-label">Hyperliquid</span>
-                <span class="fv-flow-amount fv-flow-amount-out">Order book</span>
+                <span class="fv-flow-label">Your wallet</span>
+                <span class="fv-flow-amount fv-flow-amount-out">25,000<em>USDC</em></span>
               </div>
             </div>
           </li>
@@ -655,14 +581,85 @@
       <div class="container preview-stack">
         <header class="preview-head">
           <span class="eyebrow">Demo</span>
-          <h2 class="section-title" data-split>Same Hyperliquid. Public trail shielded.</h2>
-          <p class="preview-sub" data-reveal>Watch a confidential trade open, settle on Hyperliquid, and close, with the position wallet kept off your main wallet's trail.</p>
+          <h2 class="section-title" data-split>Same Hyperliquid. Zero footprint.</h2>
+          <p class="preview-sub" data-reveal>Watch a shielded trade open, settle on chain, and close — end to end. Same fills, no on-chain trail back to you.</p>
         </header>
         <video class="preview-video"
-               src="https://www.shieldtx.xyz/assets/demo/preview.mp4"
+               src="assets/demo/preview.mp4"
                autoplay loop muted playsinline preload="metadata"
-               poster="https://www.shieldtx.xyz/assets/demo/poster.jpg"
+               poster="assets/demo/poster.jpg"
                aria-label="ShieldTX demo: log in, deposit, trade, close — shielded end to end"></video>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS — original 3-card horizontal layout -->
+    <section class="how" id="how">
+      <div class="container">
+        <header class="how-head">
+          <span class="eyebrow">How it works</span>
+          <h2 class="section-title" data-split>Three steps. Zero footprint.</h2>
+        </header>
+
+        <ol class="how-steps how-steps-3">
+          <li class="step step-card" data-step="01">
+            <div class="step-rail" aria-hidden="true">
+              <span class="step-num">Step 1</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-copy">
+              <h3>Add Funds</h3>
+              <p>Deposit from any chain via Nexus. Funds are secured by the ShieldTX vault on Arbitrum.</p>
+            </div>
+            <div class="step-media">
+              <div class="mock mock-connect" aria-hidden="true">
+                <div class="mock-row"><span class="chip">Bridge</span><b>Nexus · any chain</b></div>
+                <div class="mock-row"><span class="chip">Vault</span><b>ShieldTX · Arbitrum</b></div>
+                <div class="mock-row"><span class="chip">Deposit</span><b><span class="step-counter" data-count-to="25000" data-suffix=" USDC">0</span></b></div>
+                <div class="mock-row ok"><span class="chip">Status</span><b>Secured</b></div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step step-card" data-step="02">
+            <div class="step-rail" aria-hidden="true">
+              <span class="step-num">Step 2</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-copy">
+              <h3>Open Trade</h3>
+              <p>Confidential trades placed from a fresh, unlinkable wallet on Hyperliquid.</p>
+            </div>
+            <div class="step-media">
+              <div class="mock mock-trade" aria-hidden="true">
+                <div class="mock-tape">
+                  <div class="bar"></div><div class="bar tall"></div><div class="bar"></div>
+                  <div class="bar short"></div><div class="bar tall"></div><div class="bar"></div>
+                  <div class="bar tall"></div><div class="bar"></div><div class="bar short"></div>
+                </div>
+                <div class="mock-row"><span class="chip">Wallet</span><b>fresh · unlinkable</b></div>
+                <div class="mock-row ok"><span class="chip">Fill</span><b>$24.18 <em>(0 bps)</em></b></div>
+              </div>
+            </div>
+          </li>
+
+          <li class="step step-card" data-step="03">
+            <div class="step-rail" aria-hidden="true">
+              <span class="step-num">Step 3</span>
+              <span class="step-line step-line-end"></span>
+            </div>
+            <div class="step-copy">
+              <h3>Close Trade</h3>
+              <p>Continue trading or re-shield balance for maximum unlinkability.</p>
+            </div>
+            <div class="step-media">
+              <div class="mock mock-settle" aria-hidden="true">
+                <div class="mock-row"><span class="chip">PNL</span><b class="ok">+<span class="step-counter" data-count-to="18420" data-prefix="$">0</span></b></div>
+                <div class="mock-row"><span class="chip">Re-shield</span><b>Enabled</b></div>
+                <div class="mock-row ok"><span class="chip">Footprint</span><b>0 bps</b></div>
+              </div>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -671,7 +668,7 @@
       <div class="container">
         <header class="compare-head">
           <span class="eyebrow">Compare</span>
-          <h2 class="section-title" data-split>Shielded trading simplified.</h2>
+          <h2 class="section-title" data-split>See how we're different.</h2>
         </header>
 
         <div class="compare-wrap" data-reveal>
@@ -679,35 +676,54 @@
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th scope="col" class="col-shield">ShieldTX + Hyperliquid</th>
-                <th scope="col">Multi-wallet + Hyperliquid</th>
+                <th scope="col" class="col-shield">ShieldTX</th>
+                <th scope="col">Direct Hyperliquid</th>
+                <th scope="col">Multi-Wallet</th>
+                <th scope="col">CEX</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Supports all perp trading pairs</th>
+                <th scope="row">Position Confidentiality</th>
                 <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark no">✕</span></td>
                 <td><span class="mark yes">✓</span></td>
               </tr>
               <tr>
-                <th scope="row">Fulfills compliance obligations</th>
+                <th scope="row">Non-custodial</th>
                 <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark yes">✓</span></td>
+                <td><span class="mark yes">✓</span></td>
                 <td><span class="mark no">✕</span></td>
               </tr>
               <tr>
-                <th scope="row">Isolates PnL</th>
+                <th scope="row">Copy-bot resistant</th>
                 <td class="cell-shield"><span class="mark yes">✓</span></td>
-                <td><span class="pill-high">Often leaks</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark yes">✓</span></td>
               </tr>
               <tr>
-                <th scope="row">Copy-bot resistance</th>
-                <td class="cell-shield"><span class="pill-low">Very Strong</span></td>
-                <td><span class="pill-high">Limited</span></td>
+                <th scope="row">Wallet De-linked</th>
+                <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark no">✕</span></td>
               </tr>
               <tr>
-                <th scope="row">Operational overhead</th>
-                <td class="cell-shield"><span class="pill-low">Simple</span></td>
-                <td><span class="pill-high">Difficult</span></td>
+                <th scope="row">Compliant by design</th>
+                <td class="cell-shield"><span class="mark yes">✓</span></td>
+                <td><span class="mark yes">✓</span></td>
+                <td><span class="mark no">✕</span></td>
+                <td><span class="mark yes">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Operational Overhead</th>
+                <td class="cell-shield"><span class="pill-low">Low</span></td>
+                <td><span class="pill-low">Low</span></td>
+                <td><span class="pill-high">High</span></td>
+                <td><span class="pill-low">Low</span></td>
               </tr>
             </tbody>
           </table>
@@ -725,52 +741,31 @@
         <ul class="faq-list">
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
-              <span>Do I still trade on Hyperliquid?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Yes, the trades you place on ShieldTX are routed to Hyperliquid's order book. You access Hyperliquid liquidity, fills, and every Hyperliquid perp market via a Shielded wallet through ShieldTX.</p></div></div>
-          </li>
-          <li class="faq-item">
-            <button class="faq-q" aria-expanded="false" type="button">
-              <span>Is ShieldTX the same speed as Hyperliquid?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>No. Shielding adds extra steps that are designed to shield your trades from exposure, we don't claim to operate at the identical speed of Hyperliquid. However, you do get identical access to the Hyperliquid order book, liquidity and fills.</p></div></div>
-          </li>
-          <li class="faq-item">
-            <button class="faq-q" aria-expanded="false" type="button">
-              <span>What exactly is shielded?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Your public trading trail. ShieldTX keeps your positions, order history, PnL, liquidation levels, and position wallets from being publicly tied to your main wallet.</p></div></div>
-          </li>
-          <li class="faq-item">
-            <button class="faq-q" aria-expanded="false" type="button">
-              <span>Can someone still see activity on-chain?</span>
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Yes. Public observers can see deposits into the system, solver activity, temporary trading accounts, and withdrawals. What they will not see is a direct public link from your main wallet to the trades you placed via ShieldTX.</p></div></div>
-          </li>
-          <li class="faq-item">
-            <button class="faq-q" aria-expanded="false" type="button">
               <span>Is this like Tornado Cash?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>No. Tornado Cash is a non-complaint tool built for anonymity. ShieldTX provides professional traders the ability to shield their transactions while meeting their compliance obligations.</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p>No. ShieldTX is a compliant trading solution for Hyperliquid traders looking to protect against copy-bots, competitors and adversaries.</p></div></div>
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
-              <span>What markets are supported?</span>
+              <span>What pairs are supported?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>ShieldTX supports every Hyperliquid perp market.</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p>Every pair available on Hyperliquid is supported. If there's a specific pair you'd like added, get in touch.</p></div></div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" aria-expanded="false" type="button">
+              <span>What is the maximum leverage available?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner"><p>The maximum leverage on ShieldTX is the same as Hyperliquid.</p></div></div>
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
               <span>Does shielding affect my fills?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>No. Orders rest on Hyperliquid's order book, so you get the same liquidity and the same fills. Shielding does not add a spread, ShieldTX fees are shown separately.</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p>No. Execution is native HL: same order book, same liquidity. There is no slippage premium for shielding.</p></div></div>
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
@@ -827,10 +822,10 @@
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
-              <span>Who controls my funds?</span>
+              <span>Who controls the vault / my funds?</span>
               <span class="faq-icon" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p>You do. Funds are locked in a smart contract on Arbitrum. Core operations are permissionless and verified by zero-knowledge proofs, no admin key required. See the full breakdown in the <a class="faq-link" href="trust-model/index.html">trust model.</a> </p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p>You do. Funds are locked in a smart contract on Arbitrum. Core operations are permissionless and verified by zero-knowledge proofs, no admin key required. See the full breakdown in <a class="faq-link" href="trust-model/index.html">the trust model</a>.</p></div></div>
           </li>
           <li class="faq-item">
             <button class="faq-q" aria-expanded="false" type="button">
@@ -850,7 +845,7 @@
       <div class="container final-cta-wrap">
         <span class="eyebrow inv">Private beta</span>
         <h2 class="final-cta-title" data-split>Join the private beta.</h2>
-        <p class="final-cta-sub" data-reveal>ShieldTX is onboarding Hyperliquid traders who already know what wallet exposure costs. 500 invites in the first cohort.</p>
+        <p class="final-cta-sub" data-reveal>500 invites for the first cohort. Shipping now.</p>
 
         <div class="final-cta-actions" data-reveal>
           <a class="btn-pill btn-primary final-cta-btn" href="/request-access" data-modal-open="invite-modal">
@@ -870,8 +865,7 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <svg class="footer-logo" viewBox="0 0 414 101" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ShieldTX" focusable="false"><path d="M48.5854 87.0215C47.5068 87.5291 46.2579 87.5291 45.1792 87.0215L23.0278 76.5977H70.7368L48.5854 87.0215ZM80.5581 66.0322H13.2065V55.4678H80.5581V66.0322ZM80.5581 44.9023H13.2065V34.3369H80.5581V44.9023ZM76.5581 13.207C78.7672 13.207 80.558 14.998 80.5581 17.207V23.7725H13.2065V17.207C13.2067 14.998 14.9975 13.207 17.2065 13.207H76.5581Z"/><path d="M114.517 61.6894C114.728 63.6924 115.387 65.4319 116.494 66.9078C117.601 68.331 119.05 69.4379 120.842 70.2286C122.687 70.9665 124.743 71.3355 127.01 71.3355C130.225 71.3355 132.861 70.7557 134.916 69.596C136.972 68.4364 138 66.6969 138 64.3777C138 62.7963 137.394 61.5576 136.181 60.6615C134.969 59.7127 133.361 58.9748 131.358 58.4477C129.355 57.8679 127.168 57.3144 124.796 56.7873C122.424 56.2602 120.025 55.654 117.601 54.9688C115.229 54.2308 113.041 53.2557 111.038 52.0433C109.035 50.7783 107.428 49.1179 106.215 47.0621C105.003 44.9537 104.397 42.2655 104.397 38.9974C104.397 35.8875 105.319 33.1201 107.164 30.6954C109.009 28.218 111.565 26.2677 114.833 24.8445C118.154 23.4213 121.949 22.7097 126.219 22.7097C130.278 22.7097 133.915 23.5268 137.13 25.1608C140.398 26.7948 142.955 29.035 144.8 31.8814C146.697 34.6751 147.646 37.8905 147.646 41.5275H137.051C136.84 38.523 135.812 36.1774 133.967 34.4906C132.175 32.8039 129.461 31.9605 125.824 31.9605C122.292 31.9605 119.577 32.6194 117.68 33.9371C115.835 35.2549 114.912 36.9417 114.912 38.9974C114.912 40.7368 115.519 42.1073 116.731 43.1088C117.943 44.1103 119.551 44.901 121.554 45.4808C123.557 46.0606 125.745 46.5877 128.117 47.0621C130.541 47.5365 132.94 48.1427 135.312 48.8807C137.684 49.5659 139.871 50.5147 141.874 51.7271C143.877 52.8867 145.485 54.4944 146.697 56.5501C147.909 58.5531 148.516 61.1623 148.516 64.3777C148.516 69.4906 146.592 73.4703 142.744 76.3167C138.896 79.163 133.493 80.5862 126.535 80.5862C122.266 80.5862 118.444 79.7692 115.071 78.1352C111.697 76.5011 109.009 74.2609 107.006 71.4145C105.003 68.5682 103.922 65.3264 103.764 61.6894H114.517Z"/><path d="M153.149 20.0215H163.111V79.3212H153.149V20.0215ZM163.111 57.4989L161.846 48.5644C161.846 47.1939 162.057 45.6653 162.479 43.9786C162.901 42.2918 163.665 40.6841 164.772 39.1555C165.931 37.5742 167.513 36.2828 169.516 35.2813C171.571 34.2798 174.207 33.779 177.422 33.779C180.269 33.779 182.799 34.3588 185.013 35.5185C187.227 36.6781 188.966 38.6021 190.231 41.2903C191.549 43.9259 192.208 47.5102 192.208 52.0433V79.3212H182.245V53.0712C182.245 51.0155 182.061 49.1969 181.692 47.6156C181.323 45.9816 180.585 44.7165 179.478 43.8204C178.424 42.8716 176.843 42.3972 174.734 42.3972C172.889 42.3972 171.071 42.9243 169.279 43.9786C167.486 45.0328 166.01 46.6668 164.851 48.8807C163.691 51.0945 163.111 53.9673 163.111 57.4989Z"/><path d="M199.876 35.0441H209.759V79.3212H199.876V35.0441ZM199.867 20.0215L210.008 20.1843L209.929 31.2899L199.772 31.2041L199.867 20.0215Z"/><path d="M224.046 60.5034V52.3596H250.059L246.501 54.6525C246.712 52.6495 246.448 50.7519 245.71 48.9597C245.025 47.1149 243.892 45.6126 242.31 44.453C240.729 43.2933 238.673 42.7135 236.143 42.7135C232.717 42.7135 229.844 43.7941 227.525 45.9552C225.206 48.1164 224.046 51.2263 224.046 55.285H213.53C213.847 50.6992 215.033 46.8249 217.088 43.6623C219.197 40.4469 221.885 37.9959 225.153 36.3091C228.474 34.6224 232.137 33.779 236.143 33.779C239.148 33.779 241.968 34.3852 244.603 35.5975C247.292 36.7572 249.585 38.4966 251.482 40.8159C253.432 43.0825 254.856 45.8762 255.752 49.1969C256.7 52.5177 256.885 56.2865 256.305 60.5034H224.046ZM236.143 80.5862C231.979 80.5862 228.289 79.7429 225.074 78.0561C221.859 76.3694 219.276 74.0237 217.326 71.0192C215.375 68.0147 214.163 64.5094 213.688 60.5034H224.046C224.468 63.7715 225.654 66.4597 227.604 68.5682C229.554 70.6239 232.401 71.6517 236.143 71.6517C238.779 71.6517 240.887 71.0456 242.469 69.8332C244.103 68.5682 245.262 67.0396 245.947 65.2474H256.384C255.752 68.3046 254.513 70.9929 252.668 73.3121C250.823 75.5787 248.504 77.3709 245.71 78.6886C242.917 79.9537 239.728 80.5862 236.143 80.5862Z"/><path d="M260.308 20.0215H270.271V79.3212H260.308V20.0215Z"/><path d="M294.033 80.5862C289.922 80.5862 286.364 79.6111 283.359 77.6608C280.408 75.6578 278.115 72.8905 276.481 69.3588C274.899 65.8272 274.109 61.7948 274.109 57.2617C274.109 52.6759 274.899 48.6171 276.481 45.0855C278.115 41.5539 280.408 38.7865 283.359 36.7835C286.364 34.7805 289.922 33.779 294.033 33.779C297.196 33.779 299.884 34.4115 302.098 35.6766C304.365 36.889 306.157 38.6284 307.475 40.895V73.5493C306.21 75.7105 304.47 77.4236 302.256 78.6886C300.095 79.9537 297.354 80.5862 294.033 80.5862ZM295.615 71.6517C298.303 71.6517 300.517 71.0192 302.256 69.7542C303.996 68.4891 305.287 66.776 306.13 64.6149C307.027 62.401 307.475 59.9499 307.475 57.2617C307.475 54.5207 307.027 52.0697 306.13 49.9085C305.287 47.6947 303.996 45.9552 302.256 44.6902C300.517 43.3724 298.303 42.7135 295.615 42.7135C293.243 42.7135 291.187 43.346 289.447 44.6111C287.761 45.8234 286.469 47.5365 285.573 49.7504C284.73 51.9643 284.308 54.468 284.308 57.2617C284.308 60.0027 284.73 62.4801 285.573 64.6939C286.469 66.8551 287.761 68.5682 289.447 69.8332C291.187 71.0456 293.243 71.6517 295.615 71.6517ZM307.475 79.3212V20.0215H317.437V79.3212H307.475Z"/><path d="M362.995 30.3896H346.641V77.9766H338.338V30.3896H322.197L322.13 22.6309H362.928L362.995 30.3896Z"/><path d="M389.333 44.2158L403.485 22.6309H413.29L395.104 50.0664L413.764 77.9766H404.355L389.333 55.8379L374.231 77.9766H364.822L383.481 50.0664L365.296 22.6309H375.179L389.333 44.2158Z"/></svg>
-        <p class="footer-tagline">Confidential perp execution on Hyperliquid.</p>
-        <p class="footer-tagline footer-tagline-sub">Same order book. Same liquidity. Same fills. Public trail shielded.</p>
+        <p class="footer-tagline">Trade without exposing your wallet.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
@@ -904,7 +898,7 @@
       </div>
       <a class="footer-avail-link" href="https://availproject.org/" target="_blank" rel="noopener noreferrer" aria-label="Powered by Avail">
         <span>Powered by</span>
-        <img class="footer-avail-logo" src="https://www.shieldtx.xyz/assets/avail-logo.svg" alt="Avail" />
+        <img class="footer-avail-logo" src="/assets/avail-logo.svg" alt="Avail" />
       </a>
       <div class="footer-socials" aria-label="ShieldTX social links">
         <a class="footer-social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener noreferrer" aria-label="ShieldTX on X (Twitter)">
@@ -1090,9 +1084,9 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://www.shieldtx.xyz/public-scripts/site-cursor.js?v=3"></script>
-  <script src="https://www.shieldtx.xyz/public-scripts/modal.js?v=1"></script>
-  <script src="https://www.shieldtx.xyz/public-scripts/request-access-form.js?v=3"></script>
-  <script src="https://www.shieldtx.xyz/script.js?v=32"></script>
+  <script src="/public-scripts/site-cursor.js?v=3"></script>
+  <script src="/public-scripts/modal.js?v=1"></script>
+  <script src="/public-scripts/request-access-form.js?v=3"></script>
+  <script src="script.js?v=32"></script>
 </body>
 </html>
