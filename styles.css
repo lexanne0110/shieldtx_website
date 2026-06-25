@@ -2036,14 +2036,14 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 }
 .hero-title .accent,
 .hero-title .accent .split-char {
-  background: linear-gradient(135deg, #a8eef8 0%, #6ee0f0 50%, var(--brand-cyan) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: #fff;
+  color: #fff;
 }
 .hero-title .accent {
-  text-shadow: 0 0 40px rgba(77, 213, 232, 0.30);
+  text-shadow: none;
 }
 .hero-sub {
   font-size: clamp(17px, 1.35vw, 20px);
@@ -4581,14 +4581,15 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .fv-signin-active { border-color: var(--brand-blue); box-shadow: 0 0 0 4px rgba(51,112,255,.10); }
 
 /* 5. Custody flow */
-.feat-visual-flow { padding: 16px; gap: 16px; }
+.feat-visual-flow { padding: 16px; gap: 10px; }
 .fv-flow-card {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 14px;
   display: flex; flex-direction: column; gap: 4px;
-  min-width: 110px;
+  flex: 1 1 0;
+  min-width: 0;
 }
 .fv-flow-label {
   font-family: 'Geist Mono', ui-monospace, monospace;
@@ -4607,7 +4608,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 .fv-flow-amount-out { color: var(--brand-blue); }
 .fv-flow-arrow {
   flex: 0 0 auto;
-  width: 32px; height: 1.5px;
+  width: 20px; height: 1.5px;
   background: var(--brand-blue);
   position: relative;
 }
