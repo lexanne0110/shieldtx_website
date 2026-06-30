@@ -2,7 +2,7 @@
   "name": "shieldtx-site",
   "version": "2.0.0",
   "private": true,
-  "description": "ShieldTX marketing site + invite gate. Static HTML/CSS/JS with Vercel serverless functions in /api.",
+  "description": "ShieldTX marketing site. Static HTML/CSS/JS with Vercel serverless functions in /api.",
   "engines": {
     "node": "20.x"
   },

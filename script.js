@@ -829,45 +829,17 @@
     });
   });
 
-  // -------- Request-invite modal --------
-  // Modal open/close + URL sync lives in /public-scripts/modal.js. Expose
-  // lenis so the shared module can stop/start it.
+  // Expose lenis so other modules (e.g. nav menu scroll handling) can reach it.
   window.lenis = lenis;
-  if (window.ShieldTX && window.ShieldTX.modal) {
-    window.ShieldTX.modal.init();
-  }
-
-  // -------- Request Access form binding --------
-  // The brand-styled dropdown component and the multi-step waitlist form
-  // logic now live in /public-scripts/request-access-form.js (shared with
-  // /request-access and /app). We just hand the in-page modal form to it.
-  if (window.ShieldTX && window.ShieldTX.bindRequestAccessForm) {
-    const inPageForm = document.getElementById('waitlist-form');
-    if (inPageForm) {
-      window.ShieldTX.bindRequestAccessForm(inPageForm, { mode: 'modal' });
-    }
-  }
-
-  // The legacy brand-dropdown / multi-step / scoring code below was removed
-  // when the form was extracted. Keeping the placeholder so future readers
-  // looking at git blame find this note.
-  /* removed-in-refactor: initDropdown + waitlist-form scoring */
 
   // -------- Legacy ?waitlist=1 deep-link (back-compat) --------
-  // Old share links still exist in the wild. Strip the query from the
-  // current history entry so we land on a clean "/", then open the modal
-  // normally so closing it falls back to "/" (not to ?waitlist=1).
+  // The Request Access flow is now the full page at /request-access (the old
+  // in-page modal was retired). Old share links carrying ?waitlist=1 redirect
+  // straight there.
   try {
     const params = new URLSearchParams(window.location.search);
     if (params.get('waitlist') === '1') {
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState({}, '', '/' + window.location.hash);
-      }
-      setTimeout(() => {
-        if (window.ShieldTX && window.ShieldTX.modal) {
-          window.ShieldTX.modal.open('invite-modal');
-        }
-      }, 250);
+      window.location.replace('/request-access');
     }
   } catch (_) {}
 

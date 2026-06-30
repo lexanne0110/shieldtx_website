@@ -48,7 +48,7 @@
   // it switches to a light color so the dot + ring stay visible.
   const DARK_SURFACES = [
     '.hero', '.scan-band', '.final-cta', '.footer',
-    '.compare-dark', '.app-gate-body', '.modal.is-open',
+    '.compare-dark', '.modal.is-open',
     '[data-cursor-dark]',
   ].join(', ');
   let lastDark = false;

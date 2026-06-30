@@ -16,8 +16,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# Pages to migrate. Skipping /app/ (different gate UI) and /brand-document/
-# (custom design-doc nav). Add here to extend coverage.
+# Pages to migrate. Skipping /brand-document/ (custom design-doc nav).
+# Add here to extend coverage.
 TARGETS = [
     "index.html",
     "blog/index.html",
