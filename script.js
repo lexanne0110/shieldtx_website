@@ -393,17 +393,20 @@
 
   function updatePreview(data) {
     const coverage = data.coverage || {};
-    const score = isFiniteNumber(data.privacy_score) ? data.privacy_score : null;
-    const copyExposure = isFiniteNumber(data.copy_exposure) ? data.copy_exposure : null;
-    const copiers = isFiniteNumber(data.copier_count) ? data.copier_count : null;
     const recent = data.recent_activity || {};
-    const fillCount = isFiniteNumber(recent.fill_count) ? recent.fill_count : null;
     const copyStatus = coverage.copy || data.copier_count_status || 'unavailable';
     const scanStatus = coverage.scan || data.state || 'unavailable';
-    const quality = coverage.data_quality || 'unknown';
+    const notInDataset = scanStatus === 'not_in_dataset';
+    const quality = notInDataset ? 'not_in_dataset' : (coverage.data_quality || 'unknown');
+    const score = !notInDataset && isFiniteNumber(data.privacy_score) ? data.privacy_score : null;
+    const copyExposure = !notInDataset && isFiniteNumber(data.copy_exposure) ? data.copy_exposure : null;
+    const copiers = !notInDataset && isFiniteNumber(data.copier_count) ? data.copier_count : null;
+    const fillCount = !notInDataset && isFiniteNumber(recent.fill_count) ? recent.fill_count : null;
 
     if (previewEls.summary) {
-      const label = data.privacy_score_label ? `${data.privacy_score_label} exposure` : statusLabel(scanStatus);
+      const label = notInDataset
+        ? 'not found in the current scanner dataset'
+        : data.privacy_score_label ? `${data.privacy_score_label} exposure` : statusLabel(scanStatus);
       previewEls.summary.textContent = 'Public scanner preview for ';
       const addressEl = document.createElement('b');
       addressEl.textContent = shortAddress(data.address || lastScannedWallet);
@@ -452,8 +455,8 @@
     setBar(previewEls.coverageBar, statusPct(scanStatus === 'ready' ? quality : scanStatus));
     if (previewEls.coverageMeta) previewEls.coverageMeta.textContent = statusSentence(scanStatus, `${statusLabel(quality)} data quality.`);
 
-    if (previewEls.copyStatus) previewEls.copyStatus.textContent = statusLabel(copyStatus);
-    if (previewEls.positionStatus) previewEls.positionStatus.textContent = statusLabel(coverage.positions);
+    if (previewEls.copyStatus) previewEls.copyStatus.textContent = statusLabel(notInDataset ? 'unavailable' : copyStatus);
+    if (previewEls.positionStatus) previewEls.positionStatus.textContent = statusLabel(notInDataset ? 'unavailable' : coverage.positions);
     if (previewEls.quality) previewEls.quality.textContent = statusLabel(quality);
     if (previewEls.scannerStatus) previewEls.scannerStatus.textContent = coverage.stale ? 'Stale Snapshot' : statusLabel(scanStatus);
     updateOpenCta(data.address || lastScannedWallet);
