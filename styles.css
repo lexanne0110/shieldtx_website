@@ -3826,7 +3826,7 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 }
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -3871,8 +3871,9 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   color: var(--brand-blue-deep);
   font-variant-numeric: tabular-nums;
 }
-.stat-num-money {
-  font-size: clamp(32px, 4vw, 50px);
+.stat-num-money,
+.stat-num-status {
+  font-size: clamp(30px, 3vw, 44px);
 }
 .stat-val sub {
   font-family: 'Geist', sans-serif;
@@ -3983,56 +3984,26 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
   font-size: 15px;
   line-height: 1.55;
 }
-.scan-unlock-form {
+.scan-open-actions {
   display: grid;
-  grid-template-columns: 1fr;
   gap: 10px;
   padding: 10px;
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.12);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.20);
 }
-.scan-unlock-form:focus-within {
-  box-shadow:
-    inset 0 0 0 1.5px rgba(255, 255, 255, 0.55),
-    0 0 0 4px rgba(255, 255, 255, 0.14);
-}
-.scan-unlock-input {
-  width: 100%;
-  min-height: 48px;
-  padding: 0 16px;
-  border: 0;
-  outline: 0;
-  border-radius: calc(var(--radius) - 6px);
-  background: rgba(255, 255, 255, 0.94);
-  color: var(--ink);
-  font-size: 15px;
-}
-.scan-unlock-input::placeholder { color: var(--slate); }
-.scan-unlock-form .btn-primary {
+.scan-open-actions .btn-primary {
   width: 100%;
   justify-content: center;
-  min-height: 48px;
+  min-height: 54px;
   background: var(--white);
   color: var(--brand-blue-deep);
   border-color: var(--white);
 }
-.scan-unlock-form .btn-primary:hover {
+.scan-open-actions .btn-primary:hover {
   background: var(--brand-cyan);
   border-color: var(--brand-cyan);
 }
-.scan-unlock-form.is-submitting {
-  opacity: 0.78;
-  pointer-events: none;
-}
-.scan-unlock-error {
-  margin: 0;
-  color: #ffe2e2;
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 12px;
-  line-height: 1.4;
-}
-.scan-unlock-error[hidden] { display: none; }
 
 /* --- Stats note + CTAs --- */
 .stats-note {
