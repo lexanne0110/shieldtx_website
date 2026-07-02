@@ -45,23 +45,97 @@
 
     form.querySelectorAll('[data-dropdown]').forEach(initDropdown);
 
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // A "field" is a text input wrapper (.waitlist-field) or a dropdown
+    // question (.waitlist-question). We validate and flag errors per field.
+    function fieldContainers(step) {
+      return Array.from(step.querySelectorAll('.waitlist-field, .waitlist-question'));
+    }
+
+    function containerValid(container) {
+      const email = container.querySelector('input[type="email"]');
+      if (email) return EMAIL_RE.test(email.value.trim());
+      const text = container.querySelector('input[type="text"]');
+      if (text) return text.value.trim().length > 0;
+      const select = container.querySelector('select');
+      if (select) {
+        if (select.multiple) return Array.from(select.selectedOptions).some((o) => o.value);
+        return !!select.value;
+      }
+      return true;
+    }
+
     function stepValid() {
       const step = steps[idx];
       if (!step) return false;
-      const emailInput = step.querySelector('input[type="email"]');
-      if (emailInput) {
-        const v = emailInput.value.trim();
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return false;
-        // Also require any text inputs marked required on this step (name fields).
-        const requiredTexts = step.querySelectorAll('input[type="text"][required]');
-        return Array.from(requiredTexts).every((t) => t.value.trim().length > 0);
+      return fieldContainers(step).every(containerValid);
+    }
+
+    function errorMessageFor(container) {
+      if (container.querySelector('input[type="email"]')) return 'Enter a valid email address.';
+      const text = container.querySelector('input[type="text"]');
+      if (text) {
+        const label = container.querySelector('.waitlist-label');
+        return `Enter your ${(label ? label.textContent : 'details').toLowerCase()}.`;
       }
-      const selects = step.querySelectorAll('select');
-      if (selects.length === 0) return true;
-      return Array.from(selects).every((sel) => {
-        if (sel.multiple) return Array.from(sel.selectedOptions).some((o) => o.value);
-        return !!sel.value;
+      const select = container.querySelector('select');
+      if (select && select.multiple) return 'Select at least one option.';
+      return 'Please select an option.';
+    }
+
+    // The inline error <p> is the container's next sibling, so it renders just
+    // below the field/question and outside the <label> for text fields.
+    function fieldError(container, create) {
+      const existing = container.nextElementSibling;
+      if (existing && existing.classList && existing.classList.contains('waitlist-inline-error')) {
+        return existing;
+      }
+      if (!create) return null;
+      const el = document.createElement('p');
+      el.className = 'waitlist-inline-error';
+      el.setAttribute('role', 'alert');
+      container.insertAdjacentElement('afterend', el);
+      return el;
+    }
+
+    function showFieldError(container) {
+      container.classList.add('is-invalid');
+      fieldError(container, true).textContent = errorMessageFor(container);
+    }
+
+    function clearFieldError(container) {
+      container.classList.remove('is-invalid');
+      const el = fieldError(container, false);
+      if (el) el.remove();
+    }
+
+    function clearIfValid(target) {
+      if (!target || !target.closest) return;
+      const container = target.closest('.waitlist-field, .waitlist-question');
+      if (container && containerValid(container)) clearFieldError(container);
+    }
+
+    // Flag every incomplete field on the current step; focus the first one.
+    // Returns true when the step is fully valid.
+    function revealStepErrors() {
+      const step = steps[idx];
+      let firstInvalid = null;
+      fieldContainers(step).forEach((c) => {
+        if (containerValid(c)) {
+          clearFieldError(c);
+        } else {
+          showFieldError(c);
+          if (!firstInvalid) firstInvalid = c;
+        }
       });
+      if (firstInvalid) {
+        const focusable = firstInvalid.querySelector('input, [data-dropdown-trigger]');
+        if (focusable) focusable.focus();
+        firstInvalid.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        return false;
+      }
+      return true;
     }
 
     function updateChrome() {
@@ -74,9 +148,10 @@
       if (nextBtn) nextBtn.hidden = isLastQ || isResult;
       if (submitBtn) submitBtn.hidden = !isLastQ || isResult;
       if (doneBtn) doneBtn.hidden = !isResult;
-      const valid = stepValid();
-      if (nextBtn) nextBtn.disabled = !valid;
-      if (submitBtn) submitBtn.disabled = !valid || form.dataset.state === 'submitting';
+      // Buttons stay enabled so a click can surface validation errors; only
+      // block the submit button while a request is in flight.
+      if (nextBtn) nextBtn.disabled = false;
+      if (submitBtn) submitBtn.disabled = form.dataset.state === 'submitting';
     }
 
     function goTo(target) {
@@ -90,7 +165,7 @@
 
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        if (!stepValid()) return;
+        if (!revealStepErrors()) return;
         if (idx >= questionSteps.length - 1) return;
         goTo(idx + 1);
       });
@@ -99,11 +174,12 @@
       backBtn.addEventListener('click', () => { if (idx > 0) goTo(idx - 1); });
     }
 
-    form.addEventListener('input', updateChrome);
-    form.addEventListener('change', updateChrome);
+    form.addEventListener('input', (e) => { clearIfValid(e.target); updateChrome(); });
+    form.addEventListener('change', (e) => { clearIfValid(e.target); updateChrome(); });
     form.addEventListener('reset', () => {
       setTimeout(() => {
         steps.forEach((s) => s.classList.remove('is-active'));
+        form.querySelectorAll('.waitlist-field.is-invalid, .waitlist-question.is-invalid').forEach(clearFieldError);
         idx = 0;
         steps[0].classList.add('is-active');
         setState('idle');
@@ -114,8 +190,10 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (!stepValid()) return;
       if (form.dataset.state === 'submitting') return;
+      if (!revealStepErrors()) return;
+      // Enter on an earlier step should advance, not submit.
+      if (idx < questionSteps.length - 1) { goTo(idx + 1); return; }
 
       const data = new FormData(form);
       const payload = {
@@ -171,7 +249,7 @@
     function setState(state) {
       form.dataset.state = state;
       if (submitBtn) {
-        submitBtn.disabled = state === 'submitting' || !stepValid();
+        submitBtn.disabled = state === 'submitting';
         submitBtn.classList.toggle('is-loading', state === 'submitting');
       }
     }
