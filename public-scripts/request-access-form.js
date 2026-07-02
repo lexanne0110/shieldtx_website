@@ -51,7 +51,10 @@
       const emailInput = step.querySelector('input[type="email"]');
       if (emailInput) {
         const v = emailInput.value.trim();
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return false;
+        // Also require any text inputs marked required on this step (name fields).
+        const requiredTexts = step.querySelectorAll('input[type="text"][required]');
+        return Array.from(requiredTexts).every((t) => t.value.trim().length > 0);
       }
       const selects = step.querySelectorAll('select');
       if (selects.length === 0) return true;
@@ -116,6 +119,8 @@
 
       const data = new FormData(form);
       const payload = {
+        first_name: (data.get('first_name') || '').toString().trim(),
+        last_name: (data.get('last_name') || '').toString().trim(),
         email: (data.get('email') || '').toString().trim(),
         'trade-type': data.get('trade-type') || null,
         platforms: data.getAll('platforms'),
