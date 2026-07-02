@@ -7401,6 +7401,24 @@ body.modal-locked { overflow: hidden; }
   border-radius: 8px;
 }
 
+/* Per-field validation states for the request-access form. Errors are
+   revealed on attempted Continue/Submit (see request-access-form.js). */
+.waitlist-field.is-invalid .waitlist-input,
+.waitlist-field.is-invalid .waitlist-input:hover {
+  background: color-mix(in srgb, var(--danger) 6%, var(--white));
+  box-shadow: inset 0 0 0 1.5px var(--danger);
+}
+.waitlist-question.is-invalid .waitlist-dropdown-trigger {
+  background: color-mix(in srgb, var(--danger) 6%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--danger);
+}
+.waitlist-inline-error {
+  margin: 8px 2px 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--danger-ink);
+}
+
 /* Final-CTA helper link sits on the brand-blue gradient where the default
    .faq-link blue is invisible. Swap to brand-cyan for contrast. */
 .final-cta-helper .faq-link {
