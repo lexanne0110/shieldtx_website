@@ -6069,6 +6069,62 @@ html[data-cursor-style="ring"] .shield-cursor-dot { display: none; }
 }
 
 /* =========================================================================
+   TRUST BAND — beta traction metrics (glass stat cards below the hero)
+   ========================================================================= */
+.trust-band {
+  /* Same snow surface as the surrounding light sections — the cards stand out
+     by elevation (shadow), not a background tint, so the page scrolls with no
+     tonal seam. Bottom padding gives the card shadow room to render before the
+     problem section (which is position:relative + opaque) paints over it. */
+  padding: 72px 0 40px;
+  background: var(--bg-primary);
+}
+.trust-band + .problem { padding-top: 32px; }
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.trust-card {
+  /* White fill; stands out from the snow page by elevation. No stroke — the
+     two-layer shadow supplies the edge and the lift. The band below needs
+     bottom padding so this shadow isn't clipped by the next section. */
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 28px 30px;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 18px 40px -20px rgba(15, 23, 42, 0.16);
+}
+.trust-num {
+  display: block;
+  font-family: 'Geist', sans-serif;
+  font-size: 46px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--brand-blue-deep);
+  font-variant-numeric: tabular-nums;
+}
+.trust-lab {
+  display: block;
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--fg-secondary);
+}
+@media (max-width: 900px) {
+  .trust-band { padding: 44px 0 26px; }
+  .trust-band + .problem { padding-top: 22px; }
+  .trust-grid { grid-template-columns: 1fr; gap: 12px; }
+  .trust-card { padding: 20px 22px 22px; }
+  .trust-num { font-size: 34px; }
+  .trust-lab { font-size: 14px; margin-top: 8px; }
+}
+
+/* =========================================================================
    PROBLEM — Your wallet exposes everything (3 cards)
    ========================================================================= */
 .problem {
@@ -7488,5 +7544,20 @@ body.modal-locked { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   .btn-pill.is-loading::after { animation: none; }
+}
+
+/* =========================================================================
+   Seamless light sections — the page alternated between snow (#f8fafc) and
+   ice (#f1f5f9) tinted section backgrounds, and each tonal edge read as a
+   visible seam while scrolling. Unify every light section to the snow tone so
+   the light stretches flow continuously. Dark sections (hero, scan-band,
+   final-cta, footer) keep their intentional contrast. Placed last so it wins
+   over the per-section background rules regardless of their source order.
+   ========================================================================= */
+.today,
+.how,
+.features,
+.compare.compare-dark {
+  background: var(--bg-primary);
 }
 
