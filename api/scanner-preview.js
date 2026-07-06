@@ -6,44 +6,65 @@ const { sendJson, methodNotAllowed } = require('./_shared');
 const walletRe = /^0x[0-9a-f]{40}$/i;
 
 function scannerApiBase() {
-  return (process.env.SCANNER_API_BASE || 'https://scanner-api-canary.shieldtx.avail.tools').replace(/\/+$/, '');
+  return (process.env.SCANNER_API_BASE || 'https://scanner-v2-canary.shieldtx.avail.tools').replace(/\/+$/, '');
 }
 
-function firstArrayItem(value) {
-  return Array.isArray(value) && value.length > 0 ? value[0] : null;
+function numberOrNull(value) {
+  if (value === null || value === undefined || value === '') return null;
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
 }
 
-function pickIdentity(identity) {
-  if (!identity || typeof identity !== 'object') return null;
+function stringOrNull(value) {
+  return typeof value === 'string' && value.trim() ? value.trim() : null;
+}
+
+function objectOrEmpty(value) {
+  return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+}
+
+function publicStatus(value, fallback = 'unavailable') {
+  return stringOrNull(value) || fallback;
+}
+
+function publicWarning(warning) {
+  if (!warning || typeof warning !== 'object') return null;
   return {
-    display_name: identity.display_name || '',
-    ens: identity.ens || '',
-    twitter_handle: identity.twitter_handle || '',
-    farcaster_username: identity.farcaster_username || '',
-    arkham_label: identity.arkham_label || '',
+    field: stringOrNull(warning.field),
+    status: publicStatus(warning.status),
+    message: stringOrNull(warning.message),
   };
 }
 
 function shapePreview(data, address) {
-  const topCoin = firstArrayItem(data.most_copied_coins);
+  const source = objectOrEmpty(data);
+  const fieldMeta = objectOrEmpty(source.field_meta);
+  const coverage = {
+    scan: publicStatus(source.state),
+    data_quality: publicStatus(source.data_quality, 'unknown'),
+    stale: Boolean(source.stale),
+    copy: publicStatus(source.copier_count_status || objectOrEmpty(fieldMeta.copier_count).status),
+    positions: publicStatus(source.position_status || objectOrEmpty(fieldMeta.positions).status),
+    activity: publicStatus(source.activity_status, 'unknown'),
+  };
 
   return {
     ok: true,
     address,
-    privacy_score: data.privacy_score,
-    privacy_score_label: data.privacy_score_label,
-    copier_count: data.copier_count,
-    avg_copier_delay_ms: data.avg_copier_delay_ms,
-    alpha_leakage_usd_30d: data.alpha_leakage_usd_30d,
-    position_count: data.position_count,
-    account_value: data.account_value,
-    identity: pickIdentity(data.identity),
-    most_copied_coins: topCoin
-      ? [{
-          coin: topCoin.coin,
-          matching_fills: topCoin.matching_fills,
-          copier_count: topCoin.copier_count,
-        }]
+    state: coverage.scan,
+    privacy_score: numberOrNull(source.privacy_score),
+    privacy_score_label: stringOrNull(source.privacy_score_label),
+    privacy_tier: numberOrNull(source.privacy_tier),
+    copy_exposure: numberOrNull(source.signal_copy_exposure),
+    copier_count: numberOrNull(source.copier_count),
+    copier_count_status: coverage.copy,
+    recent_activity: {
+      fill_count: numberOrNull(source.recent_fill_count),
+      status: coverage.activity,
+    },
+    coverage,
+    data_warnings: Array.isArray(source.data_warnings)
+      ? source.data_warnings.map(publicWarning).filter(Boolean).slice(0, 4)
       : [],
   };
 }

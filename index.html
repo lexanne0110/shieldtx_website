@@ -450,21 +450,21 @@
         <div class="container">
           <header class="scan-head">
             <span class="eyebrow inv">Scan your wallet</span>
-            <h2 class="section-title inv" data-split>See who's following your Hyperliquid activity.</h2>
-            <p class="scan-sub" data-reveal>See what copy traders can access using only public data. Identify the wallets following you today. Paste your Hyperliquid trading address below.</p>
+            <h2 class="section-title inv" data-split>Preview your public wallet exposure.</h2>
+            <p class="scan-sub" data-reveal>Run a public ShieldTX scanner preview with only a wallet address. We show exposure, activity, and coverage here, then open the scanner with this wallet preloaded for email unlock.</p>
           </header>
 
-          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate data-scanner-url="https://scanner-canary.shieldtx.avail.tools/" data-preview-endpoint="/api/scanner-preview" data-report-endpoint="/api/scanner-report">
+          <form class="scan-form" id="scan-form" onsubmit="return false" data-reveal novalidate data-scanner-url="https://scanner-v2-canary.shieldtx.avail.tools/" data-preview-endpoint="/api/scanner-preview">
             <input class="scan-form-input" id="scan-addr" type="text" placeholder="0x… your Hyperliquid address" spellcheck="false" autocomplete="off" aria-describedby="scan-error" />
-            <button class="btn-pill btn-primary" id="scan-run" type="submit">Check exposure</button>
+            <button class="btn-pill btn-primary" id="scan-run" type="submit">Preview scan</button>
           </form>
           <p class="scan-form-error" id="scan-error" role="alert" hidden>Enter a valid wallet address starting with 0x.</p>
 
           <div class="scan-prefill" data-reveal>
             <span class="scan-prefill-label">Don't have an address?</span>
-            <button class="scan-prefill-chip" type="button" data-prefill="0x8050706eb79e2e1128a3a96b50ece6e74e1428de">Try sample whale</button>
-            <button class="scan-prefill-chip" type="button" data-prefill="0x357f06a2d9e4423ac1ac2d77552954eb839aa3c4">Try sample alpha trader</button>
-            <button class="scan-prefill-chip" type="button" data-prefill="0xa9881f6f5493fed3ce3346c5cb1a1e9ba80f7060">Try sample leaderboard</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0xecb63caa47c7c4e77f60f1ce858cf28dc2b82b00">Very high activity</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0x399965e15d4e61ec3529cc98b7f7ebb93b733336">High exposure</button>
+            <button class="scan-prefill-chip" type="button" data-prefill="0xa9881f6f5493fed3ce3346c5cb1a1e9ba80f7060">Active copy cluster</button>
           </div>
         </div>
       </div>
@@ -472,66 +472,60 @@
       <div class="scan-results" id="scan-results">
         <div class="container">
           <div class="stats-panel" id="stats-panel" aria-hidden="true">
-            <p class="stats-footnote" data-reveal id="preview-summary">Live scanner preview. Full report unlocks after waitlist capture.</p>
+            <p class="stats-footnote" data-reveal id="preview-summary">Public scanner preview. Unlock detailed scanner sections in the scanner.</p>
 
             <div class="stats-grid">
               <article class="stat-card">
                 <div class="stat-label">Exposure score</div>
-                <div class="stat-val"><span class="stat-num" id="preview-score" data-count-to="0">0</span><sub>/100</sub></div>
-                <div class="stat-meta" id="preview-score-meta">Higher means easier to track.</div>
+                <div class="stat-val"><span class="stat-num" id="preview-score">—</span><sub>/100</sub></div>
+                <div class="stat-meta" id="preview-score-meta">Score availability appears after a scan.</div>
                 <div class="stat-bar"><span id="preview-score-bar" style="--p:0%"></span></div>
               </article>
               <article class="stat-card">
-                <div class="stat-label">Copy traders</div>
-                <div class="stat-val"><span class="stat-num" id="preview-copiers" data-count-to="0">0</span></div>
-                <div class="stat-meta" id="preview-copiers-meta">Wallets detected mirroring this address.</div>
+                <div class="stat-label">Copy exposure</div>
+                <div class="stat-val"><span class="stat-num" id="preview-copy-exposure">—</span><sub>/100</sub></div>
+                <div class="stat-meta" id="preview-copy-exposure-meta">Copy-trading signal availability appears after a scan.</div>
+                <div class="stat-bar"><span id="preview-copy-exposure-bar" style="--p:0%"></span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-label">Detected copiers</div>
+                <div class="stat-val"><span class="stat-num" id="preview-copiers">—</span></div>
+                <div class="stat-meta" id="preview-copiers-meta">Copier coverage appears after a scan.</div>
                 <div class="stat-bar"><span id="preview-copiers-bar" style="--p:0%"></span></div>
               </article>
               <article class="stat-card">
-                <div class="stat-label">Avg follow speed</div>
-                <div class="stat-val"><span class="stat-num" id="preview-delay" data-count-to="0" data-decimals="1">0.0</span><sub>s</sub></div>
-                <div class="stat-meta">From target fill to copier fill.</div>
-                <div class="stat-bar"><span id="preview-delay-bar" style="--p:0%"></span></div>
+                <div class="stat-label">Recent activity</div>
+                <div class="stat-val"><span class="stat-num" id="preview-activity">—</span></div>
+                <div class="stat-meta" id="preview-activity-meta">Recent fill activity appears after a scan.</div>
+                <div class="stat-bar"><span id="preview-activity-bar" style="--p:0%"></span></div>
               </article>
               <article class="stat-card">
-                <div class="stat-label">Estimated leakage</div>
-                <div class="stat-val"><span class="stat-num stat-num-money" id="preview-leakage">$0</span></div>
-                <div class="stat-meta">30-day copier PnL linked to this wallet.</div>
-                <div class="stat-bar"><span id="preview-leakage-bar" style="--p:0%"></span></div>
+                <div class="stat-label">Coverage status</div>
+                <div class="stat-val"><span class="stat-num stat-num-status" id="preview-coverage">—</span></div>
+                <div class="stat-meta" id="preview-coverage-meta">Scanner coverage appears after a scan.</div>
+                <div class="stat-bar"><span id="preview-coverage-bar" style="--p:0%"></span></div>
               </article>
             </div>
 
             <div class="wallets-panel">
-              <div class="wp-head">What this wallet broadcasts</div>
+              <div class="wp-head">Public preview status</div>
               <ul class="wp-published">
-                <li><span class="wp-pub-k">Visible positions</span><span class="wp-pub-v" id="preview-positions">Checking</span></li>
-                <li><span class="wp-pub-k">Account value</span><span class="wp-pub-v" id="preview-account">Checking</span></li>
-                <li><span class="wp-pub-k">Most copied coin</span><span class="wp-pub-v" id="preview-top-coin">Checking</span></li>
-                <li><span class="wp-pub-k">Identity signals</span><span class="wp-pub-v" id="preview-identity">Checking</span></li>
-              </ul>
-            </div>
-
-            <div class="wallets-panel">
-              <div class="wp-head">Full scanner unlocks</div>
-              <ul class="wp-published">
-                <li><span class="wp-pub-k">Copy-trader addresses</span><span class="wp-pub-v">Gated</span></li>
-                <li><span class="wp-pub-k">Coin + hour copy map</span><span class="wp-pub-v">Gated</span></li>
-                <li><span class="wp-pub-k">Behavior fingerprint</span><span class="wp-pub-v">Gated</span></li>
-                <li><span class="wp-pub-k">Similar wallets</span><span class="wp-pub-v">Gated</span></li>
+                <li><span class="wp-pub-k">Copy coverage</span><span class="wp-pub-v" id="preview-copy-status">Checking</span></li>
+                <li><span class="wp-pub-k">Position coverage</span><span class="wp-pub-v" id="preview-position-status">Checking</span></li>
+                <li><span class="wp-pub-k">Data quality</span><span class="wp-pub-v" id="preview-quality">Checking</span></li>
+                <li><span class="wp-pub-k">Scanner state</span><span class="wp-pub-v" id="preview-scanner-status">Checking</span></li>
               </ul>
             </div>
 
             <div class="scan-unlock-panel">
               <div class="scan-unlock-copy">
-                <span class="eyebrow">Full scanner</span>
-                <h3>Email the detailed wallet report.</h3>
-                <p>Get the full report in your inbox and continue to the scanner with this wallet preloaded.</p>
+                <span class="eyebrow">Detailed scanner</span>
+                <h3>Unlock deeper wallet intelligence.</h3>
+                <p>Continue to the scanner to unlock detailed copy-trader relationships, wallet PnL, and current position exposure where available. Marketing attribution is carried with the link; email capture happens in the scanner.</p>
               </div>
-              <form class="scan-unlock-form" id="scan-unlock-form" novalidate>
-                <input class="scan-unlock-input" id="scan-unlock-email" type="email" name="email" placeholder="you@domain.com" autocomplete="email" spellcheck="false" required />
-                <button class="btn-pill btn-primary" type="submit">Email full report <span aria-hidden="true">→</span></button>
-                <p class="scan-unlock-error" id="scan-unlock-error" role="alert" hidden></p>
-              </form>
+              <div class="scan-open-actions">
+                <a class="btn-pill btn-primary" id="scan-open-cta" href="https://scanner-v2-canary.shieldtx.avail.tools/?utm_source=shieldtx_xyz&amp;utm_campaign=scanner_growth&amp;source=shieldtx_xyz" target="_blank" rel="noopener noreferrer">Open detailed scanner <span aria-hidden="true">→</span></a>
+              </div>
             </div>
           </div>
         </div>
