@@ -350,6 +350,45 @@
     el.textContent = decimals > 0 ? Number(value).toFixed(decimals) : '0';
   }
 
+  function setCompactCountTarget(el, value) {
+    if (!el) return;
+    el.removeAttribute('data-count-to');
+    delete el.dataset.counted;
+    delete el.dataset.decimals;
+    el.textContent = value === null || value === undefined ? '—' : formatCompactNumber(value);
+  }
+
+  function previewAvailabilityLabel(status, unavailableLabel = 'Unlock in scanner') {
+    switch (status) {
+      case 'ready':
+      case 'complete':
+      case 'active':
+        return 'Available';
+      case 'partial':
+        return 'Partial preview';
+      case 'stale':
+        return 'Latest available';
+      case 'not_in_dataset':
+        return 'Not found';
+      case 'unknown':
+        return 'Unknown';
+      case 'unavailable':
+      case undefined:
+      case null:
+      case '':
+        return unavailableLabel;
+      default:
+        return statusLabel(status);
+    }
+  }
+
+  function freshnessLabel(status, stale) {
+    if (stale || status === 'stale') return 'Latest snapshot';
+    if (status === 'ready' || status === 'complete' || status === 'active') return 'Ready';
+    if (status === 'not_in_dataset') return 'Not found';
+    return previewAvailabilityLabel(status, 'Unavailable');
+  }
+
   function setBar(el, pct) {
     if (!el) return;
     const clamped = Math.max(0, Math.min(100, Math.round(pct)));
@@ -375,13 +414,13 @@
 
   function statusSentence(status, fallback) {
     switch (status) {
-      case 'ready': return 'Coverage is ready for this public preview.';
-      case 'complete': return 'Coverage is complete for this public preview.';
-      case 'partial': return 'Coverage is partial; Scanner V2 will show available detail.';
-      case 'stale': return 'Coverage is available from the latest snapshot.';
-      case 'active': return 'Recent public trading activity is present.';
-      case 'not_in_dataset': return 'This wallet is not in the current Scanner V2 dataset.';
-      case 'unknown': return 'Scanner V2 has no recent activity status for this wallet.';
+      case 'ready': return 'Preview data is ready.';
+      case 'complete': return 'Preview data is complete.';
+      case 'partial': return 'A partial preview is available; the full scanner shows more detail.';
+      case 'stale': return 'Preview uses the latest scanner snapshot.';
+      case 'active': return 'Public trading activity is present.';
+      case 'not_in_dataset': return 'This wallet is not in the current scanner dataset.';
+      case 'unknown': return 'The scanner has no recent activity status for this wallet.';
       default: return fallback;
     }
   }
@@ -417,48 +456,52 @@
     setBar(previewEls.scoreBar, score === null ? 0 : score);
     if (previewEls.scoreMeta) {
       previewEls.scoreMeta.textContent = score === null
-        ? statusSentence(scanStatus, 'Exposure score is unavailable for this wallet.')
+        ? statusSentence(scanStatus, 'Public visibility is unavailable for this wallet.')
         : score > 70
-          ? 'High public tracking surface detected.'
+          ? 'This wallet is highly visible to public trackers.'
           : score > 40
-            ? 'Meaningful public tracking surface detected.'
-            : 'Lower exposure, but still public.';
+            ? 'This wallet leaves a meaningful public footprint.'
+            : 'Lower visibility, but still public.';
     }
 
     setCountTarget(previewEls.copyExposure, copyExposure, 0);
     setBar(previewEls.copyExposureBar, copyExposure === null ? 0 : copyExposure);
     if (previewEls.copyExposureMeta) {
       previewEls.copyExposureMeta.textContent = copyExposure === null
-        ? statusSentence(copyStatus, 'Copy exposure is unavailable in this preview.')
-        : `${statusLabel(copyStatus)} copy signal.`;
+        ? statusSentence(copyStatus, 'Copy-trader pressure is unavailable in this preview.')
+        : copyExposure > 70
+          ? 'Heavy copy-trading pressure detected.'
+          : copyExposure > 30
+            ? 'Meaningful copy-trading pressure detected.'
+            : 'Copy-trading patterns are present, but not the main risk here.';
     }
 
-    setCountTarget(previewEls.copiers, copiers, 0);
+    setCompactCountTarget(previewEls.copiers, copiers);
     setBar(previewEls.copiersBar, copiers === null ? 0 : Math.min(100, copiers * 4));
     if (previewEls.copiersMeta) {
       previewEls.copiersMeta.textContent = copiers === null
-        ? statusSentence(copyStatus, 'Detected copier count is unavailable in this preview.')
+        ? statusSentence(copyStatus, 'Likely copy-trader count is unavailable in this preview.')
         : copiers === 1
-          ? '1 wallet detected mirroring this address.'
-          : `${formatCompactNumber(copiers)} wallets detected mirroring this address.`;
+          ? '1 wallet shows behavior that tracks this address.'
+          : 'Wallets showing behavior that tracks this address.';
     }
 
-    setCountTarget(previewEls.activity, fillCount, 0);
+    setCompactCountTarget(previewEls.activity, fillCount);
     setBar(previewEls.activityBar, fillCount === null ? statusPct(recent.status) : Math.min(100, Math.max(12, fillCount / 5)));
     if (previewEls.activityMeta) {
       previewEls.activityMeta.textContent = fillCount === null
-        ? statusSentence(recent.status, 'Recent public activity is unavailable in this preview.')
-        : `${formatCompactNumber(fillCount)} recent public fills in the scanner dataset.`;
+        ? statusSentence(recent.status, 'Public trading activity is unavailable in this preview.')
+        : 'Public fills observed in the scanner dataset.';
     }
 
-    if (previewEls.coverage) previewEls.coverage.textContent = statusLabel(scanStatus);
+    if (previewEls.coverage) previewEls.coverage.textContent = freshnessLabel(scanStatus, Boolean(coverage.stale));
     setBar(previewEls.coverageBar, statusPct(scanStatus === 'ready' ? quality : scanStatus));
-    if (previewEls.coverageMeta) previewEls.coverageMeta.textContent = statusSentence(scanStatus, `${statusLabel(quality)} data quality.`);
+    if (previewEls.coverageMeta) previewEls.coverageMeta.textContent = statusSentence(scanStatus, `${previewAvailabilityLabel(quality)} data confidence.`);
 
-    if (previewEls.copyStatus) previewEls.copyStatus.textContent = statusLabel(notInDataset ? 'unavailable' : copyStatus);
-    if (previewEls.positionStatus) previewEls.positionStatus.textContent = statusLabel(notInDataset ? 'unavailable' : coverage.positions);
-    if (previewEls.quality) previewEls.quality.textContent = statusLabel(quality);
-    if (previewEls.scannerStatus) previewEls.scannerStatus.textContent = coverage.stale ? 'Stale Snapshot' : statusLabel(scanStatus);
+    if (previewEls.copyStatus) previewEls.copyStatus.textContent = previewAvailabilityLabel(notInDataset ? 'unavailable' : copyStatus, 'Unavailable');
+    if (previewEls.positionStatus) previewEls.positionStatus.textContent = previewAvailabilityLabel(notInDataset ? 'unavailable' : coverage.positions);
+    if (previewEls.quality) previewEls.quality.textContent = previewAvailabilityLabel(quality, 'Unavailable');
+    if (previewEls.scannerStatus) previewEls.scannerStatus.textContent = freshnessLabel(scanStatus, Boolean(coverage.stale));
     updateOpenCta(data.address || lastScannedWallet);
   }
 
