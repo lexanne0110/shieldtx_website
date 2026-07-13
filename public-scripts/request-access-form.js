@@ -206,6 +206,7 @@
         pain: data.get('pain') || null,
         protection: data.getAll('protection'),
         urgency: data.get('urgency') || null,
+        api_interest: !!data.get('api_interest'),
         company_url: data.get('company_url') || '',
       };
 

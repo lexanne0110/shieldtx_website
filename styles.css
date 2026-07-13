@@ -7446,6 +7446,53 @@ body.modal-locked { overflow: hidden; }
   color: var(--danger-ink);
 }
 
+/* Optional API-interest checkbox at the bottom of Step 3. */
+.waitlist-check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.waitlist-check input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.waitlist-check-box {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.05);
+  box-shadow: inset 0 0 0 1.5px rgba(15, 23, 42, 0.15);
+  color: var(--white);
+  transition: background .15s var(--ease), box-shadow .15s var(--ease);
+}
+.waitlist-check-box svg {
+  width: 12px;
+  height: 10px;
+  opacity: 0;
+  transition: opacity .15s var(--ease);
+}
+.waitlist-check input:checked + .waitlist-check-box {
+  background: var(--brand-blue);
+  box-shadow: inset 0 0 0 1.5px var(--brand-blue);
+}
+.waitlist-check input:checked + .waitlist-check-box svg { opacity: 1; }
+.waitlist-check input:focus-visible + .waitlist-check-box {
+  box-shadow: inset 0 0 0 1.5px var(--brand-blue), 0 0 0 4px rgba(51, 112, 255, 0.14);
+}
+.waitlist-check-text {
+  font-size: 15px;
+  color: var(--fg-primary);
+}
+
 /* Final-CTA helper link sits on the brand-blue gradient where the default
    .faq-link blue is invisible. Swap to brand-cyan for contrast. */
 .final-cta-helper .faq-link {
