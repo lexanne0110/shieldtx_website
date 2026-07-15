@@ -1,5 +1,5 @@
 /* =========================================================================
-   CONTACT — minimal centered form (Linear / Vercel style)
+   CONTACT US / SUPPORT — minimal centered form (Linear / Vercel style)
    ========================================================================= */
 
 .contact-body { background: var(--bg-primary); }
@@ -120,30 +120,12 @@
   text-align: center;
 }
 
-.contact-min-direct {
-  margin: 36px 0 0;
-  font-size: 13px;
-  color: var(--fg-muted);
-  text-align: center;
-  line-height: 1.7;
-}
-.contact-min-direct a {
-  color: var(--brand-blue-deep);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  transition: color .2s var(--ease);
-  white-space: nowrap;
-}
-.contact-min-direct a:hover { color: var(--brand-blue); }
-
 @media (max-width: 640px) {
   .contact-min { padding: 96px 20px 80px; }
   .contact-min-head { margin-bottom: 36px; }
-  .contact-min-direct { line-height: 2; }
 }
 
-/* Light nav on contact page (no dark hero band anymore) */
+/* Light nav on the support page (no dark hero band). */
 .contact-body .nav {
   background: rgba(248, 250, 252, .78);
   backdrop-filter: blur(14px) saturate(160%);

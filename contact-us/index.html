@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact · ShieldTX</title>
-  <meta name="description" content="Get in touch with ShieldTX for trading questions, enterprise inquiries, or early API access conversations." />
-  <link rel="canonical" href="https://www.shieldtx.xyz/contact" />
+  <title>Contact Us · ShieldTX</title>
+  <meta name="description" content="Contact ShieldTX support. Send us your email, the subject of your query, and the details — most replies within one business day." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/contact-us" />
 
   <link rel="icon" type="image/svg+xml" href="../assets/ShieldTX_LogoMark.svg" />
 
@@ -14,10 +14,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="/styles.css?v=76" />
-  <link rel="stylesheet" href="/contact/styles.css?v=75" />
+  <link rel="stylesheet" href="/contact-us/styles.css?v=1" />
 </head>
 <body class="contact-body">
-  <!-- Simplified nav -->
   <!-- @partial nav -->
   <header class="nav ">
     <a class="nav-logo" href="/" aria-label="ShieldTX">
@@ -27,6 +26,7 @@
       <a href="/">Home</a>
       <a href="/#features">Features</a>
       <a href="/blog">Blog</a>
+      <a href="/contact-us/">Contact</a>
       <!-- In-menu CTA: shown only inside the mobile dropdown (≤960px); the bar
            CTA below is hidden there. Keeps one pill visible per breakpoint. -->
       <a class="nav-cta-mobile btn-pill btn-primary" href="https://beta.shieldtx.xyz" target="_blank" rel="noopener noreferrer">Open App</a>
@@ -70,43 +70,42 @@
   <!-- /@partial nav -->
 
   <main id="top">
-    <!-- Minimal centered contact form (Linear/Vercel style) -->
+    <!-- Minimal centered support form -->
     <section class="contact-min">
       <div class="contact-min-wrap">
         <header class="contact-min-head">
-          <span class="eyebrow">Contact</span>
-          <h1 class="contact-min-title">Talk to the team.</h1>
-          <p class="contact-min-sub">Most replies in a business day. For beta access, write <b>beta</b> in your message.</p>
+          <span class="eyebrow">Support</span>
+          <h1 class="contact-min-title">Contact us.</h1>
+          <p class="contact-min-sub">Questions, issues, or anything else — tell us what's up.</p>
         </header>
 
-        <form class="contact-min-form" id="contact-form" data-state="idle" novalidate>
+        <form class="contact-min-form" id="support-form" data-state="idle" novalidate>
           <div class="waitlist-honeypot" aria-hidden="true">
             <label>Company URL<input type="text" name="company_url" tabindex="-1" autocomplete="off" /></label>
           </div>
-          <label class="contact-min-field">
-            <span class="contact-min-label">Name</span>
-            <input class="contact-min-input" type="text" name="name" required autocomplete="name" placeholder="Jane Smith" />
-          </label>
           <label class="contact-min-field">
             <span class="contact-min-label">Email</span>
             <input class="contact-min-input" type="email" name="email" required autocomplete="email" placeholder="you@domain.com" />
           </label>
           <label class="contact-min-field">
-            <span class="contact-min-label">Message</span>
-            <textarea class="contact-min-input contact-min-textarea" name="message" rows="5" required placeholder="A few sentences is plenty."></textarea>
+            <span class="contact-min-label">Subject</span>
+            <input class="contact-min-input" type="text" name="subject" required maxlength="150" placeholder="What's your query about?" />
           </label>
-          <p class="contact-min-error" data-contact-error role="alert" aria-live="polite" hidden></p>
-          <button class="contact-min-submit btn-pill btn-primary" type="submit" data-contact-submit>
+          <label class="contact-min-field">
+            <span class="contact-min-label">Details</span>
+            <textarea class="contact-min-input contact-min-textarea" name="details" rows="5" required placeholder="Share the details so we can help."></textarea>
+          </label>
+          <p class="contact-min-error" data-support-error role="alert" aria-live="polite" hidden></p>
+          <button class="contact-min-submit btn-pill btn-primary" type="submit" data-support-submit>
             <span class="contact-min-submit-label">Send message</span>
             <span aria-hidden="true">→</span>
           </button>
-          <p class="contact-min-success" data-contact-success aria-live="polite" hidden>Thanks. We'll be in touch within one business day.</p>
+          <p class="contact-min-success" data-support-success aria-live="polite" hidden>Thanks — your query is in. We'll be in touch within one business day.</p>
         </form>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <!-- @partial footer -->
   <footer class="footer">
     <div class="container footer-grid">
@@ -132,7 +131,7 @@
       <div class="footer-col">
         <h4>Company</h4>
         <a href="/request-access">Request access</a>
-        <a href="/contact/">Contact ↗</a>
+        <a href="/contact-us/">Contact ↗</a>
       </div>
     </div>
     <div class="footer-bottom container">
@@ -162,13 +161,13 @@
       const y = document.getElementById('yr');
       if (y) y.textContent = new Date().getFullYear();
 
-      const form = document.getElementById('contact-form');
+      const form = document.getElementById('support-form');
       if (!form) return;
 
-      const submitBtn = form.querySelector('[data-contact-submit]');
+      const submitBtn = form.querySelector('[data-support-submit]');
       const submitLabel = form.querySelector('.contact-min-submit-label');
-      const errorEl = form.querySelector('[data-contact-error]');
-      const successEl = form.querySelector('[data-contact-success]');
+      const errorEl = form.querySelector('[data-support-error]');
+      const successEl = form.querySelector('[data-support-success]');
 
       function setState(state) {
         form.dataset.state = state;
@@ -197,13 +196,13 @@
 
         const fd = new FormData(form);
         const payload = {
-          name: (fd.get('name') || '').toString().trim(),
           email: (fd.get('email') || '').toString().trim(),
-          message: (fd.get('message') || '').toString().trim(),
+          subject: (fd.get('subject') || '').toString().trim(),
+          details: (fd.get('details') || '').toString().trim(),
           company_url: fd.get('company_url') || '',
         };
 
-        if (!payload.name || !payload.email || !payload.message) {
+        if (!payload.email || !payload.subject || !payload.details) {
           showError('Please fill in every field.');
           return;
         }
@@ -212,7 +211,7 @@
         showError('');
 
         try {
-          const res = await fetch('/api/contact', {
+          const res = await fetch('/api/support', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -230,7 +229,7 @@
             showError(json.error || 'Submission failed. Please try again.');
           }
         } catch (err) {
-          console.error('[contact] network error', err);
+          console.error('[support] network error', err);
           setState('idle');
           showError('Network error. Please try again.');
         }
