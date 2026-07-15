@@ -20,7 +20,7 @@ Open <http://localhost:3000>.
 .
 ├── api/                          # Vercel serverless functions
 │   ├── request-access.js         # POST submissions from the hero modal + /request-access
-│   ├── contact.js                # POST submissions from /contact
+│   ├── support.js                # POST submissions from /contact-us (Contact Us / support)
 │   └── _shared.js                # tiny req/res helpers
 ├── lib/                          # Server-only helpers (Node)
 │   ├── db.js                     # DB adapter — in-memory stub; swap for Supabase/Neon later
@@ -31,7 +31,7 @@ Open <http://localhost:3000>.
 │   └── request-access-form.js    # bindRequestAccessForm — multi-step screener + brand dropdowns
 ├── assets/                       # Logos + demo video
 ├── request-access/               # /request-access — full-page permalink for the form
-├── contact/                      # /contact — name/email/message form (POSTs to /api/contact)
+├── contact-us/                   # /contact-us — email/subject/details form (POSTs to /api/support)
 ├── trust-model/                  # /trust-model — on-chain trust docs
 ├── brand-document/               # Internal brand spec (not linked from public nav)
 ├── index.html                    # Landing page (hero, features, FAQ, modal)
@@ -49,7 +49,7 @@ Open <http://localhost:3000>.
 
 - `/` — Landing
 - `/request-access` — Form permalink (also embedded in the landing modal)
-- `/contact` — General contact form
+- `/contact-us` — Contact Us / support form (email, subject, details)
 - `/trust-model` — On-chain trust docs
 - `/brand-document` — Internal brand spec (excluded from robots + sitemap)
 
@@ -67,20 +67,22 @@ Two forms, two endpoints. All do real validation, IP-keyed rate limiting, a hidd
 | ----------------------------- | ----------------------- | ------------------------------------------------------------- |
 | Hero modal "Request Access"   | `POST /api/request-access` | `index.html` (mirrored in `/request-access`)               |
 | Permalink page                | `POST /api/request-access` | `request-access/index.html`                                   |
-| Contact                       | `POST /api/contact`        | `contact/index.html`                                           |
+| Contact Us / support          | `POST /api/support`        | `contact-us/index.html`                                       |
 
-The Request Access form markup is duplicated across two pages. Behavior is shared via `public-scripts/request-access-form.js → ShieldTX.bindRequestAccessForm(formEl, { mode })`. When editing fields, update both HTML copies.
+The Request Access form markup is duplicated across two pages. Behavior is shared via `public-scripts/request-access-form.js → ShieldTX.bindRequestAccessForm(formEl, { mode })`. When editing fields, update both HTML copies. The support form is self-contained (inline script in `contact-us/index.html`).
+
+Both `request-access` and `support` mirror submissions into Airtable via `lib/db.js → appendToAirtable(fields, tableName)` — request-access → `AIRTABLE_TABLE` (default "Invite Requests"), support → `AIRTABLE_SUPPORT_TABLE` (default "Support Queries"). No-op until `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` are set.
 
 ## DB
 
-`lib/db.js` is the only place that touches storage. It exports two functions used by every API handler:
+`lib/db.js` is the only place that touches storage. It exports two functions used by the API handlers:
 
 ```js
-insertRequestAccess(payload)  // → { id }
-insertContact(payload)        // → { id }
+insertRequestAccess(payload)  // → { id }  (+ Airtable mirror)
+insertSupport(payload)        // → { id }  (+ Airtable mirror)
 ```
 
-Today's implementation is an in-memory stub (lost on cold start). To wire a real DB (Supabase / Neon / Vercel Postgres), replace those two function bodies — the API handlers don't reach inside.
+Today's implementation is an in-memory stub (lost on cold start) plus the optional Airtable mirror. To wire a real DB (Supabase / Neon / Vercel Postgres), replace those two function bodies — the API handlers don't reach inside.
 
 Schema proposal is in the plan doc.
 
