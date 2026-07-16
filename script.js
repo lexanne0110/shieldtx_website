@@ -863,6 +863,23 @@
     });
   });
 
+  // -------- Deep-link: auto-open FAQ via hash (#fees) --------
+  const openFaqByHash = (hash) => {
+    if (hash !== '#fees') return;
+    const targetItem = document.getElementById('fees');
+    if (!targetItem || !faqItems.length) return;
+    faqItems.forEach(closeFaq);
+    requestAnimationFrame(() => {
+      openFaq(targetItem);
+      const navH = document.querySelector('.nav')?.offsetHeight || 0;
+      const rect = targetItem.getBoundingClientRect();
+      const scrollTop = window.scrollY + rect.top - navH - 24;
+      window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+    });
+  };
+  openFaqByHash(window.location.hash);
+  window.addEventListener('hashchange', () => openFaqByHash(window.location.hash));
+
   // Expose lenis so other modules (e.g. nav menu scroll handling) can reach it.
   window.lenis = lenis;
 
