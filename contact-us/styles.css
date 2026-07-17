@@ -46,79 +46,35 @@
 }
 .contact-min-sub b { font-weight: 600; color: var(--brand-blue-deep); }
 
-.contact-min-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.contact-min-field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.contact-min-label {
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 11px;
+/* Clickable support email — the whole "form" is now just this address. */
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  margin: 8px auto 0;
+  padding: 16px 28px;
+  font-size: clamp(15px, 4.2vw, 19px);
   font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-}
-
-/* Borderless by default; fill-only. Borders appear only on focus. */
-.contact-min-input {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  border: none;
-  outline: none;
-  background: rgba(15, 23, 42, 0.05);
-  color: var(--fg-primary);
-  font-family: inherit;
-  font-size: 15.5px;
-  padding: 13px 16px;
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 1px transparent;
-  transition: background .2s var(--ease), box-shadow .2s var(--ease);
-}
-.contact-min-input::placeholder { color: var(--fg-muted); }
-.contact-min-input:hover { background: rgba(15, 23, 42, 0.075); }
-.contact-min-input:focus,
-.contact-min-input:focus-visible {
+  letter-spacing: -0.01em;
+  color: var(--brand-blue-deep);
   background: var(--white);
+  border-radius: var(--radius-pill);
   box-shadow:
-    inset 0 0 0 1.5px var(--brand-blue),
-    0 0 0 4px rgba(51, 112, 255, 0.14);
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 16px 36px -20px rgba(15, 23, 42, 0.16);
+  transition: color .2s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
+  word-break: break-all;
 }
-
-.contact-min-textarea {
-  font-family: inherit;
-  resize: vertical;
-  min-height: 120px;
-  line-height: 1.55;
+.contact-email:hover,
+.contact-email:focus-visible {
+  color: var(--brand-blue);
+  transform: translateY(-1px);
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.08),
+    0 22px 46px -20px rgba(15, 23, 42, 0.22);
 }
-
-.contact-min-submit {
-  margin-top: 10px;
-  align-self: stretch;
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 14px 22px;
-  gap: 8px;
-}
-
-.contact-min-success {
-  margin: 20px 0 0;
-  padding: 16px 18px;
-  background: rgba(34, 197, 94, 0.08);
-  border: 1px solid rgba(34, 197, 94, 0.25);
-  border-radius: 12px;
-  color: #166534;
-  font-size: 14.5px;
-  text-align: center;
-}
+.contact-email-icon { width: 20px; height: 20px; flex: 0 0 auto; color: var(--brand-blue); }
 
 @media (max-width: 640px) {
   .contact-min { padding: 96px 20px 80px; }
