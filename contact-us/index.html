@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="/styles.css?v=76" />
-  <link rel="stylesheet" href="/contact-us/styles.css?v=1" />
+  <link rel="stylesheet" href="/contact-us/styles.css?v=2" />
 </head>
 <body class="contact-body">
   <!-- @partial nav -->
@@ -76,29 +76,13 @@
         <header class="contact-min-head">
           <span class="eyebrow">Support</span>
           <h1 class="contact-min-title">Contact us.</h1>
-          <p class="contact-min-sub">Questions, issues, or anything else — tell us what's up.</p>
+          <p class="contact-min-sub">Questions, issues, or anything else — email our support team and we'll get back to you.</p>
         </header>
 
-        <form class="contact-min-form" id="support-form" data-state="idle" novalidate>
-          <label class="contact-min-field">
-            <span class="contact-min-label">Email</span>
-            <input class="contact-min-input" type="email" name="email" required autocomplete="email" placeholder="you@domain.com" />
-          </label>
-          <label class="contact-min-field">
-            <span class="contact-min-label">Subject</span>
-            <input class="contact-min-input" type="text" name="subject" required maxlength="150" placeholder="What's your query about?" />
-          </label>
-          <label class="contact-min-field">
-            <span class="contact-min-label">Details</span>
-            <textarea class="contact-min-input contact-min-textarea" name="details" rows="5" required placeholder="Share the details so we can help."></textarea>
-          </label>
-          <p class="contact-min-error" data-support-error role="alert" aria-live="polite" hidden></p>
-          <button class="contact-min-submit btn-pill btn-primary" type="submit" data-support-submit>
-            <span class="contact-min-submit-label">Send message</span>
-            <span aria-hidden="true">→</span>
-          </button>
-          <p class="contact-min-success" data-support-success aria-live="polite" hidden>Opening your email app… If nothing happens, write to <a href="mailto:shieldtx-support@availproject.org">shieldtx-support@availproject.org</a>.</p>
-        </form>
+        <a class="contact-email" href="mailto:shieldtx-support@availproject.org">
+          <svg class="contact-email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          shieldtx-support@availproject.org
+        </a>
       </div>
     </section>
   </main>
@@ -157,49 +141,6 @@
     (function () {
       const y = document.getElementById('yr');
       if (y) y.textContent = new Date().getFullYear();
-
-      const form = document.getElementById('support-form');
-      if (!form) return;
-
-      const SUPPORT_EMAIL = 'shieldtx-support@availproject.org';
-      const errorEl = form.querySelector('[data-support-error]');
-      const successEl = form.querySelector('[data-support-success]');
-
-      function showError(msg) {
-        if (!errorEl) return;
-        if (msg) { errorEl.textContent = msg; errorEl.hidden = false; }
-        else { errorEl.textContent = ''; errorEl.hidden = true; }
-      }
-
-      form.addEventListener('input', () => {
-        if (errorEl && !errorEl.hidden) showError('');
-      });
-
-      // No backend — compose the query in the visitor's own email client and
-      // let them send it to support. Zero third-party services involved.
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const fd = new FormData(form);
-        const email = (fd.get('email') || '').toString().trim();
-        const subject = (fd.get('subject') || '').toString().trim();
-        const details = (fd.get('details') || '').toString().trim();
-
-        if (!email || !subject || !details) {
-          showError('Please fill in every field.');
-          return;
-        }
-        showError('');
-
-        const body = 'Reply to: ' + email + '\n\n' + details;
-        const href = 'mailto:' + SUPPORT_EMAIL +
-          '?subject=' + encodeURIComponent(subject) +
-          '&body=' + encodeURIComponent(body);
-
-        // Reveal the confirmation/fallback line, then open the mail client.
-        if (successEl) successEl.hidden = false;
-        window.location.href = href;
-      });
     })();
   </script>
 </body>
