@@ -20,7 +20,6 @@ Open <http://localhost:3000>.
 .
 ├── api/                          # Vercel serverless functions
 │   ├── request-access.js         # POST submissions from the hero modal + /request-access
-│   ├── support.js                # POST submissions from /contact-us (Contact Us / support)
 │   └── _shared.js                # tiny req/res helpers
 ├── lib/                          # Server-only helpers (Node)
 │   ├── db.js                     # DB adapter — in-memory stub; swap for Supabase/Neon later
@@ -31,7 +30,7 @@ Open <http://localhost:3000>.
 │   └── request-access-form.js    # bindRequestAccessForm — multi-step screener + brand dropdowns
 ├── assets/                       # Logos + demo video
 ├── request-access/               # /request-access — full-page permalink for the form
-├── contact-us/                   # /contact-us — email/subject/details form (POSTs to /api/support)
+├── contact-us/                   # /contact-us — Contact Us form; opens a mailto: to support (no backend)
 ├── trust-model/                  # /trust-model — on-chain trust docs
 ├── brand-document/               # Internal brand spec (not linked from public nav)
 ├── index.html                    # Landing page (hero, features, FAQ, modal)
@@ -49,7 +48,7 @@ Open <http://localhost:3000>.
 
 - `/` — Landing
 - `/request-access` — Form permalink (also embedded in the landing modal)
-- `/contact-us` — Contact Us / support form (email, subject, details)
+- `/contact-us` — Contact Us form (email, subject, details) — composes a `mailto:` to shieldtx-support@availproject.org, no backend
 - `/trust-model` — On-chain trust docs
 - `/brand-document` — Internal brand spec (excluded from robots + sitemap)
 
@@ -61,25 +60,23 @@ See [.env.example](./.env.example). Copy to `.env.local` for `vercel dev`. Requi
 
 ## Forms
 
-Two forms, two endpoints. All do real validation, IP-keyed rate limiting, a hidden honeypot field, and ship idle / submitting / success / error states.
+The **Request Access** form posts to a serverless endpoint (real validation, IP-keyed rate limiting, hidden honeypot, idle / submitting / success / error states):
 
 | Form                          | Endpoint                | Source of truth for markup                                  |
 | ----------------------------- | ----------------------- | ------------------------------------------------------------- |
 | Hero modal "Request Access"   | `POST /api/request-access` | `index.html` (mirrored in `/request-access`)               |
 | Permalink page                | `POST /api/request-access` | `request-access/index.html`                                   |
-| Contact Us / support          | `POST /api/support`        | `contact-us/index.html`                                       |
 
-The Request Access form markup is duplicated across two pages. Behavior is shared via `public-scripts/request-access-form.js → ShieldTX.bindRequestAccessForm(formEl, { mode })`. When editing fields, update both HTML copies. The support form is self-contained (inline script in `contact-us/index.html`).
+The Request Access form markup is duplicated across two pages. Behavior is shared via `public-scripts/request-access-form.js → ShieldTX.bindRequestAccessForm(formEl, { mode })`. When editing fields, update both HTML copies. It mirrors submissions into Airtable via `lib/db.js → appendToAirtable(fields)` (`AIRTABLE_TABLE`, default "Invite Requests"; no-op until `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` are set).
 
-Both `request-access` and `support` mirror submissions into Airtable via `lib/db.js → appendToAirtable(fields, tableName)` — request-access → `AIRTABLE_TABLE` (default "Invite Requests"), support → `AIRTABLE_SUPPORT_TABLE` (default "Support Queries"). No-op until `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` are set.
+The **Contact Us** form (`contact-us/index.html`) has **no backend** — its inline script composes a `mailto:` to `shieldtx-support@availproject.org` and opens the visitor's email client. No endpoint, no third-party service.
 
 ## DB
 
-`lib/db.js` is the only place that touches storage. It exports two functions used by the API handlers:
+`lib/db.js` is the only place that touches storage. It exports one function used by the request-access handler:
 
 ```js
 insertRequestAccess(payload)  // → { id }  (+ Airtable mirror)
-insertSupport(payload)        // → { id }  (+ Airtable mirror)
 ```
 
 Today's implementation is an in-memory stub (lost on cold start) plus the optional Airtable mirror. To wire a real DB (Supabase / Neon / Vercel Postgres), replace those two function bodies — the API handlers don't reach inside.

@@ -80,9 +80,6 @@
         </header>
 
         <form class="contact-min-form" id="support-form" data-state="idle" novalidate>
-          <div class="waitlist-honeypot" aria-hidden="true">
-            <label>Company URL<input type="text" name="company_url" tabindex="-1" autocomplete="off" /></label>
-          </div>
           <label class="contact-min-field">
             <span class="contact-min-label">Email</span>
             <input class="contact-min-input" type="email" name="email" required autocomplete="email" placeholder="you@domain.com" />
@@ -100,7 +97,7 @@
             <span class="contact-min-submit-label">Send message</span>
             <span aria-hidden="true">→</span>
           </button>
-          <p class="contact-min-success" data-support-success aria-live="polite" hidden>Thanks — your query is in. We'll be in touch within one business day.</p>
+          <p class="contact-min-success" data-support-success aria-live="polite" hidden>Opening your email app… If nothing happens, write to <a href="mailto:shieldtx-support@availproject.org">shieldtx-support@availproject.org</a>.</p>
         </form>
       </div>
     </section>
@@ -164,21 +161,9 @@
       const form = document.getElementById('support-form');
       if (!form) return;
 
-      const submitBtn = form.querySelector('[data-support-submit]');
-      const submitLabel = form.querySelector('.contact-min-submit-label');
+      const SUPPORT_EMAIL = 'shieldtx-support@availproject.org';
       const errorEl = form.querySelector('[data-support-error]');
       const successEl = form.querySelector('[data-support-success]');
-
-      function setState(state) {
-        form.dataset.state = state;
-        if (submitBtn) {
-          submitBtn.disabled = state === 'submitting';
-          submitBtn.classList.toggle('is-loading', state === 'submitting');
-        }
-        if (submitLabel) {
-          submitLabel.textContent = state === 'submitting' ? 'Sending…' : 'Send message';
-        }
-      }
 
       function showError(msg) {
         if (!errorEl) return;
@@ -190,49 +175,30 @@
         if (errorEl && !errorEl.hidden) showError('');
       });
 
-      form.addEventListener('submit', async (e) => {
+      // No backend — compose the query in the visitor's own email client and
+      // let them send it to support. Zero third-party services involved.
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (form.dataset.state === 'submitting') return;
 
         const fd = new FormData(form);
-        const payload = {
-          email: (fd.get('email') || '').toString().trim(),
-          subject: (fd.get('subject') || '').toString().trim(),
-          details: (fd.get('details') || '').toString().trim(),
-          company_url: fd.get('company_url') || '',
-        };
+        const email = (fd.get('email') || '').toString().trim();
+        const subject = (fd.get('subject') || '').toString().trim();
+        const details = (fd.get('details') || '').toString().trim();
 
-        if (!payload.email || !payload.subject || !payload.details) {
+        if (!email || !subject || !details) {
           showError('Please fill in every field.');
           return;
         }
-
-        setState('submitting');
         showError('');
 
-        try {
-          const res = await fetch('/api/support', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          });
-          const json = await res.json().catch(() => ({}));
-          if (res.ok && json.ok) {
-            setState('success');
-            // Hide everything except the success card.
-            Array.from(form.children).forEach((child) => {
-              if (child !== successEl) child.style.display = 'none';
-            });
-            if (successEl) successEl.hidden = false;
-          } else {
-            setState('idle');
-            showError(json.error || 'Submission failed. Please try again.');
-          }
-        } catch (err) {
-          console.error('[support] network error', err);
-          setState('idle');
-          showError('Network error. Please try again.');
-        }
+        const body = 'Reply to: ' + email + '\n\n' + details;
+        const href = 'mailto:' + SUPPORT_EMAIL +
+          '?subject=' + encodeURIComponent(subject) +
+          '&body=' + encodeURIComponent(body);
+
+        // Reveal the confirmation/fallback line, then open the mail client.
+        if (successEl) successEl.hidden = false;
+        window.location.href = href;
       });
     })();
   </script>
