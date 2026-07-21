@@ -6,7 +6,7 @@ const { sendJson, methodNotAllowed } = require('./_shared');
 const walletRe = /^0x[0-9a-f]{40}$/i;
 
 function scannerApiBase() {
-  return (process.env.SCANNER_API_BASE || 'https://scanner-v2-canary.shieldtx.avail.tools').replace(/\/+$/, '');
+  return (process.env.SCANNER_API_BASE || 'https://scanner.shieldtx.xyz').replace(/\/+$/, '');
 }
 
 function numberOrNull(value) {
