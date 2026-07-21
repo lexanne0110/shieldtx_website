@@ -631,7 +631,7 @@
   });
 
   function fullScannerUrl(address) {
-    const base = (scanToolForm && scanToolForm.dataset.scannerUrl) || 'https://scanner-v2-canary.shieldtx.avail.tools/';
+    const base = (scanToolForm && scanToolForm.dataset.scannerUrl) || 'https://scanner.shieldtx.xyz/';
     const cleanBase = base.replace(/\/+$/, '');
     const wallet = (address || lastScannedWallet || (scanAddrInput && scanAddrInput.value.trim().toLowerCase()) || '').trim().toLowerCase();
     const attribution = 'utm_source=shieldtx_xyz&utm_campaign=scanner_growth&source=shieldtx_xyz';
