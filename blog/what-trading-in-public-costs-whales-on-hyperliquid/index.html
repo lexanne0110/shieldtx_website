@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog · ShieldTX</title>
-  <meta name="description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
-  <link rel="canonical" href="https://www.shieldtx.xyz/blog" />
+  <title>The surveillance tax: What Trading in Public Costs Whales on Hyperliquid · ShieldTX</title>
+  <meta name="description" content="Your Hyperliquid positions are public. Copy traders, whale hunters, and market speculators are watching. Learn what public trading costs whales and how execution isolation changes the game." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/what-trading-in-public-costs-whales-on-hyperliquid" />
 
   <link rel="icon" type="image/svg+xml" href="/assets/ShieldTX_LogoMark.svg" />
   <link rel="apple-touch-icon" href="/assets/ShieldTX_LogoMark.svg" />
 
-  <meta property="og:title" content="Blog · ShieldTX" />
-  <meta property="og:description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://shieldtx.xyz/blog" />
-  <meta property="og:image" content="https://shieldtx.xyz/assets/og-image.jpg" />
+  <meta property="og:title" content="What Trading in Public Costs Whales on Hyperliquid · ShieldTX" />
+  <meta property="og:description" content="Your Hyperliquid positions are public. Copy traders, whale hunters, and market speculators are watching. Learn what public trading costs whales and how execution isolation changes the game." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.shieldtx.xyz/blog/what-trading-in-public-costs-whales-on-hyperliquid" />
+  <meta property="og:image" content="https://www.shieldtx.xyz/assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Blog · ShieldTX" />
-  <meta name="twitter:description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
+  <meta name="twitter:title" content="What Trading in Public Costs Whales on Hyperliquid · ShieldTX" />
+  <meta name="twitter:description" content="Your Hyperliquid positions are public. Copy traders, whale hunters, and market speculators are watching. Learn what public trading costs whales and how execution isolation changes the game." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +27,6 @@
   <link rel="stylesheet" href="/blog/styles.css?v=75" />
 </head>
 <body class="blog-body">
-  <!-- Simplified nav: Home · Features · Blog · [Open App] -->
   <!-- @partial nav variant="nav-blog" -->
   <header class="nav nav-blog">
     <a class="nav-logo" href="/" aria-label="ShieldTX">
@@ -38,8 +37,6 @@
       <a href="/#features">Features</a>
       <a href="/blog">Blog</a>
       <a href="/contact-us/">Contact</a>
-      <!-- In-menu CTA: shown only inside the mobile dropdown (≤960px); the bar
-           CTA below is hidden there. Keeps one pill visible per breakpoint. -->
       <a class="nav-cta-mobile btn-pill btn-primary" href="https://beta.shieldtx.xyz" target="_blank" rel="noopener noreferrer">Open App</a>
     </nav>
     <a class="nav-cta btn-pill" href="https://beta.shieldtx.xyz" target="_blank" rel="noopener noreferrer">Open App</a>
@@ -49,9 +46,6 @@
     <div class="nav-progress" aria-hidden="true"></div>
   </header>
   <script>
-  /* Mobile nav disclosure. Lives in the nav partial so it syncs to every page
-     alongside the markup (only site-cursor.js loads site-wide, so an external
-     per-page script would be easy to forget on new pages). Idempotent. */
   (function () {
     var nav = document.currentScript.previousElementSibling;
     if (!nav || !nav.classList || !nav.classList.contains('nav') || nav.dataset.menuWired) return;
@@ -81,60 +75,108 @@
   <!-- /@partial nav -->
 
   <main id="top">
-    <section class="blog-index">
-      <div class="blog-index-wrap">
-        <header class="blog-index-head">
-          <h1 class="blog-index-title">Blogs</h1>
-          <p class="blog-index-sub">Notes on private trading, threat models, and how we're building ShieldTX.</p>
-        </header>
+    <article class="blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">What Trading in Public Costs</div>
+        <h1>The surveillance tax: What Trading in Public Costs Whales on Hyperliquid</h1>
+        <p class="blog-post-meta">
+          <span>22 July 2026</span>
+          <span>8 min read</span>
+        </p>
 
-        <!-- POSTS STACK — text-only single-column entries. Each post is a
-             semantic <article> with title, meta, lede, and a Read → CTA.
-             Hover reveals a brand-blue stripe on the left. Newest first. -->
-        <div class="blog-stack">
+        <p class="intro">Every position you open on Hyperliquid tells the market something.</p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/what-trading-in-public-costs-whales-on-hyperliquid">
-              <span class="blog-entry-meta">22 July 2026 · 8 min read</span>
-              <h2 class="blog-entry-title">The surveillance tax: What Trading in Public Costs Whales on Hyperliquid</h2>
-              <p class="blog-entry-lede">Every position you open on Hyperliquid tells the market something. Here is what public trading costs whales, and how execution isolation changes the game.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p>Your entries, position sizes, leverage, trading patterns, liquidation levels and performance are available to anyone who knows where to look. Tools such as Dexly, Hyperdash and Hyperbot make this information easier to monitor, analyse and act on.</p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/what-is-copy-trade-protection">
-              <span class="blog-entry-meta">22 May 2026 · 7 min read</span>
-              <h2 class="blog-entry-title">What Is Copy Trade Protection? A Trader's Guide to Keeping Your Strategy Yours</h2>
-              <p class="blog-entry-lede">Copy trade protection shields your on-chain trading activity from being copied, mirrored, or analyzed.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p>For individual traders, this can expose a profitable strategy to copy traders and competitors. For funds, VCs, market makers and institutions, the consequences can be much broader.</p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/hyperbot-dexly-hyperdash-copy-trading-tools">
-              <span class="blog-entry-meta">15 May 2026 · 9 min read</span>
-              <h2 class="blog-entry-title">Hyperbot, Dexly &amp; HyperDash: Are They Copying Your Trades?</h2>
-              <p class="blog-entry-lede">Hyperbot, Dexly, and HyperDash are actively copying Hyperliquid traders. How each tool works, why they're a problem, and what to do.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p>A public trading history can reveal how your organisation manages risk, which assets it is accumulating or exiting, how a new strategy is performing and whether a position is under pressure. A single wallet can quickly become a source of market speculation, social-media commentary or reputational risk.</p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/how-copy-traders-are-stealing-your-edge">
-              <span class="blog-entry-meta">8 May 2026 · 6 min read</span>
-              <h2 class="blog-entry-title">How Copy Traders Are Stealing Your Edge on Hyperliquid</h2>
-              <p class="blog-entry-lede">Your Hyperliquid trades are public. How copy trading bots track your positions in real time, and how to trade without exposing your strategy.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p>Our models suggest that being tracked by copy traders can erode between 5-100 bps per trade, depending on strategy and size. For traders moving six-figure notionals, that leakage compounds quickly.</p>
 
-        </div>
+        <h2 id="workarounds">Why workarounds do not work<a href="#workarounds" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Many traders try to limit their exposure by rotating between multiple wallets.</p>
+
+        <p>For an individual, this creates additional operational complexity. For an institution, it also creates problems around key management, reporting, accounting and audit continuity.</p>
+
+        <p>Wallet rotation is not necessarily enough to break the link. Analytics platforms such as Arkham and Nansen use transaction flows, timing, funding patterns and other forms of behavioural correlation to identify wallets that may belong to the same person or organisation.</p>
+
+        <p>Moving through a centralized exchange does not automatically solve the problem either. It means giving up direct access to Hyperliquid's liquidity.</p>
+
+        <p>Traders should not have to choose between transparency and usability. ShieldTX gives you access to Hyperliquid's order book without the public exposure.</p>
+
+        <h2 id="scanner">Test your wallet's exposure<a href="#scanner" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>To help traders understand their public exposure, we built a wallet-scanning tool that shows what can be reconstructed from a Hyperliquid address using publicly available onchain data.</p>
+
+        <p>You can enter your own Hyperliquid wallet or analyse any other wallet. You do not need to connect the wallet, sign a transaction or provide access to your funds.</p>
+
+        <p>The tool is designed to answer a simple question: what could a competitor, counterparty, copy trader, journalist or investor learn from this address?</p>
+
+        <p><a href="https://scanner.shieldtx.xyz/" class="btn-pill btn-primary">Scan your wallet</a></p>
+
+        <h2 id="introducing-shieldtx">Introducing ShieldTX<a href="#introducing-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>The team behind <a href="https://availproject.org/" target="_blank" rel="noopener noreferrer">Avail</a> built <a href="https://shieldtx.xyz/" target="_blank" rel="noopener noreferrer">ShieldTX</a>, a perp trading app that gives traders access to the Hyperliquid orderbook without permanently connecting every trade to their public trading identity.</p>
+
+        <p>When you trade through ShieldTX, your orders are routed to Hyperliquid through fresh trading wallets. These wallets are not visibly linked to the wallet you used to fund ShieldTX or to your previous trading history.</p>
+
+        <p>ShieldTX is designed for traders and organisations that want to:</p>
+
+        <ul>
+          <li>test new strategies without revealing every experiment publicly</li>
+          <li>isolate different trading mandates or portfolios</li>
+          <li>reduce unwanted monitoring and copy trading</li>
+          <li>prevent individual positions from being immediately associated with their brand</li>
+          <li>manage market signalling and reputational exposure</li>
+          <li>retain access to Hyperliquid's liquidity without maintaining a complex network of wallets</li>
+        </ul>
+
+        <p>In simple terms, it is perp trading on Hyperliquid, without the public exposure.</p>
+
+        <h2 id="what-shields">What ShieldTX shields<a href="#what-shields" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Trades placed through ShieldTX are submitted to Hyperliquid and remain visible onchain and on the Hyperliquid orderbook.</p>
+
+        <p>It breaks the obvious public connection between the trading wallet and the person, institution or funding wallet behind it. Analysts and trading bots may still observe the activity, but they see it coming from a fresh wallet without an established identity or historical trading profile.</p>
+
+        <p>This gives traders a clean separation between their public identity and a particular position, strategy or trading experiment.</p>
+
+        <h2 id="what-it-does-not-do">What ShieldTX does not do<a href="#what-it-does-not-do" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>ShieldTX is not designed to conceal trading activity from legitimate compliance processes or lawful requests. ShieldTX also maintains an internal audit history so that activity can be accounted for and reviewed where appropriate.</p>
+
+        <p>The objective is professional confidentiality: private from the market, while remaining accountable where required.</p>
+
+        <h2 id="professional-use">Built for professional and compliant use<a href="#professional-use" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>ShieldTX is intended for traders who want greater market confidentiality while maintaining the compliance architecture and operational clarity expected by professional desks.</p>
+
+        <p>For institutions, privacy cannot come at the expense of record-keeping and accountability. ShieldTX is therefore designed to preserve an internal history of activity while preventing the market from automatically associating every trade with a known institutional wallet.</p>
+
+        <p>This can help funds, VCs, treasury managers and other professional traders protect sensitive trading information while maintaining the records required for internal oversight.</p>
+
+        <p>Specific onboarding, audit and compliance requirements can be discussed directly with the ShieldTX team.</p>
+
+        <h2 id="fees">Fees<a href="#fees" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Transaction shielding involves additional fees.</p>
+
+        <p>You can review the current pricing on the <a href="/#fees">ShieldTX fees page</a>. Private-beta participants receive discounted pricing, and volume-based tiers are available for high-volume and institutional users.</p>
+
+        <h2 id="private-beta">Join the private beta<a href="#private-beta" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>The ShieldTX private beta is now live on all perp trading pairs. If you have an access code you can <a href="https://beta.shieldtx.xyz/">trade shielded perps now</a>. If you do not have a code yet, you can <a href="/request-access">request one</a>. We are currently looking for a small group of active traders, funds and institutions to test ShieldTX and help shape the product.</p>
+
+        <p>If you manage outside capital, trade significant volume or need to separate your trading activity from your organisation's public identity, we would particularly like to hear from you.</p>
+
+        <p>Our goal is not to take activity away from Hyperliquid. It is to make Hyperliquid more usable for professional traders who cannot afford to conduct every position, experiment and portfolio decision in public.</p>
       </div>
-    </section>
+    </article>
   </main>
 
-  <!-- Footer -->
   <!-- @partial footer -->
   <footer class="footer">
     <div class="container footer-grid">
