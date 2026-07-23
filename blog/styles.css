@@ -284,14 +284,14 @@
   color: var(--fg-primary);
 }
 
-.blog-post-wrap a:not(.anchor-link):not(.blog-post-back):not(.cta) {
+.blog-post-wrap a:not(.anchor-link):not(.blog-post-back):not(.cta):not(.btn-pill) {
   color: var(--brand-blue);
   text-decoration: underline;
   text-decoration-color: rgba(51, 112, 255, 0.4);
   text-underline-offset: 3px;
   transition: text-decoration-color .2s var(--ease), color .2s var(--ease);
 }
-.blog-post-wrap a:not(.anchor-link):not(.blog-post-back):not(.cta):hover {
+.blog-post-wrap a:not(.anchor-link):not(.blog-post-back):not(.cta):not(.btn-pill):hover {
   color: var(--brand-blue-deep);
   text-decoration-color: var(--brand-blue);
 }
