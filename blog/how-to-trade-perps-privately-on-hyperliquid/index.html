@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Trade Perps Privately on the Hyperliquid Orderbook · ShieldTX</title>
+  <meta name="description" content="Learn how to trade perps on Hyperliquid without exposing your positions, PnL, or strategy. A step-by-step guide to execution privacy for on-chain perpetuals." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/how-to-trade-perps-privately-on-hyperliquid" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/ShieldTX_LogoMark.svg" />
+  <link rel="apple-touch-icon" href="/assets/ShieldTX_LogoMark.svg" />
+
+  <meta property="og:title" content="How to Trade Perps Privately on the Hyperliquid Orderbook · ShieldTX" />
+  <meta property="og:description" content="Learn how to trade perps on Hyperliquid without exposing your positions, PnL, or strategy. A step-by-step guide to execution privacy for on-chain perpetuals." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/how-to-trade-perps-privately-on-hyperliquid" />
+  <meta property="og:image" content="https://shieldtx.xyz/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Trade Perps Privately on the Hyperliquid Orderbook · ShieldTX" />
+  <meta name="twitter:description" content="Learn how to trade perps on Hyperliquid without exposing your positions, PnL, or strategy. A step-by-step guide to execution privacy for on-chain perpetuals." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/styles.css?v=76" />
+  <link rel="stylesheet" href="/blog/styles.css?v=75" />
+</head>
+<body class="blog-body">
+  <!-- Simplified nav: Home · Features · Blog · [Open App] -->
+  <!-- @partial nav variant="nav-blog" -->
+  <header class="nav nav-blog">
+    <a class="nav-logo" href="/" aria-label="ShieldTX">
+      <svg class="nav-logo-svg" viewBox="0 0 414 101" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M48.5854 87.0215C47.5068 87.5291 46.2579 87.5291 45.1792 87.0215L23.0278 76.5977H70.7368L48.5854 87.0215ZM80.5581 66.0322H13.2065V55.4678H80.5581V66.0322ZM80.5581 44.9023H13.2065V34.3369H80.5581V44.9023ZM76.5581 13.207C78.7672 13.207 80.558 14.998 80.5581 17.207V23.7725H13.2065V17.207C13.2067 14.998 14.9975 13.207 17.2065 13.207H76.5581Z"/><path d="M114.517 61.6894C114.728 63.6924 115.387 65.4319 116.494 66.9078C117.601 68.331 119.05 69.4379 120.842 70.2286C122.687 70.9665 124.743 71.3355 127.01 71.3355C130.225 71.3355 132.861 70.7557 134.916 69.596C136.972 68.4364 138 66.6969 138 64.3777C138 62.7963 137.394 61.5576 136.181 60.6615C134.969 59.7127 133.361 58.9748 131.358 58.4477C129.355 57.8679 127.168 57.3144 124.796 56.7873C122.424 56.2602 120.025 55.654 117.601 54.9688C115.229 54.2308 113.041 53.2557 111.038 52.0433C109.035 50.7783 107.428 49.1179 106.215 47.0621C105.003 44.9537 104.397 42.2655 104.397 38.9974C104.397 35.8875 105.319 33.1201 107.164 30.6954C109.009 28.218 111.565 26.2677 114.833 24.8445C118.154 23.4213 121.949 22.7097 126.219 22.7097C130.278 22.7097 133.915 23.5268 137.13 25.1608C140.398 26.7948 142.955 29.035 144.8 31.8814C146.697 34.6751 147.646 37.8905 147.646 41.5275H137.051C136.84 38.523 135.812 36.1774 133.967 34.4906C132.175 32.8039 129.461 31.9605 125.824 31.9605C122.292 31.9605 119.577 32.6194 117.68 33.9371C115.835 35.2549 114.912 36.9417 114.912 38.9974C114.912 40.7368 115.519 42.1073 116.731 43.1088C117.943 44.1103 119.551 44.901 121.554 45.4808C123.557 46.0606 125.745 46.5877 128.117 47.0621C130.541 47.5365 132.94 48.1427 135.312 48.8807C137.684 49.5659 139.871 50.5147 141.874 51.7271C143.877 52.8867 145.485 54.4944 146.697 56.5501C147.909 58.5531 148.516 61.1623 148.516 64.3777C148.516 69.4906 146.592 73.4703 142.744 76.3167C138.896 79.163 133.493 80.5862 126.535 80.5862C122.266 80.5862 118.444 79.7692 115.071 78.1352C111.697 76.5011 109.009 74.2609 107.006 71.4145C105.003 68.5682 103.922 65.3264 103.764 61.6894H114.517Z"/><path d="M153.149 20.0215H163.111V79.3212H153.149V20.0215ZM163.111 57.4989L161.846 48.5644C161.846 47.1939 162.057 45.6653 162.479 43.9786C162.901 42.2918 163.665 40.6841 164.772 39.1555C165.931 37.5742 167.513 36.2828 169.516 35.2813C171.571 34.2798 174.207 33.779 177.422 33.779C180.269 33.779 182.799 34.3588 185.013 35.5185C187.227 36.6781 188.966 38.6021 190.231 41.2903C191.549 43.9259 192.208 47.5102 192.208 52.0433V79.3212H182.245V53.0712C182.245 51.0155 182.061 49.1969 181.692 47.6156C181.323 45.9816 180.585 44.7165 179.478 43.8204C178.424 42.8716 176.843 42.3972 174.734 42.3972C172.889 42.3972 171.071 42.9243 169.279 43.9786C167.486 45.0328 166.01 46.6668 164.851 48.8807C163.691 51.0945 163.111 53.9673 163.111 57.4989Z"/><path d="M199.876 35.0441H209.759V79.3212H199.876V35.0441ZM199.867 20.0215L210.008 20.1843L209.929 31.2899L199.772 31.2041L199.867 20.0215Z"/><path d="M224.046 60.5034V52.3596H250.059L246.501 54.6525C246.712 52.6495 246.448 50.7519 245.71 48.9597C245.025 47.1149 243.892 45.6126 242.31 44.453C240.729 43.2933 238.673 42.7135 236.143 42.7135C232.717 42.7135 229.844 43.7941 227.525 45.9552C225.206 48.1164 224.046 51.2263 224.046 55.285H213.53C213.847 50.6992 215.033 46.8249 217.088 43.6623C219.197 40.4469 221.885 37.9959 225.153 36.3091C228.474 34.6224 232.137 33.779 236.143 33.779C239.148 33.779 241.968 34.3852 244.603 35.5975C247.292 36.7572 249.585 38.4966 251.482 40.8159C253.432 43.0825 254.856 45.8762 255.752 49.1969C256.7 52.5177 256.885 56.2865 256.305 60.5034H224.046ZM236.143 80.5862C231.979 80.5862 228.289 79.7429 225.074 78.0561C221.859 76.3694 219.276 74.0237 217.326 71.0192C215.375 68.0147 214.163 64.5094 213.688 60.5034H224.046C224.468 63.7715 225.654 66.4597 227.604 68.5682C229.554 70.6239 232.401 71.6517 236.143 71.6517C238.779 71.6517 240.887 71.0456 242.469 69.8332C244.103 68.5682 245.262 67.0396 245.947 65.2474H256.384C255.752 68.3046 254.513 70.9929 252.668 73.3121C250.823 75.5787 248.504 77.3709 245.71 78.6886C242.917 79.9537 239.728 80.5862 236.143 80.5862Z"/><path d="M260.308 20.0215H270.271V79.3212H260.308V20.0215Z"/><path d="M294.033 80.5862C289.922 80.5862 286.364 79.6111 283.359 77.6608C280.408 75.6578 278.115 72.8905 276.481 69.3588C274.899 65.8272 274.109 61.7948 274.109 57.2617C274.109 52.6759 274.899 48.6171 276.481 45.0855C278.115 41.5539 280.408 38.7865 283.359 36.7835C286.364 34.7805 289.922 33.779 294.033 33.779C297.196 33.779 299.884 34.4115 302.098 35.6766C304.365 36.889 306.157 38.6284 307.475 40.895V73.5493C306.21 75.7105 304.47 77.4236 302.256 78.6886C300.095 79.9537 297.354 80.5862 294.033 80.5862ZM295.615 71.6517C298.303 71.6517 300.517 71.0192 302.256 69.7542C303.996 68.4891 305.287 66.776 306.13 64.6149C307.027 62.401 307.475 59.9499 307.475 57.2617C307.475 54.5207 307.027 52.0697 306.13 49.9085C305.287 47.6947 303.996 45.9552 302.256 44.6902C300.517 43.3724 298.303 42.7135 295.615 42.7135C293.243 42.7135 291.187 43.346 289.447 44.6111C287.761 45.8234 286.469 47.5365 285.573 49.7504C284.73 51.9643 284.308 54.468 284.308 57.2617C284.308 60.0027 284.73 62.4801 285.573 64.6939C286.469 66.8551 287.761 68.5682 289.447 69.8332C291.187 71.0456 293.243 71.6517 295.615 71.6517ZM307.475 79.3212V20.0215H317.437V79.3212H307.475Z"/><path d="M362.995 30.3896H346.641V77.9766H338.338V30.3896H322.197L322.13 22.6309H362.928L362.995 30.3896Z"/><path d="M389.333 44.2158L403.485 22.6309H413.29L395.104 50.0664L413.764 77.9766H404.355L389.333 55.8379L374.231 77.9766H364.822L383.481 50.0664L365.296 22.6309H375.179L389.333 44.2158Z"/></svg>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/#features">Features</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact-us/">Contact</a>
+      <!-- In-menu CTA: shown only inside the mobile dropdown (≤960px); the bar
+           CTA below is hidden there. Keeps one pill visible per breakpoint. -->
+      <a class="nav-cta-mobile btn-pill btn-primary" href="https://beta.shieldtx.xyz" target="_blank" rel="noopener noreferrer">Open App</a>
+    </nav>
+    <a class="nav-cta btn-pill" href="https://beta.shieldtx.xyz" target="_blank" rel="noopener noreferrer">Open App</a>
+    <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+      <span class="nav-burger-box" aria-hidden="true"><span class="nav-burger-line"></span></span>
+    </button>
+    <div class="nav-progress" aria-hidden="true"></div>
+  </header>
+  <script>
+  /* Mobile nav disclosure. Lives in the nav partial so it syncs to every page
+     alongside the markup (only site-cursor.js loads site-wide, so an external
+     per-page script would be easy to forget on new pages). Idempotent. */
+  (function () {
+    var nav = document.currentScript.previousElementSibling;
+    if (!nav || !nav.classList || !nav.classList.contains('nav') || nav.dataset.menuWired) return;
+    nav.dataset.menuWired = '1';
+    var burger = nav.querySelector('.nav-burger');
+    var links = nav.querySelector('.nav-links');
+    if (!burger || !links) return;
+    function setOpen(open) {
+      nav.classList.toggle('nav-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    burger.addEventListener('click', function () {
+      setOpen(!nav.classList.contains('nav-open'));
+    });
+    links.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('nav-open')) { setOpen(false); burger.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('nav-open') && !nav.contains(e.target)) setOpen(false);
+    });
+  })();
+  </script>
+  <!-- /@partial nav -->
+
+  <main id="top">
+    <article class="blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">Guide</div>
+        <h1>How to Trade Perps Privately on the Hyperliquid Orderbook</h1>
+        <p class="blog-post-meta">
+          <span>24 July 2026</span>
+          <span>12 min read</span>
+        </p>
+
+        <p class="intro">You open a $2M position. Within 90 seconds, three copybots have mirrored it and your liquidation level is a public target. This is the default state of trading perps on Hyperliquid. In this guide we show how traders can control their public footprint.</p>
+
+        <p>Hyperliquid has become the dominant venue for on-chain perpetual trading because its order book is fast, liquid, and fully transparent. Every position, entry, exit, and liquidation level is visible on-chain. For most traders, this transparency is a feature. It prevents exchange manipulation and gives everyone the same source of truth.</p>
+
+        <p>For traders with size, an edge, or a public reputation, that same transparency creates a structural problem. A mature surveillance ecosystem has built itself on top of Hyperliquid's public data. Your positions are not just visible, they are monitored, copied, and in some cases, hunted.</p>
+
+        <p>This article is about <strong>Hyperliquid private trading</strong>. Specifically, how to achieve execution privacy for perp trades without leaving the venue. If you are looking for a way to trade perps without exposing your strategy, your PnL, or your personal or company's brand, this guide is for you.</p>
+
+        <h2 id="what-private-perp-trading-actually-means-onchain">What "private perp trading" actually means onchain<a href="#what-private-perp-trading-actually-means-onchain" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Private perp trading can mean many things, including using a VPN to obfuscate IP addresses, trading without KYC or even using manual wallet rotation to limit your onchain footprint.</p>
+
+        <p><strong>Hyperliquid perps privacy</strong> in this article is talking specifically about execution privacy. This means, breaking the structural link between the wallet that funds your trading activity and the wallet that actually executes the trade on Hyperliquid's order book. It is about making sure that when you open a position, the market cannot immediately associate that position with your identity, your history, or your other positions.</p>
+
+        <p>Execution privacy does not mean hiding trades from the order book either. Trades placed on Hyperliquid are still visible on-chain. What it means is that the trading wallet is not visibly linked to you. Analysts and bots may still observe the activity, but they see it coming from a fresh wallet without an established identity or historical profile.</p>
+
+        <h2 id="the-surveillance-problem-on-hyperliquid">The surveillance problem on Hyperliquid<a href="#the-surveillance-problem-on-hyperliquid" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Hyperliquid's on-chain architecture means that the moment your trade executes, your position is public. Anyone can query it. Tools like Dexly, Hyperdash, and Hyperbot make this data actionable. They do not just display it, they monitor it in real time, alert followers, and in some cases, trigger automated responses.</p>
+
+        <p>This creates three concrete problems for traders moving significant volume.</p>
+
+        <h3>Position hunting on Hyperliquid</h3>
+        <p>When a large wallet opens a directional position, the liquidation level becomes a visible target. Adversarial actors can identify the price at which you will be forced to exit, and trade against you to push the market toward that level. <strong>Hyperliquid liquidation hunt</strong> dynamics are not theoretical. They are a documented feature of transparent derivatives markets.</p>
+
+        <h3>Strategy exposure</h3>
+        <p>Every entry, exit, sizing decision, and pair preference is indexed permanently. Over time, your wallet becomes a readable profile of how you trade. Copybots detect your entries within seconds and replicate them. Their follow-on volume pushes price against you, eroding approximately 5-100 bps per trade.</p>
+
+        <h3>Full PnL history</h3>
+        <p>Your realised and unrealised performance is permanently queryable. For funds, VCs, market makers, and individual whales, this creates reputational exposure. A visible drawdown damages investor confidence. A known accumulation triggers market speculation. A single, high profile trade can become a social media sensation.</p>
+
+        <p>These problems land differently depending on who you are. Individual whales and fund managers face direct edge erosion and whale hunting because their known wallets are actively monitored. Institutions with public brands face reputational risk when their positions are visible. Market makers face inventory exposure that can be front-run.</p>
+
+        <h2 id="test-your-own-exposure">Test your own exposure<a href="#test-your-own-exposure" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Before we dive into the solutions, see what data your wallet has exposed. Enter your Hyperliquid wallet address below to see what competitors, journalists, or copy traders can learn about your positions.</p>
+
+        <p><a class="cta" href="https://scanner.shieldtx.xyz/">Scan your wallet</a></p>
+
+        <h2 id="why-hyperliquid-subaccounts-do-not-solve-the-problem">Why Hyperliquid subaccounts do not solve the problem<a href="#why-hyperliquid-subaccounts-do-not-solve-the-problem" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Hyperliquid offers <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/trading/sub-accounts">subaccounts</a> as a native feature. At first glance, subaccounts look like a privacy tool. They let you separate different strategies or portfolios under one master account.</p>
+
+        <p>Here is how they work. You can create up to 10 subaccounts after reaching $100,000 in volume. Every additional $100 million in volume enables one additional sub-account, up to a maximum of 50 sub-accounts as of the time of writing.</p>
+
+        <p>But things are a bit different when you look through the lens of Hyperliquid subaccounts privacy. The master account for Hyperliquid subaccounts is queryable on-chain and via the API. Every subaccount resolves back to its master account on-chain and via the API. One identified subaccount exposes the entire set.. They offer organisational separation, not identity separation.</p>
+
+        <p>In short, subaccounts are a useful trading feature. They are not a Hyperliquid privacy solution.</p>
+
+        <h2 id="how-shieldtx-works">How ShieldTX works<a href="#how-shieldtx-works" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p><a href="https://shieldtx.xyz/"><strong>ShieldTX</strong></a>, built by the team behind <a href="https://availproject.org/"><strong>Avail</strong></a>, is a perp trading app designed specifically for Hyperliquid private trading. It gives you access to Hyperliquid's order book and liquidity without permanently connecting every trade to your public wallet identity.</p>
+
+        <p>When you trade through ShieldTX, your orders are routed to Hyperliquid through fresh trading wallets. Funds enter a shielded pool. The wallet that executes your trade is funded from that pool, not from your deposit. So there is no on-chain path from your funding wallet to your position, even for an observer watching both. The deposit and settlement are on-chain. The trading activity itself is not linked to your funding wallet.</p>
+
+        <p>Trades placed through ShieldTX are submitted to Hyperliquid and remain visible onchain and on the Hyperliquid orderbook. What changes is the attribution. Analysts and trading bots may still observe the activity, but they see it coming from a fresh wallet without an established identity or historical trading profile. This gives traders a clean separation between their public identity and a particular position, strategy, or trading experiment.</p>
+
+        <p>ShieldTX is intended for traders who want greater market confidentiality while maintaining the compliance architecture expected by professional desks. It is not designed to conceal trading activity from legitimate compliance processes or lawful requests. An internal audit history is maintained so that activity can be accounted for and reviewed where appropriate. The objective is professional confidentiality: private from the market, while remaining accountable where required.</p>
+
+        <h2 id="how-to-trade-perps-privately-on-hyperliquid-step-by-step">How to trade perps privately on Hyperliquid: step by step<a href="#how-to-trade-perps-privately-on-hyperliquid-step-by-step" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>The ShieldTX <a href="https://beta.shieldtx.xyz/">private beta is live</a>. You can <a href="https://www.shieldtx.xyz/request-access">request access</a>, fund your account, and start trading shielded perps on every Hyperliquid perp market.</p>
+
+        <p>Here is how it works.</p>
+
+        <h3>Step 1: Fund your ShieldTX balance</h3>
+        <p>Deposit USDC into ShieldTX. Observers see the deposit, not what happens next. You can bridge from 10+ chains to the ShieldTX vault on Arbitrum. Deposits are free.</p>
+
+        <h3>Step 2: Open a Hyperliquid perp</h3>
+        <p>Place the trade inside ShieldTX. A fresh wallet is funded for it and the order routes to Hyperliquid's native order book. You access the same liquidity and fills as native Hyperliquid trading. There is a delay of a few seconds between placing a trade on ShieldTX and it hitting the order book, which is necessary to shield the trade. If you're interested in higher frequency shielding via the API then <a href="https://www.shieldtx.xyz/contact-us">reach out</a>. We're looking to optimise the specific trading features and performance with our beta users.</p>
+
+        <p>ShieldTX supports all Hyperliquid perp trading pairs today. You can use up to 40x leverage. Fees are shown separately at checkout and are separate from Hyperliquid's native fees. Private beta members get discounted pricing.</p>
+
+        <h3>Step 3: Close and settle</h3>
+        <p>Close through ShieldTX. Proceeds return to your shielded balance, separate from the wallet that traded on Hyperliquid.</p>
+
+        <h3>Step 4: Withdraw</h3>
+        <p>When you are ready, withdraw to an external wallet.</p>
+
+        <h2 id="who-this-is-for">Who this is for<a href="#who-this-is-for" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>ShieldTX is designed for traders and organisations that want to:</p>
+
+        <ul>
+          <li>test new strategies without revealing every experiment publicly</li>
+          <li>isolate different trading mandates or portfolios</li>
+          <li>reduce unwanted monitoring and copy trading</li>
+          <li>prevent individual positions from being immediately associated with their brand</li>
+          <li>manage market signalling and reputational exposure</li>
+          <li>retain access to Hyperliquid's liquidity without maintaining a complex network of wallets.</li>
+        </ul>
+
+        <p>If you manage outside capital, trade significant volume, or need to separate your trading activity from your organisation's public identity, ShieldTX is built for you.</p>
+
+        <h2 id="summary">Summary<a href="#summary" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Hyperliquid's transparency is what makes it trustworthy and liquid. The problem is not the protocol. The problem is the surveillance infrastructure that has been built to exploit that transparency. <strong>Position hunting on Hyperliquid</strong>, strategy exposure, and public PnL history exposure are real structural costs for traders with size or a reputation to protect.</p>
+
+        <p>Subaccounts help with organisation, not privacy. VPNs help with network privacy, not execution privacy. The real need is to break the structural link between your funding wallet and your trading activity.</p>
+
+        <p>ShieldTX does exactly that. It is perp trading on Hyperliquid, without the public exposure.</p>
+
+        <p><strong>Request access to the private beta</strong> and start trading shielded perps today.</p>
+
+        <p><a class="cta" href="/request-access">Request access</a></p>
+
+        <div class="faq" id="faq">
+          <h2>Frequently Asked Questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+          <div class="faq-item">
+            <h3>Can others see my positions on Hyperliquid?</h3>
+            <p>Yes. Hyperliquid is fully on-chain. Every position, entry, size, leverage, and liquidation level is public and queryable by anyone in real time. Tools like Dexly and Hyperdash make this easy to monitor. Trades placed through ShieldTX hit Hyperliquid's orderbook but the link to your trading history and funding wallet is private.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Is Hyperliquid trading private?</h3>
+            <p>No. By default, all Hyperliquid trading is public, including perpetuals. Execution privacy tools like ShieldTX break the link between your funding wallet and your trading activity, so positions are not attributed to your identity.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>What is position hunting on Hyperliquid?</h3>
+            <p>Position hunting (aka Whale hunting) is when adversarial actors see your visible liquidation level and trade against it, pushing the market toward your forced exit. Hyperliquid's transparency makes this data accessible to anyone with the tools to query it.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Do Hyperliquid subaccounts provide privacy?</h3>
+            <p>No. Subaccounts organise strategies under one master account, but they are queryable on-chain and via the API. Anyone can tie them together.</p>
+          </div>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <!-- @partial footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <svg class="footer-logo" viewBox="0 0 414 101" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ShieldTX" focusable="false"><path d="M48.5854 87.0215C47.5068 87.5291 46.2579 87.5291 45.1792 87.0215L23.0278 76.5977H70.7368L48.5854 87.0215ZM80.5581 66.0322H13.2065V55.4678H80.5581V66.0322ZM80.5581 44.9023H13.2065V34.3369H80.5581V44.9023ZM76.5581 13.207C78.7672 13.207 80.558 14.998 80.5581 17.207V23.7725H13.2065V17.207C13.2067 14.998 14.9975 13.207 17.2065 13.207H76.5581Z"/><path d="M114.517 61.6894C114.728 63.6924 115.387 65.4319 116.494 66.9078C117.601 68.331 119.05 69.4379 120.842 70.2286C122.687 70.9665 124.743 71.3355 127.01 71.3355C130.225 71.3355 132.861 70.7557 134.916 69.596C136.972 68.4364 138 66.6969 138 64.3777C138 62.7963 137.394 61.5576 136.181 60.6615C134.969 59.7127 133.361 58.9748 131.358 58.4477C129.355 57.8679 127.168 57.3144 124.796 56.7873C122.424 56.2602 120.025 55.654 117.601 54.9688C115.229 54.2308 113.041 53.2557 111.038 52.0433C109.035 50.7783 107.428 49.1179 106.215 47.0621C105.003 44.9537 104.397 42.2655 104.397 38.9974C104.397 35.8875 105.319 33.1201 107.164 30.6954C109.009 28.218 111.565 26.2677 114.833 24.8445C118.154 23.4213 121.949 22.7097 126.219 22.7097C130.278 22.7097 133.915 23.5268 137.13 25.1608C140.398 26.7948 142.955 29.035 144.8 31.8814C146.697 34.6751 147.646 37.8905 147.646 41.5275H137.051C136.84 38.523 135.812 36.1774 133.967 34.4906C132.175 32.8039 129.461 31.9605 125.824 31.9605C122.292 31.9605 119.577 32.6194 117.68 33.9371C115.835 35.2549 114.912 36.9417 114.912 38.9974C114.912 40.7368 115.519 42.1073 116.731 43.1088C117.943 44.1103 119.551 44.901 121.554 45.4808C123.557 46.0606 125.745 46.5877 128.117 47.0621C130.541 47.5365 132.94 48.1427 135.312 48.8807C137.684 49.5659 139.871 50.5147 141.874 51.7271C143.877 52.8867 145.485 54.4944 146.697 56.5501C147.909 58.5531 148.516 61.1623 148.516 64.3777C148.516 69.4906 146.592 73.4703 142.744 76.3167C138.896 79.163 133.493 80.5862 126.535 80.5862C122.266 80.5862 118.444 79.7692 115.071 78.1352C111.697 76.5011 109.009 74.2609 107.006 71.4145C105.003 68.5682 103.922 65.3264 103.764 61.6894H114.517Z"/><path d="M153.149 20.0215H163.111V79.3212H153.149V20.0215ZM163.111 57.4989L161.846 48.5644C161.846 47.1939 162.057 45.6653 162.479 43.9786C162.901 42.2918 163.665 40.6841 164.772 39.1555C165.931 37.5742 167.513 36.2828 169.516 35.2813C171.571 34.2798 174.207 33.779 177.422 33.779C180.269 33.779 182.799 34.3588 185.013 35.5185C187.227 36.6781 188.966 38.6021 190.231 41.2903C191.549 43.9259 192.208 47.5102 192.208 52.0433V79.3212H182.245V53.0712C182.245 51.0155 182.061 49.1969 181.692 47.6156C181.323 45.9816 180.585 44.7165 179.478 43.8204C178.424 42.8716 176.843 42.3972 174.734 42.3972C172.889 42.3972 171.071 42.9243 169.279 43.9786C167.486 45.0328 166.01 46.6668 164.851 48.8807C163.691 51.0945 163.111 53.9673 163.111 57.4989Z"/><path d="M199.876 35.0441H209.759V79.3212H199.876V35.0441ZM199.867 20.0215L210.008 20.1843L209.929 31.2899L199.772 31.2041L199.867 20.0215Z"/><path d="M224.046 60.5034V52.3596H250.059L246.501 54.6525C246.712 52.6495 246.448 50.7519 245.71 48.9597C245.025 47.1149 243.892 45.6126 242.31 44.453C240.729 43.2933 238.673 42.7135 236.143 42.7135C232.717 42.7135 229.844 43.7941 227.525 45.9552C225.206 48.1164 224.046 51.2263 224.046 55.285H213.53C213.847 50.6992 215.033 46.8249 217.088 43.6623C219.197 40.4469 221.885 37.9959 225.153 36.3091C228.474 34.6224 232.137 33.779 236.143 33.779C239.148 33.779 241.968 34.3852 244.603 35.5975C247.292 36.7572 249.585 38.4966 251.482 40.8159C253.432 43.0825 254.856 45.8762 255.752 49.1969C256.7 52.5177 256.885 56.2865 256.305 60.5034H224.046ZM236.143 80.5862C231.979 80.5862 228.289 79.7429 225.074 78.0561C221.859 76.3694 219.276 74.0237 217.326 71.0192C215.375 68.0147 214.163 64.5094 213.688 60.5034H224.046C224.468 63.7715 225.654 66.4597 227.604 68.5682C229.554 70.6239 232.401 71.6517 236.143 71.6517C238.779 71.6517 240.887 71.0456 242.469 69.8332C244.103 68.5682 245.262 67.0396 245.947 65.2474H256.384C255.752 68.3046 254.513 70.9929 252.668 73.3121C250.823 75.5787 248.504 77.3709 245.71 78.6886C242.917 79.9537 239.728 80.5862 236.143 80.5862Z"/><path d="M260.308 20.0215H270.271V79.3212H260.308V20.0215Z"/><path d="M294.033 80.5862C289.922 80.5862 286.364 79.6111 283.359 77.6608C280.408 75.6578 278.115 72.8905 276.481 69.3588C274.899 65.8272 274.109 61.7948 274.109 57.2617C274.109 52.6759 274.899 48.6171 276.481 45.0855C278.115 41.5539 280.408 38.7865 283.359 36.7835C286.364 34.7805 289.922 33.779 294.033 33.779C297.196 33.779 299.884 34.4115 302.098 35.6766C304.365 36.889 306.157 38.6284 307.475 40.895V73.5493C306.21 75.7105 304.47 77.4236 302.256 78.6886C300.095 79.9537 297.354 80.5862 294.033 80.5862ZM295.615 71.6517C298.303 71.6517 300.517 71.0192 302.256 69.7542C303.996 68.4891 305.287 66.776 306.13 64.6149C307.027 62.401 307.475 59.9499 307.475 57.2617C307.475 54.5207 307.027 52.0697 306.13 49.9085C305.287 47.6947 303.996 45.9552 302.256 44.6902C300.517 43.3724 298.303 42.7135 295.615 42.7135C293.243 42.7135 291.187 43.346 289.447 44.6111C287.761 45.8234 286.469 47.5365 285.573 49.7504C284.73 51.9643 284.308 54.468 284.308 57.2617C284.308 60.0027 284.73 62.4801 285.573 64.6939C286.469 66.8551 287.761 68.5682 289.447 69.8332C291.187 71.0456 293.243 71.6517 295.615 71.6517ZM307.475 79.3212V20.0215H317.437V79.3212H307.475Z"/><path d="M362.995 30.3896H346.641V77.9766H338.338V30.3896H322.197L322.13 22.6309H362.928L362.995 30.3896Z"/><path d="M389.333 44.2158L403.485 22.6309H413.29L395.104 50.0664L413.764 77.9766H404.355L389.333 55.8379L374.231 77.9766H364.822L383.481 50.0664L365.296 22.6309H375.179L389.333 44.2158Z"/></svg>
+        <p class="footer-tagline">Trade without exposing your wallet.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="/#features">Features</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#how">How it works</a>
+        <a href="https://beta.shieldtx.xyz" target="_blank" rel="noopener noreferrer">Open App</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/#faq">FAQ</a>
+        <a href="/#scan-tool">Scan</a>
+        <a href="/trust-model/">Trust model ↗</a>
+        <a href="/brand-document/">Brand book ↗</a>
+        <a href="/blog">Blog ↗</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/request-access">Request access</a>
+        <a href="/contact-us/">Contact ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <div class="footer-bottom-left">
+        <span>© <span id="yr"></span> ShieldTX</span>
+        <nav class="footer-bottom-legal" aria-label="Legal">
+          <a href="/terms">Terms</a>
+          <a href="/privacy">Privacy</a>
+        </nav>
+      </div>
+      <a class="footer-avail-link" href="https://availproject.org/" target="_blank" rel="noopener noreferrer" aria-label="Powered by Avail">
+        <span>Powered by</span>
+        <img class="footer-avail-logo" src="/assets/avail-logo.svg" alt="Avail" />
+      </a>
+      <div class="footer-socials" aria-label="ShieldTX social links">
+        <a class="footer-social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener noreferrer" aria-label="ShieldTX on X (Twitter)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.7l-6.92 7.91L22 21h-6.4l-5.01-6.55L4.84 21H1.66l7.4-8.46L1.5 3h6.56l4.53 5.99L17.53 3Zm-1.12 16.13h1.76L7.7 4.78H5.82l10.59 14.35Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+  <!-- /@partial footer -->
+
+  <script>
+    (function () {
+      const y = document.getElementById('yr');
+      if (y) y.textContent = new Date().getFullYear();
+
+      // Copy-link anchor behavior (preserves the source post's interaction)
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
