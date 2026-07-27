@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog · ShieldTX</title>
-  <meta name="description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
-  <link rel="canonical" href="https://www.shieldtx.xyz/blog" />
+  <title>How to Tell If You're Being Copy Traded on Hyperliquid · ShieldTX</title>
+  <meta name="description" content="Learn how to tell if someone is copying your Hyperliquid trades. Scan your wallet, detect copy trading, and protect your strategy with execution privacy." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/how-to-tell-if-youre-being-copy-traded-on-hyperliquid" />
 
   <link rel="icon" type="image/svg+xml" href="/assets/ShieldTX_LogoMark.svg" />
   <link rel="apple-touch-icon" href="/assets/ShieldTX_LogoMark.svg" />
 
-  <meta property="og:title" content="Blog · ShieldTX" />
-  <meta property="og:description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://shieldtx.xyz/blog" />
+  <meta property="og:title" content="How to Tell If You're Being Copy Traded on Hyperliquid · ShieldTX" />
+  <meta property="og:description" content="Learn how to tell if someone is copying your Hyperliquid trades. Scan your wallet, detect copy trading, and protect your strategy with execution privacy." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/how-to-tell-if-youre-being-copy-traded-on-hyperliquid" />
   <meta property="og:image" content="https://shieldtx.xyz/assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Blog · ShieldTX" />
-  <meta name="twitter:description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
+  <meta name="twitter:title" content="How to Tell If You're Being Copy Traded on Hyperliquid · ShieldTX" />
+  <meta name="twitter:description" content="Learn how to tell if someone is copying your Hyperliquid trades. Scan your wallet, detect copy trading, and protect your strategy with execution privacy." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -81,75 +81,143 @@
   <!-- /@partial nav -->
 
   <main id="top">
-    <section class="blog-index">
-      <div class="blog-index-wrap">
-        <header class="blog-index-head">
-          <h1 class="blog-index-title">Blogs</h1>
-          <p class="blog-index-sub">Notes on private trading, threat models, and how we're building ShieldTX.</p>
-        </header>
+    <article class="blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">Guide</div>
+        <h1>How to Tell If You're Being Copy Traded on Hyperliquid</h1>
+        <p class="blog-post-meta">
+          <span>27 July 2026</span>
+          <span>8 min read</span>
+        </p>
 
-        <!-- POSTS STACK — text-only single-column entries. Each post is a
-             semantic <article> with title, meta, lede, and a Read → CTA.
-             Hover reveals a brand-blue stripe on the left. Newest first. -->
-        <div class="blog-stack">
+        <p class="intro"><em>If you are profitable on Hyperliquid, there is a high probability someone is copying your trades. Here is how to find out, and how to stop it.</em></p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/how-to-tell-if-youre-being-copy-traded-on-hyperliquid">
-              <span class="blog-entry-meta">27 July 2026 · 8 min read</span>
-              <h2 class="blog-entry-title">How to Tell If You're Being Copy Traded on Hyperliquid</h2>
-              <p class="blog-entry-lede">Learn how to tell if someone is copying your Hyperliquid trades. Scan your wallet, detect copy trading, and protect your strategy.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p>Hyperliquid is fully transparent. That transparency is what makes it trustworthy, auditable, and liquid. It also means that every position you open is public. The moment your trade executes, your entry price, size, leverage, and liquidation level are visible to anyone who knows where to look.</p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/how-to-trade-perps-privately-on-hyperliquid">
-              <span class="blog-entry-meta">24 July 2026 · 12 min read</span>
-              <h2 class="blog-entry-title">How to Trade Perps Privately on the Hyperliquid Orderbook</h2>
-              <p class="blog-entry-lede">A step-by-step guide to trading perps on Hyperliquid without exposing your positions, PnL, or strategy to copybots and surveillance tools.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p>Copy trading on Hyperliquid is not just manual followers watching a leaderboard. It is automated, systematic, and available through at least a dozen tools. Some of them operate at sub-second latency, detecting your entry and placing a mirroring order before the market has time to validate your thesis.</p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/what-trading-in-public-costs-whales-on-hyperliquid">
-              <span class="blog-entry-meta">22 July 2026 · 8 min read</span>
-              <h2 class="blog-entry-title">The surveillance tax: What Trading in Public Costs Whales on Hyperliquid</h2>
-              <p class="blog-entry-lede">Every position you open on Hyperliquid tells the market something. Here is what public trading costs whales, and how execution isolation changes the game.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p>The first step is knowing whether you are already being copied. You can scan your wallet in 30 seconds, no wallet connection required.</p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/what-is-copy-trade-protection">
-              <span class="blog-entry-meta">22 May 2026 · 7 min read</span>
-              <h2 class="blog-entry-title">What Is Copy Trade Protection? A Trader's Guide to Keeping Your Strategy Yours</h2>
-              <p class="blog-entry-lede">Copy trade protection shields your on-chain trading activity from being copied, mirrored, or analyzed.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p><a class="cta" href="https://scanner.shieldtx.xyz/">Scan your wallet now</a></p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/hyperbot-dexly-hyperdash-copy-trading-tools">
-              <span class="blog-entry-meta">15 May 2026 · 9 min read</span>
-              <h2 class="blog-entry-title">Hyperbot, Dexly &amp; HyperDash: Are They Copying Your Trades?</h2>
-              <p class="blog-entry-lede">Hyperbot, Dexly, and HyperDash are actively copying Hyperliquid traders. How each tool works, why they're a problem, and what to do.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <h2 id="the-copy-trading-problem-on-hyperliquid">The Copy Trading Problem on Hyperliquid<a href="#the-copy-trading-problem-on-hyperliquid" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/how-copy-traders-are-stealing-your-edge">
-              <span class="blog-entry-meta">8 May 2026 · 6 min read</span>
-              <h2 class="blog-entry-title">How Copy Traders Are Stealing Your Edge on Hyperliquid</h2>
-              <p class="blog-entry-lede">Your Hyperliquid trades are public. How copy trading bots track your positions in real time, and how to trade without exposing your strategy.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p>Hyperliquid's on-chain architecture means that positions become visible after execution. This is how the protocol works, and for the most part, it works as intended. The transparency prevents exchange manipulation and gives everyone the same source of truth.</p>
 
+        <p>The side effect is that copy trading tools exploit this public state. They monitor open positions in real time, detect new entries, and replicate them. Platforms like Dexly, Hyperdash, and Hyperbot make this information not just available, but actionable. They alert followers, profile wallets by performance, and segment traders by asset preference and sizing behaviour.</p>
+
+        <p>The cost is not hypothetical. Our models suggest that being tracked by copy traders can erode between 5 and 100 basis points per trade, depending on strategy and size. For traders moving significant volume, edge erosion compounds quickly.</p>
+
+        <p>Copy trading is the most visible layer of the problem, but the underlying issue is broader. Your wallet is a permanent, queryable record of how you trade. Every entry, exit, sizing decision, and pair preference is indexed forever. Over time, it becomes a readable strategy manual.</p>
+
+        <p>Hyperliquid's transparency is a feature. The surveillance ecosystem built on top of it is a problem.</p>
+
+        <p>Learn <a href="https://www.shieldtx.xyz/blog/how-to-trade-perps-privately-on-hyperliquid">how to trade perps privately on the Hyperliquid orderbook</a></p>
+
+        <h2 id="how-to-check-if-youre-being-copied">How to Check If You're Being Copied<a href="#how-to-check-if-youre-being-copied" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>There are manual signs that suggest your trades are being copied.</p>
+
+        <p>Unusual price movement immediately after your entry, as follow-on volume pushes the market against you. Follower wallets appearing in the same direction within seconds or minutes of your trade. Your liquidation level becoming a visible target in volatile conditions. Temporal correlation between your entries and copy volume is the most reliable indicator.</p>
+
+        <p>But manual checks have real limitations. You cannot see every follower's wallet. Timing correlation is hard to prove without tooling. And even if you confirm you are being copied, you are already paying the cost.</p>
+
+        <p>What a proper check should show is not just whether copy traders exist, but how much of your strategy is exposed. Your open positions, your position history, your PnL, and how easily a competitor could reconstruct your approach from your wallet alone. The question is not whether someone is watching. It is what they can learn.</p>
+
+        <p>The easiest way to get a full picture is to run a scan.</p>
+
+        <h2 id="step-by-step-scan-your-wallet">Step-by-Step: Scan Your Wallet with Our Wallet Scanner Tool<a href="#step-by-step-scan-your-wallet" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>We built a wallet scanner to show what can be reconstructed from a Hyperliquid address using publicly available on-chain data.</p>
+
+        <p>You do not need to connect your wallet, sign a transaction, or provide access to your funds. You enter your address. The scanner returns what the market can already see.</p>
+
+        <p>It is designed to answer a simple question: what could a competitor, counterparty, copy trader, journalist, or investor learn from this address?</p>
+
+        <p><a class="cta" href="https://scanner.shieldtx.xyz/">Scan your wallet now</a></p>
+
+        <h2 id="what-to-do-if-youre-being-copied">What to Do If You're Being Copied<a href="#what-to-do-if-youre-being-copied" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Most traders who discover they are being copied try one of three workarounds.</p>
+
+        <p><strong>Wallet rotation</strong> is the most common. The logic is simple: if no single wallet holds a significant track record, followers have no target. The problem is that clustering tools like Arkham and Nansen use transaction flows, timing, funding patterns, and behavioural correlation to link wallets operated by the same person or organisation. For an individual, rotation creates additional operational complexity. For an institution, it creates problems around key management, reporting, accounting, and audit continuity.</p>
+
+        <p><strong>CEX routing</strong> means moving activity through a centralised exchange to obscure on-chain trails. This adds latency and friction, and more importantly, it pulls you off Hyperliquid entirely. You lose the venue you actually want.</p>
+
+        <p><strong>Execution randomisation</strong> means varying your entry timing, sizing, and frequency to add noise. This degrades your own performance. You end up trading worse to confuse bots. It is a real trade-off, not a free solution.</p>
+
+        <p>These workarounds address the symptom, having a recognisable wallet with follower volume, but they fail to address the root cause. The root cause is that your position data is publicly attributable to your wallet identity. The structural fix is execution privacy that breaks that link.</p>
+
+        <p><strong>ShieldTX</strong></p>
+
+        <h2 id="how-shieldtx-solves-the-problem">How ShieldTX Solves the Problem<a href="#how-shieldtx-solves-the-problem" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p><a href="https://www.shieldtx.xyz/"><strong>ShieldTX</strong></a> routes perp trades to Hyperliquid's native order book through fresh trading wallets. These wallets are not visibly linked to the wallet you used to fund ShieldTX or to your previous trading history.</p>
+
+        <p>Trades are visible on-chain and on the Hyperliquid order book. What changes is the attribution. Analysts and trading bots may still observe the activity, but they see it coming from a fresh wallet without an established identity or historical trading profile.</p>
+
+        <p>You get the same liquidity and fills. The same perp pairs. A delay of a few seconds between placing a trade and it hitting the order book, which is necessary to shield the trade. ShieldTX supports all Hyperliquid perp markets and offers up to 40x leverage.</p>
+
+        <p>It is a trading tool that isolates execution data. The objective is professional confidentiality: private from the market, while remaining accountable where required. An internal audit history is maintained so that activity can be reviewed where appropriate.</p>
+
+        <p><a href="/blog/how-to-trade-perps-privately-on-hyperliquid">How to trade perps privately on Hyperliquid</a></p>
+
+        <h2 id="how-to-avoid-position-hunting-on-hyperliquid">How to Avoid Position Hunting on Hyperliquid<a href="#how-to-avoid-position-hunting-on-hyperliquid" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Position hunting is when adversarial actors identify your visible liquidation level and trade against it.</p>
+
+        <p>On Hyperliquid, your liquidation price is public state. Anyone can query it. In volatile markets, clusters of liquidation levels become targets. A market move applied at the right price can cascade through those clusters, triggering forced exits that amplify the move.</p>
+
+        <p>The fix is the same as for copy trading. If the market cannot associate a position with a known wallet, it cannot identify a liquidation target worth pushing toward. It cannot build a profile of your sizing, your conviction levels, or your risk tolerance.</p>
+
+        <p>ShieldTX provides this by routing through fresh wallets with no established identity or historical profile. The position is visible on the order book. The attribution is not.</p>
+
+        <p><a class="cta" href="https://scanner.shieldtx.xyz/">Scan your wallet to see your exposure</a></p>
+
+        <div class="faq" id="faq">
+          <h2>Frequently Asked Questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+          <div class="faq-item">
+            <h3>Can I tell if someone is copying my Hyperliquid trades?</h3>
+            <p>Manual signs exist but are hard to prove without tooling. A wallet scan is the most reliable way to see your public exposure and assess whether your strategy is being replicated.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Does Hyperliquid allow copy trading?</h3>
+            <p>Hyperliquid does not prevent it. Its transparency makes positions publicly queryable, which copy trading tools exploit. The protocol architecture is not the problem. The surveillance ecosystem built on top of it is.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How do I stop copy trading on Hyperliquid?</h3>
+            <p>Workarounds like wallet rotation are defeated by clustering tools. The structural fix is execution privacy that breaks the public link between your funding wallet and your trading activity.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Is my Hyperliquid wallet public?</h3>
+            <p>Your positions, PnL, liquidation levels, and full trading history are all public by default. There is no privacy setting to switch this off.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Does using ShieldTX mean I am not trading on Hyperliquid?</h3>
+            <p>No. Trades route to Hyperliquid's native order book. You access the same liquidity, fills, and perp markets. ShieldTX is not an alternative venue. It is a privacy layer on top of the venue you already use.</p>
+          </div>
         </div>
+
+        <h2 id="conclusion">Conclusion<a href="#conclusion" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+        <p>Hyperliquid's transparency is a feature. The surveillance layer built on top of it is the problem. Copy trading, strategy extraction, and position hunting are real, measurable costs for traders with an edge worth protecting.</p>
+
+        <p>The first step is diagnosis. Scan your wallet to see what the market can already see.</p>
+
+        <p>The next step is protection. ShieldTX gives you execution privacy without pulling you off the venue. It is perp trading on Hyperliquid, without the public exposure.</p>
+
+        <p><a class="cta" href="https://scanner.shieldtx.xyz/">Scan your wallet now</a></p>
+
+        <p><a class="cta" href="/request-access">Request access to the private beta</a></p>
+
       </div>
-    </section>
+    </article>
   </main>
 
   <!-- Footer -->
@@ -206,6 +274,19 @@
     (function () {
       const y = document.getElementById('yr');
       if (y) y.textContent = new Date().getFullYear();
+
+      // Copy-link anchor behavior (preserves the source post's interaction)
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
     })();
   </script>
 </body>
