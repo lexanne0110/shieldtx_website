@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trust model · ShieldTX</title>
-  <meta name="description" content="ShieldTX holds your USDC in a ZK-verified vault on Arbitrum. Full breakdown of token flow, shielding guarantees, and permissionless withdrawal." />
+  <meta name="description" content="Your USDC sits in an on-chain vault on Arbitrum. A full breakdown of token flow, shielding, and how withdrawals work." />
   <link rel="canonical" href="https://www.shieldtx.xyz/trust-model" />
 
   <link rel="icon" type="image/svg+xml" href="../assets/ShieldTX_LogoMark.svg" />
@@ -100,12 +100,12 @@
         <header class="docs-header">
           <span class="eyebrow">Trust model</span>
           <h1 class="docs-title">How your funds are protected on-chain.</h1>
-          <p class="docs-lede">ShieldTX lets you trade perpetuals on-chain using Hyperliquid, with full execution shielding. Your deposits, positions, and withdrawals are protected on-chain, and shielded from copy-traders and competitors. You retain custody of your assets at every step.</p>
+          <p class="docs-lede">Your deposits, trades, and withdrawals stay hidden from copy-traders and competitors. Funds move only when you sign for them.</p>
         </header>
 
         <section class="docs-section" id="overview">
           <h2 class="docs-h2">Overview</h2>
-          <p>When you use ShieldTX, your tokens remain under your control, secured by your private keys, and stored securely in an on-chain vault with timeout protection. This document explains exactly what happens to your tokens at every step.</p>
+          <p>Your USDC sits in an on-chain vault and moves only when you sign a transaction. Here's exactly what happens at each stage.</p>
         </section>
 
         <section class="docs-section" id="token-flow">
@@ -116,9 +116,9 @@
               <div class="docs-step-body">
                 <h3 class="docs-h3">Deposit</h3>
                 <p class="docs-step-flow"><b>Your funds</b> → <b>Vault contract</b> → <b>ShieldTX</b></p>
-                <p>ShieldTX accepts deposits directly from every major EVM chain. Your USDC is added to ShieldTX's on-chain vault on Arbitrum via Avail Nexus. The on-chain vault contract locks your USDC, and credits your ShieldTX account with a shielded, spendable balance that only you can see or spend.</p>
+                <p>ShieldTX accepts deposits directly from every major EVM chain. Your USDC lands in ShieldTX's on-chain vault on Arbitrum via Avail Nexus. The vault contract locks it and credits your ShieldTX account with a private balance only you can see, ready to trade.</p>
                 <ul class="docs-list">
-                  <li>Your USDC is secured on-chain by ZK proofs on Arbitrum and can only be released when you submit a signed transaction.</li>
+                  <li>Your USDC stays locked in the on-chain vault on Arbitrum and is released only when you submit a signed transaction.</li>
                 </ul>
               </div>
             </li>
@@ -129,9 +129,9 @@
                 <p class="docs-step-flow"><b>ShieldTX</b> → <b>Fresh Hyperliquid account</b></p>
                 <p>You choose a pair, direction, size, and leverage via the ShieldTX app. ShieldTX creates a brand-new Hyperliquid wallet on-chain, completely unlinkable to your deposit wallet or any previous on-chain trades. <b>Your trade gets placed on Hyperliquid from this fresh wallet.</b></p>
                 <ul class="docs-list">
-                  <li>You control the Hyperliquid position through ShieldTX using a wallet secured by Privy.</li>
-                  <li>When you place your open or close positions via ShieldTX, a separate on-chain smart contract executes the trade.</li>
-                  <li>If the funding process fails for any reason, your transaction reverts with automatic timeout protection. Your ShieldTX balance returns the full amount automatically.</li>
+                  <li>You open and close the position from the ShieldTX app.</li>
+                  <li>Your order fills on Hyperliquid's order book, at the same price you'd get trading directly on HL minus the shielding fee.</li>
+                  <li>If opening the position fails for any reason, your full amount returns to your ShieldTX balance on its own.</li>
                 </ul>
               </div>
             </li>
@@ -142,9 +142,9 @@
                 <p class="docs-step-flow"><b>Hyperliquid account</b> → <b>ShieldTX</b></p>
                 <p>Your position closes directly on Hyperliquid. Proceeds return to your ShieldTX balance, unlinkable to the Hyperliquid account used for the trade.</p>
                 <ul class="docs-list">
-                  <li>You must initiate the close on ShieldTX. No one else can close your position.</li>
-                  <li>The ShieldTX validator confirms the settlement has completed on-chain before crediting your ShieldTX balance.</li>
-                  <li>Settlement is guaranteed on-chain. If the process fails for any reason, timeout protection automatically returns your funds.</li>
+                  <li>Your position follows Hyperliquid's rules. It closes when you close it, or when a take-profit, stop-loss, or liquidation triggers. ShieldTX adds no rules of its own.</li>
+                  <li>ShieldTX validates that the settlement has completed on-chain before crediting your ShieldTX balance.</li>
+                  <li>Closing settles on-chain in a few steps before your ShieldTX balance is credited.</li>
                 </ul>
               </div>
             </li>
@@ -153,11 +153,10 @@
               <div class="docs-step-body">
                 <h3 class="docs-h3">Withdraw</h3>
                 <p class="docs-step-flow"><b>ShieldTX</b> → <b>Your wallet</b></p>
-                <p>Funds that are not part of an active trade can be claimed from the ShieldTX vault at any point, by signing a transaction on-chain. The vault verifies the transaction and automatically releases the funds to your designated wallet address.</p>
+                <p>Funds that aren't in an active trade can be claimed from the ShieldTX vault at any time. You sign a transaction to claim, and the vault sends the funds to the address you choose.</p>
                 <ul class="docs-list">
-                  <li>You must initiate the withdrawal from ShieldTX. No one else can withdraw your funds.</li>
-                  <li>The vault automatically releases your funds once the ZK proof is verified on-chain.</li>
-                  <li>Double-spend prevention is enforced. Each withdrawal can only be claimed once.</li>
+                  <li>Only you can claim your funds, with a signed transaction.</li>
+                  <li>Once ShieldTX posts the required confirmation on-chain, you claim your funds from the vault.</li>
                 </ul>
               </div>
             </li>
@@ -169,12 +168,12 @@
           <div class="docs-table-wrap">
             <table class="docs-table">
               <thead>
-                <tr><th scope="col">What's shielded</th><th scope="col">From whom</th></tr>
+                <tr><th scope="col">Shielded</th><th scope="col">From</th></tr>
               </thead>
               <tbody>
-                <tr><th scope="row">Your shielded balance</th><td>Everyone. Only you and ShieldTX can see your balance.</td></tr>
+                <tr><th scope="row">Your ShieldTX balance</th><td>Everyone. Only you and ShieldTX can see your balance.</td></tr>
                 <tr><th scope="row">Your deposit and your trades</th><td>Public observers, copy-traders, and competitors cannot link your deposits to your trades.</td></tr>
-                <tr><th scope="row">Different positions</th><td>Use a fresh, unlinkable Hyperliquid account for each trade on ShieldTX, breaking the link between your trading activity.</td></tr>
+                <tr><th scope="row">Different positions</th><td>Uses a fresh, unlinkable Hyperliquid account for each trade on ShieldTX, breaking the link between your trading activity.</td></tr>
                 <tr><th scope="row">Your trading P&amp;L and history</th><td>External observers. No one can look on-chain and decipher your entire P&amp;L or trading history when you use ShieldTX.</td></tr>
               </tbody>
             </table>
@@ -189,10 +188,10 @@
                 <tr><th scope="col">Mechanism</th><th scope="col">Protection</th></tr>
               </thead>
               <tbody>
-                <tr><th scope="row">Vault contract</th><td>Core operations are permissionless and ZK-verified. Funds only move when cryptographically proven on-chain.</td></tr>
-                <tr><th scope="row">Zero-knowledge proofs</th><td>Every state transition (deposit, transfer, withdrawal) is cryptographically proven before it takes effect.</td></tr>
-                <tr><th scope="row">Key management (Privy)</th><td>Privy manages keys client-side. The server never sees your private keys.</td></tr>
-                <tr><th scope="row">Escrow with timeout</th><td>Funds locked in escrow auto-release if the funding or settlement process fails. No funds can be permanently stuck.</td></tr>
+                <tr><th scope="row">On-chain vault</th><td>Your balance lives in an on-chain vault contract on Arbitrum. It changes only through the protocol's on-chain updates.</td></tr>
+                <tr><th scope="row">On-chain settlement</th><td>Every deposit, trade, and withdrawal settles on-chain before it takes effect.</td></tr>
+                <tr><th scope="row">Key management (Privy)</th><td>Privy handles the trading-wallet keys client-side.</td></tr>
+                <tr><th scope="row">Automatic returns on open</th><td>If opening a position fails, your full amount returns to your ShieldTX balance on its own.</td></tr>
               </tbody>
             </table>
           </div>
@@ -206,9 +205,9 @@
                 <tr><th scope="col">Component</th><th scope="col">Trust level</th></tr>
               </thead>
               <tbody>
-                <tr><th scope="row">Vault contract</th><td><span class="docs-trust-pill">Permissionless</span> All core operations are ZK-verified on-chain. No admin keys required.</td></tr>
-                <tr><th scope="row">ShieldTX</th><td><span class="docs-trust-pill">Verifiable</span> Every state transition is ZK-proven and verified on-chain before L1 state advances.</td></tr>
-                <tr><th scope="row">Withdrawals</th><td><span class="docs-trust-pill">Trustless</span> ZK proof + inclusion proof verified on-chain, permissionless claiming.</td></tr>
+                <tr><th scope="row">Vault contract</th><td><span class="docs-trust-pill">On-chain</span> Your balance lives in an on-chain vault contract on Arbitrum.</td></tr>
+                <tr><th scope="row">ShieldTX</th><td><span class="docs-trust-pill">On-chain</span> Every deposit, trade, and withdrawal settles on-chain.</td></tr>
+                <tr><th scope="row">Withdrawals</th><td><span class="docs-trust-pill">Pull-based</span> You claim your funds with a signed transaction, once the protocol posts the confirmation on-chain.</td></tr>
               </tbody>
             </table>
           </div>
