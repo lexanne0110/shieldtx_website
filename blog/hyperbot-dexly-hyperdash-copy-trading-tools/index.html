@@ -123,11 +123,11 @@
 
     <h3 id="being-copied">What "Being Copied" Actually Means<a href="#being-copied" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h3>
 
-    <p>Copy trading on Hyperliquid is not just "following along." It is real-time position mirroring that happens within seconds, sometimes milliseconds, after your execution. When you open a position, copy bots mirror that same position instantly. When you close, they close. The gap between your trade and theirs is small enough to create execution pressure on your fills.</p>
+    <p>Copy trading on Hyperliquid is not just 'following along.' It is real-time position mirroring that happens within seconds of your position appearing in public state. When your position becomes visible, copy bots detect it and open their own mirrored positions quickly enough to create execution pressure on your fills.</p>
 
     <p>This creates two immediate effects:</p>
 
-    <p><strong>Execution pressure:</strong> When multiple bots replicate your entry simultaneously, they push the price against you before your order fully fills. Your slippage becomes their profit margin.</p>
+    <p><strong>Execution pressure:</strong> When multiple bots detect your newly opened position and replicate your entry, their follow-on volume pushes the price further in the same direction. Your average fill on large orders becomes worse than it would have been trading alone. Your slippage becomes their profit margin.</p>
 
     <p><strong>Signal leakage:</strong> Once copy traders know your exit points, they can anticipate your closes and trade ahead of them too. Your risk management becomes their alpha.</p>
 
