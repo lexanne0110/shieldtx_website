@@ -1,0 +1,60 @@
+# ShieldTX
+
+> ShieldTX is a private beta trading application that routes perpetual trades to Hyperliquid's native order book while isolating positions, PnL, and liquidation levels from the user's main funding wallet.
+
+## What ShieldTX does
+
+- Routes orders to Hyperliquid's native order book with the same liquidity and fills as native trading.
+- Isolates trading activity: positions, PnL, and liquidation levels are not publicly linked to the wallet that funded the trade.
+- Funds each trade from a fresh, temporary wallet; proceeds return to a shielded balance on Arbitrum after closing.
+- Deposits and settlements are on-chain; the trading activity itself is unlinked from the depositor's identity.
+- Bridging is via Avail Nexus from any chain.
+
+## Key specs
+
+- $1M+ traded in beta.
+- 40x maximum leverage.
+- Supports all Hyperliquid perp markets.
+- Beta access is by application only.
+
+## How it works
+
+1. Deposit USDC into a ShieldTX balance (vault on Arbitrum).
+2. Open a Hyperliquid perp inside ShieldTX; a fresh wallet is funded for the order.
+3. Close and settle; proceeds return to the shielded balance, separate from the trading wallet.
+
+## Compliance & trust
+
+- Funds are locked in an on-chain vault contract on Arbitrum.
+- Withdrawals are pull-based: you claim funds with a signed transaction after the protocol posts settlement confirmation on-chain.
+- Trading-wallet keys are handled client-side via Privy.
+- Architecture is designed to support professional compliance obligations. User-held viewing keys are planned but not yet implemented.
+- ShieldTX is not an anonymity tool or mixer; it is a trading execution layer.
+
+## Main
+
+- [Home](https://www.shieldtx.xyz/)
+- [Features](https://www.shieldtx.xyz/#features)
+- [How it works](https://www.shieldtx.xyz/#how)
+- [Compare](https://www.shieldtx.xyz/#compare)
+- [FAQ](https://www.shieldtx.xyz/#faq)
+
+## Product & Access
+
+- [Open App (beta)](https://beta.shieldtx.xyz)
+- [Request Access](https://www.shieldtx.xyz/request-access)
+- [Wallet Scanner](https://www.shieldtx.xyz/#scan-tool)
+
+## Resources
+
+- [Trust Model](https://www.shieldtx.xyz/trust-model/)
+- [Blog](https://www.shieldtx.xyz/blog)
+- [Contact](https://www.shieldtx.xyz/contact/)
+
+## Optional
+
+- [Brand Book](https://www.shieldtx.xyz/brand-document/)
+- [Powered by Avail](https://availproject.org/)
+- [X / Twitter](https://x.com/ShieldTXxyz)
+- [Terms](https://www.shieldtx.xyz/terms)
+- [Privacy](https://www.shieldtx.xyz/privacy)
