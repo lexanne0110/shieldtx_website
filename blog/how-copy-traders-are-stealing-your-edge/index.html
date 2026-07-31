@@ -227,7 +227,7 @@
 
       <div class="faq-item">
         <h3>How do copy trading bots find and mirror my trades?</h3>
-        <p>Bots monitor the Hyperliquid order book and on-chain data for target wallets. When a new position is detected, the bot fires a mirroring order. In 2026, the most sophisticated implementations operate at sub-second latency, meaning the copy order can be placed before your own fill has fully propagated. Temporal correlation analysis (same asset, same direction, 2–60 second lag) is the measurable signature.</p>
+        <p>Bots monitor Hyperliquid's public position data for target wallets. When a new position appears in public state, the bot fires a mirroring order. In 2026, the most sophisticated implementations detect a new position within seconds of it appearing in public state, and place a mirroring order shortly after. Temporal correlation analysis (same asset, same direction, 2–60 second lag) is the measurable signature.</p>
       </div>
 
       <div class="faq-item">
