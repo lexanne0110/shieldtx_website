@@ -18,6 +18,10 @@ replaced with the empty string.
 Re-running the script regenerates the content between markers, so it is safe
 to invoke after every edit to a partial. Run via `npm run sync` (which calls
 this script via python3).
+
+The sync also guarantees that every page has a crawler-visible Open Graph
+image. Pages can define their own ``og:image``; otherwise the site-wide image
+used by the homepage is inserted into the document head.
 """
 
 import os
@@ -32,6 +36,17 @@ SKIP_DIRS = {"node_modules", ".git", "partials", ".vercel"}
 OPEN_RE = re.compile(r"<!--\s*@partial\s+([\w-]+)([^>]*?)-->")
 ATTR_RE = re.compile(r'([\w-]+)\s*=\s*"([^"]*)"')
 TOKEN_RE = re.compile(r"{{\s*([\w-]+)\s*}}")
+HEAD_CLOSE_RE = re.compile(r"(?P<indent>^[ \t]*)</head>", re.MULTILINE | re.IGNORECASE)
+OG_IMAGE_RE = re.compile(
+    r'<meta\s+[^>]*property=["\']og:image["\'][^>]*>', re.IGNORECASE
+)
+
+DEFAULT_OG_IMAGE = "https://shieldtx.xyz/assets/og-image.jpg"
+DEFAULT_OG_IMAGE_TAGS = f"""<meta property="og:image" content="{DEFAULT_OG_IMAGE}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta name="twitter:image" content="{DEFAULT_OG_IMAGE}" />"""
 
 
 def read_partial(name: str) -> str:
@@ -47,6 +62,22 @@ def apply_tokens(template: str, attrs: dict) -> str:
 
 def parse_attrs(raw: str) -> dict:
     return {m.group(1): m.group(2) for m in ATTR_RE.finditer(raw)}
+
+
+def ensure_default_og_image(html: str, path: Path) -> str:
+    """Insert the homepage OG image when a page has no explicit OG image."""
+    if OG_IMAGE_RE.search(html):
+        return html
+
+    head_close = HEAD_CLOSE_RE.search(html)
+    if not head_close:
+        raise ValueError(
+            f"Cannot add the default OG image: missing </head> in {path.relative_to(ROOT)}"
+        )
+
+    indent = head_close.group("indent")
+    tags = DEFAULT_OG_IMAGE_TAGS.replace("\n", "\n" + indent)
+    return html[:head_close.start()] + indent + tags + "\n" + html[head_close.start():]
 
 
 def sync_file(path: Path) -> bool:
@@ -88,9 +119,10 @@ def sync_file(path: Path) -> bool:
         if original[open_end:close_idx].strip() != indented.strip():
             changed = True
 
-    new_content = "".join(out)
-    if changed:
+    new_content = ensure_default_og_image("".join(out), path)
+    if new_content != original:
         path.write_text(new_content, encoding="utf-8")
+        changed = True
     return changed
 
 
