@@ -67,7 +67,7 @@ The **Request Access** form posts to a serverless endpoint (real validation, IP-
 | Hero modal "Request Access"   | `POST /api/request-access` | `index.html` (mirrored in `/request-access`)               |
 | Permalink page                | `POST /api/request-access` | `request-access/index.html`                                   |
 
-The Request Access form markup is duplicated across two pages. Behavior is shared via `public-scripts/request-access-form.js → ShieldTX.bindRequestAccessForm(formEl, { mode })`. When editing fields, update both HTML copies. It mirrors submissions into Airtable via `lib/db.js → appendToAirtable(fields)` (`AIRTABLE_TABLE`, default "Invite Requests"; no-op until `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` are set).
+The Request Access form markup is duplicated across two pages. Behavior is shared via `public-scripts/request-access-form.js → ShieldTX.bindRequestAccessForm(formEl, { mode })`. When editing fields, update both HTML copies. It mirrors submissions into Airtable via `lib/db.js → appendToAirtable(fields)` (`AIRTABLE_TABLE`, default "Invite Requests"; no-op until `AIRTABLE_TOKEN` + `AIRTABLE_BASE_ID` are set) and into Google Sheets via `lib/sheets.js → appendRow` ("Invite Requests" tab, created on demand; no-op until `GOOGLE_SERVICE_ACCOUNT_EMAIL` + `GOOGLE_PRIVATE_KEY` + `GOOGLE_SHEET_ID` are set).
 
 The **Contact Us** form (`contact-us/index.html`) has **no backend** — its inline script composes a `mailto:` to `shieldtx-support@availproject.org` and opens the visitor's email client. No endpoint, no third-party service.
 
