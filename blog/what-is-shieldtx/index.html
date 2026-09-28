@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog · ShieldTX</title>
-  <meta name="description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
-  <link rel="canonical" href="https://www.shieldtx.xyz/blog" />
+  <title>What Is ShieldTX · ShieldTX</title>
+  <meta name="description" content="ShieldTX is a shielded execution layer for perpetual trading on Hyperliquid. Learn how it works, what it shields and what remains public." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/what-is-shieldtx" />
 
   <link rel="icon" type="image/svg+xml" href="/assets/ShieldTX_LogoMark.svg" />
   <link rel="apple-touch-icon" href="/assets/ShieldTX_LogoMark.svg" />
 
-  <meta property="og:title" content="Blog · ShieldTX" />
-  <meta property="og:description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://shieldtx.xyz/blog" />
+  <meta property="og:title" content="What Is ShieldTX · ShieldTX" />
+  <meta property="og:description" content="Shielded perpetual trading on Hyperliquid for professional traders." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/what-is-shieldtx" />
   <meta property="og:image" content="https://shieldtx.xyz/assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Blog · ShieldTX" />
-  <meta name="twitter:description" content="Notes from the ShieldTX team on private trading, threat models, and how we're building the product." />
+  <meta name="twitter:title" content="What Is ShieldTX · ShieldTX" />
+  <meta name="twitter:description" content="Shielded perpetual trading on Hyperliquid for professional traders." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,9 +39,7 @@
   <!-- /@partial head-global -->
 </head>
 <body class="blog-body">
-  <!-- Simplified nav: Home · Features · Blog · [Open App] -->
-  <!-- @partial nav variant="nav-blog" -->
-  <header class="nav nav-blog">
+<header class="nav nav-blog">
     <a class="nav-logo" href="/" aria-label="ShieldTX">
       <svg class="nav-logo-svg" viewBox="0 0 414 101" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M48.5854 87.0215C47.5068 87.5291 46.2579 87.5291 45.1792 87.0215L23.0278 76.5977H70.7368L48.5854 87.0215ZM80.5581 66.0322H13.2065V55.4678H80.5581V66.0322ZM80.5581 44.9023H13.2065V34.3369H80.5581V44.9023ZM76.5581 13.207C78.7672 13.207 80.558 14.998 80.5581 17.207V23.7725H13.2065V17.207C13.2067 14.998 14.9975 13.207 17.2065 13.207H76.5581Z"/><path d="M114.517 61.6894C114.728 63.6924 115.387 65.4319 116.494 66.9078C117.601 68.331 119.05 69.4379 120.842 70.2286C122.687 70.9665 124.743 71.3355 127.01 71.3355C130.225 71.3355 132.861 70.7557 134.916 69.596C136.972 68.4364 138 66.6969 138 64.3777C138 62.7963 137.394 61.5576 136.181 60.6615C134.969 59.7127 133.361 58.9748 131.358 58.4477C129.355 57.8679 127.168 57.3144 124.796 56.7873C122.424 56.2602 120.025 55.654 117.601 54.9688C115.229 54.2308 113.041 53.2557 111.038 52.0433C109.035 50.7783 107.428 49.1179 106.215 47.0621C105.003 44.9537 104.397 42.2655 104.397 38.9974C104.397 35.8875 105.319 33.1201 107.164 30.6954C109.009 28.218 111.565 26.2677 114.833 24.8445C118.154 23.4213 121.949 22.7097 126.219 22.7097C130.278 22.7097 133.915 23.5268 137.13 25.1608C140.398 26.7948 142.955 29.035 144.8 31.8814C146.697 34.6751 147.646 37.8905 147.646 41.5275H137.051C136.84 38.523 135.812 36.1774 133.967 34.4906C132.175 32.8039 129.461 31.9605 125.824 31.9605C122.292 31.9605 119.577 32.6194 117.68 33.9371C115.835 35.2549 114.912 36.9417 114.912 38.9974C114.912 40.7368 115.519 42.1073 116.731 43.1088C117.943 44.1103 119.551 44.901 121.554 45.4808C123.557 46.0606 125.745 46.5877 128.117 47.0621C130.541 47.5365 132.94 48.1427 135.312 48.8807C137.684 49.5659 139.871 50.5147 141.874 51.7271C143.877 52.8867 145.485 54.4944 146.697 56.5501C147.909 58.5531 148.516 61.1623 148.516 64.3777C148.516 69.4906 146.592 73.4703 142.744 76.3167C138.896 79.163 133.493 80.5862 126.535 80.5862C122.266 80.5862 118.444 79.7692 115.071 78.1352C111.697 76.5011 109.009 74.2609 107.006 71.4145C105.003 68.5682 103.922 65.3264 103.764 61.6894H114.517Z"/><path d="M153.149 20.0215H163.111V79.3212H153.149V20.0215ZM163.111 57.4989L161.846 48.5644C161.846 47.1939 162.057 45.6653 162.479 43.9786C162.901 42.2918 163.665 40.6841 164.772 39.1555C165.931 37.5742 167.513 36.2828 169.516 35.2813C171.571 34.2798 174.207 33.779 177.422 33.779C180.269 33.779 182.799 34.3588 185.013 35.5185C187.227 36.6781 188.966 38.6021 190.231 41.2903C191.549 43.9259 192.208 47.5102 192.208 52.0433V79.3212H182.245V53.0712C182.245 51.0155 182.061 49.1969 181.692 47.6156C181.323 45.9816 180.585 44.7165 179.478 43.8204C178.424 42.8716 176.843 42.3972 174.734 42.3972C172.889 42.3972 171.071 42.9243 169.279 43.9786C167.486 45.0328 166.01 46.6668 164.851 48.8807C163.691 51.0945 163.111 53.9673 163.111 57.4989Z"/><path d="M199.876 35.0441H209.759V79.3212H199.876V35.0441ZM199.867 20.0215L210.008 20.1843L209.929 31.2899L199.772 31.2041L199.867 20.0215Z"/><path d="M224.046 60.5034V52.3596H250.059L246.501 54.6525C246.712 52.6495 246.448 50.7519 245.71 48.9597C245.025 47.1149 243.892 45.6126 242.31 44.453C240.729 43.2933 238.673 42.7135 236.143 42.7135C232.717 42.7135 229.844 43.7941 227.525 45.9552C225.206 48.1164 224.046 51.2263 224.046 55.285H213.53C213.847 50.6992 215.033 46.8249 217.088 43.6623C219.197 40.4469 221.885 37.9959 225.153 36.3091C228.474 34.6224 232.137 33.779 236.143 33.779C239.148 33.779 241.968 34.3852 244.603 35.5975C247.292 36.7572 249.585 38.4966 251.482 40.8159C253.432 43.0825 254.856 45.8762 255.752 49.1969C256.7 52.5177 256.885 56.2865 256.305 60.5034H224.046ZM236.143 80.5862C231.979 80.5862 228.289 79.7429 225.074 78.0561C221.859 76.3694 219.276 74.0237 217.326 71.0192C215.375 68.0147 214.163 64.5094 213.688 60.5034H224.046C224.468 63.7715 225.654 66.4597 227.604 68.5682C229.554 70.6239 232.401 71.6517 236.143 71.6517C238.779 71.6517 240.887 71.0456 242.469 69.8332C244.103 68.5682 245.262 67.0396 245.947 65.2474H256.384C255.752 68.3046 254.513 70.9929 252.668 73.3121C250.823 75.5787 248.504 77.3709 245.71 78.6886C242.917 79.9537 239.728 80.5862 236.143 80.5862Z"/><path d="M260.308 20.0215H270.271V79.3212H260.308V20.0215Z"/><path d="M294.033 80.5862C289.922 80.5862 286.364 79.6111 283.359 77.6608C280.408 75.6578 278.115 72.8905 276.481 69.3588C274.899 65.8272 274.109 61.7948 274.109 57.2617C274.109 52.6759 274.899 48.6171 276.481 45.0855C278.115 41.5539 280.408 38.7865 283.359 36.7835C286.364 34.7805 289.922 33.779 294.033 33.779C297.196 33.779 299.884 34.4115 302.098 35.6766C304.365 36.889 306.157 38.6284 307.475 40.895V73.5493C306.21 75.7105 304.47 77.4236 302.256 78.6886C300.095 79.9537 297.354 80.5862 294.033 80.5862ZM295.615 71.6517C298.303 71.6517 300.517 71.0192 302.256 69.7542C303.996 68.4891 305.287 66.776 306.13 64.6149C307.027 62.401 307.475 59.9499 307.475 57.2617C307.475 54.5207 307.027 52.0697 306.13 49.9085C305.287 47.6947 303.996 45.9552 302.256 44.6902C300.517 43.3724 298.303 42.7135 295.615 42.7135C293.243 42.7135 291.187 43.346 289.447 44.6111C287.761 45.8234 286.469 47.5365 285.573 49.7504C284.73 51.9643 284.308 54.468 284.308 57.2617C284.308 60.0027 284.73 62.4801 285.573 64.6939C286.469 66.8551 287.761 68.5682 289.447 69.8332C291.187 71.0456 293.243 71.6517 295.615 71.6517ZM307.475 79.3212V20.0215H317.437V79.3212H307.475Z"/><path d="M362.995 30.3896H346.641V77.9766H338.338V30.3896H322.197L322.13 22.6309H362.928L362.995 30.3896Z"/><path d="M389.333 44.2158L403.485 22.6309H413.29L395.104 50.0664L413.764 77.9766H404.355L389.333 55.8379L374.231 77.9766H364.822L383.481 50.0664L365.296 22.6309H375.179L389.333 44.2158Z"/></svg>
     </a>
@@ -93,105 +91,106 @@
   <!-- /@partial nav -->
 
   <main id="top">
-    <section class="blog-index">
-      <div class="blog-index-wrap">
-        <header class="blog-index-head">
-          <h1 class="blog-index-title">Blogs</h1>
-          <p class="blog-index-sub">Notes on private trading, threat models, and how we're building ShieldTX.</p>
-        </header>
+    <article class="blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">Understanding ShieldTX</div>
+        <h1>What Is ShieldTX</h1>
+        <p class="blog-post-meta">
+          <span>28 September 2026</span>
+          <span>6 min read</span>
+        </p>
 
-        <!-- POSTS STACK — text-only single-column entries. Each post is a
-             semantic <article> with title, meta, lede, and a Read → CTA.
-             Hover reveals a brand-blue stripe on the left. Newest first. -->
-        <div class="blog-stack">
+        <figure class="blog-post-hero">
+          <img src="/blog/what-is-shieldtx/hero.png" alt="Shielded perpetual trading on Hyperliquid for professional traders." width="2048" height="1152" />
+        </figure>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/what-is-shieldtx">
-              <span class="blog-entry-meta">28 September 2026 · 6 min read</span>
-              <h2 class="blog-entry-title">What Is ShieldTX</h2>
-              <p class="blog-entry-lede">ShieldTX is a shielded execution layer for perpetual trading on Hyperliquid. Learn how it works, what it shields and what remains public.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
+        <p class="intro">Shielded perpetual trading on Hyperliquid for professional traders.</p>
 
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/how-are-shieldtx-and-silhouette-different">
-              <span class="blog-entry-meta">15 September 2026 · 3 min read</span>
-              <h2 class="blog-entry-title">How are ShieldTX and Silhouette different?</h2>
-              <p class="blog-entry-lede">ShieldTX and Silhouette both operate in the Hyperliquid privacy space, but they solve different problems. Here's how each one differs and when to use which.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
-
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/shielded-perpetual-trading-on-hyperliquid">
-              <span class="blog-entry-meta">7 September 2026 · 9 min read</span>
-              <h2 class="blog-entry-title">Shielded Perpetual Trading on Hyperliquid: What It Is and How It Works</h2>
-              <p class="blog-entry-lede">Every Hyperliquid position is public. Learn what shielded perpetual trading is, how it works, and how it stops copybots and whale hunters from tracking you.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
-
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/how-to-tell-if-youre-being-copy-traded-on-hyperliquid">
-              <span class="blog-entry-meta">27 July 2026 · 8 min read</span>
-              <h2 class="blog-entry-title">How to Tell If You're Being Copy Traded on Hyperliquid</h2>
-              <p class="blog-entry-lede">Learn how to tell if someone is copying your Hyperliquid trades. Scan your wallet, detect copy trading, and protect your strategy.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
-
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/how-to-trade-perps-privately-on-hyperliquid">
-              <span class="blog-entry-meta">24 July 2026 · 12 min read</span>
-              <h2 class="blog-entry-title">How to Trade Perps Privately on the Hyperliquid Orderbook</h2>
-              <p class="blog-entry-lede">A step-by-step guide to trading perps on Hyperliquid without exposing your positions, PnL, or strategy to copybots and surveillance tools.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
-
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/what-trading-in-public-costs-whales-on-hyperliquid">
-              <span class="blog-entry-meta">22 July 2026 · 8 min read</span>
-              <h2 class="blog-entry-title">The surveillance tax: What Trading in Public Costs Whales on Hyperliquid</h2>
-              <p class="blog-entry-lede">Every position you open on Hyperliquid tells the market something. Here is what public trading costs whales, and how execution isolation changes the game.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
-
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/what-is-copy-trade-protection">
-              <span class="blog-entry-meta">22 May 2026 · 7 min read</span>
-              <h2 class="blog-entry-title">What Is Copy Trade Protection? A Trader's Guide to Keeping Your Strategy Yours</h2>
-              <p class="blog-entry-lede">Copy trade protection shields your on-chain trading activity from being copied, mirrored, or analyzed.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
-
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/hyperbot-dexly-hyperdash-copy-trading-tools">
-              <span class="blog-entry-meta">15 May 2026 · 9 min read</span>
-              <h2 class="blog-entry-title">Hyperbot, Dexly &amp; HyperDash: Are They Copying Your Trades?</h2>
-              <p class="blog-entry-lede">Hyperbot, Dexly, and HyperDash are actively copying Hyperliquid traders. How each tool works, why they're a problem, and what to do.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
-
-          <article class="blog-entry">
-            <a class="blog-entry-link" href="/blog/how-copy-traders-are-stealing-your-edge">
-              <span class="blog-entry-meta">8 May 2026 · 6 min read</span>
-              <h2 class="blog-entry-title">How Copy Traders Are Stealing Your Edge on Hyperliquid</h2>
-              <p class="blog-entry-lede">Your Hyperliquid trades are public. How copy trading bots track your positions in real time, and how to trade without exposing your strategy.</p>
-              <span class="blog-entry-cta">Read →</span>
-            </a>
-          </article>
-
+<section>
+        <h2 id="what-is-shieldtx">What is ShieldTX<a href="#what-is-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <p><a href="https://www.shieldtx.xyz/">ShieldTX</a> is a shielded execution layer for perpetual trading on <a href="https://app.hyperliquid.xyz/trade">Hyperliquid</a>. It lets traders place isolated perp trades through fresh wallets while keeping the resulting positions, PnL, liquidation levels, and trading history from being publicly linked to the wallet that funded them. The trades still execute on Hyperliquid's native order book, with access to its liquidity, markets, and fills.</p>
+        <p>ShieldTX is built for professional traders whose public wallets attract attention. This includes fund managers, market makers, trading desks, institutions, and individual whales. These traders do not need another venue. They need a way to keep using Hyperliquid without turning every position into a public signal.</p>
+        <p>The product is designed to protect three things: a trader's strategy, the alpha contained in their trading patterns, and the reputation attached to a known wallet.</p>
+      </section>
+      <section>
+        <h2 id="why-shieldtx-exists">Why ShieldTX exists<a href="#why-shieldtx-exists" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <p>Perpetual trading on Hyperliquid is transparent by design. Once a position opens, its size, direction, entry price, leverage, PnL, liquidation level, and history can be observed through public data. This transparency makes the venue auditable, but it also gives wallet trackers, copybots, competitors, and public commentators a live view into a trader's activity.</p>
+        <p>The exposure becomes more costly as a wallet grows in size or reputation. A profitable wallet can become a feed for copy traders. A market maker's inventory can reveal directional exposure. A fund's experimental position can be interpreted as a public conviction trade. A known trader's liquidation level can become a target.</p>
+        <p>ShieldTX reduces this exposure by separating the wallet that funds a trade from the wallet that executes and holds the position.</p>
+      </section>
+      <section>
+        <h2 id="how-shieldtx-works">How ShieldTX works<a href="#how-shieldtx-works" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <p>The ShieldTX flow has three main stages.</p>
+        <ol>
+          <li><strong>Fund your ShieldTX balance.</strong> Deposit USDC into ShieldTX. The deposit into the system is visible on-chain.</li>
+          <li><strong>Open a Hyperliquid perp through ShieldTX.</strong> A fresh wallet is funded for the trade, and the order is routed to Hyperliquid's native order book.</li>
+          <li><strong>Close and settle.</strong> When the position closes, the proceeds return to the user's shielded balance, separate from the wallet that held the position on Hyperliquid.</li>
+        </ol>
+        <p>The position remains visible on Hyperliquid. What changes is attribution. An observer can see that a fresh wallet opened a position, but cannot directly connect that position to the funding wallet, its previous trading history, or the identity behind it.</p>
+      </section>
+      <section>
+        <h2 id="what-shieldtx-shields-and-what-remains-public">What ShieldTX shields and what remains public<a href="#what-shieldtx-shields-and-what-remains-public" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <p>Shielded does not mean invisible. ShieldTX is designed to reduce public attribution around perp execution, not remove activity from public infrastructure.</p>
+        <div class="blog-table-wrap">
+          <table class="blog-table"><thead><tr><th scope="col">Shielded from a direct public link</th><th scope="col">Still visible on-chain</th></tr></thead><tbody><tr><td>Positions tied to your main wallet</td><td>Deposits into the ShieldTX system</td></tr><tr><td>Position wallet tied to your identity</td><td>Solver and temporary wallet activity</td></tr><tr><td>PnL and liquidation levels tied to your main wallet</td><td>Perp positions on Hyperliquid</td></tr><tr><td>Order and trading history tied to your main wallet</td><td>Withdrawals from the system</td></tr></tbody></table></div>
+        <p>This distinction matters. ShieldTX is not a system for making on-chain trades disappear. It is an execution tool that limits the public link between a trader's known wallet and the positions they place through ShieldTX.</p>
+      </section>
+      <section>
+        <h2 id="who-shieldtx-is-built-for">Who ShieldTX is built for<a href="#who-shieldtx-is-built-for" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <ul><li>Fund managers who do not want every new position or experimental strategy to become a public performance signal.</li><li>Market makers that need to limit the trading intelligence competitors can derive from public inventory and position history.</li><li>Trading desks and institutions that want shielded execution to fit into their existing operating setup, including API-based workflows.</li><li>Individual whales whose known wallets attract copybots, whale hunters, and public commentary.</li><li>Professional traders testing new pairs, hedges, or strategies before connecting them to a recognised wallet or mandate.</li></ul>
+      </section>
+      <section>
+        <h2 id="how-shieldtx-differs-from-common-alternatives">How ShieldTX differs from common alternatives<a href="#how-shieldtx-differs-from-common-alternatives" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <div class="blog-table-wrap">
+          <table class="blog-table"><thead><tr><th scope="col">Approach</th><th scope="col">What it does</th><th scope="col">Where it falls short for this use case</th></tr></thead><tbody><tr><td>Manual wallet rotation</td><td>Spreads activity across multiple wallets</td><td>Funding paths, timing, amounts, and repeated behaviour can still create links. It also adds key, gas, reporting, and operational overhead.</td></tr><tr><td>Centralised exchange routing</td><td>Moves activity away from a public on-chain wallet</td><td>The trader gives up direct access to Hyperliquid and introduces a different custody and venue model.</td></tr><tr><td>ShieldTX</td><td>Routes isolated perp trades to Hyperliquid through fresh wallets</td><td>Built specifically to reduce the public link between the funding wallet and Hyperliquid perp positions.</td></tr></tbody></table></div>
+      </section>
+      <section>
+        <h2 id="does-shieldtx-change-execution-on-hyperliquid">Does ShieldTX change execution on Hyperliquid<a href="#does-shieldtx-change-execution-on-hyperliquid" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <p>ShieldTX orders execute on Hyperliquid's order book. Traders retain access to Hyperliquid's supported perp markets, liquidity, price discovery, and fills. ShieldTX does not add a spread to the order. Its fees are displayed separately.</p>
+        <p>Shielding adds a delay of a few seconds between placing an order in ShieldTX and the order reaching Hyperliquid. That delay is part of the process used to separate the trade from the funding wallet. Traders should consider this when deciding which orders or strategies to shield.</p>
+      </section>
+      <section>
+        <h2 id="who-controls-the-funds">Who controls the funds<a href="#who-controls-the-funds" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <p>ShieldTX is non-custodial. According to the <a href="https://www.shieldtx.xyz/trust-model">ShieldTX trust model</a>, funds are locked in a smart contract on Arbitrum, core operations are permissionless and verified by zero-knowledge proofs, and no admin key is required for those operations.</p>
+      </section>
+      <section>
+        <h2 id="how-to-access-shieldtx">How to access ShieldTX<a href="#how-to-access-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <p>ShieldTX is currently onboarding traders through a private beta. Traders can request access to the application, while trading desks, systematic traders, and institutions can request API access for ShieldTX to fit into their existing workflows.</p>
+        <p><a class="cta" href="https://www.shieldtx.xyz/request-access">Request access to ShieldTX</a></p>
+      </section>
+      <section>
+        <div class="faq" id="faq">
+          <h2>Frequently asked questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+        <div class="faq-item">
+            <h3>Is ShieldTX a separate trading venue</h3>
+            <p>Trades placed through ShieldTX are routed to Hyperliquid's native order book. ShieldTX provides the shielded execution layer around the trade.</p>
+          </div>
+        <div class="faq-item">
+            <h3>Does ShieldTX hide the trade itself</h3>
+            <p>No. The trade and resulting position remain visible on Hyperliquid. ShieldTX is designed to prevent a direct public link between that position and the wallet that funded it.</p>
+          </div>
+        <div class="faq-item">
+            <h3>Does ShieldTX affect fills</h3>
+            <p>Orders execute on Hyperliquid's order book and access its liquidity and fills. ShieldTX does not add a spread, although the shielding process introduces a delay of a few seconds and separate ShieldTX fees apply.</p>
+          </div>
+        <div class="faq-item">
+            <h3>Which markets does ShieldTX support</h3>
+            <p>ShieldTX currently supports every Hyperliquid perpetual market available through the product.</p>
+          </div>
+        <div class="faq-item">
+            <h3>Can trading desks use an API</h3>
+            <p>API access is available on request for selected teams and systematic traders.</p>
+          </div>
+        
         </div>
+        <p>Accurate as of September 2026.</p>
+      </section>
       </div>
-    </section>
+    </article>
   </main>
 
-  <!-- Footer -->
+<!-- Footer -->
   <!-- @partial footer -->
   <footer class="footer">
     <div class="container footer-grid">
@@ -245,7 +244,21 @@
     (function () {
       const y = document.getElementById('yr');
       if (y) y.textContent = new Date().getFullYear();
+
+      // Copy-link anchor behavior (preserves the source post's interaction)
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
     })();
   </script>
 </body>
 </html>
+
