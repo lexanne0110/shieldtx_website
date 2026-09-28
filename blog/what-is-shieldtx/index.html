@@ -143,7 +143,7 @@
       <section>
         <h2 id="how-shieldtx-differs-from-common-alternatives">How ShieldTX differs from common alternatives<a href="#how-shieldtx-differs-from-common-alternatives" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
         <div class="blog-table-wrap">
-          <table class="blog-table"><thead><tr><th scope="col">Approach</th><th scope="col">What it does</th><th scope="col">Where it falls short for this use case</th></tr></thead><tbody><tr><td>Manual wallet rotation</td><td>Spreads activity across multiple wallets</td><td>Funding paths, timing, amounts, and repeated behaviour can still create links. It also adds key, gas, reporting, and operational overhead.</td></tr><tr><td>Centralised exchange routing</td><td>Moves activity away from a public on-chain wallet</td><td>The trader gives up direct access to Hyperliquid and introduces a different custody and venue model.</td></tr><tr><td>Mixer</td><td>Obfuscates transaction flows</td><td>It is not a trading execution product and does not provide access to Hyperliquid's perp order book.</td></tr><tr><td>Private spot or RFQ tools</td><td>Address privacy or price discovery for a different trade type or execution model</td><td>They do not necessarily shield the attribution of a Hyperliquid perp position after it becomes public.</td></tr><tr><td>ShieldTX</td><td>Routes isolated perp trades to Hyperliquid through fresh wallets</td><td>Built specifically to reduce the public link between the funding wallet and Hyperliquid perp positions.</td></tr></tbody></table></div>
+          <table class="blog-table"><thead><tr><th scope="col">Approach</th><th scope="col">What it does</th><th scope="col">Where it falls short for this use case</th></tr></thead><tbody><tr><td>Manual wallet rotation</td><td>Spreads activity across multiple wallets</td><td>Funding paths, timing, amounts, and repeated behaviour can still create links. It also adds key, gas, reporting, and operational overhead.</td></tr><tr><td>Centralised exchange routing</td><td>Moves activity away from a public on-chain wallet</td><td>The trader gives up direct access to Hyperliquid and introduces a different custody and venue model.</td></tr><tr><td>ShieldTX</td><td>Routes isolated perp trades to Hyperliquid through fresh wallets</td><td>Built specifically to reduce the public link between the funding wallet and Hyperliquid perp positions.</td></tr></tbody></table></div>
       </section>
       <section>
         <h2 id="does-shieldtx-change-execution-on-hyperliquid">Does ShieldTX change execution on Hyperliquid<a href="#does-shieldtx-change-execution-on-hyperliquid" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
@@ -153,28 +153,22 @@
       <section>
         <h2 id="who-controls-the-funds">Who controls the funds<a href="#who-controls-the-funds" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
         <p>ShieldTX is non-custodial. According to the current <a href="https://www.shieldtx.xyz/trust-model">ShieldTX trust model</a>, funds are locked in a smart contract on Arbitrum, core operations are permissionless and verified by zero-knowledge proofs, and no admin key is required for those operations.</p>
-        <p>Before using the product, review the current ShieldTX trust model and confirm the latest product, security, and audit information. Product details can change during private beta.</p>
       </section>
       <section>
         <h2 id="how-to-access-shieldtx">How to access ShieldTX<a href="#how-to-access-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
         <p>ShieldTX is currently onboarding traders through a private beta. Traders can request access to the application, while trading desks, systematic traders, and institutions can request API access for ShieldTX to fit into their existing workflows.</p>
         <p><a class="cta" href="https://www.shieldtx.xyz/request-access">Request access to ShieldTX</a></p>
-        <p><a href="https://www.shieldtx.xyz/#scan">Scan your public Hyperliquid wallet exposure</a></p>
       </section>
       <section>
         <div class="faq" id="faq">
           <h2>Frequently asked questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
         <div class="faq-item">
             <h3>Is ShieldTX a separate trading venue</h3>
-            <p>No. Trades placed through ShieldTX are routed to Hyperliquid's native order book. ShieldTX provides the shielded execution layer around the trade.</p>
+            <p>Trades placed through ShieldTX are routed to Hyperliquid's native order book. ShieldTX provides the shielded execution layer around the trade.</p>
           </div>
         <div class="faq-item">
             <h3>Does ShieldTX hide the trade itself</h3>
             <p>No. The trade and resulting position remain visible on Hyperliquid. ShieldTX is designed to prevent a direct public link between that position and the wallet that funded it.</p>
-          </div>
-        <div class="faq-item">
-            <h3>Is ShieldTX like Tornado Cash</h3>
-            <p>No. Tornado Cash is a mixer for transaction obfuscation. ShieldTX is a trading tool that isolates perp execution data while routing trades to Hyperliquid.</p>
           </div>
         <div class="faq-item">
             <h3>Does ShieldTX affect fills</h3>
