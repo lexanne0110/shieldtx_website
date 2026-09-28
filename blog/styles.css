@@ -375,6 +375,70 @@
 }
 .blog-post-wrap .cta:hover { opacity: 0.9; }
 
+/* Hero image — full-width within the reading column, above the lede. -------- */
+.blog-post-hero {
+  margin: 0 0 40px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ice);
+  border: 1px solid var(--border);
+}
+.blog-post-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Inline images inside the post body */
+.blog-post-wrap img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Shared table style — every blog table uses .blog-table inside a scrollable
+   .blog-table-wrap so all posts look the same. Modeled on the landing page's
+   .compare-table (see styles.css): muted thead, hairline borders, row hover. */
+.blog-table-wrap {
+  width: 100%;
+  margin: 0 0 28px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-primary);
+}
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg-primary);
+}
+.blog-table thead th {
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: var(--fg-muted);
+  background: var(--ice);
+  border-bottom: 1px solid var(--border);
+}
+.blog-table tbody th,
+.blog-table tbody td {
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: rgba(15, 23, 42, 0.85);
+}
+.blog-table tbody tr:last-child th,
+.blog-table tbody tr:last-child td { border-bottom: none; }
+.blog-table tbody tr:hover th,
+.blog-table tbody tr:hover td { background: var(--ice); }
+
 /* Responsive -------------------------------------------------------------- */
 @media (max-width: 880px) {
   .blog-index-layout { grid-template-columns: 1fr; gap: 24px; }
@@ -392,4 +456,7 @@
   .blog-post-wrap { font-size: 16px; }
   .blog-post-wrap h2 { font-size: 22px; }
   .blog-post-wrap .intro { font-size: 17px; }
+  .blog-table thead th,
+  .blog-table tbody th,
+  .blog-table tbody td { padding: 12px 14px; font-size: 14px; }
 }
