@@ -36,6 +36,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.shieldtx.xyz/blog/how-institutions-can-trade-hyperliquid-perps-privately</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.shieldtx.xyz/blog/private-spot-trading-vs-private-perp-trading</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>yearly</changefreq>
