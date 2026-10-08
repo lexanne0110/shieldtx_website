@@ -36,6 +36,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.shieldtx.xyz/blog/how-to-keep-pnl-and-liquidation-levels-private-on-hyperliquid</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.shieldtx.xyz/blog/wallet-rotation-vs-shielded-execution</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.shieldtx.xyz/blog/how-institutions-can-trade-hyperliquid-perps-privately</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>yearly</changefreq>
