@@ -4,7 +4,7 @@
   "private": true,
   "description": "ShieldTX marketing site. Static HTML/CSS/JS with Vercel serverless functions in /api.",
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "npx serve -l 3000 .",
