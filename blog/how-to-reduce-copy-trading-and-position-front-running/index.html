@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Reduce Copy Trading and Position Front-Running on Hyperliquid · ShieldTX</title>
+  <meta name="description" content="Learn how public wallet attribution enables copy trading and position front-running on Hyperliquid, and how shielded execution can reduce exposure." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/how-to-reduce-copy-trading-and-position-front-running" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/ShieldTX_LogoMark.svg" />
+  <link rel="apple-touch-icon" href="/assets/ShieldTX_LogoMark.svg" />
+
+  <meta property="og:title" content="How to Reduce Copy Trading and Position Front-Running on Hyperliquid · ShieldTX" />
+  <meta property="og:description" content="Reduce copy trading and position front-running while executing on Hyperliquid." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/how-to-reduce-copy-trading-and-position-front-running" />
+  <meta property="og:image" content="https://shieldtx.xyz/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Reduce Copy Trading and Position Front-Running on Hyperliquid · ShieldTX" />
+  <meta name="twitter:description" content="Reduce copy trading and position front-running while executing on Hyperliquid." />
+
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/blog/styles.css?v=4" />
+
+  <!-- @partial head-global -->
+  <!-- PostHog analytics -->
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ji Yi init fn mn Hr pn bn cn capture calculateEventProperties Sn register register_once register_for_session unregister unregister_for_session In getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Mn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Cn xn createPersonProfile setInternalOrTestUser Tn hn Pn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing debug Ur wt getPageViewId captureTraceFeedback captureTraceMetric an".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_vj7vAdMiHrkqstyP22Au7yf634eSv9WSgF63WXXPTcPD', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+      })
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
+  <!-- /@partial head-global -->
+</head>
+<body class="page-blog blog-body">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <article class="section frame blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">Trading Privacy</div>
+        <h1>How to Reduce Copy Trading and Position Front-Running on Hyperliquid</h1>
+        <p class="blog-post-meta">
+          <span>12 October 2026</span>
+          <span>10 min read</span>
+        </p>
+
+<figure class="blog-post-hero">
+          <img src="/blog/how-to-reduce-copy-trading-and-position-front-running/hero-dark.webp" alt="Reduce copy trading and position front-running while executing on Hyperliquid" width="2048" height="1152" />
+        </figure>
+
+        <p class="intro">On Hyperliquid, a profitable trading wallet can become a public signal. Once observers identify the address, they can monitor new positions, compare them with earlier trades and act on the information. Some may mirror the trade. Others may use the position, size and timing to anticipate what the trader is likely to do next.</p><section><h2 id="why-copy-trading-and-position-front-running-matter-for-high-volume-traders">Why copy trading and position front-running matter for high-volume traders<a href="#why-copy-trading-and-position-front-running-matter-for-high-volume-traders" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><p>Every open position on Hyperliquid can be read in real time: the market, the direction, the size, the leverage and the liquidation level are all public. For a retail trader that transparency is useful. For a fund, market maker or whale, the same transparency turns a trading strategy into a live signal anyone can watch.</p><p>Two forms of behaviour exploit that signal. Copy trading mirrors the trade once it becomes visible, riding the same market and direction. Position front-running goes further: it uses the visible position, its size and the wallet's history to predict the trader's next move and trade ahead of that expectation. Both depend on the same thing, attribution, the ability to connect a position to a specific wallet and its past behaviour.</p><p>Shielding does not remove the trade from Hyperliquid or hide the position. It removes the link between the position and a recognisable wallet. Without that link, a position carries much less information: it has no history, no pattern and no identity for an observer to act on.</p></section><section><h2 id="how-public-attribution-can-erode-a-trading-edge">How public attribution can erode a trading edge<a href="#how-public-attribution-can-erode-a-trading-edge" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><h3 id="followers-can-add-pressure-after-an-entry">Followers can add pressure after an entry</h3><p>If an address is actively monitored, follower wallets can enter the same market and direction shortly after it. In a liquid market, the effect may be small. In a thinner market or around a larger order, follow-on activity may contribute to short-term price movement and make later fills or position additions less favourable.</p><h3 id="position-size-can-become-a-conviction-signal">Position size can become a conviction signal</h3><p>Observers can compare a new position with the wallet's historical size. A trade that is unusually large may be interpreted as higher conviction. Copy traders may respond more aggressively to the positions that matter most to the original trader.</p><h3 id="adjustments-can-reveal-the-execution-plan">Adjustments can reveal the execution plan</h3><p>Repeated additions, partial closes and collateral changes can show how the trader manages a position. Over time, observers may learn whether the wallet scales in gradually, cuts risk at a particular drawdown or tends to take profit after a familiar move.</p><h3 id="visible-risk-levels-can-attract-attention">Visible risk levels can attract attention</h3><p>Liquidation information can show where a position may become vulnerable if the market moves against it. A visible level does not prove that another participant can force a liquidation. It does, however, provide information about where forced action may occur and how the position could react under stress.</p></section>
+      <section><h2 id="what-a-public-hyperliquid-wallet-can-reveal">What a public Hyperliquid wallet can reveal<a href="#what-a-public-hyperliquid-wallet-can-reveal" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><p>Every Hyperliquid account is public. Anyone can look up a wallet address and inspect its positions and risk in real time. That transparency supports verifiability, but it also leaves a persistent public record of how a trader operates.</p><p>A single trade may reveal little. A long-running wallet can reveal much more. Repeated activity can show preferred markets, typical sizing, entry timing, risk tolerance, collateral management and the conditions under which a trader tends to reduce or close a position.</p></section><section><h2 id="copy-trading-and-position-front-running-are-different">Copy trading and position front-running are different<a href="#copy-trading-and-position-front-running-are-different" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><h3 id="copy-trading-follows-an-observed-position">Copy trading follows an observed position</h3><p>A copy trader monitors another wallet and opens a similar position after the original trade becomes visible. The follower may copy the market, direction and approximate size manually or through an automated system, and dedicated <a href="/blog/hyperbot-dexly-hyperdash-copy-trading-tools">copy-trading tools</a> make that easy to do at scale. To see how much follower behaviour your own wallet attracts, the <a href="https://scanner.shieldtx.xyz/">ShieldTX wallet scanner</a> shows how many wallets enter the same market and direction after your trades.</p><p>The copied order does not need to arrive before the original trader's order. It only needs to arrive quickly enough for the follower to benefit from the original trader's signal. If many wallets react to the same address, their combined activity may add follow-on pressure after the first entry.</p><h3 id="position-front-running-anticipates-the-traders-next-action">Position front-running anticipates the trader's next action</h3><p>In this article, position front-running refers to using a visible position and its history to trade in anticipation of the trader's likely next action. It may include entering before an expected add, positioning around a likely exit or using a visible risk boundary to prepare for forced selling or buying.</p><p>This is not necessarily the same as mempool front-running or transaction reordering. Hyperliquid positions generally become useful to copy traders after they are reflected in the venue's public state. The risk discussed here is informational: public account data can help another participant form and act on a prediction about the trader.</p></section><section><h2 id="why-common-workarounds-are-incomplete">Why common workarounds are incomplete<a href="#why-common-workarounds-are-incomplete" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><h3 id="manual-wallet-rotation">Manual wallet rotation</h3><p>A trader may create a new wallet so that the next position does not appear under the recognised address. This can reduce immediate recognition, but the funding path, timing, trade size and repeated behaviour may reconnect the new wallet to the original trader. Each additional wallet also adds balances, keys, permissions and reporting work.</p><h3 id="changing-size-or-timing">Changing size or timing</h3><p>Randomising order size, delaying entries or changing normal execution patterns can make behaviour harder to classify. It can also make the trader execute a strategy less efficiently. Protection that depends on deliberately trading worse introduces its own performance cost.</p><h3 id="splitting-a-position">Splitting a position</h3><p>Breaking one position into smaller orders may reduce the signal created by any single fill. The completed position can still become visible, and repeated order patterns may reveal that the trades belong to one execution plan.</p><h3 id="trading-through-a-centralised-exchange">Trading through a centralised exchange</h3><p>A centralised venue can hide the account state from public onchain observers, but it also moves execution away from Hyperliquid and introduces a different custody, counterparty and operational model.</p></section><section><h2 id="what-reducing-copy-trading-realistically-means">What reducing copy trading realistically means<a href="#what-reducing-copy-trading-realistically-means" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><p>There are two different objectives:</p><ol><li>Preventing anyone from seeing that a position exists</li><li>Reducing the public connection between the position and a trader with a recognisable history</li></ol><p>The first objective is not how trading on Hyperliquid works. The execution wallet and its position remain part of Hyperliquid's public account state.</p><p>The more realistic objective is attribution separation. If a new position cannot be easily connected to the main wallet and its earlier trades, an observer has less context for deciding whether the position is worth copying or what it may reveal about the trader's broader strategy.</p><p>The position remains visible. The persistent identity and accumulated strategy profile are better separated.</p></section><section><h2 id="how-shielded-execution-changes-attribution">How shielded execution changes attribution<a href="#how-shielded-execution-changes-attribution" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><p>A shielded execution layer separates the wallet supplying funds from the wallet that executes and holds the position. With <a class="text-link" href="/">ShieldTX</a>, the general workflow is:</p><ol><li>The trader deposits USDC into a ShieldTX balance.</li><li>The trader submits a Hyperliquid perpetual order through ShieldTX.</li><li>A fresh trading wallet is funded for the position.</li><li>The order is routed to Hyperliquid's native order book.</li><li>The resulting position is held by the fresh trading wallet.</li><li>When the position is closed through ShieldTX, the proceeds return to the shielded balance.</li></ol><p>The trade and position remain visible on Hyperliquid. What changes is the relationship between that execution wallet and the trader's recognised funding wallet. A fresh wallet without an established public history provides less information to a system deciding which trader is worth following.</p><p>Using separate execution wallets can also limit how much strategy history accumulates under one address. Observers may still analyse an individual position, but they have less persistent wallet history through which to interpret it.</p></section><section><h2 id="direct-trading-vs-manual-workarounds-vs-shielded-execution">Direct trading vs manual workarounds vs shielded execution<a href="#direct-trading-vs-manual-workarounds-vs-shielded-execution" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><div class="blog-table-wrap">
+          <table class="blog-table">
+
+<thead>
+<tr>
+<th><strong>Area</strong></th>
+<th><strong>Direct trading</strong></th>
+<th><strong>Manual workarounds</strong></th>
+<th><strong>Shielded execution</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Position visibility</td>
+<td>Visible on the recognised wallet</td>
+<td>Visible on rotated or split wallets</td>
+<td>Visible on the execution wallet</td>
+</tr>
+<tr>
+<td>Link to trading history</td>
+<td>Direct</td>
+<td>May be reconstructed</td>
+<td>Designed to reduce the direct public link</td>
+</tr>
+<tr>
+<td>Copy-trader signal</td>
+<td>Recognised wallet provides context</td>
+<td>Reduced only if wallets remain unlinked</td>
+<td>Fresh wallet has limited public history</td>
+</tr>
+<tr>
+<td>Behavioural analysis</td>
+<td>Accumulates under one address</td>
+<td>Can continue across clustered wallets</td>
+<td>Separated across execution wallets</td>
+</tr>
+<tr>
+<td>Hyperliquid execution</td>
+<td>Native</td>
+<td>Native when wallets trade directly</td>
+<td>Native order book</td>
+</tr>
+<tr>
+<td>Operational overhead</td>
+<td>Lower</td>
+<td>Increases with wallets and transfers</td>
+<td>Managed within the ShieldTX workflow</td>
+</tr>
+<tr>
+<td>Market impact</td>
+<td>Unchanged</td>
+<td>Unchanged</td>
+<td>Unchanged</td>
+</tr>
+<tr>
+<td>Trading risk</td>
+<td>Remains</td>
+<td>Remains</td>
+<td>Remains</td>
+</tr>
+</tbody>
+</table></div></section><section><h2 id="what-remains-publicly-visible-with-shieldtx">What remains publicly visible with ShieldTX<a href="#what-remains-publicly-visible-with-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><p>ShieldTX should not be interpreted as making Hyperliquid trading invisible. The execution wallet, its market, direction, size, entry, mark price, PnL, leverage, margin mode, liquidation price, orders and its eventual close or liquidation all remain public, as do deposits into and withdrawals from the ShieldTX system and solver and settlement activity. Shielding separates the position from your main wallet; it does not hide the position itself.</p><p>Large trades may still affect the market. A distinctive strategy may still create behavioural clues. ShieldTX is designed to reduce the direct public relationship between the execution activity and the trader's main wallet, not to remove every possible signal.</p></section><section><h2 id="practical-steps-to-reduce-copy-trader-exposure">Practical steps to reduce copy-trader exposure<a href="#practical-steps-to-reduce-copy-trader-exposure" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><h3 id="measure-the-current-exposure">Measure the current exposure</h3><p>Start with the recognised wallet. Review which positions, PnL information, liquidation levels and historical patterns are publicly available. The <a href="https://scanner.shieldtx.xyz/">ShieldTX wallet scanner</a> automates the first pass: it checks your wallet's trading activity and shows how many wallets enter the same market and direction after your trades.</p><h3 id="separate-custody-and-execution-deliberately">Separate custody and execution deliberately</h3><p>Do not assume that creating another address creates a separate identity. Review the funding path, timing, withdrawal flow and behavioural signals that may reconnect it to the primary wallet.</p><h3 id="avoid-publishing-unnecessary-wallet-associations">Avoid publishing unnecessary wallet associations</h3><p>Public profiles, dashboards, screenshots and transaction links can connect an otherwise pseudonymous address to a trader or institution. Review which addresses are disclosed through operational and communications workflows.</p><h3 id="control-information-outside-the-chain">Control information outside the chain</h3><p>Wallet separation cannot protect information leaked through API credentials, shared dashboards, alerting systems or internal access. Professional teams should apply appropriate permissions, monitoring and incident-response controls around their trading infrastructure.</p><h3 id="evaluate-protection-alongside-execution-quality">Evaluate protection alongside execution quality</h3><p>Review where orders execute, which order types are supported, what fees apply and whether privacy routing introduces latency. ShieldTX routes orders to Hyperliquid's native order book, but shielded routing introduces a delay of a few seconds.</p></section><section><h2 id="how-to-access-shieldtx">How to access ShieldTX<a href="#how-to-access-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><p>ShieldTX is a non-custodial execution privacy layer for Hyperliquid perpetuals.</p><p>It is currently onboarding professional traders, funds and systematic desks through a private beta. Teams can request access and discuss API integration for their existing workflows.</p><p><a class="cta" href="/request-access">Request access to ShieldTX</a></p></section><section><div class="faq" id="faq">
+          <h2>Frequently asked questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2><div class="faq-item">
+            <h3>Can copy trading be completely prevented on Hyperliquid?</h3>
+            <p>No system can prevent another trader from independently placing a similar order. ShieldTX is designed to reduce the direct public attribution that makes a recognised wallet easy to monitor and copy.</p>
+          </div><div class="faq-item">
+            <h3>Does ShieldTX hide the position from Hyperliquid?</h3>
+            <p>No. The position remains visible at the execution wallet and trades through Hyperliquid's native order book. The privacy benefit comes from separating that wallet from the trader's recognised funding wallet and broader history.</p>
+          </div><div class="faq-item">
+            <h3>Is position front-running the same as MEV front-running?</h3>
+            <p>Not necessarily. In this article, position front-running means using visible account information to anticipate a trader's likely next action. It does not imply that a transaction was reordered or inserted ahead of another transaction.</p>
+          </div><div class="faq-item">
+            <h3>Will a fresh wallet stop every form of analysis?</h3>
+            <p>No. Observers may still analyse market impact, timing, order behaviour and the individual position. A fresh wallet reduces persistent attribution; it does not remove all market signals.</p>
+          </div><div class="faq-item">
+            <h3>Does ShieldTX change Hyperliquid fills or liquidity?</h3>
+            <p>Orders are routed to Hyperliquid's native order book. Shielding does not create a separate liquidity venue, although the routing process introduces a delay of a few seconds and ShieldTX fees are shown separately.</p>
+          </div><div class="faq-item">
+            <h3>Does shielded execution remove liquidation risk?</h3>
+            <p>No. Positions remain subject to Hyperliquid's normal margin, funding and liquidation mechanics. Privacy separation complements risk management; it does not replace it.</p>
+          </div><div class="faq-item">
+            <h3>Can systematic trading teams use ShieldTX?</h3>
+            <p>API access is available upon request for selected teams. A systematic desk should review authentication, supported order types, latency, failure handling, reconciliation and operational controls before integration.</p>
+          </div>
+        </div>
+      </section>
+      </div>
+    </article>
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Where Hyperliquid whales hide.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo.svg" alt="Avail" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
+  </main>
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have a<br><span>ShieldTX account?</span></h2><p>Members trade in the app. New traders request access to the private beta first.</p><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
+
+  <script>
+    (function () {
+
+      // Copy-link anchor behavior (preserves the source post's interaction)
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
+
