@@ -36,6 +36,12 @@ demo-source/
 *.mp4
 !/assets/demo/preview.mp4
 
+# Redesign workspace: designer's zip + work log. Local only, never deployed.
+_redesign/
+
 # Local Claude Code config (debugger launch, etc.)
 .claude/
 .vercel
+
+# Playwright MCP session output (local screenshots/logs)
+.playwright-mcp/

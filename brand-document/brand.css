@@ -1,0 +1,219 @@
+/* ShieldTX brand document · one system for the app and the website.
+   Every value below is a live token from the app (Figma App V2) or the website (dist/style.css). */
+@font-face{font-family:'Geist';font-weight:400;font-display:swap;src:url('/assets/v2/fonts/Geist-Regular.ttf') format('truetype')}
+@font-face{font-family:'Geist';font-weight:500;font-display:swap;src:url('/assets/v2/fonts/Geist-Medium.ttf') format('truetype')}
+@font-face{font-family:'Geist';font-weight:600;font-display:swap;src:url('/assets/v2/fonts/Geist-SemiBold.ttf') format('truetype')}
+@font-face{font-family:'Geist Mono';font-weight:400;font-display:swap;src:url('/assets/v2/fonts/GeistMono-Regular.ttf') format('truetype')}
+@font-face{font-family:'Geist Mono';font-weight:500;font-display:swap;src:url('/assets/v2/fonts/GeistMono-Medium.ttf') format('truetype')}
+
+:root{
+  color-scheme:dark;
+  /* surfaces */
+  --canvas:#040405;--panel:#0E111A;--well:#171E29;--raised:#242C3D;--popover:#1B2438;--divider:#252B36;
+  /* text */
+  --text-1:#F6FEFD;--text-2:#C3CAD6;--text-3:#8B93A6;--text-4:#6B7488;
+  /* brand */
+  /* one brand blue + its gradient (app primary). --brand-light is kept as an alias because theme.css/site.css read it. */
+  --brand:#3B82F6;--brand-deep:#1D4ED8;--brand-light:var(--brand);--card-blue:#1D304E;
+  --brand-gradient:linear-gradient(180deg,var(--brand),var(--brand-deep));
+  /* trading */
+  --long:#00D885;--long-fill:#00C573;--short:#FF7B88;--short-fill:#FC606F;
+  /* composites */
+  --cta:var(--brand-gradient);
+  --blue-card:radial-gradient(circle at 50% 0%,#ffffff0e,transparent 70%),linear-gradient(var(--panel),var(--canvas)); /* website card, same as css/site.css */
+  --heading-gradient:linear-gradient(var(--text-1) 10%,var(--text-2) 45%,var(--card-blue) 140%);
+  /* radius · only 8 / 12 / 16 */
+  --r-lg:16px;--r:12px;--r-sm:8px;
+  --sans:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--canvas);color:var(--text-1);font:400 15px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--brand);text-decoration:none}
+a:hover{color:var(--text-1)}
+code{font:500 12px var(--mono);color:var(--text-2)}
+
+/* ---------- layout ---------- */
+.doc{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;max-width:1200px;margin:0 auto;padding:56px 40px 96px}
+.toc{position:sticky;top:40px;align-self:start;display:flex;flex-direction:column;gap:2px}
+.toc img{width:120px;margin-bottom:28px}
+.toc a{color:var(--text-3);font-size:13px;padding:6px 10px;border-radius:var(--r-sm)}
+.toc a:hover{color:var(--text-1);background:rgba(59,130,246,.08)}
+.toc .toc-meta{margin-top:24px;color:var(--text-4);font-size:12px;padding-inline:10px}
+
+section{padding:56px 0;border-top:1px solid var(--divider)}
+section:first-of-type{border-top:0;padding-top:0}
+.eyebrow{display:block;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:14px}
+h1{font:400 clamp(40px,5vw,64px)/1.04 var(--sans);letter-spacing:-.04em;margin:0 0 20px}
+h1 span{background:var(--heading-gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font:400 32px/1.15 var(--sans);letter-spacing:-.03em;margin:0 0 10px}
+h3{font:500 15px/1.4 var(--sans);margin:0 0 6px;color:var(--text-1)}
+.intro{color:var(--text-3);max-width:640px;margin:0 0 32px}
+.sub{font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin:40px 0 16px}
+.card .sub{margin:0 0 16px}
+.note>div>.sub{margin-top:24px}
+
+/* ---------- cards ---------- */
+.card{background:var(--panel);border-radius:var(--r-lg);padding:24px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card p,.note{color:var(--text-3);font-size:13px;margin:0}
+.note{margin-top:16px}
+
+/* ---------- logo ---------- */
+.logo-tile{display:grid;place-items:center;height:170px;border-radius:var(--r-lg);background:var(--panel);margin-bottom:12px}
+.logo-tile img{max-height:44px;max-width:70%}
+.logo-tile .mark{max-height:56px}
+.naming{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.naming span{font-size:13px;padding:4px 10px;border-radius:var(--r-sm);background:var(--well);color:var(--text-3)}
+.naming .ok{background:rgba(0,216,133,.12);color:var(--long)}
+.naming .no{text-decoration:line-through;text-decoration-color:var(--short)}
+
+/* ---------- swatches ---------- */
+.swatch{border-radius:var(--r-lg);overflow:hidden;background:var(--panel)}
+.swatch i{display:block;height:84px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.swatch div{padding:12px 14px}
+.swatch b{display:block;font-weight:500;font-size:13px}
+.swatch code{display:block;margin-top:2px}
+.swatch span{display:block;color:var(--text-4);font-size:12px;margin-top:6px;line-height:1.45}
+.c-canvas{background:var(--canvas)}.c-panel{background:var(--panel)}.c-well{background:var(--well)}.c-raised{background:var(--raised)}
+.c-popover{background:var(--popover)}.c-divider{background:var(--divider)}
+.c-t1{background:var(--text-1)}.c-t2{background:var(--text-2)}.c-t3{background:var(--text-3)}.c-t4{background:var(--text-4)}
+.c-brand{background:var(--brand)}.c-brand-deep{background:var(--brand-deep)}
+.c-long{background:var(--long)}.c-short{background:var(--short)}.c-long-fill{background:var(--long-fill)}.c-short-fill{background:var(--short-fill)}
+.c-cta{background:var(--cta)}.c-blue-card{background:var(--blue-card)}.c-tint{background:var(--panel);box-shadow:inset 0 0 0 999px rgba(59,130,246,.16)!important}
+.c-heading{background:var(--heading-gradient)}
+.brand-hero{height:220px;border-radius:var(--r-lg);background:var(--brand-gradient);display:flex;align-items:flex-end;padding:20px 22px;margin-bottom:12px}
+.brand-hero b{display:block;font-weight:500;font-size:15px}
+.brand-hero code{color:rgba(246,254,253,.8)}
+.stops{margin-bottom:8px}
+.c-sel{background:linear-gradient(rgba(59,130,246,.10),rgba(59,130,246,.03)),var(--panel)}
+
+/* ---------- buttons (live specimens) ---------- */
+.btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px;border-radius:var(--r);border:0;font:500 14px var(--sans);cursor:pointer;color:var(--text-1);white-space:nowrap}
+.btn-primary{background:var(--cta)}
+.btn-primary:hover{filter:brightness(1.12)}
+.btn-white{background:#fff;color:var(--canvas)}
+.btn-white:hover{background:#ddd}
+.btn-secondary{background:rgba(59,130,246,.16);color:var(--text-1)}
+.btn-outline{background:transparent;box-shadow:inset 0 0 0 1px rgba(202,213,226,.5)}
+.btn-outline:hover{background:rgba(255,255,255,.04)}
+.btn-tertiary{background:none;height:auto;padding:0;color:var(--brand);font-size:13px}
+.btn-disabled{background:var(--well);color:var(--text-4);cursor:not-allowed}
+.btn-compact{height:32px;padding:0 14px;border-radius:var(--r);font-size:13px}
+.btn-long{background:linear-gradient(180deg,#00C573,#00B060);color:#04170F}
+.btn-short{background:linear-gradient(180deg,#FC606F,#E54A5C);color:#2B0609}
+.spec{width:100%;border-collapse:collapse;font-size:13px}
+.spec th{text-align:left;font-weight:500;color:var(--text-3);padding:10px 12px;border-bottom:1px solid var(--divider)}
+.spec td{padding:12px;border-bottom:1px solid var(--divider);color:var(--text-2);vertical-align:top}
+.spec td:first-child{color:var(--text-1);white-space:nowrap}
+.spec-wrap{overflow-x:auto}
+
+/* ---------- card / state specimens ---------- */
+.specimen{height:150px;border-radius:var(--r-lg);padding:16px;display:flex;flex-direction:column;justify-content:flex-end}
+.specimen.panel{background:var(--panel)}
+.specimen.blue{background:var(--blue-card);box-shadow:inset 0 1px rgba(59,130,246,.16)}
+.specimen.popover{background:var(--popover);box-shadow:0 16px 40px rgba(0,0,0,.55)}
+.specimen b{font-weight:500;font-size:13px}
+.specimen code{color:var(--text-3)}
+.states{display:flex;flex-direction:column;gap:4px;background:var(--panel);border-radius:var(--r-lg);padding:8px}
+.states span{padding:9px 12px;border-radius:var(--r-sm);font-size:13px;color:var(--text-3)}
+.states .sel{background:linear-gradient(rgba(59,130,246,.10),rgba(59,130,246,.03));color:var(--text-1)}
+.states .hov{background:rgba(255,255,255,.03);color:var(--text-2)}
+.tabs{display:flex;gap:24px;border-bottom:1px solid var(--divider)}
+.tabs span{padding:10px 0;font-size:13px;font-weight:500;color:var(--text-3)}
+.tabs .on{color:var(--text-1);box-shadow:inset 0 -2px var(--brand)}
+
+/* ---------- type ---------- */
+.type-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--divider)}
+.type-row:last-child{border-bottom:0}
+.type-row code{color:var(--text-4)}
+.t-hero{font-size:56px;line-height:1.05;letter-spacing:-.045em}
+.t-section{font-size:36px;line-height:1.12;letter-spacing:-.045em}
+.t-amount{font-size:28px;font-weight:500;letter-spacing:-.02em}
+.t-title{font-size:18px;font-weight:600}
+.t-body{font-size:16px;color:var(--text-2)}
+.t-ui{font-size:13px}
+.t-label{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.t-data{font:500 13px var(--mono);color:var(--text-2)}
+.grad-text{background:var(--heading-gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- radius ---------- */
+.radii{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.radii div{text-align:center;font-size:12px;color:var(--text-3)}
+.radii i{display:block;height:96px;background:var(--well);margin-bottom:8px;box-shadow:inset 0 0 0 1px rgba(59,130,246,.18)}
+.rlg{border-radius:16px}.rmd{border-radius:12px}.rsm{border-radius:8px}
+
+
+/* ---------- responsive ---------- */
+@media(max-width:1000px){
+  .doc{grid-template-columns:minmax(0,1fr);gap:32px;padding:32px 16px 72px}
+  .toc{position:static;display:block}
+  .toc img{display:block;width:110px;margin:0 0 16px}
+  .toc a{display:inline-block}
+  .toc .toc-meta{display:none}
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .g2,.g4{grid-template-columns:1fr}
+  .type-row{grid-template-columns:1fr;gap:4px}
+  .t-hero{font-size:40px}
+  h2{font-size:26px}
+}
+
+/* ---------- copy buttons (added by brand.js) ---------- */
+.copy{display:inline-grid;place-items:center;width:24px;height:24px;margin-left:4px;vertical-align:middle;border:0;border-radius:var(--r-sm);background:none;color:var(--text-4);cursor:pointer;transition:color .15s,background .15s}
+.copy:hover{color:var(--brand);background:rgba(59,130,246,.12)}
+.copy:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+.copy.done{color:var(--long)}
+.swatch div{position:relative}
+.swatch .has-copy{padding-right:40px}
+.swatch .copy{position:absolute;top:8px;right:8px;margin:0}
+.brand-hero code{display:inline}
+.brand-hero .copy{color:rgba(246,254,253,.7)}
+.brand-hero .copy:hover{color:var(--text-1);background:rgba(255,255,255,.14)}
+.copy-buffer{position:fixed;opacity:0;pointer-events:none}
+
+/* ---------- loader demo (logic in brand.js, ported from the website loader) ---------- */
+.loader-stage{--shield:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20431.246%20462.718%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M352.111%2060.7389C362.271%2060.7391%20370.507%2068.9762%20370.507%2079.1364V319.352C370.507%20326.479%20366.392%20332.964%20359.944%20335.999L223.457%20400.228C218.495%20402.563%20212.751%20402.563%20207.79%20400.228L71.3024%20335.999C64.8544%20332.964%2060.7389%20326.478%2060.7389%20319.352V79.1364C60.7389%2068.976%2068.976%2060.7389%2079.1364%2060.7389H352.111Z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E");position:relative;height:320px;border-radius:var(--r-lg);background:var(--canvas);box-shadow:inset 0 0 0 1px var(--divider);overflow:hidden;margin-bottom:12px}
+.loader-arrive{position:absolute;inset:0}
+.loader-mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:120px;aspect-ratio:431.246/462.718;perspective:820px}
+.loader-band{position:absolute;inset:0;background:var(--text-1);backface-visibility:visible;
+  -webkit-mask-image:var(--shield);mask-image:var(--shield);-webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.loader-replay{position:absolute;right:12px;bottom:12px;height:32px;padding:0 12px;border:0;border-radius:var(--r);
+  background:rgba(59,130,246,.16);color:var(--text-1);font:500 13px var(--sans);cursor:pointer}
+.loader-replay:hover{background:rgba(59,130,246,.24)}
+
+@media(max-width:700px){:root{--r-lg:12px;--r:8px;--r-sm:8px}}
+
+/* --- Site addition (not in the designer's file): the contents-nav logo links home.
+   Undo the .toc a item styling so the logo sits exactly as designed. --- */
+.toc a.toc-home{display:block;line-height:0;padding:0;background:none;border-radius:0;margin-bottom:28px}
+.toc a.toc-home img{display:block;margin-bottom:0}
+@media(max-width:1000px){.toc a.toc-home{display:block;margin:0 0 16px}}
+
+/* --- Site addition: the site nav (fixed, 12px inset; 76px tall, 68px ≤1100, 64px ≤700)
+   sits above the document, so the document and its sticky contents start below it. --- */
+.page-brand .doc{padding-top:144px}
+.page-brand .toc{top:128px}
+@media(max-width:1100px){.page-brand .doc{padding-top:136px}.page-brand .toc{top:120px}}
+@media(max-width:1000px){.page-brand .doc{padding-top:112px}}
+@media(max-width:700px){.page-brand .doc{padding-top:108px}}
+/* Undo the three site-wide theme.css rules that reach into the document (verified by
+   a computed-style + geometry diff against the standalone page): button font,
+   h1 span display, disabled-button cursor, and max-width on svg (squeezes copy icons), img, h1. */
+.page-brand .doc button.copy{font:revert}
+.page-brand .doc h1>span{display:inline}
+.page-brand .doc .btn:disabled{cursor:not-allowed}
+.page-brand .doc svg,.page-brand .doc img,.page-brand .doc h1{max-width:none}
+/* ...and the reverse: keep brand.css's body font and link colour out of the site chrome.
+   :where() keeps specificity at the element level, so theme.css's own nav rules still win. */
+:where(.page-brand) :where(.site-header,.page-rails,dialog){font:400 16px/normal var(--sans)}
+.page-brand .scroll-top{line-height:normal} /* its own font rules in theme.css do the rest */
+:where(.page-brand .site-header,.page-brand dialog) a{color:inherit}

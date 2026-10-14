@@ -1,462 +1,99 @@
 /* =========================================================================
-   Blog — listing + individual posts
-   Inherits global tokens from /styles.css. Self-contained — does NOT depend
-   on /trust-model/styles.css (different visual treatment: centered single-
-   column reading flow instead of sticky-TOC docs layout).
+   Blog — listing + individual posts (v2 design)
+   Loaded after /css/theme.css + /css/site.css; uses their tokens only.
+   Class names are unchanged from v1 so post markup needs no edits.
    ========================================================================= */
 
-.blog-body {
-  background: var(--bg-primary);
-  color: var(--fg-primary);
-}
+/* ---------- Listing: /blog ---------- */
+.blog-index { padding-top: 170px; }
+.blog-index-wrap { max-width: 960px; margin: 0 auto; }
+.blog-index-head { margin-bottom: 48px; }
+.blog-index-head .section-eyebrow { display: block; }
+.blog-index-title { font-size: clamp(42px, 4.6vw, 82px); line-height: 1.04; letter-spacing: -.035em; margin: 0 0 20px; }
+.blog-index-sub { max-width: 56ch; font-size: 18px; line-height: 1.65; color: var(--text-3); margin: 0; }
 
-/* Suppress marketing-site grain on blog (cleaner reading surface) */
-.blog-body .grain,
-.blog-body .cursor { display: none; }
+/* Entries sit in one card with hairline rows, like the homepage FAQ. */
+.blog-stack { border: 1px solid #fff2; border-radius: var(--r-lg); overflow: hidden; background: linear-gradient(115deg, var(--well), var(--canvas)); }
+.blog-entry { border-bottom: 1px solid #fff1; }
+.blog-entry:last-child { border-bottom: 0; }
+.blog-entry-link { display: block; padding: 32px; color: inherit; transition: background .25s; }
+.blog-entry-link:hover, .blog-entry-link:focus-visible { background: #ffffff06; outline: none; }
+.blog-entry-link:focus-visible { box-shadow: inset 0 0 0 2px #ffffffb3; }
+.blog-entry-meta { display: block; font: 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-4); margin-bottom: 12px; }
+.blog-entry-title { font-size: 26px; line-height: 1.25; letter-spacing: -.025em; color: var(--text-1); max-width: 52ch; margin: 0 0 10px; }
+.blog-entry-lede { font-size: 15px; line-height: 1.6; color: var(--text-3); max-width: 72ch; margin: 0 0 16px; }
+.blog-entry-cta { display: inline-block; font-size: 13px; color: var(--text-2); transition: transform .2s, color .2s; }
+.blog-entry-link:hover .blog-entry-cta { color: var(--text-1); }
+.blog-entry-link:hover .blog-entry-cta, .blog-entry-link:focus-visible .blog-entry-cta { transform: translateX(3px); }
+.blog-index-empty { text-align: center; padding: 64px 0; font: 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-4); }
 
-/* Nav adapted for blog: matches body --snow so there's no visible seam
-   between the fixed nav and the page on first scroll. */
-.nav-blog {
-  background: rgba(248, 250, 252, 0.85);
-  backdrop-filter: blur(8px) saturate(120%);
-  -webkit-backdrop-filter: blur(8px) saturate(120%);
-}
+/* ---------- Post: /blog/<slug> ---------- */
+.blog-post { padding-top: 150px; }
+.blog-post-wrap { max-width: 720px; margin: 0 auto; font-size: 17px; line-height: 1.7; color: var(--text-2); }
+.blog-post-back { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 36px; font-size: 14px; color: var(--text-3); transition: color .2s; }
+.blog-post-back:hover { color: var(--text-1); }
+.blog-post-wrap .eyebrow { display: block; margin-bottom: 16px; font-size: 13px; } /* colour + type: shared eyebrow style in site.css */
+.blog-post-wrap h1 { font-size: clamp(34px, 4.4vw, 56px); line-height: 1.1; letter-spacing: -.035em; color: var(--text-1); margin: 0 0 18px; }
+.blog-post-meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0 0 40px; font: 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-4); }
+.blog-post-meta span + span::before { content: '·'; margin-right: 12px; }
+.blog-post-wrap .intro { font-size: 20px; line-height: 1.6; color: var(--text-1); margin: 0 0 40px; }
+.blog-post-wrap h2 { position: relative; font-size: 28px; line-height: 1.25; letter-spacing: -.03em; color: var(--text-1); margin: 56px 0 16px; scroll-margin-top: 110px; }
+.blog-post-wrap h3 { position: relative; font-size: 20px; line-height: 1.35; letter-spacing: -.015em; color: var(--text-1); margin: 32px 0 12px; scroll-margin-top: 110px; }
+.blog-post-wrap p { margin: 0 0 20px; }
+.blog-post-wrap strong, .blog-post-wrap b { font-weight: 500; color: var(--text-1); }
+.blog-post-wrap a:not(.anchor-link):not(.blog-post-back):not(.cta):not(.btn-pill) { color: var(--text-1); text-decoration: underline; text-decoration-color: #ffffff4d; text-underline-offset: 4px; transition: color .2s, text-decoration-color .2s; }
+.blog-post-wrap a:not(.anchor-link):not(.blog-post-back):not(.cta):not(.btn-pill):hover { color: var(--text-1); text-decoration-color: var(--text-1); }
+.blog-post-wrap ul, .blog-post-wrap ol { margin: 0 0 20px; padding-left: 24px; }
+.blog-post-wrap li { margin-bottom: 8px; }
+.blog-post-wrap li::marker { color: var(--text-4); }
 
-/* =========================================================================
-   Listing — /blog
-   ========================================================================= */
-.blog-index {
-  padding-top: calc(var(--nav-h) + 64px);
-  padding-bottom: 96px;
-  min-height: calc(100vh - var(--nav-h));
-}
-
-.blog-index-wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 28px;
-}
-
-.blog-index-head {
-  max-width: 720px;
-  margin: 0 auto 56px;
-  text-align: center;
-}
-.blog-index-head .eyebrow {
-  margin-bottom: 16px;
-  display: inline-block;
-}
-.blog-index-title {
-  margin: 0 0 16px;
-  font-size: clamp(36px, 4.4vw, 56px);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
-  color: var(--fg-primary);
-}
-.blog-index-sub {
-  margin: 0 auto;
-  font-size: clamp(17px, 1.4vw, 19px);
-  line-height: 1.6;
-  color: var(--fg-secondary);
-  max-width: 56ch;
-}
-
-/* Posts stack — single-column text-only entries separated by hairlines.
-   Hover reveals a brand-blue stripe on the left and shifts the title color.
-   Pattern: text-only tech-publication blog index (Stripe Press, Vercel Blog
-   text mode) — no cover imagery, headlines do the work. */
-.blog-stack {
-  max-width: min(840px, 100%);
-  margin: 0 auto;
-}
-
-.blog-entry {
-  border-top: 1px solid var(--border);
-  padding: 40px 0;
-}
-.blog-entry:last-child {
-  border-bottom: 1px solid var(--border);
-}
-
-/* The whole entry is one click target. A transparent 3px left border at
-   rest reserves the space; on hover/focus it fills with brand-blue and
-   the content shifts right by 16px in sync. Reserving the border space
-   prevents text reflow on hover. */
-.blog-entry-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  border-left: 3px solid transparent;
-  padding-left: 0;
-  transition: border-color .28s var(--ease), padding-left .28s var(--ease);
-}
-.blog-entry-link:hover,
-.blog-entry-link:focus-visible {
-  border-left-color: var(--brand-blue);
-  padding-left: 10px;
-  outline: none;
-}
-
-.blog-entry-meta {
-  display: block;
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: 12px;
-}
-
-.blog-entry-title {
-  margin: 0 0 12px;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  line-height: 1.25;
-  color: var(--fg-primary);
-  max-width: 52ch;
-  transition: color .28s var(--ease);
-}
-.blog-entry-link:hover .blog-entry-title,
-.blog-entry-link:focus-visible .blog-entry-title {
-  color: var(--brand-blue);
-}
-
-.blog-entry-lede {
-  margin: 0 0 16px;
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--fg-secondary);
-  max-width: 72ch;
-}
-
-.blog-entry-cta {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--brand-blue);
-  transition: transform .15s var(--ease);
-}
-.blog-entry-link:hover .blog-entry-cta,
-.blog-entry-link:focus-visible .blog-entry-cta {
-  transform: translateX(2px);
-}
-
-/* Empty state preserved for future use (no posts yet). */
-.blog-index-empty {
-  text-align: center;
-  color: var(--fg-muted);
-  padding: 64px 0;
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-/* =========================================================================
-   Post — /blog/<slug>
-   Centered single-column long-form reading flow (Stripe Blog / Vercel feel).
-   ========================================================================= */
-.blog-post {
-  padding-top: calc(var(--nav-h) + 48px);
-  padding-bottom: 96px;
-}
-
-.blog-post-wrap {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 0 24px;
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--fg-primary);
-}
-
-/* Back link — text-style nav link (not a button). Pinned to the left
-   of the reading column on desktop via position:fixed; collapses to
-   inline on mobile. Chrome stripped so the link top-aligns with the
-   eyebrow that sits next to it in the column header row. */
-.blog-post-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--brand-blue);
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  margin-bottom: 32px;
-  transition: color .25s var(--ease);
-}
-.blog-post-back:hover {
-  color: var(--brand-blue-deep);
-}
-
-/* Desktop only: pin to the left of the centered reading column. The
-   `top` matches .blog-post padding-top so the link's top edge aligns
-   with the eyebrow's top edge inside the column. */
-@media (min-width: 880px) {
-  .blog-post-back {
-    position: fixed;
-    top: calc(var(--nav-h) + 48px);
-    right: calc(50% + 340px + 24px);
-    margin-bottom: 0;
-    z-index: 10;
-  }
-}
-
-/* Per-post eyebrow stays on the site's default --fg-muted slate so it
-   reads as supporting taxonomy rather than competing with the brand-blue
-   back link that sits on the same baseline. */
-.blog-post-wrap .eyebrow {
-  display: inline-block;
-  margin-bottom: 16px;
-  color: var(--fg-muted);
-}
-
-.blog-post-wrap h1 {
-  margin: 0 0 16px;
-  font-size: clamp(32px, 5vw, 44px);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
-  color: var(--fg-primary);
-}
-
-.blog-post-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  margin: 0 0 40px;
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-}
-.blog-post-meta span + span::before {
-  content: '·';
-  margin-right: 12px;
-}
-
-/* IMPORTANT: the global `.intro` class is a SECTION container with
-   `padding: 140px 0 160px` and `background: var(--snow)`. Our blog
-   posts use `.intro` as a typography modifier for the lede paragraph,
-   so we need to neutralize the global section-level rules explicitly.
-   Resetting padding + background here keeps the post lede from
-   inheriting the landing-page intro section's huge top/bottom padding. */
-.blog-post-wrap .intro {
-  padding: 0;
-  background: transparent;
-  font-size: 19px;
-  line-height: 1.6;
-  color: var(--fg-secondary);
-  margin: 0 0 40px;
-}
-
-.blog-post-wrap h2 {
-  margin: 48px 0 16px;
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  color: var(--fg-primary);
-  position: relative;
-}
-
-.blog-post-wrap h3 {
-  margin: 32px 0 12px;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--fg-primary);
-  position: relative;
-}
-
-.blog-post-wrap p {
-  margin: 0 0 20px;
-  color: rgba(15, 23, 42, 0.85);
-}
-
-.blog-post-wrap strong {
-  font-weight: 600;
-  color: var(--fg-primary);
-}
-
-.blog-post-wrap a:not(.anchor-link):not(.blog-post-back):not(.cta):not(.btn-pill) {
-  color: var(--brand-blue);
-  text-decoration: underline;
-  text-decoration-color: rgba(51, 112, 255, 0.4);
-  text-underline-offset: 3px;
-  transition: text-decoration-color .2s var(--ease), color .2s var(--ease);
-}
-.blog-post-wrap a:not(.anchor-link):not(.blog-post-back):not(.cta):not(.btn-pill):hover {
-  color: var(--brand-blue-deep);
-  text-decoration-color: var(--brand-blue);
-}
-
-.blog-post-wrap ul {
-  margin: 0 0 20px;
-  padding-left: 24px;
-}
-.blog-post-wrap ul li {
-  margin-bottom: 8px;
-  color: rgba(15, 23, 42, 0.85);
-}
-
-/* Copy-link anchor icon next to each h2/h3 -------------------------------- */
-.anchor-link {
-  display: inline-flex;
-  align-items: center;
-  opacity: 0;
-  margin-left: 8px;
-  color: rgba(15, 23, 42, 0.35);
-  text-decoration: none;
-  transition: opacity .2s var(--ease), color .2s var(--ease);
-  vertical-align: middle;
-  cursor: pointer;
-  position: relative;
-}
-.blog-post-wrap h2:hover .anchor-link,
-.blog-post-wrap h3:hover .anchor-link {
-  opacity: 1;
-}
-.anchor-link:hover { color: var(--brand-blue); }
+/* Copy-link icon beside each heading */
+.anchor-link { position: relative; display: inline-flex; align-items: center; vertical-align: middle; margin-left: 10px; color: var(--text-4); opacity: 0; transition: opacity .2s, color .2s; cursor: pointer; }
+.blog-post-wrap h2:hover .anchor-link, .blog-post-wrap h3:hover .anchor-link, .anchor-link:focus-visible { opacity: 1; }
+.anchor-link:hover { color: var(--text-1); }
 .anchor-link svg { width: 18px; height: 18px; }
-.anchor-link::after {
-  content: 'Copy link';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--ink);
-  color: var(--white);
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .2s var(--ease);
-  margin-top: 4px;
-}
+.anchor-link::after { content: 'Copy link'; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 6px; padding: 4px 8px; border: 1px solid #fff2; border-radius: var(--r-sm); background: var(--panel); color: var(--text-2); font: 12px var(--sans); letter-spacing: 0; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; }
 .anchor-link:hover::after { opacity: 1; }
 .anchor-link.copied::after { content: 'Copied!'; }
 
-/* FAQ block at the end of posts ------------------------------------------- */
-.blog-post-wrap .faq {
-  margin-top: 64px;
-  padding-top: 48px;
-  box-shadow: inset 0 1px 0 rgba(15, 23, 42, 0.08);
-}
+/* FAQ block at the end of posts */
+.blog-post-wrap .faq { margin-top: 64px; padding-top: 48px; border-top: 1px solid #fff2; }
 .blog-post-wrap .faq h2 { margin-top: 0; }
-.blog-post-wrap .faq-item { margin-bottom: 24px; }
-.blog-post-wrap .faq-item h3 {
-  font-size: 17px;
-  margin: 0 0 8px;
-}
-.blog-post-wrap .faq-item p {
-  font-size: 16px;
-  margin-bottom: 0;
-}
+.blog-post-wrap .faq-item { padding: 20px 0; border-bottom: 1px solid #fff1; }
+.blog-post-wrap .faq-item:last-of-type { border-bottom: 0; }
+.blog-post-wrap .faq-item h3 { font-size: 17px; margin: 0 0 8px; }
+.blog-post-wrap .faq-item p { font-size: 15px; color: var(--text-3); margin: 0; }
 
-/* Optional bottom CTA — reserved for future use (Request access etc.) ----- */
-.blog-post-wrap .cta {
-  display: inline-block;
-  background: var(--brand-blue);
-  color: var(--white);
-  padding: 14px 28px;
-  border-radius: 9999px;
-  font-weight: 500;
-  text-decoration: none;
-  margin-top: 48px;
-  transition: opacity .2s var(--ease);
-}
-.blog-post-wrap .cta:hover { opacity: 0.9; }
+/* In-post calls to action (.cta and the two v1 .btn-pill links) = design light button */
+.blog-post-wrap .cta, .blog-post-wrap .btn-pill { display: inline-flex; align-items: center; justify-content: center; margin-top: 16px; padding: 13px 20px; border: 1px solid #fff; border-radius: var(--r); background: #fff; color: var(--canvas); font-size: 14px; line-height: 1; text-transform: uppercase; transition: background .2s, transform .2s; }
+.blog-post-wrap .cta:hover, .blog-post-wrap .btn-pill:hover { background: #ddd; transform: translateY(-2px); }
 
-/* Hero image — full-width within the reading column, above the lede. -------- */
-.blog-post-hero {
-  margin: 0 0 40px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--ice);
-  border: 1px solid var(--border);
-}
-.blog-post-hero img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+/* Images */
+.blog-post-hero { margin: 0 0 40px; border: 1px solid #fff2; border-radius: var(--r-lg); overflow: hidden; background: var(--panel); }
+.blog-post-hero img { display: block; width: 100%; height: auto; }
+.blog-post-wrap img { max-width: 100%; height: auto; border-radius: var(--r); }
+.blog-post-hero img { border-radius: 0; }
 
-/* Inline images inside the post body */
-.blog-post-wrap img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
+/* Tables: dark card, hairline rows */
+.blog-table-wrap { width: 100%; margin: 0 0 28px; overflow-x: auto; border: 1px solid #fff2; border-radius: var(--r-lg); background: linear-gradient(130deg, var(--well), var(--panel)); }
+.blog-table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.blog-table thead th { padding: 14px 16px; text-align: left; font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-4); border-bottom: 1px solid #fff2; }
+.blog-table tbody th, .blog-table tbody td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid #fff1; color: var(--text-2); }
+.blog-table tbody th { font-weight: 500; color: var(--text-1); }
+.blog-table tbody tr:last-child th, .blog-table tbody tr:last-child td { border-bottom: 0; }
+.blog-table tbody tr:hover th, .blog-table tbody tr:hover td { background: #ffffff05; }
 
-/* Shared table style — every blog table uses .blog-table inside a scrollable
-   .blog-table-wrap so all posts look the same. Modeled on the landing page's
-   .compare-table (see styles.css): muted thead, hairline borders, row hover. */
-.blog-table-wrap {
-  width: 100%;
-  margin: 0 0 28px;
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--bg-primary);
-}
-.blog-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--fg-primary);
-}
-.blog-table thead th {
-  padding: 14px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-align: left;
-  color: var(--fg-muted);
-  background: var(--ice);
-  border-bottom: 1px solid var(--border);
-}
-.blog-table tbody th,
-.blog-table tbody td {
-  padding: 14px 16px;
-  text-align: left;
-  vertical-align: top;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-primary);
-  color: rgba(15, 23, 42, 0.85);
-}
-.blog-table tbody tr:last-child th,
-.blog-table tbody tr:last-child td { border-bottom: none; }
-.blog-table tbody tr:hover th,
-.blog-table tbody tr:hover td { background: var(--ice); }
-
-/* Responsive -------------------------------------------------------------- */
-@media (max-width: 880px) {
-  .blog-index-layout { grid-template-columns: 1fr; gap: 24px; }
-  .blog-recent { position: static; }
-}
-@media (max-width: 720px) {
-  .blog-index { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 56px; }
-  .blog-index-head { margin-bottom: 40px; }
-  .blog-entry { padding: 28px 0; }
-  .blog-entry-title { font-size: 22px; }
-  .blog-entry-lede { max-width: none; }
-  .blog-entry-link:hover,
-  .blog-entry-link:focus-visible { padding-left: 8px; }
-  .blog-post { padding-top: calc(var(--nav-h) + 24px); padding-bottom: 56px; }
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+  .blog-index { padding-top: 120px; }
+  .blog-index-title { font-size: clamp(36px, 10vw, 48px); }
+  .blog-index-sub { font-size: 15px; }
+  .blog-entry-link { padding: 24px 20px; }
+  .blog-entry-title { font-size: 21px; }
+  .blog-post { padding-top: 110px; }
   .blog-post-wrap { font-size: 16px; }
-  .blog-post-wrap h2 { font-size: 22px; }
-  .blog-post-wrap .intro { font-size: 17px; }
-  .blog-table thead th,
-  .blog-table tbody th,
-  .blog-table tbody td { padding: 12px 14px; font-size: 14px; }
+  .blog-post-wrap h2 { font-size: 23px; margin-top: 44px; }
+  .blog-post-wrap .intro { font-size: 18px; }
+  .blog-table thead th, .blog-table tbody th, .blog-table tbody td { padding: 12px 14px; font-size: 14px; }
+  .anchor-link { opacity: .6; }
 }

@@ -171,7 +171,9 @@
       try {
         conditionals.forEach(({ el, selectName, values, notValues }) => {
           const sel = form.querySelector(`select[name="${selectName}"]`);
-          const show = !!sel && values.includes(sel.value) && !notValues.includes(sel.value);
+          // Empty value list = "any non-empty value" (see data-show-when above).
+          const matches = values.length ? values.includes(sel && sel.value) : !!(sel && sel.value);
+          const show = !!sel && matches && !notValues.includes(sel.value);
           const wasHidden = el.hidden;
           el.hidden = !show;
           // Reset the conditional's own selects only when it transitions
@@ -181,6 +183,12 @@
           if (!wasHidden && !show) {
             el.querySelectorAll('select').forEach((s) => {
               Array.from(s.options).forEach((o) => { o.selected = false; });
+              // A single select with nothing selected falls back to its first
+              // enabled option; re-select the empty placeholder instead.
+              if (!s.multiple) {
+                const placeholder = Array.from(s.options).find((o) => o.value === '');
+                if (placeholder) placeholder.selected = true;
+              }
               syncSelectUI(s);
             });
             clearFieldError(el);
@@ -213,6 +221,13 @@
           labelEl.textContent = `${picked.length} Selected`;
           labelEl.classList.remove('is-placeholder');
         }
+      }
+      else if (!select.value) {
+        labelEl.textContent = placeholder;
+        labelEl.classList.add('is-placeholder');
+      } else {
+        labelEl.textContent = select.options[select.selectedIndex].textContent;
+        labelEl.classList.remove('is-placeholder');
       }
       panel.querySelectorAll('.waitlist-dropdown-row').forEach((row) => {
         const opt = Array.from(select.options).find((o) => o.value === row.dataset.value);
@@ -350,6 +365,7 @@
 
     const multi = select.multiple;
     const placeholder = labelEl.textContent;
+    labelEl.dataset.placeholder = placeholder; // read by syncSelectUI after programmatic resets
     root.classList.add(multi ? 'is-multi' : 'is-single');
 
     while (panel.firstChild) panel.removeChild(panel.firstChild);

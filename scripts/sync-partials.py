@@ -31,7 +31,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PARTIALS_DIR = ROOT / "partials"
-SKIP_DIRS = {"node_modules", ".git", "partials", ".vercel"}
+SKIP_DIRS = {"node_modules", ".git", "partials", ".vercel", "_redesign"}
 
 OPEN_RE = re.compile(r"<!--\s*@partial\s+([\w-]+)([^>]*?)-->")
 ATTR_RE = re.compile(r'([\w-]+)\s*=\s*"([^"]*)"')
