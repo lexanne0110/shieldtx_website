@@ -35,7 +35,7 @@ yarn-error.log*
 demo-source/
 *.mp4
 !/assets/demo/demo-v17-desktop.mp4
-!/assets/demo/demo-v17-mobile.mp4
+!/assets/demo/demo-v18-mobile.mp4
 
 # Redesign workspace: designer's zip + work log. Local only, never deployed.
 _redesign/
