@@ -28,13 +28,14 @@ yarn-error.log*
 .env.local
 .env.*.local
 
-# Raw video source — block by default. Allowlist the one canonical
-# demo video that's deliberately committed for the in-site Preview.
+# Raw video source — block by default. Allowlist the compressed demo videos
+# committed for the homepage product section (masters stay in _redesign/video-source).
 *.mov
 *.webm
 demo-source/
 *.mp4
-!/assets/demo/preview.mp4
+!/assets/demo/demo-v17-desktop.mp4
+!/assets/demo/demo-v17-mobile.mp4
 
 # Redesign workspace: designer's zip + work log. Local only, never deployed.
 _redesign/
