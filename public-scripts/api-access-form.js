@@ -48,6 +48,22 @@
 
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    // ---- PostHog form analytics (PII-free: field names only, never values)
+    const FORM_ID = 'api-access';
+    let formStarted = false;
+    function capture(event, props) {
+      try {
+        if (window.posthog && typeof window.posthog.capture === 'function') {
+          window.posthog.capture(event, props || {});
+        }
+      } catch (_) {}
+    }
+    function trackStart() {
+      if (formStarted) return;
+      formStarted = true;
+      capture('form_started', { form_id: FORM_ID });
+    }
+
     function fieldContainers(step) {
       return Array.from(step.querySelectorAll('.waitlist-field, .waitlist-question'))
         .filter((c) => !(c.classList.contains('is-conditional') && c.hidden));
@@ -119,6 +135,17 @@
         }
       });
       if (firstInvalid) {
+        capture('form_validation_error', {
+          form_id: FORM_ID,
+          step: steps[idx] ? steps[idx].dataset.step : null,
+          fields: fieldContainers(step)
+            .filter((c) => !containerValid(c))
+            .map((c) => {
+              const sel = c.querySelector('select');
+              return (sel && sel.name) || (c.querySelector('input') || {}).name || '';
+            })
+            .filter(Boolean),
+        });
         const focusable = firstInvalid.querySelector('input, [data-dropdown-trigger]');
         if (focusable) focusable.focus();
         firstInvalid.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
@@ -146,6 +173,9 @@
       idx = target;
       steps[idx].classList.add('is-active');
       updateChrome();
+      if (target > 0 || steps[target].dataset.step === 'result') {
+        capture('form_step_viewed', { form_id: FORM_ID, step: steps[target].dataset.step });
+      }
       const focusable = steps[idx].querySelector('input, button[data-dropdown-trigger]');
       if (focusable) setTimeout(() => focusable.focus(), 60);
     }
@@ -248,8 +278,8 @@
       backBtn.addEventListener('click', () => { if (idx > 0) goTo(idx - 1); });
     }
 
-    form.addEventListener('input', (e) => { clearIfValid(e.target); });
-    form.addEventListener('change', (e) => { clearIfValid(e.target); syncConditionals(); });
+    form.addEventListener('input', (e) => { trackStart(); clearIfValid(e.target); });
+    form.addEventListener('change', (e) => { trackStart(); clearIfValid(e.target); syncConditionals(); });
     form.addEventListener('reset', () => {
       setTimeout(() => {
         steps.forEach((s) => s.classList.remove('is-active'));
@@ -269,6 +299,7 @@
     if (walkthroughSel) {
       walkthroughSel.addEventListener('change', () => {
         if (walkthroughSel.value !== 'yes-call') return;
+        capture('book_call_clicked', { form_id: FORM_ID });
         const email = (form.querySelector('input[name="email"]') || {}).value || '';
         const subject = encodeURIComponent('ShieldTX API — tailored integration call');
         const body = encodeURIComponent(
@@ -284,6 +315,7 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (form.dataset.state === 'submitting') return;
+      trackStart(); // covers autofill, which can fill fields without input events
       if (!revealStepErrors()) return;
       if (idx < questionSteps.length - 1) { goTo(idx + 1); return; }
 
@@ -300,6 +332,8 @@
       setState('submitting');
       showError('');
 
+      capture('form_submitted', { form_id: FORM_ID });
+
       try {
         const res = await fetch(form.dataset.endpoint || '/api/api-access', {
           method: 'POST',
@@ -308,15 +342,19 @@
         });
         const json = await res.json().catch(() => ({}));
         if (res.ok && json.ok) {
+          capture('form_submit_succeeded', { form_id: FORM_ID });
           setState('success');
           const resultIdx = steps.findIndex((s) => s.dataset.step === 'result');
           if (resultIdx > -1) goTo(resultIdx);
         } else {
           setState('idle');
-          showError(json.error || 'Submission failed. Please try again.');
+          const msg = json.error || 'Submission failed. Please try again.';
+          capture('form_submit_failed', { form_id: FORM_ID, reason: 'server', error: msg });
+          showError(msg);
         }
       } catch (err) {
         console.error('[api-access] network error', err);
+        capture('form_submit_failed', { form_id: FORM_ID, reason: 'network' });
         setState('idle');
         showError('Network error. Please try again.');
       }
