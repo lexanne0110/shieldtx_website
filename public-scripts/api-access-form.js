@@ -72,6 +72,8 @@
     function containerValid(container) {
       const email = container.querySelector('input[type="email"]');
       if (email) return EMAIL_RE.test(email.value.trim());
+      const text = container.querySelector('input[type="text"]');
+      if (text) return text.value.trim().length > 0;
       const select = container.querySelector('select');
       if (select) {
         if (select.multiple) return Array.from(select.selectedOptions).some((o) => o.value);
@@ -88,6 +90,11 @@
 
     function errorMessageFor(container) {
       if (container.querySelector('input[type="email"]')) return 'Enter a valid email address.';
+      const text = container.querySelector('input[type="text"]');
+      if (text) {
+        const label = container.querySelector('.waitlist-label');
+        return `Enter your ${(label ? label.textContent : 'details').toLowerCase()}.`;
+      }
       const select = container.querySelector('select');
       if (select && select.multiple) return 'Select at least one option.';
       return 'Please select an option.';
@@ -321,6 +328,7 @@
 
       const data = new FormData(form);
       const payload = {
+        name: (data.get('name') || '').toString().trim(),
         email: (data.get('email') || '').toString().trim(),
         use_case: data.get('use_case') || null,
         venue_coverage: data.get('venue_coverage') || null,
