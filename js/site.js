@@ -181,3 +181,65 @@ document.querySelectorAll('.faq-grid details').forEach(details => {
     addEventListener('load', () => document.fonts.ready.then(() => jump(arrival, false)), { once: true });
   }
 })();
+
+// ---- Conversion funnel (PostHog) -------------------------------------------
+// Site-wide delegated tracking for the CTAs and the account dialog. Labelled
+// from the href rather than markup attributes: the CTAs live in partials and
+// are repeated across 24 pages, so an attribute would be easy to add and then
+// silently lost to the next partial sync. PII-free — labels and hrefs only,
+// never anything the visitor typed.
+//
+// Events:
+//   cta_clicked     { cta, location, href, opens_dialog? }
+//   account_choice  { choice: yes-open-app | no-request-access, location }
+(() => {
+  const capture = (event, props) => {
+    try {
+      if (window.posthog && typeof window.posthog.capture === 'function') {
+        window.posthog.capture(event, props || {});
+      }
+    } catch (_) { /* analytics must never break the page */ }
+  };
+
+  // First match wins. Add new conversion links here.
+  const CTAS = [
+    [/^\/request-access(?:[/?#]|$)/, 'request-access'],
+    [/^\/api-access(?:[/?#]|$)/, 'api-access'],
+    [/^\/contact-us\/?(?:[?#]|$)/, 'contact'],
+    [/^https:\/\/beta\.shieldtx\.xyz/, 'open-app'],
+    [/^https:\/\/scanner\.shieldtx\.xyz/, 'scanner'],
+  ];
+
+  function locationOf(el) {
+    if (el.closest('dialog')) return 'dialog';
+    if (el.closest('header, .nav')) return 'nav';
+    if (el.closest('#wallet-scan')) return 'scan';
+    if (el.closest('.hero-copy, .hero')) return 'hero';
+    if (el.closest('.closing')) return 'closing';
+    if (el.closest('footer')) return 'footer';
+    if (el.closest('.page-intro, .form-section')) return 'form-page';
+    return 'body';
+  }
+
+  // Capture phase: fires before the dialog opener's preventDefault() and
+  // before any navigation takes the page away.
+  document.addEventListener('click', event => {
+    const el = event.target instanceof Element ? event.target.closest('a[href], button') : null;
+    if (!el) return;
+
+    if (el.dataset.accountChoice) {
+      capture('account_choice', {
+        choice: el.dataset.accountChoice === 'yes' ? 'yes-open-app' : 'no-request-access',
+        location: locationOf(el),
+      });
+      return;
+    }
+
+    const href = el.getAttribute('href') || '';
+    const match = CTAS.find(([re]) => re.test(href));
+    if (!match) return;
+    const props = { cta: match[1], location: locationOf(el), href };
+    if (el.dataset.dialog) props.opens_dialog = el.dataset.dialog;
+    capture('cta_clicked', props);
+  }, true);
+})();

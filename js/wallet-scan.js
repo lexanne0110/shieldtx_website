@@ -32,18 +32,37 @@
     fills: document.getElementById('scan-result-fills'),
   };
 
+  // ---- PostHog funnel -------------------------------------------------------
+  // Mirrors the form funnel's event names so one PostHog funnel can read the
+  // whole journey. PII-free: derived figures and statuses only — never the
+  // wallet address the visitor typed.
+  let scanStarted = false;
+  const capture = (event, props) => {
+    try {
+      if (window.posthog && typeof window.posthog.capture === 'function') {
+        window.posthog.capture(event, props || {});
+      }
+    } catch (_) { /* analytics must never break the scan */ }
+  };
+  function trackStart() {
+    if (scanStarted) return;
+    scanStarted = true;
+    capture('scan_started', {});
+  }
+
   // ---- Expand / collapse ----
-  function setOpen(open, { focus = true } = {}) {
+  function setOpen(open, { focus = true, via = null } = {}) {
     section.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     panel.inert = !open;
     panel.setAttribute('aria-hidden', String(!open));
     if (open && focus) setTimeout(() => wallet.focus({ preventScroll: true }), 250);
+    if (open && via) capture('scan_panel_opened', { via });
   }
-  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true', { via: 'toggle' }));
   setOpen(false, { focus: false });
   // /#wallet-scan links: js/site.js scrolls here and announces the jump; open the panel.
-  addEventListener('shield-hash-jump', event => { if (event.detail === section) setOpen(true, { focus: false }); });
+  addEventListener('shield-hash-jump', event => { if (event.detail === section) setOpen(true, { focus: false, via: 'hash' }); });
 
   // ---- Preview ----
   const fullScannerUrl = address => walletRe.test(address || '')
@@ -103,9 +122,11 @@
     if (!walletRe.test(address)) {
       setError('Enter a valid public wallet address: 0x followed by 40 hexadecimal characters.');
       wallet.focus();
+      capture('scan_preview_invalid', {});
       return;
     }
     setError('');
+    capture('scan_preview_submitted', {});
     fallback.hidden = true;
     openFull.href = fullScannerUrl(address);
     if (abort) abort.abort();
@@ -117,10 +138,23 @@
         signal: abort.signal,
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(json.error || 'No scanner preview is available for this wallet yet.');
+      if (!res.ok) {
+        const err = new Error(json.error || 'No scanner preview is available for this wallet yet.');
+        err.status = res.status;
+        throw err;
+      }
       render(json, address);
       result.hidden = false;
       openFull.focus({ preventScroll: true });
+      const coverage = json.coverage || {};
+      capture('scan_preview_succeeded', {
+        privacy_score: typeof json.privacy_score === 'number' ? json.privacy_score : null,
+        privacy_label: json.privacy_score_label || null,
+        privacy_tier: typeof json.privacy_tier === 'number' ? json.privacy_tier : null,
+        copy_exposure: typeof json.copy_exposure === 'number' ? json.copy_exposure : null,
+        copier_count_status: json.copier_count_status || null,
+        dataset_state: coverage.scan || json.state || null,
+      });
     } catch (err) {
       if (err && err.name === 'AbortError') return;
       // The preview is a bonus: never block the hand-off to the full scanner.
@@ -128,10 +162,25 @@
       result.hidden = true;
       fallback.hidden = false;
       fallback.href = fullScannerUrl(address);
+      capture('scan_preview_failed', {
+        reason: err && typeof err.status === 'number' ? 'server' : 'network',
+        status: err && typeof err.status === 'number' ? err.status : null,
+      });
     } finally {
       setLoading(false);
     }
   });
 
-  wallet.addEventListener('input', () => setError(''));
+  wallet.addEventListener('input', () => { trackStart(); setError(''); });
+
+  // Hand-off to the full scanner — the scanner-growth conversion this section
+  // exists for: the deep-linked result link, the error fallback, and the
+  // sample-wallet link inside the form.
+  const trackHandoff = (el, from) => {
+    if (!el) return;
+    el.addEventListener('click', () => capture('scan_handoff_clicked', { from }));
+  };
+  trackHandoff(openFull, 'result');
+  trackHandoff(fallback, 'fallback');
+  trackHandoff(form.querySelector('.scan-sample a'), 'sample');
 })();
