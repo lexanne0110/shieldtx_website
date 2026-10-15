@@ -181,6 +181,36 @@
       if (submitBtn) submitBtn.disabled = form.dataset.state === 'submitting';
     }
 
+    // ---- Stable step height ------------------------------------------------
+    // Every step shares one card, but their content differs (step 2 of the
+    // invite form is ~140px taller than step 1, and its mobile result step
+    // collapses to a sliver), so the card used to resize on each transition
+    // and drag everything below it up or down. Hold every question step at
+    // the tallest natural height for the current width: only the contents
+    // move, the card doesn't. The result step is deliberately left out — it
+    // is the terminal state and reads better as its own compact panel.
+    let equaliseRaf = 0;
+    function equaliseStepHeights() {
+      cancelAnimationFrame(equaliseRaf);
+      equaliseRaf = requestAnimationFrame(() => {
+        const previouslyActive = steps.filter((s) => s.classList.contains('is-active'));
+        form.style.setProperty('--step-min', '0px'); // measure content, not the last answer
+        let max = 0;
+        questionSteps.forEach((s) => {
+          steps.forEach((o) => o.classList.remove('is-active'));
+          s.classList.add('is-active');
+          max = Math.max(max, s.getBoundingClientRect().height);
+        });
+        steps.forEach((o) => o.classList.remove('is-active'));
+        previouslyActive.forEach((s) => s.classList.add('is-active'));
+        if (max > 0) form.style.setProperty('--step-min', `${Math.ceil(max)}px`);
+      });
+    }
+    window.addEventListener('resize', equaliseStepHeights);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(equaliseStepHeights).catch(() => {});
+    }
+
     function goTo(target) {
       steps[idx].classList.remove('is-active');
       idx = target;
@@ -302,6 +332,7 @@
     }
 
     updateChrome();
+    equaliseStepHeights();
     return { reset: () => form.reset() };
   };
 
