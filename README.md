@@ -19,38 +19,51 @@ Open <http://localhost:3000>.
 ```
 .
 ├── api/                          # Vercel serverless functions
-│   ├── request-access.js         # POST submissions from the hero modal + /request-access
+│   ├── request-access.js         # POST from /request-access
+│   ├── api-access.js             # POST from /api-access
+│   ├── api-waitlist.js           # POST from the homepage API waitlist email box
+│   ├── scanner-preview.js        # GET wallet exposure preview (homepage + nav scan dialog)
+│   ├── scanner-report.js
 │   └── _shared.js                # tiny req/res helpers
-├── lib/                          # Server-only helpers (Node)
-│   ├── db.js                     # DB adapter — in-memory stub; swap for Supabase/Neon later
-│   ├── validate.js               # Input validation + sanitization
-│   ├── rate-limit.js             # In-memory IP rate limiter
-│   └── crypto.js                 # IP hashing
-├── public-scripts/               # Browser-served JS (shared across pages)
-│   └── request-access-form.js    # bindRequestAccessForm — multi-step screener + brand dropdowns
-├── assets/                       # Logos + demo video
-├── request-access/               # /request-access — full-page permalink for the form
-├── contact-us/                   # /contact-us — Contact Us form; opens a mailto: to support (no backend)
-├── trust-model/                  # /trust-model — on-chain trust docs
-├── brand-document/               # Internal brand spec (not linked from public nav)
-├── index.html                    # Landing page (hero, features, FAQ, modal)
-├── styles.css                    # All styles (brand tokens at the top)
-├── script.js                     # Lenis + ScrollTrigger, hero chart, modal open/close
-├── vercel.json                   # Headers, clean URLs
-├── package.json                  # Minimal — Node 20 engine, no build step
+├── lib/                          # Server-only helpers (Node): db, validate, rate-limit, crypto, sheets
+├── css/                          # v2 design styles (see "Styles" below)
+├── js/                           # v2 design scripts; js/vendor/ = three, gsap, ScrollTrigger
+├── public-scripts/               # Form behaviour: request-access-form.js, api-access-form.js
+├── partials/                     # Shared chrome, synced into every page by `npm run sync`
+│   ├── head-global.html          # PostHog + Google Analytics
+│   ├── nav.html                  # Site header + "Start trading" CTA
+│   ├── footer.html
+│   └── site-end.html             # Scroll-to-top, account + wallet-scan dialogs, site scripts
+├── scripts/
+│   ├── sync-partials.py          # `npm run sync`
+│   └── darken-hero.py            # Recolour a bright-blue blog hero to the dark design
+├── assets/                       # Logos, favicons, OG image, demo video; assets/v2/ = design fonts + images
+├── blog/                         # /blog index, posts, blog/styles.css, blog/_template/
+├── request-access/  api-access/  contact-us/  trust-model/  privacy/  terms/
+├── brand-document/               # Brand book (standalone doc + site nav; not in sitemap)
+├── index.html                    # Landing page
+├── vercel.json                   # Headers, clean URLs (/assets/* cached 1 year, immutable)
+├── package.json                  # No build step
 ├── .env.example                  # Required env vars
 ├── robots.txt                    # Excludes /api, /brand-document
 ├── sitemap.xml
 └── README.md
 ```
 
+## Styles
+
+Load order on every page: `css/theme.css` (the designer's stylesheet, tokens in `:root`) → `css/site.css` (shared overrides: 1760px wide-screen cap, dialogs) → the page's own file (`css/home.css`, `css/forms.css`, `blog/styles.css`, `trust-model/styles.css` for the docs/legal layout, `contact-us/styles.css`, `brand-document/brand.css`). Bump the `?v=N` on a CSS/JS link whenever that file changes. Never put CSS/JS under `/assets/` (cached for a year).
+
 ## Routes
 
 - `/` — Landing
-- `/request-access` — Form permalink (also embedded in the landing modal)
-- `/contact-us` — Contact Us form (email, subject, details) — composes a `mailto:` to shieldtx-support@availproject.org, no backend
+- `/request-access` — Request access form ("No, request access" in the Start trading dialog)
+- `/api-access` — API access form (homepage "Get API access")
+- `/blog`, `/blog/<slug>` — Blog
 - `/trust-model` — On-chain trust docs
-- `/brand-document` — Internal brand spec (excluded from robots + sitemap)
+- `/privacy`, `/terms` — Legal
+- `/contact-us` — Support email (mailto, no backend)
+- `/brand-document` — Brand book (excluded from robots + sitemap)
 
 ## Env vars
 
@@ -60,16 +73,16 @@ See [.env.example](./.env.example). Copy to `.env.local` for `vercel dev`. Requi
 
 ## Forms
 
-The **Request Access** form posts to a serverless endpoint (real validation, IP-keyed rate limiting, hidden honeypot, idle / submitting / success / error states):
+| Form | Endpoint | Markup | Behaviour |
+| --- | --- | --- | --- |
+| Request access (2 steps) | `POST /api/request-access` | `request-access/index.html` | `public-scripts/request-access-form.js` |
+| API access | `POST /api/api-access` | `api-access/index.html` | `public-scripts/api-access-form.js` |
+| API waitlist (email) | `POST /api/api-waitlist` → redirects to `/api-access` | `index.html` | `js/api-waitlist.js` |
+| Wallet scan preview | `GET /api/scanner-preview` → scanner.shieldtx.xyz | `partials/site-end.html` | `js/scan-dialog.js` |
 
-| Form                          | Endpoint                | Source of truth for markup                                  |
-| ----------------------------- | ----------------------- | ------------------------------------------------------------- |
-| Hero modal "Request Access"   | `POST /api/request-access` | `index.html` (mirrored in `/request-access`)               |
-| Permalink page                | `POST /api/request-access` | `request-access/index.html`                                   |
+Form scripts depend on the `waitlist-*` classes and `data-*` hooks in the markup — keep them when restyling. Request-access submissions are mirrored to Google Sheets via `lib/sheets.js → appendRow` ("Invite Requests" tab; no-op until `GOOGLE_SERVICE_ACCOUNT_EMAIL` + `GOOGLE_PRIVATE_KEY` + `GOOGLE_SHEET_ID` are set).
 
-The Request Access form markup is duplicated across two pages. Behavior is shared via `public-scripts/request-access-form.js → ShieldTX.bindRequestAccessForm(formEl, { mode })`. When editing fields, update both HTML copies. It mirrors submissions into Google Sheets via `lib/sheets.js → appendRow` ("Invite Requests" tab, created on demand; no-op until `GOOGLE_SERVICE_ACCOUNT_EMAIL` + `GOOGLE_PRIVATE_KEY` + `GOOGLE_SHEET_ID` are set).
-
-The **Contact Us** form (`contact-us/index.html`) has **no backend** — its inline script composes a `mailto:` to `shieldtx-support@availproject.org` and opens the visitor's email client. No endpoint, no third-party service.
+**Contact Us** (`contact-us/index.html`) has no backend: a `mailto:` link to `shieldtx-support@availproject.org`.
 
 ## DB
 
@@ -85,14 +98,8 @@ Schema proposal is in the plan doc.
 
 ## Brand tokens
 
-Defined in `:root` of `styles.css`:
-
-- `--brand-blue: #3370ff`
-- `--brand-blue-bright: #5ba0ff`
-- `--brand-blue-deep: #1e3a8a`
-- `--brand-gradient` — hero + final-cta
-- Geist + Geist Mono via Google Fonts
+Defined in `:root` of `css/theme.css` (the design): `--canvas #040405`, `--panel`, `--well`, `--text-1…4`, `--brand #3B82F6`, `--brand-light #60A5FA`, `--long #00D885`, radii `--r-lg/--r/--r-sm`, fonts Geist + Geist Mono (self-hosted in `assets/v2/fonts/`). See `/brand-document`.
 
 ## Animation
 
-Subdued by design. All animations respect `prefers-reduced-motion`. The custom morphing cursor, page-wide grain, tilt cards, and char-by-char headline splits were removed during the v2.0 refactor — the OS pointer and a single fade reveal carry the motion budget.
+All animations respect `prefers-reduced-motion`. Homepage scroll stories use GSAP + ScrollTrigger (`js/vendor/`); muted autoplay videos play only while on screen (`js/site.js`).

@@ -1,0 +1,18 @@
+/* ShieldTX · opening loader
+   Ported from the Whales deck intro (deck/js/intro.js): louvre, alternating shutter, ~2.8 s.
+   The solid shield arrives, contracts to the logomark, then the bands hinge open.
+   Markup: .site-loader > .site-loader-arrive > .site-loader-mark > 4 x .site-loader-band */
+.site-loader{--shield:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20431.246%20462.718%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M352.111%2060.7389C362.271%2060.7391%20370.507%2068.9762%20370.507%2079.1364V319.352C370.507%20326.479%20366.392%20332.964%20359.944%20335.999L223.457%20400.228C218.495%20402.563%20212.751%20402.563%20207.79%20400.228L71.3024%20335.999C64.8544%20332.964%2060.7389%20326.478%2060.7389%20319.352V79.1364C60.7389%2068.976%2068.976%2060.7389%2079.1364%2060.7389H352.111Z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E");
+  position:fixed;inset:0;z-index:1000;pointer-events:none;background:var(--canvas);
+  /* failsafe: if loader.js never runs, the overlay still clears itself */
+  animation:site-loader-failsafe 0s 4.5s forwards}
+.site-loader.done{display:none}
+.site-loader-arrive{position:absolute;inset:0;opacity:0}
+.site-loader-mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  height:clamp(96px,18vh,170px);aspect-ratio:431.246/462.718;perspective:820px}
+.site-loader-band{position:absolute;inset:0;background:var(--text-1);backface-visibility:visible;
+  -webkit-mask-image:var(--shield);mask-image:var(--shield);
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+@keyframes site-loader-failsafe{to{visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.site-loader{display:none}}

@@ -48,6 +48,22 @@
 
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    // ---- PostHog form analytics (PII-free: field names only, never values)
+    const FORM_ID = 'api-access';
+    let formStarted = false;
+    function capture(event, props) {
+      try {
+        if (window.posthog && typeof window.posthog.capture === 'function') {
+          window.posthog.capture(event, props || {});
+        }
+      } catch (_) {}
+    }
+    function trackStart() {
+      if (formStarted) return;
+      formStarted = true;
+      capture('form_started', { form_id: FORM_ID });
+    }
+
     function fieldContainers(step) {
       return Array.from(step.querySelectorAll('.waitlist-field, .waitlist-question'))
         .filter((c) => !(c.classList.contains('is-conditional') && c.hidden));
@@ -56,6 +72,8 @@
     function containerValid(container) {
       const email = container.querySelector('input[type="email"]');
       if (email) return EMAIL_RE.test(email.value.trim());
+      const text = container.querySelector('input[type="text"]');
+      if (text) return text.value.trim().length > 0;
       const select = container.querySelector('select');
       if (select) {
         if (select.multiple) return Array.from(select.selectedOptions).some((o) => o.value);
@@ -72,6 +90,11 @@
 
     function errorMessageFor(container) {
       if (container.querySelector('input[type="email"]')) return 'Enter a valid email address.';
+      const text = container.querySelector('input[type="text"]');
+      if (text) {
+        const label = container.querySelector('.waitlist-label');
+        return `Enter your ${(label ? label.textContent : 'details').toLowerCase()}.`;
+      }
       const select = container.querySelector('select');
       if (select && select.multiple) return 'Select at least one option.';
       return 'Please select an option.';
@@ -119,6 +142,17 @@
         }
       });
       if (firstInvalid) {
+        capture('form_validation_error', {
+          form_id: FORM_ID,
+          step: steps[idx] ? steps[idx].dataset.step : null,
+          fields: fieldContainers(step)
+            .filter((c) => !containerValid(c))
+            .map((c) => {
+              const sel = c.querySelector('select');
+              return (sel && sel.name) || (c.querySelector('input') || {}).name || '';
+            })
+            .filter(Boolean),
+        });
         const focusable = firstInvalid.querySelector('input, [data-dropdown-trigger]');
         if (focusable) focusable.focus();
         firstInvalid.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
@@ -141,11 +175,44 @@
       if (submitBtn) submitBtn.disabled = form.dataset.state === 'submitting';
     }
 
+    // ---- Stable step height ------------------------------------------------
+    // Every step shares one card, but their content differs — revealing a
+    // conditional question grows one step, and the result step is shorter than
+    // both — so the card used to resize on each transition and drag everything
+    // below it up or down. Hold every question step at the tallest natural
+    // height for the current width: only the contents move, the card doesn't.
+    // The result step is deliberately left out — it is the terminal state and
+    // reads better as its own compact panel.
+    let equaliseRaf = 0;
+    function equaliseStepHeights() {
+      cancelAnimationFrame(equaliseRaf);
+      equaliseRaf = requestAnimationFrame(() => {
+        const previouslyActive = steps.filter((s) => s.classList.contains('is-active'));
+        form.style.setProperty('--step-min', '0px'); // measure content, not the last answer
+        let max = 0;
+        questionSteps.forEach((s) => {
+          steps.forEach((o) => o.classList.remove('is-active'));
+          s.classList.add('is-active');
+          max = Math.max(max, s.getBoundingClientRect().height);
+        });
+        steps.forEach((o) => o.classList.remove('is-active'));
+        previouslyActive.forEach((s) => s.classList.add('is-active'));
+        if (max > 0) form.style.setProperty('--step-min', `${Math.ceil(max)}px`);
+      });
+    }
+    window.addEventListener('resize', equaliseStepHeights);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(equaliseStepHeights).catch(() => {});
+    }
+
     function goTo(target) {
       steps[idx].classList.remove('is-active');
       idx = target;
       steps[idx].classList.add('is-active');
       updateChrome();
+      if (target > 0 || steps[target].dataset.step === 'result') {
+        capture('form_step_viewed', { form_id: FORM_ID, step: steps[target].dataset.step });
+      }
       const focusable = steps[idx].querySelector('input, button[data-dropdown-trigger]');
       if (focusable) setTimeout(() => focusable.focus(), 60);
     }
@@ -171,7 +238,9 @@
       try {
         conditionals.forEach(({ el, selectName, values, notValues }) => {
           const sel = form.querySelector(`select[name="${selectName}"]`);
-          const show = !!sel && values.includes(sel.value) && !notValues.includes(sel.value);
+          // Empty value list = "any non-empty value" (see data-show-when above).
+          const matches = values.length ? values.includes(sel && sel.value) : !!(sel && sel.value);
+          const show = !!sel && matches && !notValues.includes(sel.value);
           const wasHidden = el.hidden;
           el.hidden = !show;
           // Reset the conditional's own selects only when it transitions
@@ -181,6 +250,12 @@
           if (!wasHidden && !show) {
             el.querySelectorAll('select').forEach((s) => {
               Array.from(s.options).forEach((o) => { o.selected = false; });
+              // A single select with nothing selected falls back to its first
+              // enabled option; re-select the empty placeholder instead.
+              if (!s.multiple) {
+                const placeholder = Array.from(s.options).find((o) => o.value === '');
+                if (placeholder) placeholder.selected = true;
+              }
               syncSelectUI(s);
             });
             clearFieldError(el);
@@ -214,6 +289,13 @@
           labelEl.classList.remove('is-placeholder');
         }
       }
+      else if (!select.value) {
+        labelEl.textContent = placeholder;
+        labelEl.classList.add('is-placeholder');
+      } else {
+        labelEl.textContent = select.options[select.selectedIndex].textContent;
+        labelEl.classList.remove('is-placeholder');
+      }
       panel.querySelectorAll('.waitlist-dropdown-row').forEach((row) => {
         const opt = Array.from(select.options).find((o) => o.value === row.dataset.value);
         const isSel = !!opt && opt.selected;
@@ -233,8 +315,8 @@
       backBtn.addEventListener('click', () => { if (idx > 0) goTo(idx - 1); });
     }
 
-    form.addEventListener('input', (e) => { clearIfValid(e.target); });
-    form.addEventListener('change', (e) => { clearIfValid(e.target); syncConditionals(); });
+    form.addEventListener('input', (e) => { trackStart(); clearIfValid(e.target); });
+    form.addEventListener('change', (e) => { trackStart(); clearIfValid(e.target); syncConditionals(); });
     form.addEventListener('reset', () => {
       setTimeout(() => {
         steps.forEach((s) => s.classList.remove('is-active'));
@@ -254,6 +336,7 @@
     if (walkthroughSel) {
       walkthroughSel.addEventListener('change', () => {
         if (walkthroughSel.value !== 'yes-call') return;
+        capture('book_call_clicked', { form_id: FORM_ID });
         const email = (form.querySelector('input[name="email"]') || {}).value || '';
         const subject = encodeURIComponent('ShieldTX API — tailored integration call');
         const body = encodeURIComponent(
@@ -269,11 +352,13 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (form.dataset.state === 'submitting') return;
+      trackStart(); // covers autofill, which can fill fields without input events
       if (!revealStepErrors()) return;
       if (idx < questionSteps.length - 1) { goTo(idx + 1); return; }
 
       const data = new FormData(form);
       const payload = {
+        name: (data.get('name') || '').toString().trim(),
         email: (data.get('email') || '').toString().trim(),
         use_case: data.get('use_case') || null,
         venue_coverage: data.get('venue_coverage') || null,
@@ -285,6 +370,8 @@
       setState('submitting');
       showError('');
 
+      capture('form_submitted', { form_id: FORM_ID });
+
       try {
         const res = await fetch(form.dataset.endpoint || '/api/api-access', {
           method: 'POST',
@@ -293,15 +380,19 @@
         });
         const json = await res.json().catch(() => ({}));
         if (res.ok && json.ok) {
+          capture('form_submit_succeeded', { form_id: FORM_ID });
           setState('success');
           const resultIdx = steps.findIndex((s) => s.dataset.step === 'result');
           if (resultIdx > -1) goTo(resultIdx);
         } else {
           setState('idle');
-          showError(json.error || 'Submission failed. Please try again.');
+          const msg = json.error || 'Submission failed. Please try again.';
+          capture('form_submit_failed', { form_id: FORM_ID, reason: 'server', error: msg });
+          showError(msg);
         }
       } catch (err) {
         console.error('[api-access] network error', err);
+        capture('form_submit_failed', { form_id: FORM_ID, reason: 'network' });
         setState('idle');
         showError('Network error. Please try again.');
       }
@@ -334,6 +425,7 @@
 
     syncConditionals();
     updateChrome();
+    equaliseStepHeights();
     return { reset: () => form.reset() };
   };
 
@@ -350,6 +442,7 @@
 
     const multi = select.multiple;
     const placeholder = labelEl.textContent;
+    labelEl.dataset.placeholder = placeholder; // read by syncSelectUI after programmatic resets
     root.classList.add(multi ? 'is-multi' : 'is-single');
 
     while (panel.firstChild) panel.removeChild(panel.firstChild);

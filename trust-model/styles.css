@@ -1,417 +1,95 @@
 /* =========================================================================
-   Trust model — docs page
-   Stripe/Vercel docs base + ShieldTX brand tokens
+   Docs layout (v2 design) — /trust-model, /privacy, /terms
+   Loaded after /css/theme.css + /css/site.css; uses their tokens only.
+   Class names unchanged from v1. Legal pages add body.legal-body.
    ========================================================================= */
 
-.docs-body {
-  background: var(--bg-primary);
-  color: var(--fg-primary);
-}
+.docs-main { padding-top: 150px; }
+/* Bottom space goes on the container: the footer partial (with its divider) sits inside <main>. */
+.docs-container { padding-bottom: clamp(80px, 8vw, 140px); display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 64px; align-items: start; }
 
-/* Suppress the marketing site's grain + cursor on docs (cleaner reading) */
-.docs-body .grain,
-.docs-body .cursor { display: none; }
-
-/* Nav adapted for docs: matches body --snow so there's no visible seam
-   between the fixed nav and the page on first scroll. */
-.nav-docs {
-  background: rgba(248, 250, 252, 0.85);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
-  border-bottom-color: transparent;
-}
-
-.docs-main {
-  padding-top: calc(var(--nav-h) + 56px);
-  padding-bottom: 80px;
-  min-height: calc(100vh - var(--nav-h));
-}
-
-.docs-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 28px;
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 56px;
-  align-items: start;
-}
-
-/* TOC ---------------------------------------------------- */
-.docs-toc {
-  position: sticky;
-  top: calc(var(--nav-h) + 32px);
-  align-self: start;
-}
+/* ---------- TOC ---------- */
+/* Sticks just under the fixed nav (its bar is up to 76px tall), and scrolls inside itself
+   when the list is taller than the screen so the last items aren't cut off. */
+.docs-toc { position: sticky; top: 60px; align-self: start; max-height: calc(100svh - 80px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #ffffff1f transparent; }
 .docs-toc-mobile { display: none; }
+.docs-toc-list { display: flex; flex-direction: column; gap: 4px; }
+.docs-toc-label { display: block; margin: 0 0 12px 12px; font: 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-4); }
+/* Active item: soft fill + a short straight marker inside the pill (an inset shadow on a
+   rounded box curved round the corners and read as a bracket sticking out). */
+.docs-toc-link { position: relative; padding: 8px 12px 8px 16px; border-radius: var(--r-sm); font-size: 14px; line-height: 1.45; color: var(--text-3); transition: background .2s, color .2s; }
+.docs-toc-link::before { content: ''; position: absolute; left: 6px; top: 50%; width: 2px; height: 14px; border-radius: 2px; background: var(--text-1); transform: translateY(-50%) scaleY(0); transition: transform .2s; }
+.docs-toc-link:hover { color: var(--text-1); background: #ffffff08; }
+.docs-toc-link.is-active { color: var(--text-1); background: #ffffff0d; }
+.docs-toc-link.is-active::before { transform: translateY(-50%) scaleY(1); }
+.docs-toc-back { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; padding: 18px 0 0 12px; border-top: 1px solid #fff1; font-size: 13px; color: var(--text-4); }
+.docs-toc-back:hover { color: var(--text-1); }
 
-.docs-toc-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.docs-toc-label {
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: 8px;
-}
-.docs-toc-link {
-  font-size: 14px;
-  line-height: 1.45;
-  color: var(--fg-secondary);
-  padding: 6px 12px;
-  border-radius: 8px;
-  transition: background .2s var(--ease), color .2s var(--ease);
-}
-.docs-toc-link:hover {
-  color: var(--brand-blue);
-  background: rgba(51, 112, 255, 0.06);
-}
-.docs-toc-link.is-active {
-  color: var(--brand-blue);
-  background: rgba(51, 112, 255, 0.10);
-  font-weight: 500;
-}
-.docs-toc-back {
-  margin-top: 18px;
-  padding-top: 18px;
-  font-size: 13px;
-  color: var(--fg-muted);
-  box-shadow: inset 0 1px 0 rgba(15, 23, 42, 0.06);
-  display: inline-flex; align-items: center; gap: 6px;
-  padding-left: 12px;
-  border-radius: 0;
-}
-.docs-toc-back:hover {
-  color: var(--fg-primary);
-  background: transparent;
-}
+/* ---------- Content ---------- */
+.docs-content { min-width: 0; max-width: 780px; }
+.docs-header { margin-bottom: 56px; }
+.docs-header .eyebrow { display: block; margin-bottom: 16px; font-size: 13px; } /* colour + type: shared eyebrow style in site.css */
+.docs-title { font-size: clamp(38px, 4.4vw, 64px); line-height: 1.06; letter-spacing: -.035em; color: var(--text-1); margin: 0 0 24px; }
+.docs-lede { max-width: 64ch; font-size: 18px; line-height: 1.65; color: var(--text-3); margin: 0; }
+.docs-meta { margin: 0 0 24px; font: 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--text-4); }
+.docs-callout { max-width: 64ch; margin: 8px 0 0; padding: 16px 20px; border-left: 2px solid var(--text-4); border-radius: 0 var(--r) var(--r) 0; background: #ffffff08; font-size: 15px; line-height: 1.6; color: var(--text-2); }
+.docs-link { color: var(--text-1); text-decoration: underline; text-decoration-color: #ffffff4d; text-underline-offset: 4px; transition: color .2s, text-decoration-color .2s; }
+.docs-link:hover { color: var(--text-1); text-decoration-color: var(--text-1); }
 
-/* Content ------------------------------------------------- */
-.docs-content {
-  max-width: 760px;
-  min-width: 0;
-}
-
-.docs-header {
-  margin-bottom: 56px;
-}
-.docs-header .eyebrow {
-  margin-bottom: 16px;
-  display: inline-block;
-}
-.docs-title {
-  margin: 0 0 24px;
-  font-size: clamp(36px, 4.4vw, 56px);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
-  color: var(--fg-primary);
-}
-.docs-lede {
-  margin: 0;
-  font-size: clamp(17px, 1.4vw, 19px);
-  line-height: 1.6;
-  color: var(--fg-secondary);
-  max-width: 64ch;
-}
-
-/* Page metadata line — "Last updated 4 May 2026" etc. Sits below the
-   .docs-title and above any .docs-callout. */
-.docs-meta {
-  margin: 0 0 24px;
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  color: var(--fg-muted);
-}
-
-/* Attention callout — used at the top of legal pages to flag the
-   "please read" preamble. Subtle left border + muted background so it
-   doesn't compete with the title. */
-.docs-callout {
-  margin: 8px 0 0;
-  padding: 16px 20px;
-  border-left: 3px solid var(--brand-blue);
-  background: rgba(51, 112, 255, 0.06);
-  border-radius: 0 12px 12px 0;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--fg-secondary);
-  max-width: 64ch;
-}
-
-/* Inline link inside docs prose. The default .docs-content a styling
-   may be missing or too subtle; this gives external links a clear
-   underlined treatment without making them shouty. */
-.docs-link {
-  color: var(--brand-blue);
-  text-decoration: underline;
-  text-decoration-color: rgba(51, 112, 255, 0.4);
-  text-underline-offset: 3px;
-  transition: text-decoration-color .2s var(--ease), color .2s var(--ease);
-}
-.docs-link:hover {
-  color: var(--brand-blue-deep);
-  text-decoration-color: var(--brand-blue);
-}
-
-.docs-section {
-  margin-top: 48px;
-  padding-top: 32px;
-  box-shadow: inset 0 1px 0 rgba(15, 23, 42, 0.06);
-  scroll-margin-top: calc(var(--nav-h) + 24px);
-}
-.docs-section:first-of-type {
-  margin-top: 32px;
-  padding-top: 0;
-  box-shadow: none;
-}
-
-.docs-h2 {
-  margin: 0 0 18px;
-  font-size: clamp(24px, 2.4vw, 32px);
-  font-weight: 600;
-  letter-spacing: -0.018em;
-  line-height: 1.2;
-  color: var(--fg-primary);
-}
-.docs-h3 {
-  margin: 0 0 10px;
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--fg-primary);
-}
-.docs-content p {
-  margin: 0 0 16px;
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--fg-secondary);
-}
+.docs-section { margin-top: 48px; padding-top: 40px; border-top: 1px solid #fff1; scroll-margin-top: 110px; }
+.docs-section:first-of-type { margin-top: 32px; padding-top: 0; border-top: 0; }
+.docs-h2 { font-size: clamp(26px, 2.4vw, 34px); line-height: 1.2; letter-spacing: -.03em; color: var(--text-1); margin: 0 0 18px; }
+.docs-h3 { font-size: 20px; line-height: 1.3; letter-spacing: -.02em; color: var(--text-1); margin: 0 0 10px; }
+.docs-content p { margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: var(--text-2); }
 .docs-content p:last-child { margin-bottom: 0; }
+.docs-content b, .docs-content strong { font-weight: 500; color: var(--text-1); }
 
-.docs-content b,
-.docs-content strong {
-  color: var(--fg-primary);
-  font-weight: 600;
-}
-
-/* Steps --------------------------------------------------- */
-.docs-steps {
-  list-style: none;
-  margin: 24px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-.docs-step {
-  display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
-  gap: 20px;
-  padding: 24px 24px 26px;
-  background: var(--white);
-  border-radius: 16px;
-  box-shadow:
-    0 1px 0 rgba(15, 23, 42, 0.04),
-    0 24px 48px -28px rgba(15, 23, 42, 0.08);
-}
-.docs-step-num {
-  display: inline-grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  background: var(--brand-blue);
-  color: var(--white);
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 14px;
-  font-weight: 600;
-}
+/* ---------- Steps: design window cards ---------- */
+.docs-steps { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.docs-step { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 20px; padding: 28px; border: 1px solid #fff2; border-radius: var(--r-lg); background: linear-gradient(130deg, var(--well), var(--panel)); box-shadow: inset 0 1px 0 #ffffff15; }
+.docs-step-num { display: inline-grid; place-items: center; width: 36px; height: 36px; border: 1px solid #ffffff33; border-radius: 50%; background: #ffffff0a; color: var(--text-1); font: 500 14px var(--mono); }
 .docs-step-body { min-width: 0; }
-.docs-step-flow {
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 13px;
-  color: var(--brand-blue-deep);
-  margin: 0 0 12px;
-}
+.docs-step-flow { margin: 0 0 12px; font: 13px var(--mono); color: var(--text-3); }
+.docs-content .docs-step-flow b { color: var(--text-1); font-weight: 500; }
 
-/* Lists --------------------------------------------------- */
-.docs-list {
-  list-style: none;
-  margin: 12px 0 0;
-  padding: 0;
-}
-.docs-list li {
-  position: relative;
-  padding: 6px 0 6px 22px;
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--fg-secondary);
-}
-.docs-list li::before {
-  content: '';
-  position: absolute;
-  left: 4px;
-  top: 14px;
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: var(--brand-cyan);
-}
+/* ---------- Lists ---------- */
+.docs-list { list-style: none; margin: 12px 0 0; padding: 0; }
+.docs-list li { position: relative; padding: 6px 0 6px 22px; font-size: 15px; line-height: 1.6; color: var(--text-3); }
+.docs-list li::before { content: ''; position: absolute; left: 4px; top: 15px; width: 5px; height: 5px; border-radius: 50%; background: var(--text-4); }
 
-/* Tables -------------------------------------------------- */
-.docs-table-wrap {
-  margin-top: 16px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: var(--white);
-  box-shadow:
-    0 1px 0 rgba(15, 23, 42, 0.04),
-    0 24px 48px -28px rgba(15, 23, 42, 0.08);
-}
-.docs-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 15px;
-}
-.docs-table thead th {
-  text-align: left;
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--fg-muted);
-  padding: 16px 22px;
-  background: rgba(15, 23, 42, 0.02);
-  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.06);
-}
-.docs-table tbody th {
-  text-align: left;
-  font-weight: 600;
-  color: var(--fg-primary);
-  padding: 18px 22px;
-  vertical-align: top;
-  width: 38%;
-  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.06);
-}
-.docs-table tbody td {
-  color: var(--fg-secondary);
-  padding: 18px 22px;
-  vertical-align: top;
-  line-height: 1.55;
-  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.06);
-}
-.docs-table tbody tr:last-child th,
-.docs-table tbody tr:last-child td { box-shadow: none; }
+/* ---------- Tables: dark card, hairline rows ---------- */
+.docs-table-wrap { margin-top: 16px; overflow: hidden; border: 1px solid #fff2; border-radius: var(--r-lg); background: linear-gradient(130deg, var(--well), var(--panel)); }
+.docs-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.docs-table thead th { padding: 16px 22px; text-align: left; font: 500 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-4); border-bottom: 1px solid #fff2; }
+.docs-table tbody th { width: 38%; padding: 18px 22px; text-align: left; vertical-align: top; font-weight: 500; color: var(--text-1); border-bottom: 1px solid #fff1; }
+.docs-table tbody td { padding: 18px 22px; vertical-align: top; line-height: 1.6; color: var(--text-2); border-bottom: 1px solid #fff1; }
+.docs-table tbody tr:last-child th, .docs-table tbody tr:last-child td { border-bottom: 0; }
+.docs-trust-pill { display: inline-block; margin-right: 8px; padding: 4px 10px; border: 1px solid #00d88540; border-radius: var(--r-sm); background: #00d88514; color: var(--long); font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; vertical-align: middle; }
 
-.docs-trust-pill {
-  display: inline-block;
-  margin-right: 8px;
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #16a34a;
-  background: rgba(22, 163, 74, 0.10);
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-weight: 600;
-  vertical-align: middle;
-}
+/* ---------- Closing CTA: design blue card ---------- */
+.docs-cta { margin-top: 64px; padding: 44px 36px; text-align: center; border: 1px solid var(--blue-edge); border-radius: var(--r-lg); background: var(--blue-card); }
+.docs-cta-title { font-size: clamp(24px, 2.2vw, 32px); letter-spacing: -.03em; color: var(--text-1); margin: 0 0 10px; }
+.docs-cta .docs-cta-sub { margin: 0 0 26px; font-size: 16px; line-height: 1.5; color: var(--text-3); }
 
-/* Closing CTA --------------------------------------------- */
-.docs-cta {
-  margin-top: 64px;
-  padding: 40px 36px;
-  background: linear-gradient(135deg, var(--brand-blue-deep) 0%, var(--brand-blue) 100%);
-  border-radius: 24px;
-  color: var(--white);
-  text-align: center;
-  box-shadow: 0 40px 80px -40px rgba(51, 112, 255, 0.40);
-}
-.docs-cta-title {
-  margin: 0 0 10px;
-  font-size: clamp(22px, 2vw, 28px);
-  font-weight: 600;
-  letter-spacing: -0.018em;
-  color: var(--white);
-}
-/* Scoped under .docs-cta because the generic .docs-content p rule has
-   higher specificity (0,1,1) than a single class selector. */
-.docs-cta .docs-cta-sub {
-  margin: 0 0 24px;
-  font-size: 16px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.75);
-}
-.docs-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--white);
-  color: var(--brand-blue-deep);
-  font-weight: 500;
-}
-.docs-cta-btn:hover {
-  background: var(--brand-cyan);
-  color: var(--brand-blue-deep);
-}
-
-/* Responsive ---------------------------------------------- */
+/* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .docs-container {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .docs-toc {
-    position: static;
-    top: auto;
-  }
+  .docs-container { grid-template-columns: 1fr; gap: 28px; }
+  .docs-toc { position: static; }
   .docs-toc-desktop { display: none; }
-  .docs-toc-mobile {
-    display: block;
-    background: var(--bg-elev);
-    border-radius: 12px;
-    padding: 14px 16px;
-  }
-  .docs-toc-mobile summary {
-    cursor: pointer;
-    font-family: 'Geist Mono', ui-monospace, monospace;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--fg-muted);
-    list-style: none;
-  }
+  .docs-toc-mobile { display: block; padding: 14px 16px; border: 1px solid #fff2; border-radius: var(--r); background: var(--panel); }
+  .docs-toc-mobile summary { list-style: none; cursor: pointer; font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
   .docs-toc-mobile summary::-webkit-details-marker { display: none; }
   .docs-toc-mobile[open] summary { margin-bottom: 12px; }
-  .docs-toc-mobile .docs-toc-list { gap: 4px; }
-
-  /* Legal pages (Terms, Privacy) hide the TOC entirely on narrow viewports.
-     Legal copy reads sequentially top-to-bottom; a dropdown TOC adds noise
-     for a use case where users typically scroll through the whole document.
-     Trust-model keeps its mobile TOC because its numbered steps + tables
-     benefit from in-page navigation. */
+  /* Legal pages read top to bottom; no TOC on narrow screens (as in v1). */
   body.legal-body .docs-toc { display: none; }
-
-  .docs-step {
-    grid-template-columns: 36px minmax(0, 1fr);
-    gap: 14px;
-    padding: 20px;
-  }
+  .docs-step { grid-template-columns: 36px minmax(0, 1fr); gap: 14px; padding: 20px; }
   .docs-step-num { width: 30px; height: 30px; font-size: 13px; }
   .docs-table-wrap { overflow-x: auto; }
   .docs-table { min-width: 540px; }
 }
-
-@media (max-width: 560px) {
-  .docs-main { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 56px; }
+@media (max-width: 700px) {
+  .docs-main { padding-top: 110px; }
+  .docs-container { padding-bottom: 64px; }
+  .docs-lede { font-size: 16px; }
   .docs-cta { padding: 28px 20px; }
 }

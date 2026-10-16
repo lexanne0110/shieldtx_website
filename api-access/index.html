@@ -15,11 +15,11 @@
   <meta property="og:url" content="https://shieldtx.xyz/api-access" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="/styles.css" />
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/css/forms.css?v=3" />
 
   <!-- @partial head-global -->
   <!-- PostHog analytics -->
@@ -31,6 +31,15 @@
           person_profiles: 'identified_only',
       })
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
   <!-- /@partial head-global -->
 <meta property="og:image" content="https://shieldtx.xyz/assets/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
@@ -38,20 +47,37 @@
 <meta property="og:image:type" content="image/jpeg" />
 <meta name="twitter:image" content="https://shieldtx.xyz/assets/og-image.jpg" />
 </head>
-<body class="request-access-body">
-  <main class="request-access-main" id="top">
-    <section class="request-access-section">
-      <div class="container request-access-wrap">
-        <header class="request-access-head">
-          <span class="eyebrow">API early access</span>
-          <h1 class="request-access-title">Request API access.</h1>
-          <p class="request-access-sub">Tell us a little about your setup and we'll route your request to the right team.</p>
+<body class="page-form page-api-access">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <section class="section frame form-section" aria-labelledby="page-title">
+      <div class="form-layout">
+        <header class="page-intro">
+          <span class="section-eyebrow">API EARLY ACCESS</span>
+          <h1 id="page-title"><span>Request</span><span class="silver-text">API access.</span></h1>
+          <p>Tell us a little about your setup and we'll route your request to the right team.</p>
         </header>
 
-        <div class="waitlist-mount waitlist-page">
+        <div class="waitlist-mount waitlist-page window">
           <form class="waitlist-form" id="api-access-form" data-state="idle" novalidate data-endpoint="/api/api-access">
             <section class="waitlist-step is-active" data-step="1">
-              <h2 class="waitlist-title">Request API access.</h2>
+              <h2 class="waitlist-title">Your setup.</h2>
+
+              <label class="waitlist-field">
+                <span class="waitlist-label">Name</span>
+                <input class="waitlist-input" type="text" name="name" required autocomplete="name" maxlength="80" />
+              </label>
 
               <label class="waitlist-field">
                 <span class="waitlist-label">Email</span>
@@ -150,7 +176,7 @@
             </section>
 
             <section class="waitlist-step waitlist-result" data-step="result">
-              <span class="eyebrow" data-result-eyebrow>Request received</span>
+              <span class="micro waitlist-step-label" data-result-eyebrow>Request received</span>
               <h2 class="waitlist-title" data-result-title>Thanks — we'll be in touch.</h2>
               <p class="waitlist-sub" data-result-sub>Your API access request is in. We'll reach out as capacity opens up.</p>
             </section>
@@ -158,17 +184,25 @@
             <p class="waitlist-error" data-form-error role="alert" aria-live="polite" hidden></p>
 
             <div class="waitlist-nav">
-              <button type="submit" class="btn-pill btn-primary waitlist-submit" data-waitlist-submit>Submit request <span aria-hidden="true">→</span></button>
-              <button type="button" class="btn-pill btn-primary waitlist-done" data-waitlist-done hidden>Done</button>
+              <button type="submit" class="button light waitlist-submit" data-waitlist-submit>Submit request <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></button>
+              <button type="button" class="button light waitlist-done" data-waitlist-done hidden>Done</button>
             </div>
           </form>
         </div>
       </div>
     </section>
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Where Hyperliquid whales hide.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo.svg" alt="Avail" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
   </main>
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have a<br><span>ShieldTX account?</span></h2><p>Members trade in the app. New traders request access to the private beta first.</p><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
 
-  <script src="/public-scripts/site-cursor.js"></script>
-  <script src="/public-scripts/api-access-form.js"></script>
+  <script src="/public-scripts/api-access-form.js?v=4"></script>
   <script>
     (function () {
       var form = document.getElementById('api-access-form');

@@ -1,0 +1,75 @@
+/* ShieldTX v2 · shared overrides + components on top of the design (theme.css).
+   Loaded on every v2 page, right after theme.css. */
+
+/* ---------- Blue = eyebrow labels only (user, 2026-10-13) ----------
+   The saturated design blue (#97fce4, 5.1:1 on the dark card) is used ONLY for
+   eyebrow / step labels ("WITH SHIELDTX", "STEP 1 OF 2", "01 / CUSTODY"). All
+   labels share one style: Geist 500, uppercase, tracked. Everything else that was
+   blue (links, highlights, focus rings, counters, icons) is neutral. Homepage
+   illustration accents (radar dots, threat rays, sweep) keep the blue as artwork. */
+:root { --brand-light: #97fce4; --eyebrow: #97fce4; --blue-edge: rgba(151,252,228,.16); } /* one brand blue: the card top edge is its 16% tint (design used #97fce4) */
+
+/* Surfaces: the designer's original --panel / --well / --raised. Cards (--blue-card: trade flow,
+   trust, FAQ, API form, dialogs, docs CTA) use the plain design window look — the "Backed by"
+   card — so they blend into the page: soft top glow, --panel fading to --canvas (user, 2026-10-13). */
+:root {
+  --blue-card: radial-gradient(circle at 50% 0%, #ffffff0e, transparent 70%), linear-gradient(var(--panel), var(--canvas));
+}
+
+.section-eyebrow, #how-it-works .section-eyebrow,
+#problem .exposure-eyebrow, #shieldtx .product-eyebrow, #product .anatomy-kicker,
+#trust .trust-points .micro, dialog .dialog-top .micro, #scan-dialog .dialog-top .micro,
+.waitlist-step-label, .blog-post-wrap .eyebrow, .docs-header .eyebrow, .contact-min-head .eyebrow {
+  font-family: var(--sans); font-weight: 500; text-transform: uppercase; letter-spacing: .13em; color: var(--eyebrow);
+}
+#trust .trust-labels .trust-art-number { font-family: var(--sans); font-weight: 500; text-transform: uppercase; fill: var(--eyebrow); }
+
+/* Neutral, not blue: the design's non-label uses of --brand-light / --brand. */
+button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible, .scroll-top:focus-visible { outline-color: #ffffffb3; }
+.site-header nav a.active:after { background: var(--text-1); }
+#problem .exposure-tabs .sidebar-item.active { background: linear-gradient(#ffffff0d, #ffffff05); box-shadow: inset 0 1px #ffffff12; }
+#problem .exposure-tabs .sidebar-item.active span { color: inherit; }
+#problem button.radar-label:hover, #problem button.radar-label[aria-pressed="true"] { background: #ffffff08; box-shadow: 0 0 0 8px #ffffff08; outline-color: #ffffff1f; }
+#how-it-works .flow-tabs button[aria-pressed="true"] { background: #ffffff0d; box-shadow: inset 0 -1px #ffffff2e; }
+.anatomy-controls button[aria-pressed="true"] { background: #ffffff12; }
+.scroll-top span[aria-hidden] { color: inherit; }
+.scroll-top:hover { background: #ffffff14; }
+#shieldtx .shieldtx-heading h2 span { color: var(--text-3); } /* product-showcase.css loads after site.css */
+#shieldtx .shieldtx-heading p { color: var(--text-3); }
+
+/* ---------- Wide screens: cap the frame at 1760px and centre it ----------
+   The design stretches edge to edge (fixed 32px gutters). Above 1824px
+   (1760 + 2 × 32) everything is capped; 1760 matches the design's own
+   cap on the product heading. Rails sit 8px outside the frame, as designed. */
+@media (min-width: 1825px) {
+  .frame { max-width: 1760px; }
+  .page-rails { max-width: 1776px; }
+  /* Hero is full-bleed; keep its copy and architecture where they sit at 1824px
+     (copy ~88px inside the frame, architecture 56% wide out to 32px past it),
+     so nothing jumps when the cap starts. */
+  .hero-copy { margin-left: calc((100% - 1760px) / 2 + 88px); }
+  .hero-institution { right: calc((100% - 1760px) / 2 - 32px); width: calc(1824px * .56); }
+}
+
+/* ---------- Account dialog: "Do you have a ShieldTX account?" ---------- */
+.account-dialog > p { margin-bottom: 28px; }
+.account-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.account-choices .button { width: 100%; }
+@media (max-width: 700px) {
+  .account-choices { grid-template-columns: 1fr; }
+}
+
+/* Visually hidden, still read by screen readers and search engines. */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Footer: tagline closer to the logo (user, 2026-10-13; design had 18px). */
+.footer-brand p { margin-top: 6px; }
+
+/* Footer: same background as the cards (the "Backed by" window look; user, 2026-10-13). */
+#footer { background: var(--blue-card); }
+
+/* Footer "Powered by Avail": smaller logo, tighter gap (user, 2026-10-13). The SVG's own
+   width/height (1400×731) don't match its 3:1 viewBox, so `contain` left empty space
+   beside the artwork; true ratio + fill makes the box hug the logo. */
+#footer .footer-avail { gap: 8px; }
+#footer .footer-avail img { width: auto; height: 18px; aspect-ratio: 1016 / 341; object-fit: fill; }
