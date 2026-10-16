@@ -115,7 +115,7 @@
 /* The design tuned the radar for a lit card; on the open page it read too faint.
    Same drawing and motion, stronger lines/labels/dots. */
 #problem .radar, #problem .radar > i { border-color: rgba(147,177,224,.22); }
-#problem .radar-sweep { background: conic-gradient(transparent 0deg, transparent 332deg, rgba(59,130,246,.05) 344deg, rgba(59,130,246,.14) 360deg); }
+#problem .radar-sweep { background: conic-gradient(transparent 0deg, transparent 332deg, rgba(151,252,228,.05) 344deg, rgba(151,252,228,.14) 360deg); }
 #problem .radar-dot { opacity: .7; }
 #problem .radar-label { color: var(--text-3); }
 #problem .radar-label::before { width: 3px; height: 3px; }

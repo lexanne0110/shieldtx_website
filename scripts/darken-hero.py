@@ -13,7 +13,7 @@ import sys
 from PIL import Image
 
 BG = (3, 83, 241)          # sampled: identical in all five heroes
-DARK = (14, 17, 26)        # design --panel (#0E111A)
+DARK = (15, 25, 23)        # design --panel (#0F1917)
 SOLID = 0.8                # channel move counted as fully opaque art
 MIN_ROOM = 60              # ignore moves in directions with less headroom
 

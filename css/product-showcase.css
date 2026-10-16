@@ -22,10 +22,10 @@
  .shieldtx-stage{position:relative;height:auto;min-height:0;padding-bottom:48px}
  .shieldtx-stage .shieldtx-photo{will-change:auto}
 }
-.protection-trigger{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);max-width:calc(100% - 60px);padding:13px 21px;border:1px solid rgba(59,130,246,.55);border-radius:var(--r);background:var(--well);color:var(--text-1);font:500 14px var(--sans);cursor:pointer;opacity:0;visibility:hidden;white-space:nowrap;transition:background .2s,border-color .2s}
+.protection-trigger{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);max-width:calc(100% - 60px);padding:13px 21px;border:1px solid rgba(151,252,228,.55);border-radius:var(--r);background:var(--well);color:var(--text-1);font:500 14px var(--sans);cursor:pointer;opacity:0;visibility:hidden;white-space:nowrap;transition:background .2s,border-color .2s}
 .protection-trigger:hover{background:var(--raised);border-color:var(--brand-light)}.protection-trigger span{color:var(--brand-light);margin-left:14px}
 
-.protection-dialog{width:min(1000px,calc(100vw - 40px));height:min(720px,calc(100svh - 56px));max-height:calc(100svh - 56px);box-sizing:border-box;padding:32px 38px 20px;border:1px solid #ffffff26;border-radius:var(--r-lg);background-color:var(--well);background-image:linear-gradient(rgba(59,130,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.03) 1px,transparent 1px);background-size:40px 40px;color:var(--text-1);box-shadow:0 28px 100px #000b;overflow:hidden}
+.protection-dialog{width:min(1000px,calc(100vw - 40px));height:min(720px,calc(100svh - 56px));max-height:calc(100svh - 56px);box-sizing:border-box;padding:32px 38px 20px;border:1px solid #ffffff26;border-radius:var(--r-lg);background-color:var(--well);background-image:linear-gradient(rgba(151,252,228,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(151,252,228,.03) 1px,transparent 1px);background-size:40px 40px;color:var(--text-1);box-shadow:0 28px 100px #000b;overflow:hidden}
 .protection-dialog[open]{display:flex;flex-direction:column;animation:protection-in .25s ease-out}
 .protection-dialog::backdrop{background:#000b;backdrop-filter:blur(9px)}
 @keyframes protection-in{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
@@ -33,7 +33,7 @@
 .protection-dialog .protection-heading{display:block;position:static;width:100%;height:auto;margin:0;padding:0 26px 22px 0;border:0;background:none;box-sizing:border-box;flex:none}
 .protection-heading h2{font:450 48px/1.15 var(--sans);letter-spacing:-.04em;margin:0 0 10px;color:var(--text-1)}
 .protection-heading p{color:var(--brand-light);font:400 20px/1.6 var(--sans);margin:0}
-.protection-scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(59,130,246,.55) transparent;outline-offset:4px}
+.protection-scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(151,252,228,.55) transparent;outline-offset:4px}
 .protection-step{height:100%;min-height:0;box-sizing:border-box;display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;align-items:center;scroll-snap-align:start;scroll-snap-stop:always;padding:12px 20px 12px 0}
 .protection-copy{text-align:center;justify-self:center;width:100%;max-width:300px;opacity:var(--step-visibility,1);transform:translateY(calc((1 - var(--step-visibility,1))*18px))}
 .protection-copy>span{font:500 18px/1.5 var(--sans);letter-spacing:.1em;color:var(--brand-light)}
@@ -45,7 +45,7 @@
 .protection-footer{flex:none;padding:18px 0 0;text-align:center;background:none;border:0}
 .protection-tabs{display:flex;justify-content:center;gap:10px;margin:0}
 .protection-tabs button{border:1px solid #ffffff1c;border-radius:var(--r-sm);padding:9px 16px;background:transparent;color:var(--text-3);font:500 13px var(--sans);cursor:pointer}
-.protection-tabs button[aria-pressed=true]{color:var(--on-secondary);border-color:transparent;background:rgba(59,130,246,.16)}
+.protection-tabs button[aria-pressed=true]{color:var(--on-secondary);border-color:transparent;background:rgba(151,252,228,.16)}
 .protection-footer p{font:400 10px/1.5 var(--sans);color:var(--text-3);margin:10px 0 0;letter-spacing:.06em}
 .protection-footer p span{margin-left:6px}
 @media(max-width:700px){.protection-dialog{padding:28px 20px 16px;width:calc(100vw - 24px);height:calc(100svh - 32px);max-height:none}.protection-heading h2{font-size:36px}.protection-heading p{font-size:17px}.protection-step{grid-template-columns:.85fr 1.15fr;gap:12px;padding-right:8px}.protection-copy h3{font-size:26px}.protection-copy>span{font-size:14px}.protection-copy p{font-size:19px}.protection-copy .protection-note{font-size:15px}.protection-shot img{border-radius:var(--r-lg)}.protection-tabs{gap:6px}.protection-tabs button{padding:8px 10px;font-size:12px}.protection-trigger{font-size:12px;padding:12px 14px;white-space:normal;width:max-content}}
@@ -55,7 +55,7 @@
 
 /* A low-intensity echo of the hero's cobalt, teal and violet light. */
 .shieldtx-stage{isolation:isolate}
-.shieldtx-stage:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 28% 70%,#234cbe20,transparent 58%),radial-gradient(ellipse at 70% 75%,#3888a41c,transparent 55%),radial-gradient(ellipse at 90% 85%,#5646d41a,transparent 50%);mask-image:linear-gradient(transparent,#000 25%,#000 75%,transparent)}
+.shieldtx-stage:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 28% 70%,#97fce420,transparent 58%),radial-gradient(ellipse at 70% 75%,#97fce41c,transparent 55%),radial-gradient(ellipse at 90% 85%,#97fce41a,transparent 50%);mask-image:linear-gradient(transparent,#000 25%,#000 75%,transparent)}
 
 @keyframes product-laptop-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 @media(prefers-reduced-motion:no-preference){.shieldtx-photo>svg{animation:product-laptop-float 6s ease-in-out infinite;animation-play-state:paused}.shieldtx-stage.is-in-view .shieldtx-photo>svg{animation-play-state:running}}

@@ -2,12 +2,12 @@
    Loaded on every v2 page, right after theme.css. */
 
 /* ---------- Blue = eyebrow labels only (user, 2026-10-13) ----------
-   The saturated design blue (#3B82F6, 5.1:1 on the dark card) is used ONLY for
+   The saturated design blue (#97fce4, 5.1:1 on the dark card) is used ONLY for
    eyebrow / step labels ("WITH SHIELDTX", "STEP 1 OF 2", "01 / CUSTODY"). All
    labels share one style: Geist 500, uppercase, tracked. Everything else that was
    blue (links, highlights, focus rings, counters, icons) is neutral. Homepage
    illustration accents (radar dots, threat rays, sweep) keep the blue as artwork. */
-:root { --brand-light: #3B82F6; --eyebrow: #3B82F6; --blue-edge: rgba(59,130,246,.16); } /* one brand blue: the card top edge is its 16% tint (design used #60A5FA) */
+:root { --brand-light: #97fce4; --eyebrow: #97fce4; --blue-edge: rgba(151,252,228,.16); } /* one brand blue: the card top edge is its 16% tint (design used #97fce4) */
 
 /* Surfaces: the designer's original --panel / --well / --raised. Cards (--blue-card: trade flow,
    trust, FAQ, API form, dialogs, docs CTA) use the plain design window look — the "Backed by"
