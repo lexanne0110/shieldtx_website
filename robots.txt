@@ -4,5 +4,3 @@ Disallow: /api/
 Disallow: /brand-document/
 
 Sitemap: https://shieldtx.xyz/sitemap.xml
-
-# deploy canary 2026-10-16: harmless comment, verifies that merging to main rebuilds production
