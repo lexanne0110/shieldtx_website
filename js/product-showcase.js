@@ -16,7 +16,11 @@
   // Enlarge the complete laptop gently, keeping the keyboard inside the viewport.
   const metrics=()=>{
    const room=stage.clientHeight;
-   const scale=Math.max(1,Math.min(1.22,(stage.clientWidth-64)/laptop.clientWidth,(room-100)/laptop.clientHeight));
+   // Containment: the zoom may fill the page frame — 1536px on wide monitors,
+   // viewport-64 on narrower ones — never the full-bleed stage. The laptop's
+   // resting size is already frame-capped in CSS (max-width:1536px).
+   const frameW=Math.min(1536,stage.clientWidth-64);
+   const scale=Math.max(1,Math.min(1.22,frameW/laptop.clientWidth,(room-100)/laptop.clientHeight));
    return {scale,y:room/2-laptop.offsetTop-laptop.clientHeight*scale/2};
   };
   const timeline=gsap.timeline({scrollTrigger:{trigger:section,start:'top top',end:'bottom bottom',scrub:.7,invalidateOnRefresh:true}});
