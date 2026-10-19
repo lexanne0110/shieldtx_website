@@ -37,20 +37,6 @@ button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visibl
 #shieldtx .shieldtx-heading h2 span { color: var(--text-3); } /* product-showcase.css loads after site.css */
 #shieldtx .shieldtx-heading p { color: var(--text-3); }
 
-/* ---------- Wide screens: cap the frame at 1760px and centre it ----------
-   The design stretches edge to edge (fixed 32px gutters). Above 1824px
-   (1760 + 2 × 32) everything is capped; 1760 matches the design's own
-   cap on the product heading. Rails sit 8px outside the frame, as designed. */
-@media (min-width: 1825px) {
-  .frame { max-width: 1760px; }
-  .page-rails { max-width: 1776px; }
-  /* Hero is full-bleed; keep its copy and architecture where they sit at 1824px
-     (copy ~88px inside the frame, architecture 56% wide out to 32px past it),
-     so nothing jumps when the cap starts. */
-  .hero-copy { margin-left: calc((100% - 1760px) / 2 + 88px); }
-  .hero-institution { right: calc((100% - 1760px) / 2 - 32px); width: calc(1824px * .56); }
-}
-
 /* ---------- Account dialog: "Do you have a ShieldTX account?" ---------- */
 .account-dialog > p { margin-bottom: 28px; }
 .account-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

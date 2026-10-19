@@ -8,10 +8,10 @@
 .shieldtx-preview-card.shieldtx-photo{padding:0;border:0;border-radius:0;overflow:visible;background:none;box-shadow:none;filter:drop-shadow(0 20px 18px #0008)}
 .shieldtx-photo svg{display:block;width:100%;height:auto}
 /* A full device introduction followed by a scroll-controlled screen close-up. */
-#shieldtx{width:100%;max-width:none;padding:0;height:240svh;min-height:0;position:relative}
+#shieldtx{width:100%;max-width:none;padding:0;height:192svh;min-height:0;position:relative}
 .shieldtx-stage{position:sticky;top:0;height:100svh;box-sizing:border-box;overflow:hidden;padding-top:clamp(48px,8svh,100px)}
-.shieldtx-stage .shieldtx-heading{width:calc(100% - var(--frame-inset)*2 - clamp(40px,5.6vw,108px));max-width:1760px;margin:0 auto}
-.shieldtx-stage .shieldtx-photo{position:relative;width:min(calc(100% - 116px),calc((100svh - 285px)*1.6943));margin:clamp(64px,11svh,112px) auto 0;transform-origin:50% 0;will-change:transform}
+.shieldtx-stage .shieldtx-heading{width:calc(100% - var(--frame-inset)*2 - clamp(40px,5.6vw,108px));max-width:1536px;margin:0 auto}
+.shieldtx-stage .shieldtx-photo{position:relative;width:min(calc(100% - 116px),calc((100svh - 285px)*1.6943));max-width:1536px;margin:clamp(64px,11svh,112px) auto 0;transform-origin:50% 0;will-change:transform}
 @media(max-width:700px){
  .shieldtx-stage{padding-top:48px}
  .shieldtx-stage .shieldtx-heading{width:calc(100% - 58px)}
