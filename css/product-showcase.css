@@ -58,7 +58,11 @@
 .shieldtx-stage:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 28% 70%,#97fce420,transparent 58%),radial-gradient(ellipse at 70% 75%,#97fce41c,transparent 55%),radial-gradient(ellipse at 90% 85%,#97fce41a,transparent 50%);mask-image:linear-gradient(transparent,#000 25%,#000 75%,transparent)}
 
 @keyframes product-laptop-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@media(prefers-reduced-motion:no-preference){.shieldtx-photo>svg{animation:product-laptop-float 6s ease-in-out infinite;animation-play-state:paused}.shieldtx-stage.is-in-view .shieldtx-photo>svg{animation-play-state:running}}
+@media(prefers-reduced-motion:no-preference){.shieldtx-photo>svg{animation:product-laptop-float 6s ease-in-out infinite;animation-play-state:paused}.shieldtx-stage.is-in-view .shieldtx-photo>svg{animation-play-state:running}
+  /* The phone mockup floats with the laptop - same amplitude/cadence, so the
+     mobile product preview is alive without faking phone-app footage. */
+  .product-phone{animation:product-laptop-float 6s ease-in-out infinite;animation-play-state:paused}
+  .shieldtx-stage.is-in-view .product-phone{animation-play-state:running}}
 @media(max-width:700px){.shieldtx-heading{align-items:flex-start;flex-direction:column;gap:16px}.shieldtx-heading p{text-align:left;font-size:13px}.product-eyebrow{font-size:10px;margin-bottom:10px}}
 
 /* Use the same monochrome surfaces and typography as the surrounding site. */
