@@ -30,7 +30,7 @@
     // Restoring a later section must not depend on replaying the first trade.
     const resume=window.shieldScrollResume;
     const resumeSection=resume?.section==='closing'?document.querySelector('.closing'):document.getElementById(resume?.section||'');
-    const anatomySection=document.querySelector('#product');const scanSection=document.getElementById('wallet-scan');
+    const anatomySection=document.querySelector('#product');
     let restoredBeyondFlow=Boolean(anatomySection&&resumeSection&&(resumeSection===anatomySection||(anatomySection.compareDocumentPosition(resumeSection)&Node.DOCUMENT_POSITION_FOLLOWING)));
     function drawCoin(){
       const c=Math.cos(angle),s=Math.sin(angle),z=c>=0?6:-6,front=ring(z,c,s),rear=ring(-z,c,s);let rim='',reed='';
@@ -80,8 +80,8 @@
       }
       if(index===3&&!travel&&anatomy)opacity=parseFloat(getComputedStyle(anatomy).opacity);
       if(current.y<-100||current.y>innerHeight+100||document.querySelector('dialog[open]'))opacity=0;
-      // Hidden while it would cross the wallet scan section (it sits between the radar and the trade flow).
-      if(scanSection){const r=scanSection.getBoundingClientRect();if(current.y>r.top-60&&current.y<r.bottom+60)opacity=0;}
+      // The wallet scan card paints above the coin (.scan-card z-index), so the coin
+      // passes behind it and reappears below — no fade-out, no early stop.
       const size=Math.max(22,current.size)*116/88;
       // Compositor transforms avoid layout/repaint on every frame during touch scrolling.
       const target={x:current.x,y:current.y,size};

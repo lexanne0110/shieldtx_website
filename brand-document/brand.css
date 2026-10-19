@@ -13,8 +13,8 @@
   /* text */
   --text-1:#F6FEFD;--text-2:#C3CAD6;--text-3:#8BA6A1;--text-4:#6B7488;
   /* brand */
-  /* one brand blue + its gradient (app primary). --brand-light is kept as an alias because theme.css/site.css read it. */
-  --brand:#97fce4;--brand-deep:#1D4ED8;--brand-light:var(--brand);--card-blue:#97fce4;
+  /* one brand green + its gradient (app primary). --brand-light is kept as an alias because theme.css/site.css read it. */
+  --brand:#97fce4;--brand-deep:#07EDB7;--brand-light:var(--brand);--card-blue:#97fce4;
   --brand-gradient:linear-gradient(180deg,var(--brand),var(--brand-deep));
   /* trading */
   --long:#00D885;--long-fill:#00C573;--short:#FF7B88;--short-fill:#FC606F;
@@ -67,6 +67,12 @@ h3{font:500 15px/1.4 var(--sans);margin:0 0 6px;color:var(--text-1)}
 .logo-tile{display:grid;place-items:center;height:170px;border-radius:var(--r-lg);background:var(--panel);margin-bottom:12px}
 .logo-tile img{max-height:44px;max-width:70%}
 .logo-tile .mark{max-height:56px}
+.logo-tile.social-tile{background:#101a17}
+.logo-tile.social-tile img{max-height:72px;max-width:72%;border-radius:16px}
+.logo-downloads{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0 0}
+.logo-downloads a{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brand);text-decoration:none;border-bottom:1px solid rgba(151,252,228,.35);padding-bottom:4px}
+.logo-downloads a:hover{color:var(--text-1);border-bottom-color:var(--text-1)}
+@media(max-width:1000px){.logo-downloads a{font-size:10px}}
 .naming{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .naming span{font-size:13px;padding:4px 10px;border-radius:var(--r-sm);background:var(--well);color:var(--text-3)}
 .naming .ok{background:rgba(0,216,133,.12);color:var(--long)}
@@ -87,15 +93,15 @@ h3{font:500 15px/1.4 var(--sans);margin:0 0 6px;color:var(--text-1)}
 .c-cta{background:var(--cta)}.c-blue-card{background:var(--blue-card)}.c-tint{background:var(--panel);box-shadow:inset 0 0 0 999px rgba(151,252,228,.16)!important}
 .c-heading{background:var(--heading-gradient)}
 .brand-hero{height:220px;border-radius:var(--r-lg);background:var(--brand-gradient);display:flex;align-items:flex-end;padding:20px 22px;margin-bottom:12px}
-.brand-hero b{display:block;font-weight:500;font-size:15px}
-.brand-hero code{color:rgba(246,254,253,.8)}
+.brand-hero b{display:block;font-weight:500;font-size:15px;color:#04170F}
+.brand-hero code{color:rgba(4,23,15,.72)}
 .stops{margin-bottom:8px}
 .c-sel{background:linear-gradient(rgba(151,252,228,.10),rgba(151,252,228,.03)),var(--panel)}
 
 /* ---------- buttons (live specimens) ---------- */
 .btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:16px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px;border-radius:var(--r);border:0;font:500 14px var(--sans);cursor:pointer;color:var(--text-1);white-space:nowrap}
-.btn-primary{background:var(--cta)}
+.btn-primary{background:var(--cta);color:#04170F}
 .btn-primary:hover{filter:brightness(1.12)}
 .btn-white{background:#fff;color:var(--canvas)}
 .btn-white:hover{background:#ddd}

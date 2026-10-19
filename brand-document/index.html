@@ -7,7 +7,7 @@
   <title>Brand Book · ShieldTX</title>
   <meta name="description" content="ShieldTX brand system — colors, typography, logo, voice, and components." />
   <link rel="canonical" href="https://www.shieldtx.xyz/brand-document" />
-  <link rel="icon" type="image/svg+xml" href="/brand-document/assets/ShieldTX_LogoMark.svg" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=2" />
   <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
   <!-- Site nav styles first; brand.css loads after and wins for the document itself. -->
   <link rel="stylesheet" href="/css/theme.css?v=1" />
@@ -80,11 +80,16 @@
 <section id="logo">
   <span class="eyebrow">Identity</span>
   <h2>Logo</h2>
-  <p class="intro">Use the lockup by default. The mark works alone in tight spaces. Keep clear space equal to the mark's height; minimum 24px tall on screen. White on dark surfaces only.</p>
-  <div class="grid g3">
-    <div><div class="logo-tile"><img src="/brand-document/assets/ShieldTX_Logo.svg" alt="ShieldTX lockup"></div><h3>Lockup</h3><p class="note">Default. Nav, footer, app chrome. TX in flat letterforms.</p></div>
-    <div><div class="logo-tile"><img class="mark" src="/brand-document/assets/ShieldTX_LogoMark.svg" alt="ShieldTX mark"></div><h3>Mark</h3><p class="note">Favicon, loader, avatars, tight spaces. Seven equal bands, four visible.</p></div>
-    <div><div class="logo-tile"><img src="/brand-document/assets/ShieldTX_LogoType.svg" alt="ShieldTX logotype"></div><h3>Logotype</h3><p class="note">Standalone only. The crossed-line TX appears here, never in the lockup.</p></div>
+  <p class="intro">Use the lockup by default. The mark works alone in tight spaces. Keep clear space equal to the mark's height; minimum 24px tall on screen. White on dark surfaces; the social icon is the exception — ink mark on a brand green tile. Every asset below downloads directly.</p>
+  <div class="grid g4">
+    <div><div class="logo-tile"><img src="/brand-document/assets/ShieldTX_Logo.svg" alt="ShieldTX lockup"></div><h3>Lockup</h3><p class="note">Default. Nav, footer, app chrome. TX in flat letterforms.</p>
+      <p class="logo-downloads"><a href="/brand-document/assets/ShieldTX_Logo.svg" download="ShieldTX_Logo.svg">Download SVG</a></p></div>
+    <div><div class="logo-tile"><img class="mark" src="/brand-document/assets/ShieldTX_LogoMark.svg" alt="ShieldTX mark"></div><h3>Mark</h3><p class="note">Favicon, loader, avatars, tight spaces. Seven equal bands, four visible.</p>
+      <p class="logo-downloads"><a href="/brand-document/assets/ShieldTX_LogoMark.svg" download="ShieldTX_LogoMark.svg">Download SVG</a><a href="/assets/favicon-192.png" download="ShieldTX_Favicon-192.png">PNG 192</a></p></div>
+    <div><div class="logo-tile"><img src="/brand-document/assets/ShieldTX_LogoType.svg" alt="ShieldTX logotype"></div><h3>Logotype</h3><p class="note">Standalone only. The crossed-line TX appears here, never in the lockup.</p>
+      <p class="logo-downloads"><a href="/brand-document/assets/ShieldTX_LogoType.svg" download="ShieldTX_LogoType.svg">Download SVG</a></p></div>
+    <div><div class="logo-tile social-tile"><img src="/brand-document/assets/ShieldTX_SocialIcon.svg" alt="ShieldTX social icon"></div><h3>Social icon</h3><p class="note">Alternative version for avatars and app tiles: the mark on a brand green tile. X, Telegram, Discord, decks.</p>
+      <p class="logo-downloads"><a href="/brand-document/assets/ShieldTX_SocialIcon.svg" download="ShieldTX_SocialIcon.svg">SVG</a><a href="/brand-document/assets/ShieldTX_SocialIcon-1024.png" download="ShieldTX_SocialIcon-1024.png">PNG 1024</a><a href="/brand-document/assets/ShieldTX_SocialIcon-400.png" download="ShieldTX_SocialIcon-400.png">PNG 400</a></p></div>
   </div>
   <p class="sub">Always written as</p>
   <div class="naming"><span class="ok">ShieldTX</span><span class="no">Shield TX</span><span class="no">ShieldTx</span><span class="no">Shield-TX</span><span class="no">shieldtx</span><span class="no">SHIELDTX in prose</span></div>
@@ -94,7 +99,7 @@
 <section id="surfaces">
   <span class="eyebrow">Colour</span>
   <h2>Surfaces</h2>
-  <p class="intro">Near-black canvas with cool navy layers. Each layer is one step lighter than the one beneath it.</p>
+  <p class="intro">Near-black canvas with quiet, cool-tinted layers. Each layer is one step lighter than the one beneath it.</p>
   <div class="grid g3">
     <div class="swatch"><i class="c-canvas"></i><div><b>Canvas</b><code>#040405 · --canvas</code><span>Page and app background. The ShieldTX black.</span></div></div>
     <div class="swatch"><i class="c-panel"></i><div><b>Panel</b><code>#0F1917 · --panel</code><span>Cards, windows, app panels.</span></div></div>
@@ -122,24 +127,24 @@
   </div>
 </section>
 
-<!-- BRAND BLUE -->
+<!-- BRAND GREEN -->
 <section id="blue">
   <span class="eyebrow">Colour</span>
   <h2>Brand colour</h2>
-  <p class="intro">One blue, set on brand black with brand white. The gradient is the same blue stepping one shade deeper, for the app's primary action. There are no other blues in the system: tints below are this blue at lower opacity.</p>
+  <p class="intro">One green, set on brand black with brand white. The gradient is the same green stepping one shade deeper, for the app's primary action. There are no other accent colours in the system: tints below are this green at lower opacity.</p>
   <div class="brand-hero">
-    <div><b>Brand blue gradient</b><code data-copy="linear-gradient(180deg, #97fce4, #1D4ED8)">180° · #97fce4 → #1D4ED8 · --brand-gradient</code></div>
+    <div><b>Brand green gradient</b><code data-copy="linear-gradient(180deg, #97FCE4, #07EDB7)">180° · #97FCE4 → #07EDB7 · --brand-gradient</code></div>
   </div>
   <div class="grid g2 stops">
-    <div class="swatch"><i class="c-brand"></i><div><b>Brand blue</b><code>#97fce4 · --brand</code><span>The single brand blue. Eyebrows and step labels, links, focus rings, active marks, illustration accents.</span></div></div>
-    <div class="swatch"><i class="c-brand-deep"></i><div><b>Gradient end</b><code>#1D4ED8 · --brand-deep</code><span>Only as the bottom of the brand gradient. Never on its own.</span></div></div>
+    <div class="swatch"><i class="c-brand"></i><div><b>Brand green</b><code>#97FCE4 · --brand</code><span>The single brand green. Eyebrows and step labels, links, focus rings, active marks, illustration accents.</span></div></div>
+    <div class="swatch"><i class="c-brand-deep"></i><div><b>Gradient end</b><code>#07EDB7 · --brand-deep</code><span>Only as the bottom of the brand gradient. Never on its own. Text on the gradient is ink (#04170F), never white.</span></div></div>
   </div>
   <p class="sub">Brand black &amp; white</p>
   <div class="grid g2 stops">
     <div class="swatch"><i class="c-canvas"></i><div><b>Brand black</b><code>#040405 · --canvas</code><span>Background of the app and the website.</span></div></div>
     <div class="swatch"><i class="c-t1"></i><div><b>Brand white</b><code>#F6FEFD · --text-1</code><span>Logo on dark, headings, primary text, text on blue.</span></div></div>
   </div>
-  <p class="sub">Tints of the brand blue</p>
+  <p class="sub">Tints of the brand green</p>
   <div class="grid g3">
     <div class="swatch"><i class="c-tint"></i><div><b>16%</b><code>rgba(151,252,228,.16)</code><span>App secondary button, selected tab in popups, card top edge.</span></div></div>
     <div class="swatch"><i class="c-sel"></i><div><b>10% → 3%</b><code data-copy="linear-gradient(rgba(151,252,228,.10), rgba(151,252,228,.03))">gradient, top to bottom</code><span>App selected list item, active segmented tab.</span></div></div>
@@ -151,7 +156,7 @@
 <section id="trading">
   <span class="eyebrow">Colour</span>
   <h2>Trading</h2>
-  <p class="intro">Green and red carry direction only: long, short, profit, loss. Blue is pending or info. No amber or yellow status colours.</p>
+  <p class="intro">Green and red carry direction only: long, short, profit, loss. Brand green is pending or info. No amber or yellow status colours.</p>
   <div class="grid g4">
     <div class="swatch"><i class="c-long"></i><div><b>Long · profit</b><code>#00D885 · --long</code><span>Values, side text, PNL up.</span></div></div>
     <div class="swatch"><i class="c-long-fill"></i><div><b>Long fill</b><code>#00C573 · --long-fill</code><span>Buy button, depth bars.</span></div></div>
@@ -186,7 +191,7 @@
 <section id="ctas">
   <span class="eyebrow">Components</span>
   <h2>CTAs</h2>
-  <p class="intro">One primary action per view. On the website the primary is white; in the app it is the brand blue gradient. Everything else steps down.</p>
+  <p class="intro">One primary action per view. On the website the primary is white; in the app it is the brand green gradient. Everything else steps down.</p>
   <div class="card">
     <div class="btn-row">
       <button class="btn btn-white" type="button">Start trading</button>
@@ -206,16 +211,16 @@
     <table class="spec">
       <tr><th>Button</th><th>Fill</th><th>Text</th><th>Size</th><th>Use</th></tr>
       <tr><td>Primary · website</td><td><code>#FFFFFF</code> · hover <code>#DDDDDD</code></td><td><code>#040405</code></td><td>44px · r12</td><td>Start trading, Open wallet scan</td></tr>
-      <tr><td>Primary · app</td><td><code>--brand-gradient</code> (#97fce4 → #1D4ED8)</td><td><code>#F6FEFD</code></td><td>44px · r12</td><td>Confirm, Deposit</td></tr>
+      <tr><td>Primary · app</td><td><code>--brand-gradient</code> (#97FCE4 → #07EDB7)</td><td><code>#F6FEFD</code></td><td>44px · r12</td><td>Confirm, Deposit</td></tr>
       <tr><td>Primary compact</td><td>as primary</td><td>as primary</td><td>28–32px · r12</td><td>Top bar, nav bar</td></tr>
       <tr><td>Secondary</td><td><code>--brand</code> 16%</td><td><code>#F6FEFD</code></td><td>44px · r12</td><td>App: Withdraw, Close</td></tr>
       <tr><td>Outline</td><td>no fill · 1px light rim</td><td><code>#F6FEFD</code></td><td>44px · r12</td><td>Website secondary: Get API access</td></tr>
-      <tr><td>Tertiary</td><td>none</td><td><code>#97fce4</code> Medium 13</td><td>text only</td><td>Back, View, Cancel, table row actions</td></tr>
+      <tr><td>Tertiary</td><td>none</td><td><code>#97FCE4</code> Medium 13</td><td>text only</td><td>Back, View, Cancel, table row actions</td></tr>
       <tr><td>Disabled</td><td><code>--well</code></td><td><code>#6B7488</code></td><td>as parent</td><td>Incomplete forms</td></tr>
       <tr><td>Buy / Sell</td><td><code>#00C573→#00B060</code> / <code>#FC606F→#E54A5C</code></td><td>dark on fill</td><td>44px · r12</td><td>Order ticket only</td></tr>
     </table>
   </div>
-  <p class="note">Hover on the app primary brightens the gradient about 12%. Focus: 2px <code>#97fce4</code> ring in the app; neutral white ring on the website.</p>
+  <p class="note">Hover on the app primary brightens the gradient about 12%. Focus: 2px <code>#97FCE4</code> ring in the app; neutral white ring on the website.</p>
 </section>
 
 <!-- TYPE -->
@@ -279,7 +284,7 @@
 <script src="/brand-document/brand.js?v=2" defer></script>
 <!-- @partial site-end -->
 <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
-<dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have a<br><span>ShieldTX account?</span></h2><p>Members trade in the app. New traders request access to the private beta first.</p><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+<dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have an invite code<br><span>or ShieldTX Account?</span></h2><p>Members trade in the app. New traders request access to the private beta first.</p><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
 <script src="/js/site.js?v=6" defer></script>
 <!-- /@partial site-end -->
 </body>

@@ -60,6 +60,14 @@
 #backers .section-heading > p { font-size: var(--section-description-size); line-height: 1.6; }
 
 .backers-built { display: inline-flex; align-items: center; gap: .55em; width: max-content; }
+/* "BUILT BY AVAIL" eyebrow — above the hero H1 and in the backers heading.
+   The Avail wordmark is masked so it takes the eyebrow's brand colour (no inlined SVG). */
+.built-by { display: inline-flex; align-items: center; gap: .6em; width: max-content; margin-bottom: 18px;
+  font: 500 11px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--brand-light); }
+.built-by-logo { display: block; flex: none; height: 1.75em; aspect-ratio: 1016 / 341; background: currentColor;
+  -webkit-mask: url(/assets/v2/avail-logo.svg) center / contain no-repeat; mask: url(/assets/v2/avail-logo.svg) center / contain no-repeat; }
+.built-by:hover { color: var(--text-1); }
+@media (max-width: 700px) { .built-by { font-size: 10px; margin-bottom: 14px; } }
 /* Inline SVG with fill=currentColor so it takes the eyebrow blue; sized to the label's cap height. */
 .backers-avail-logo { display: block; flex: none; width: auto; height: 1.3em; aspect-ratio: 1016 / 341; }
 .backers-cells { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -93,7 +101,7 @@
    dividers, as the user's reference). Right: the design's radar. The section is a tall
    scroll track; the stage pins and each row lights up in turn (exposure-dashboard.js).
    Phones and reduced motion: no pin, rows highlight on tap. */
-#problem.exposure-story { height: 300svh; padding-top: 0; padding-bottom: 0; } /* 3 steps */
+#problem.exposure-story { height: 220svh; padding-top: 0; padding-bottom: 0; } /* 3 steps, ~40vh of scroll each */
 #problem .exposure-stage { position: sticky; top: 0; height: 100svh; min-height: 640px; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(32px, 4vw, 80px); padding: 104px 0 64px; } /* top clears the fixed nav; bottom keeps the last row off the edge */
 #problem .exposure-eyebrow { margin: 0 0 18px; }
 #problem .exposure-copy h2 { font-size: var(--section-title-size); line-height: 1.12; letter-spacing: -.045em; margin: 0 0 clamp(20px, 2.2vw, 36px); }
@@ -148,6 +156,8 @@
    One card: a band (heading + "Check my wallet") that expands into the scan panel below it.
    Expand/collapse animates grid rows 0fr → 1fr; js/wallet-scan.js toggles .is-open + inert. */
 .scan-section { padding-top: clamp(40px, 5vw, 96px); }
+/* The shared coin (z-index 44) travels behind this card and re-emerges below it. */
+.scan-card { position: relative; z-index: 45; }
 .scan-band { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 40px; padding: clamp(28px, 3vw, 56px); }
 .scan-band-copy .section-eyebrow { display: block; }
 .scan-band-copy h2 { font-size: var(--section-title-size); line-height: 1.12; letter-spacing: -.045em; margin: 0 0 14px; }
