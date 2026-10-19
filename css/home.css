@@ -65,7 +65,7 @@
 .built-by { display: inline-flex; align-items: center; gap: .6em; width: max-content; margin-bottom: 18px;
   font: 500 11px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--brand-light); }
 .built-by-logo { display: block; flex: none; height: 1.75em; aspect-ratio: 1016 / 341; background: currentColor;
-  -webkit-mask: url(/assets/v2/avail-logo.svg) center / contain no-repeat; mask: url(/assets/v2/avail-logo.svg) center / contain no-repeat; }
+  -webkit-mask: url(/assets/v2/avail-logo-v2.svg) center / contain no-repeat; mask: url(/assets/v2/avail-logo-v2.svg) center / contain no-repeat; }
 .built-by:hover { color: var(--text-1); }
 @media (max-width: 700px) { .built-by { font-size: 10px; margin-bottom: 14px; } }
 /* Inline SVG with fill=currentColor so it takes the eyebrow blue; sized to the label's cap height. */

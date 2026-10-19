@@ -10,7 +10,7 @@
 /* A full device introduction followed by a scroll-controlled screen close-up. */
 #shieldtx{width:100%;max-width:none;padding:0;height:192svh;min-height:0;position:relative}
 .shieldtx-stage{position:sticky;top:0;height:100svh;box-sizing:border-box;overflow:hidden;padding-top:clamp(48px,8svh,100px)}
-.shieldtx-stage .shieldtx-heading{width:calc(100% - var(--frame-inset)*2 - clamp(40px,5.6vw,108px));max-width:1536px;margin:0 auto}
+.shieldtx-stage .shieldtx-heading{width:calc(100% - var(--frame-inset)*2 - clamp(40px,5.6vw,108px));max-width:1536px;margin:0 auto;padding:0 28px}
 .shieldtx-stage .shieldtx-photo{position:relative;width:min(calc(100% - 116px),calc((100svh - 285px)*1.6943));max-width:1536px;margin:clamp(64px,11svh,112px) auto 0;transform-origin:50% 0;will-change:transform}
 @media(max-width:700px){
  .shieldtx-stage{padding-top:48px}

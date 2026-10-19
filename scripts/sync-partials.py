@@ -41,7 +41,7 @@ OG_IMAGE_RE = re.compile(
     r'<meta\s+[^>]*property=["\']og:image["\'][^>]*>', re.IGNORECASE
 )
 
-DEFAULT_OG_IMAGE = "https://shieldtx.xyz/assets/og-image.jpg"
+DEFAULT_OG_IMAGE = "https://shieldtx.xyz/assets/og-image-v2.jpg"
 DEFAULT_OG_IMAGE_TAGS = f"""<meta property="og:image" content="{DEFAULT_OG_IMAGE}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
