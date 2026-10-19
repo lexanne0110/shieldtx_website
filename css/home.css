@@ -12,9 +12,11 @@
   .shieldtx-photo > .product-video { animation: product-laptop-float 6s ease-in-out infinite; animation-play-state: paused; }
   .shieldtx-stage.is-in-view .shieldtx-photo > .product-video { animation-play-state: running; }
 }
+/* Mobile (≤700px): the product-phone mockup carries the preview (restored
+   2026-10-19); the demo video is desktop-laptop-only, so keep it hidden here. */
 @media (max-width: 700px) {
   #shieldtx .shieldtx-photo { width: calc(100% - 58px); } /* = .shieldtx-heading width on mobile */
-  .shieldtx-photo > .product-video { position: static; display: block; width: 100%; height: auto; border: 1px solid #fff2; border-radius: var(--r); background: var(--canvas); }
+  .shieldtx-photo > .product-video { display: none; }
 }
 
 /* Form error line (wallet scan form). */
