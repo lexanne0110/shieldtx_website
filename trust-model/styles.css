@@ -6,7 +6,10 @@
 
 .docs-main { padding-top: 150px; }
 /* Bottom space goes on the container: the footer partial (with its divider) sits inside <main>. */
-.docs-container { padding-bottom: clamp(80px, 8vw, 140px); display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 64px; align-items: start; }
+/* padding-inline mirrors .section (32/24/20px): .docs-container is a bare .frame, so without it
+   the content sat 1px from .page-rails::before's inner rule — flush against the container line. */
+.docs-container { padding-bottom: clamp(80px, 8vw, 140px); padding-inline: 32px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 64px; align-items: start; }
+@media (max-width: 1100px) { .docs-container { padding-inline: 24px; } }
 
 /* ---------- TOC ---------- */
 /* Sticks just under the fixed nav (its bar is up to 76px tall), and scrolls inside itself
@@ -89,7 +92,7 @@
 }
 @media (max-width: 700px) {
   .docs-main { padding-top: 110px; }
-  .docs-container { padding-bottom: 64px; }
+  .docs-container { padding-bottom: 64px; padding-inline: 20px; }
   .docs-lede { font-size: 16px; }
   .docs-cta { padding: 28px 20px; }
 }
