@@ -35,9 +35,8 @@ a:hover{color:var(--text-1)}
 code{font:500 12px var(--mono);color:var(--text-2)}
 
 /* ---------- layout ---------- */
-.doc{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;max-width:1200px;margin:0 auto;padding:56px 40px 96px}
+.doc{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;width:calc(100% - 30px);max-width:1200px;margin:0 auto;padding:56px 20px 96px}
 .toc{position:sticky;top:40px;align-self:start;display:flex;flex-direction:column;gap:2px}
-.toc img{width:120px;margin-bottom:28px}
 .toc a{color:var(--text-3);font-size:13px;padding:6px 10px;border-radius:var(--r-sm)}
 .toc a:hover{color:var(--text-1);background:rgba(151,252,228,.08)}
 .toc .toc-meta{margin-top:24px;color:var(--text-4);font-size:12px;padding-inline:10px}
@@ -64,8 +63,11 @@ h3{font:500 15px/1.4 var(--sans);margin:0 0 6px;color:var(--text-1)}
 .note{margin-top:16px}
 
 /* ---------- logo ---------- */
-.logo-tile{display:grid;place-items:center;height:170px;border-radius:var(--r-lg);background:var(--panel);margin-bottom:12px}
-.logo-tile img{max-height:44px;max-width:70%}
+.logo-tile{display:grid;place-items:center;height:170px;border-radius:var(--r-lg);background:var(--panel);margin-bottom:12px;overflow:hidden}
+/* The site addition below neutralises theme.css's global img{max-width:100%}, so the
+   designer's own width cap has to be re-asserted here: the horizontal logotype
+   (310x61) at max-height 44px is 223px wide and escaped its 205px tile. */
+.logo-tile img{max-height:44px;max-width:calc(100% - 24px);width:auto}
 .logo-tile .mark{max-height:56px}
 .logo-tile.social-tile{background:#101a17}
 .logo-tile.social-tile img{max-height:72px;max-width:72%;border-radius:16px}
@@ -156,10 +158,27 @@ h3{font:500 15px/1.4 var(--sans);margin:0 0 6px;color:var(--text-1)}
 
 
 /* ---------- responsive ---------- */
+
+/* Site addition: keep the document clear of the page rails.
+   The rails are two nested vertical rules (theme.css .page-rails + ::before)
+   sitting 8/12/24px in from the viewport edge with a second rule 6-7px further
+   in. The rest of the site clears them because .frame narrows the column and
+   .section adds its own inline padding on top; .doc is a standalone document
+   container that instead spanned the full viewport with 40px/16px of padding,
+   so at <=1000px its content started at x=16 while the inner rule painted at
+   x=19 — the text was crossing the rule, not merely touching it.
+   Mirroring .frame's width formula and .section's padding-inline gives the
+   same 35 / 44 / 64px content inset the other pages use, so the document's
+   gutter matches the site at every width and never re-enters the rails. */
+@media(min-width:701px){
+  .doc{width:calc(100% - 40px);padding-inline:24px}
+}
+@media(min-width:1101px){
+  .doc{width:calc(100% - 64px);padding-inline:32px}
+}
 @media(max-width:1000px){
-  .doc{grid-template-columns:minmax(0,1fr);gap:32px;padding:32px 16px 72px}
+  .doc{grid-template-columns:minmax(0,1fr);gap:32px;padding-top:32px;padding-bottom:72px}
   .toc{position:static;display:block}
-  .toc img{display:block;width:110px;margin:0 0 16px}
   .toc a{display:inline-block}
   .toc .toc-meta{display:none}
   .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -198,12 +217,6 @@ h3{font:500 15px/1.4 var(--sans);margin:0 0 6px;color:var(--text-1)}
 
 @media(max-width:700px){:root{--r-lg:12px;--r:8px;--r-sm:8px}}
 
-/* --- Site addition (not in the designer's file): the contents-nav logo links home.
-   Undo the .toc a item styling so the logo sits exactly as designed. --- */
-.toc a.toc-home{display:block;line-height:0;padding:0;background:none;border-radius:0;margin-bottom:28px}
-.toc a.toc-home img{display:block;margin-bottom:0}
-@media(max-width:1000px){.toc a.toc-home{display:block;margin:0 0 16px}}
-
 /* --- Site addition: the site nav (fixed, 12px inset; 76px tall, 68px ≤1100, 64px ≤700)
    sits above the document, so the document and its sticky contents start below it. --- */
 .page-brand .doc{padding-top:144px}
@@ -218,6 +231,10 @@ h3{font:500 15px/1.4 var(--sans);margin:0 0 6px;color:var(--text-1)}
 .page-brand .doc h1>span{display:inline}
 .page-brand .doc .btn:disabled{cursor:not-allowed}
 .page-brand .doc svg,.page-brand .doc img,.page-brand .doc h1{max-width:none}
+/* ...and the one exception: the logo tiles. That blanket undo outranks the
+   designer's .logo-tile img cap, so the horizontal logotype (310x61 -> 223px wide
+   at the 44px height cap) escaped its 205px tile. Re-assert the width cap. */
+.page-brand .doc .logo-tile img{max-width:calc(100% - 24px)}
 /* ...and the reverse: keep brand.css's body font and link colour out of the site chrome.
    :where() keeps specificity at the element level, so theme.css's own nav rules still win. */
 :where(.page-brand) :where(.site-header,.page-rails,dialog){font:400 16px/normal var(--sans)}
