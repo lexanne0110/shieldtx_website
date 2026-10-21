@@ -108,8 +108,12 @@
 #problem .exposure-eyebrow { margin: 0 0 18px; }
 #problem .exposure-copy h2 { font-size: var(--section-title-size); line-height: 1.12; letter-spacing: -.045em; margin: 0 0 clamp(20px, 2.2vw, 36px); }
 #problem .exposure-copy h2 span { color: var(--text-3); }
-.exposure-rows { list-style: none; margin: 0; padding: 0; }
-.exposure-rows li { border-top: 1px solid #ffffff1f; }
+.exposure-rows { list-style: none; margin: 0; padding: 0; --exposure-bleed: clamp(14px, 1.3vw, 20px); }
+/* The active row paints a full-width band, not just lighter text: the li bleeds into
+   the section gutter by --exposure-bleed (mirrored as padding so the label/title keep
+   their alignment with the heading) and carries a 2px mint edge. Scroll-driven by
+   js/exposure-dashboard.js via .is-active. */
+.exposure-rows li { border-top: 1px solid #ffffff1f; margin-inline: calc(var(--exposure-bleed) * -1); padding-inline: var(--exposure-bleed); background-color: transparent; box-shadow: inset 2px 0 0 transparent; transition: background-color .4s ease, box-shadow .4s ease; }
 .exposure-row { display: grid; grid-template-columns: minmax(140px, .34fr) minmax(0, 1fr); align-items: baseline; gap: 24px; width: 100%; padding: clamp(14px, 1.25vw, 22px) 0; border: 0; background: none; text-align: left; cursor: pointer; }
 /* Hierarchy: category = small tracked label; title = largest; subtext = smaller, muted. */
 .exposure-row-label { font: 500 12px/1.4 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--text-4); transition: color .35s; }
@@ -117,6 +121,8 @@
 .exposure-row-title { font: 400 clamp(19px, 1.45vw, 26px)/1.25 var(--display); letter-spacing: -.02em; color: var(--text-3); transition: color .35s; }
 .exposure-row-line { font: 400 clamp(14px, .95vw, 16px)/1.55 var(--sans); color: var(--text-4); transition: color .35s; }
 .exposure-row:hover .exposure-row-title { color: var(--text-2); }
+.exposure-rows li:hover { background-color: #ffffff08; }
+.exposure-rows li.is-active { background-color: rgba(151, 252, 228, .08); box-shadow: inset 2px 0 0 var(--brand); }
 .exposure-rows li.is-active .exposure-row-label { color: var(--text-2); }
 .exposure-rows li.is-active .exposure-row-title { color: var(--text-1); }
 .exposure-rows li.is-active .exposure-row-line { color: var(--text-3); }
@@ -152,6 +158,7 @@
   #problem .exposure-visual .scan-visual { height: 340px; }
   .exposure-row { grid-template-columns: 1fr; gap: 8px; padding: 18px 0; }
   .exposure-row-title { font-size: 19px; }
+  .exposure-rows { --exposure-bleed: 12px; } /* stays inside the 18px section gutter */
 }
 
 /* ---------- Wallet scan (after "Without ShieldTX") ----------
@@ -174,7 +181,11 @@
 .scan-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.22, 1, .36, 1); }
 .scan-section.is-open .scan-panel { grid-template-rows: 1fr; }
 .scan-panel-inner { min-height: 0; overflow: hidden; }
-.scan-panel-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 80px); margin: 0 clamp(28px, 3vw, 56px); padding: clamp(28px, 3vw, 48px) 0 clamp(28px, 3vw, 56px); border-top: 1px solid #fff1; opacity: 0; transition: opacity .3s; }
+/* One column until there is a result to show: an empty second column reads as a hole
+   under the form. js/wallet-scan.js un-hides #scan-result on success, which is what
+   opens the second column. */
+.scan-panel-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 4vw, 80px); margin: 0 clamp(28px, 3vw, 56px); padding: clamp(28px, 3vw, 48px) 0 clamp(28px, 3vw, 56px); border-top: 1px solid #fff1; opacity: 0; transition: opacity .3s; }
+.scan-panel-grid:has(#scan-result:not([hidden])) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .scan-section.is-open .scan-panel-grid { opacity: 1; transition-delay: .12s; }
 
 .scan-form label { display: block; font-size: 13px; color: var(--text-2); margin-bottom: 10px; }
@@ -184,15 +195,19 @@
 .scan-form input:focus-visible { outline: none; border-color: #ffffff80; box-shadow: 0 0 0 3px #ffffff14; }
 .scan-form input[aria-invalid="true"] { border-color: #eeabab88; }
 .scan-help { font-size: 13px; color: var(--text-4); margin: 10px 0 0; }
+/* Helper text left, "No address handy? / Try a sample" right-aligned on the same row,
+   directly beneath the address field. */
+.scan-help-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-top: 10px; }
+.scan-help-row .scan-help { margin: 0; }
 .scan-form .button { width: 100%; justify-content: center; margin-top: 20px; }
 .scan-form.is-loading .button { opacity: .7; }
 .scan-fallback { display: inline-block; margin-top: 12px; font-size: 13px; color: var(--text-2); text-decoration: underline; text-underline-offset: 4px; }
-.scan-sample { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color: var(--text-4); margin: 18px 0 0; }
+.scan-sample { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 10px; font-size: 13px; color: var(--text-4); margin: 0; }
+.scan-meta { display: flex; justify-content: flex-end; margin: 16px 0 0; }
 .scan-sample a, .scan-full-link { color: var(--text-2); text-decoration: underline; text-decoration-color: #ffffff4d; text-underline-offset: 4px; transition: color .2s, text-decoration-color .2s; }
 .scan-sample a:hover, .scan-full-link:hover { color: var(--text-1); text-decoration-color: var(--text-1); }
 
 .scan-side { display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; }
-.scan-note { font-size: 15px; line-height: 1.6; color: var(--text-3); margin: 0; }
 .scan-full-link { font-size: 14px; width: max-content; }
 .scan-result-summary { font-size: 13px; color: var(--text-3); margin: 0 0 14px; }
 .scan-result-summary b { font: 500 13px var(--mono); color: var(--text-1); }
