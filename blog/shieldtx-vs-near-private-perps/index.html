@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Private Perps on Hyperliquid: ShieldTX vs NEAR · ShieldTX</title>
+  <meta name="description" content="See how the privacy of ShieldTX and NEAR differ, the traders they are more suited for and which is the right solution for you." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/shieldtx-vs-near-private-perps" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png?v=3" />
+
+  <meta property="og:title" content="Private Perps on Hyperliquid: ShieldTX vs NEAR · ShieldTX" />
+  <meta property="og:description" content="See how the privacy of ShieldTX and NEAR differ, the traders they are more suited for and which is the right solution for you." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/shieldtx-vs-near-private-perps" />
+  <meta property="og:image" content="https://shieldtx.xyz/assets/og-image-v2.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Private Perps on Hyperliquid: ShieldTX vs NEAR · ShieldTX" />
+  <meta name="twitter:description" content="See how the privacy of ShieldTX and NEAR differ, the traders they are more suited for and which is the right solution for you." />
+
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/blog/styles.css?v=4" />
+
+  <!-- @partial head-global -->
+  <!-- PostHog analytics -->
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ji Yi init fn mn Hr pn bn cn capture calculateEventProperties Sn register register_once register_for_session unregister unregister_for_session In getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Mn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Cn xn createPersonProfile setInternalOrTestUser Tn hn Pn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing debug Ur wt getPageViewId captureTraceFeedback captureTraceMetric an".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_vj7vAdMiHrkqstyP22Au7yf634eSv9WSgF63WXXPTcPD', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+      })
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
+  <!-- /@partial head-global -->
+</head>
+<body class="page-blog blog-body">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <article class="section frame blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">Comparison</div>
+        <h1>Private Perps on Hyperliquid: ShieldTX vs NEAR</h1>
+        <p class="blog-post-meta">
+          <span>26 October 2026</span>
+          <span>3 min read</span>
+        </p>
+
+        <figure class="blog-post-hero">
+          <img src="/blog/shieldtx-vs-near-private-perps/hero-dark.webp" alt="ShieldTX versus NEAR: private perps on Hyperliquid" width="2048" height="1152" />
+        </figure>
+
+        <p class="intro">What's the difference between ShieldTX and NEAR's private perp offering?</p>
+
+        <p>On the surface, NEAR's private perps product and ShieldTX look similar, but there is one key difference. NEAR's solution uses the same Hyperliquid wallet for every trade, while ShieldTX uses a brand-new wallet for every trade. This significantly impacts the privacy assurances that each product can deliver, and the types of traders they are useful for.</p>
+
+        <section>
+          <h2 id="shieldtx-unlinkable-onchain-trading">ShieldTX: Unlinkable Onchain Trading<a href="#shieldtx-unlinkable-onchain-trading" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>ShieldTX uses a brand-new account for every trade, making each trade unlinkable onchain. If a single trade is linked to you there is nothing onchain that links your previous, or future trades together.</p>
+          <p>For an onchain observer, every trade is unique. Copy-traders, competitors and media have nothing to link your trades onchain. This keeps your signal, identity and strategies private.</p>
+          <img src="/blog/shieldtx-vs-near-private-perps/shieldtx-vs-near-graphic.webp" alt="Separate wallets per trade on ShieldTX versus one connected wallet on NEAR" width="2048" height="1152" />
+        </section>
+
+        <section>
+          <h2 id="near-connected-onchain-trading">NEAR: Connected Onchain Trading<a href="#near-connected-onchain-trading" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>NEAR's private perps use the same Hyperliquid wallet for every trade, linking each trade to the next. The more you use this wallet, the more data there is for copy-traders, competitors and media to follow.</p>
+          <p>While the link between your funding account and your trading account is not publicly available, every trade you make through the account is linked. This exposes more and more information about how you trade, your preferred entries/exits, risk tolerance and preferred markets.</p>
+          <p>This has a few risks:</p>
+          <ul>
+            <li>If one trade is linked to you, then all trades are instantly linked to you.</li>
+            <li>Onchain observers can build an accurate profile of your trading activity.</li>
+            <li>Your PnL is still completely visible onchain</li>
+            <li>Copy-traders don't need to know your funding wallet to copy a profitable trading wallet.</li>
+          </ul>
+          <p>Because every trade is connected, the more you use the wallet the more exposed you become.</p>
+        </section>
+
+        <section>
+          <h2 id="shieldtx-zk-proof-verification">ShieldTX: ZK Proof Verification<a href="#shieldtx-zk-proof-verification" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>ShieldTX is built on Avail's ZK appchain <a href="https://blog.availproject.org/inside-shieldtx-the-architecture-enabling-shielded-trading-onchain/">Nightshade</a> allowing it to prove correctness without exposing your trading data to an external validator set. Its settlement rules enforce ownership, value conservation and protection against double-spend attacks, without publishing the underlying state onchain. Nightshade is Avail's dedicated privacy infrastructure.</p>
+        </section>
+
+        <section>
+          <h2 id="near-tee-verification">NEAR: TEE Verification<a href="#near-tee-verification" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>NEAR's <a href="https://intents.near.org/confidential">confidential Intents</a> keep balances and trading activity inside a permissioned private shard connected to NEAR through a TEE-based bridge. A trusted execution environment (TEE) isolates code and data in protected hardware. The private validators and bridge are used to verify a user's trading activity.</p>
+        </section>
+
+        <section>
+          <h2 id="shieldtx-vs-near-summary">ShieldTX vs NEAR Summary<a href="#shieldtx-vs-near-summary" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>ShieldTX and NEAR both break the public link between a user's funding wallet and trading wallets on Hyperliquid. Both execute trades on Hyperliquid directly, the difference is what happens when you use them regularly. On NEAR, your privacy decays with each subsequent trade, on ShieldTX, it remains consistent as each trade is funded from a brand-new wallet.</p>
+          <p>To public observers like copy-traders, crypto media and competitors it's much easier to link a trader using NEAR than it is on ShieldTX. While this may not matter to some traders, we believe those trading with enough size to move a market will prefer the additional guarantees that ShieldTX provides.</p>
+          <p>If you're interested in learning more about how ShieldTX works, or integrating it into your trading app, <a href="https://calendar.app.google/ckRN51M3BwzhmydN6">get in touch</a>. Our product team will be happy to walk you through a product demo, answer any questions and help keep your edge protected.</p>
+        </section>
+      </div>
+    </article>
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Enterprise-grade shielding for Hyperliquid.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo-v2.svg" alt="Avail" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
+  </main>
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have an invite code<br><span>or ShieldTX Account?</span></h2><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
+
+  <script>
+    (function () {
+
+      // Copy-link anchor behavior (preserves the source post's interaction)
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
