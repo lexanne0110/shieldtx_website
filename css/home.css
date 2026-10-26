@@ -223,12 +223,24 @@
 @media (max-width: 900px) {
   .scan-band { grid-template-columns: 1fr; gap: 28px; }
   .scan-band-cta { align-items: flex-start; }
-  .scan-panel-grid { grid-template-columns: 1fr; }
+  /* minmax(0, …) so a child's min-content (the nowrap submit label) cannot
+     stretch the single column past the card's content box. */
+  .scan-panel-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 700px) {
   .scan-band { padding: 24px; }
   .scan-panel-grid { margin: 0 24px; padding: 24px 0; }
   .scan-band-cta, .scan-band-cta .button { width: 100%; min-width: 0; }
+  /* Phone: drop the helper sentence, the "No address handy?" prompt and the
+     full-scanner link — they only cost vertical space and blow the column out.
+     "Try a sample" stays, right-aligned under the field. */
+  .scan-help, .scan-sample span, .scan-meta { display: none; }
+  .scan-help-row { justify-content: flex-end; }
+  /* The submit label is an <span>, so theme.css's ` .button span `
+     {font-size:17px;line-height:.6} outranks a bare class here (class+type) and
+     held the button on one ~290px line. Match its specificity and undo both. */
+  .scan-form .button { white-space: normal; }
+  .scan-form .button span { font-size: 11px; line-height: 1.2; }
   .scan-result-grid dd { font-size: 20px; }
   .scan-result-grid > div { padding: 12px; }
 }
