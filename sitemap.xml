@@ -36,6 +36,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.shieldtx.xyz/blog/shieldtx-vs-near-private-perps</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.shieldtx.xyz/blog/how-to-keep-pnl-and-liquidation-levels-private-on-hyperliquid</loc>
     <lastmod>2026-10-08</lastmod>
     <changefreq>yearly</changefreq>
