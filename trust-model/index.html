@@ -100,7 +100,7 @@
               <div class="docs-step-body">
                 <h3 class="docs-h3">Deposit</h3>
                 <p class="docs-step-flow"><b>Your funds</b> → <b>Vault contract</b> → <b>ShieldTX</b></p>
-                <p>ShieldTX accepts deposits directly from every major EVM chain. Your USDC lands in ShieldTX's on-chain vault on Arbitrum via Avail Nexus. The vault contract locks it and credits your ShieldTX account with a private balance only you can see, ready to trade.</p>
+                <p>ShieldTX accepts deposits directly from every major EVM chain. Your USDC lands in ShieldTX's on-chain vault on Arbitrum. The vault contract locks it and credits your ShieldTX account with a private balance only you can see, ready to trade.</p>
                 <ul class="docs-list">
                   <li>Your USDC stays locked in the on-chain vault on Arbitrum and is released only when you submit a signed transaction.</li>
                 </ul>
@@ -111,7 +111,7 @@
               <div class="docs-step-body">
                 <h3 class="docs-h3">Open position</h3>
                 <p class="docs-step-flow"><b>ShieldTX</b> → <b>Fresh Hyperliquid account</b></p>
-                <p>You choose a pair, direction, size, and leverage via the ShieldTX app. ShieldTX creates a brand-new Hyperliquid wallet on-chain, completely unlinkable to your deposit wallet or any previous on-chain trades. <b>Your trade gets placed on Hyperliquid from this fresh wallet.</b></p>
+                <p>You choose a pair, direction, size, and leverage via the ShieldTX app. ShieldTX creates a brand-new Hyperliquid wallet per trade, on-chain, completely unlinkable to your deposit wallet or any previous on-chain trades. <b>Your trade gets placed on Hyperliquid from this fresh wallet.</b></p>
                 <ul class="docs-list">
                   <li>You open and close the position from the ShieldTX app.</li>
                   <li>Your order fills on Hyperliquid's order book, at the same price you'd get trading directly on HL minus the shielding fee.</li>
@@ -128,7 +128,6 @@
                 <ul class="docs-list">
                   <li>Your position follows Hyperliquid's rules. It closes when you close it, or when a take-profit, stop-loss, or liquidation triggers. ShieldTX adds no rules of its own.</li>
                   <li>ShieldTX validates that the settlement has completed on-chain before crediting your ShieldTX balance.</li>
-                  <li>Closing settles on-chain in a few steps before your ShieldTX balance is credited.</li>
                 </ul>
               </div>
             </li>
@@ -137,10 +136,10 @@
               <div class="docs-step-body">
                 <h3 class="docs-h3">Withdraw</h3>
                 <p class="docs-step-flow"><b>ShieldTX</b> → <b>Your wallet</b></p>
-                <p>Funds that aren't in an active trade can be claimed from the ShieldTX vault at any time. You sign a transaction to claim, and the vault sends the funds to the address you choose.</p>
+                <p>Funds that aren't in an active trade can be withdrawn at any time. You sign a withdrawal request, and ShieldTX sends the funds to the address you choose once the withdrawal is confirmed on-chain.</p>
                 <ul class="docs-list">
-                  <li>Only you can claim your funds, with a signed transaction.</li>
-                  <li>Once ShieldTX posts the required confirmation on-chain, you claim your funds from the vault.</li>
+                  <li>Funds move only when you sign a withdrawal request, and are sent to the address you choose.</li>
+                  <li>ShieldTX sends the funds once the withdrawal is confirmed on-chain.</li>
                 </ul>
               </div>
             </li>
@@ -191,7 +190,7 @@
               <tbody>
                 <tr><th scope="row">Vault contract</th><td><span class="docs-trust-pill">On-chain</span> Your balance lives in an on-chain vault contract on Arbitrum.</td></tr>
                 <tr><th scope="row">ShieldTX</th><td><span class="docs-trust-pill">On-chain</span> Every deposit, trade, and withdrawal settles on-chain.</td></tr>
-                <tr><th scope="row">Withdrawals</th><td><span class="docs-trust-pill">Pull-based</span> You claim your funds with a signed transaction, once the protocol posts the confirmation on-chain.</td></tr>
+                <tr><th scope="row">Withdrawals</th><td><span class="docs-trust-pill">Signed request</span> Funds move only after you sign a withdrawal request, and are sent to the address you choose once confirmed on-chain.</td></tr>
               </tbody>
             </table>
           </div>
