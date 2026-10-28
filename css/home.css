@@ -1,22 +1,24 @@
 /* ShieldTX v2 · homepage additions on top of the design (theme.css + site.css).
    Everything uses theme tokens. */
 
-/* ---------- Product section = demo video ----------
-   Desktop: video on the laptop mockup's screen, inside the design's scroll zoom
-   (product-showcase.js scales the whole figure). Positions = the laptop SVG's
-   screen-image area (x 177–1359, y 147–823) in its viewBox (32 84 1474 870),
-   so the camera notch stays visible. Floats with the laptop (same keyframes).
-   Mobile (≤700px, laptop hidden by the design): the video as is. Phone mockup dropped. */
-.shieldtx-photo > .product-video { position: absolute; left: 9.837%; top: 7.241%; width: 80.19%; height: 77.701%; object-fit: contain; background: #0c1018; pointer-events: none; }
+/* ---------- Product section = demo videos ----------
+   Desktop: the video fills the laptop SVG's display (rect x 177, y 114, 1182 × 742,
+   rx 16 in viewBox 32 84 1474 870). The display is 1.593:1, the same shape as the
+   1910 × 1200 recording, so it fills edge to edge. The camera notch (path x 693–843,
+   y 114–146) is redrawn on top as .product-notch, because the video sits above the SVG.
+   Both float with the laptop (same keyframes); product-showcase.js scales the figure.
+   Mobile (≤700px): the laptop is hidden and the portrait app recording plays inside
+   the .product-phone mockup (its own status bar and home indicator are in the video). */
+.shieldtx-photo > .product-video { position: absolute; left: 9.837%; top: 3.448%; width: 80.19%; height: 85.287%; object-fit: cover; border-radius: 1.354% / 2.156%; background: #0c1018; pointer-events: none; }
+.shieldtx-photo > .product-notch { position: absolute; left: 44.844%; top: 3.448%; width: 10.176%; height: 3.678%; border-radius: 0 0 6% 6% / 0 0 28% 28%; background: #050608; pointer-events: none; }
 @media (prefers-reduced-motion: no-preference) {
-  .shieldtx-photo > .product-video { animation: product-laptop-float 6s ease-in-out infinite; animation-play-state: paused; }
-  .shieldtx-stage.is-in-view .shieldtx-photo > .product-video { animation-play-state: running; }
+  .shieldtx-photo > .product-video, .shieldtx-photo > .product-notch { animation: product-laptop-float 6s ease-in-out infinite; animation-play-state: paused; }
+  .shieldtx-stage.is-in-view .shieldtx-photo > .product-video, .shieldtx-stage.is-in-view .shieldtx-photo > .product-notch { animation-play-state: running; }
 }
-/* Mobile (≤700px): the product-phone mockup carries the preview (restored
-   2026-10-19); the demo video is desktop-laptop-only, so keep it hidden here. */
+.product-phone-video { display: block; width: 100%; height: auto; aspect-ratio: 738 / 1600; object-fit: cover; border-radius: 20px; background: #0c1018; }
 @media (max-width: 700px) {
   #shieldtx .shieldtx-photo { width: calc(100% - 58px); } /* = .shieldtx-heading width on mobile */
-  .shieldtx-photo > .product-video { display: none; }
+  .shieldtx-photo > .product-video, .shieldtx-photo > .product-notch { display: none; }
 }
 
 /* Form error line (wallet scan form). */
