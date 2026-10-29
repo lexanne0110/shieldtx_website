@@ -249,3 +249,5 @@
 @media (prefers-reduced-motion: reduce) {
   .scan-panel, .scan-panel-grid { transition: none; }
 }
+
+.faq-grid details { scroll-margin-top: 85px; }
