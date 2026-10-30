@@ -38,6 +38,398 @@
   <script src="/js/vendor/ScrollTrigger.min.js" defer></script>
   <script src="/js/product-showcase.js?v=5" defer></script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.shieldtx.xyz/#organization",
+        "name": "ShieldTX",
+        "url": "https://www.shieldtx.xyz/",
+        "logo": {
+          "@id": "https://www.shieldtx.xyz/#logo"
+        },
+        "image": {
+          "@id": "https://www.shieldtx.xyz/#logo"
+        },
+        "slogan": "Enterprise-grade shielding for Hyperliquid.",
+        "description": "ShieldTX privately routes your trades to Hyperliquid, protecting your signal, reputation and strategies from copy bots, competitors and media.",
+        "parentOrganization": {
+          "@id": "https://www.availproject.org/#organization"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "shieldtx-support@availproject.org",
+          "url": "https://www.shieldtx.xyz/contact-us"
+        },
+        "sameAs": [
+          "https://x.com/ShieldTXxyz"
+        ]
+      },
+      {
+        "@type": "ImageObject",
+        "@id": "https://www.shieldtx.xyz/#logo",
+        "url": "https://www.shieldtx.xyz/assets/favicon-192.png",
+        "contentUrl": "https://www.shieldtx.xyz/assets/favicon-192.png",
+        "width": 192,
+        "height": 192,
+        "caption": "ShieldTX logo"
+      },
+      {
+        "@type": "ImageObject",
+        "@id": "https://www.shieldtx.xyz/#primaryimage",
+        "url": "https://www.shieldtx.xyz/assets/og-image-v2.jpg",
+        "contentUrl": "https://www.shieldtx.xyz/assets/og-image-v2.jpg",
+        "width": 1200,
+        "height": 630,
+        "caption": "ShieldTX - Shielded Perps on Hyperliquid"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.availproject.org/#organization",
+        "name": "AVAIL",
+        "url": "https://www.availproject.org/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.availproject.org/assets/favicon/apple-touch-icon.png",
+          "width": 180,
+          "height": 180
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.shieldtx.xyz/#legal-entity",
+        "name": "Avail Holding Ltd.",
+        "legalName": "Avail Holding Ltd.",
+        "description": "The entity that provides ShieldTX under the ShieldTX Terms and Conditions and Privacy Policy."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.shieldtx.xyz/#website",
+        "url": "https://www.shieldtx.xyz/",
+        "name": "ShieldTX",
+        "inLanguage": "en",
+        "description": "Trade perps on Hyperliquid with full execution shielding and built-in compliance. Get the same fills and control your public exposure.",
+        "publisher": {
+          "@id": "https://www.shieldtx.xyz/#organization"
+        },
+        "copyrightHolder": {
+          "@id": "https://www.shieldtx.xyz/#organization"
+        },
+        "copyrightYear": 2026,
+        "hasPart": {
+          "@id": "https://www.shieldtx.xyz/blog#blog"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.shieldtx.xyz/#webpage",
+        "url": "https://www.shieldtx.xyz/",
+        "name": "ShieldTX - Shielded Perps on Hyperliquid",
+        "headline": "Shield Your Trades on Hyperliquid.",
+        "description": "Trade perps on Hyperliquid with full execution shielding and built-in compliance. Get the same fills and control your public exposure.",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@id": "https://www.shieldtx.xyz/#website"
+        },
+        "about": {
+          "@id": "https://www.shieldtx.xyz/#webapp"
+        },
+        "mainEntity": {
+          "@id": "https://www.shieldtx.xyz/#webapp"
+        },
+        "primaryImageOfPage": {
+          "@id": "https://www.shieldtx.xyz/#primaryimage"
+        },
+        "image": {
+          "@id": "https://www.shieldtx.xyz/#primaryimage"
+        },
+        "publisher": {
+          "@id": "https://www.shieldtx.xyz/#organization"
+        },
+        "mentions": [
+          {
+            "@id": "https://www.shieldtx.xyz/#scanner"
+          },
+          {
+            "@id": "https://www.shieldtx.xyz/#faq"
+          },
+          {
+            "@id": "https://www.shieldtx.xyz/#howto"
+          },
+          {
+            "@id": "https://www.shieldtx.xyz/#site-navigation"
+          }
+        ],
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": [
+            "#hero-title"
+          ]
+        },
+        "potentialAction": {
+          "@type": "CommunicateAction",
+          "name": "Book a private demo",
+          "target": "https://calendar.app.google/ckRN51M3BwzhmydN6"
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://www.shieldtx.xyz/#webapp",
+        "name": "ShieldTX",
+        "url": "https://www.shieldtx.xyz/",
+        "image": {
+          "@id": "https://www.shieldtx.xyz/#primaryimage"
+        },
+        "description": "ShieldTX privately routes your trades to Hyperliquid, protecting your signal, reputation and strategies from copy bots, competitors and media. Your funding wallet stays separate from your trading wallet, and orders execute on Hyperliquid through a fresh trading account. ShieldTX is currently onboarding traders through a private beta.",
+        "applicationCategory": "FinanceApplication",
+        "applicationSubCategory": "Shielded perps trading on Hyperliquid",
+        "featureList": [
+          "Supports every Hyperliquid perpetual market",
+          "Fund with USDC: fund your ShieldTX balance",
+          "Shield your wallet association",
+          "A new trading account for each trade",
+          "Execute on the same Hyperliquid orderbook",
+          "Non-custodial: your shielded balance is held securely on-chain",
+          "Verifiable execution: ZK proofs make your shielded trades verifiable onchain",
+          "Immutable rules: withdraw funds at any time with a signed request",
+          "Wallet exposure scan with no wallet connection required",
+          "API access for trading desks, systematic traders and institutions"
+        ],
+        "audience": {
+          "@type": "Audience",
+          "audienceType": "High-volume traders, trading desks, market makers, funds, and institutions"
+        },
+        "funder": [
+          {
+            "@type": "Organization",
+            "name": "Dragonfly"
+          },
+          {
+            "@type": "Organization",
+            "name": "Cyber Fund"
+          },
+          {
+            "@type": "Organization",
+            "name": "Founders Fund"
+          }
+        ],
+        "creator": {
+          "@id": "https://www.availproject.org/#organization"
+        },
+        "publisher": {
+          "@id": "https://www.shieldtx.xyz/#organization"
+        },
+        "provider": {
+          "@id": "https://www.shieldtx.xyz/#legal-entity"
+        },
+        "softwareHelp": {
+          "@type": "CreativeWork",
+          "name": "ShieldTX trust model",
+          "url": "https://www.shieldtx.xyz/trust-model"
+        },
+        "sameAs": [
+          "https://x.com/ShieldTXxyz"
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://www.shieldtx.xyz/#scanner",
+        "name": "ShieldTX wallet exposure scan",
+        "url": "https://scanner.shieldtx.xyz/",
+        "description": "Discover what your public trading is costing you. Check a public Hyperliquid address with ShieldTX for exposure score, copy exposure, likely copiers and public fills. No wallet connection required.",
+        "applicationCategory": "FinanceApplication",
+        "publisher": {
+          "@id": "https://www.shieldtx.xyz/#organization"
+        },
+        "isPartOf": {
+          "@id": "https://www.shieldtx.xyz/#website"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.shieldtx.xyz/#faq",
+        "name": "A few things worth knowing.",
+        "isPartOf": {
+          "@id": "https://www.shieldtx.xyz/#webpage"
+        },
+        "inLanguage": "en",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I still trade on Hyperliquid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Orders execute on Hyperliquid through a fresh trading account."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What markets are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every Hyperliquid perpetual market."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does it cost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Private beta access members get discounted pricing. Trading: Open position (market) costs 5 bps of notional + $1. Open position (limit) costs 5 bps of notional + $1, refunded if unfilled. Close position costs 5 bps of notional + ~$1 gas. Closing without shielding is free. There is no liquidation fee. Account: Deposits are free. Withdrawals to an external wallet cost $2. Private transfers within ShieldTX are free."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I speak with someone to learn more?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, <a href=\"https://calendar.app.google/ckRN51M3BwzhmydN6\">get in touch</a> to discuss your requirements with our product team."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "@id": "https://www.shieldtx.xyz/#howto",
+        "name": "How ShieldTX shields your trades",
+        "description": "Your funding wallet stays separate from your trading wallet. Nothing on-chain links the two.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Fund with USDC",
+            "text": "Fund your ShieldTX balance.",
+            "url": "https://www.shieldtx.xyz/#how-it-works"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Shield",
+            "text": "Shield your wallet association.",
+            "url": "https://www.shieldtx.xyz/#how-it-works"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "New trading account",
+            "text": "A new account for each trade.",
+            "url": "https://www.shieldtx.xyz/#how-it-works"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Hyperliquid execution",
+            "text": "Execute on the same orderbook.",
+            "url": "https://www.shieldtx.xyz/#how-it-works"
+          }
+        ]
+      },
+      {
+        "@type": "Blog",
+        "@id": "https://www.shieldtx.xyz/blog#blog",
+        "name": "ShieldTX Blog",
+        "url": "https://www.shieldtx.xyz/blog",
+        "inLanguage": "en",
+        "description": "Notes from the ShieldTX team on private trading, threat models, and how we're building the product.",
+        "publisher": {
+          "@id": "https://www.shieldtx.xyz/#organization"
+        }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://www.shieldtx.xyz/#site-navigation",
+        "name": "Main navigation",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "How it works",
+              "url": "https://www.shieldtx.xyz/#how-it-works"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "Wallet scan",
+              "url": "https://www.shieldtx.xyz/#wallet-scan"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "FAQ",
+              "url": "https://www.shieldtx.xyz/#faq"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "Trust model",
+              "url": "https://www.shieldtx.xyz/trust-model"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "Blog",
+              "url": "https://www.shieldtx.xyz/blog"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "Request access",
+              "url": "https://www.shieldtx.xyz/request-access"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "API access",
+              "url": "https://www.shieldtx.xyz/api-access"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 8,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "Contact",
+              "url": "https://www.shieldtx.xyz/contact-us"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 9,
+            "item": {
+              "@type": "SiteNavigationElement",
+              "name": "Open app",
+              "url": "https://app.shieldtx.xyz/"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <!-- @partial head-global -->
   <!-- PostHog analytics -->
   <script>
