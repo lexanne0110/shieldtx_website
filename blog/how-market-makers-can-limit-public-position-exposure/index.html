@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market-Making Privacy on Hyperliquid · ShieldTX</title>
+  <meta name="description" content="Learn how market makers can reduce public wallet attribution on Hyperliquid and use shielded execution for selected inventory and hedging positions." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/how-market-makers-can-limit-public-position-exposure" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png?v=3" />
+
+  <meta property="og:title" content="Market-Making Privacy on Hyperliquid · ShieldTX" />
+  <meta property="og:description" content="Learn how market makers can reduce public wallet attribution on Hyperliquid and use shielded execution for selected inventory and hedging positions." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/how-market-makers-can-limit-public-position-exposure" />
+  <meta property="og:image" content="https://shieldtx.xyz/blog/how-market-makers-can-limit-public-position-exposure/banner.png" />
+  <meta property="og:image:width" content="7680" />
+  <meta property="og:image:height" content="4320" />
+  <meta property="og:image:alt" content="ShieldTX separates a funding wallet from public trading activity for market makers." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Market-Making Privacy on Hyperliquid · ShieldTX" />
+  <meta name="twitter:description" content="Learn how market makers can reduce public wallet attribution on Hyperliquid and use shielded execution for selected inventory and hedging positions." />
+  <meta name="twitter:image" content="https://shieldtx.xyz/blog/how-market-makers-can-limit-public-position-exposure/banner.png" />
+  <meta name="twitter:image:alt" content="ShieldTX separates a funding wallet from public trading activity for market makers." />
+
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/blog/styles.css?v=4" />
+
+  <!-- @partial head-global -->
+  <!-- PostHog analytics -->
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ji Yi init fn mn Hr pn bn cn capture calculateEventProperties Sn register register_once register_for_session unregister unregister_for_session In getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Mn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Cn xn createPersonProfile setInternalOrTestUser Tn hn Pn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing debug Ur wt getPageViewId captureTraceFeedback captureTraceMetric an".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_vj7vAdMiHrkqstyP22Au7yf634eSv9WSgF63WXXPTcPD', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+      })
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
+  <!-- /@partial head-global -->
+</head>
+<body class="page-blog blog-body">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <article class="section frame blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">TRADING PRIVACY</div>
+        <h1>Market-Making Privacy on Hyperliquid: Separating Positions from a Recognised Wallet</h1>
+        <p class="blog-post-meta">
+          <span>2 November 2026</span>
+          <span>9 min read</span>
+        </p>
+
+        <figure class="blog-post-hero">
+          <img src="/blog/how-market-makers-can-limit-public-position-exposure/hero-dark.webp" alt="ShieldTX separates a funding wallet from public trading activity for market makers." width="2048" height="1152" />
+        </figure>
+
+        <p class="intro">Learn how market makers can reduce public wallet attribution on Hyperliquid and use shielded execution for selected inventory and hedging positions.</p>
+<section><h2 id="why-public-position-exposure-matters-to-market-makers">Why public position exposure matters to market makers<a href="#why-public-position-exposure-matters-to-market-makers" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>A market maker expects its quotes to be visible. Public prices and available liquidity are part of the market. The more sensitive exposure often sits behind those quotes: accumulated inventory, hedge positions, margin usage and the trading history associated with the same wallet.</p>
+<p>On Hyperliquid, account data can be queried using a public address. If a market-making wallet becomes recognised, observers may be able to monitor its open positions, orders, fills, leverage, unrealised PnL and liquidation levels. Repeated observation can provide context about how the desk manages inventory and responds when risk moves away from neutral.</p>
+<p>The realistic privacy objective is not to hide the order book. It is to limit how easily public execution data can be connected to the desk's recognised funding wallet and accumulated trading history.</p>
+</section>
+<section><h2 id="what-observers-can-learn-from-a-market-making-wallet">What observers can learn from a market-making wallet<a href="#what-observers-can-learn-from-a-market-making-wallet" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>Market making generates a continuous stream of public activity. One order or fill may reveal little, but the same address operating over time can become a detailed behavioural record.</p>
+<p>Depending on the account data and activity available, observers may inspect:</p>
+<ul>
+<li>Open orders and quoted markets</li>
+<li>Recent fills and trade direction</li>
+<li>Net long or short positions</li>
+<li>Position size and average entry price</li>
+<li>Leverage and margin mode</li>
+<li>Unrealised and realised PnL signals</li>
+<li>Liquidation levels</li>
+<li>Collateral and margin changes</li>
+<li>Historical order and position behaviour</li>
+</ul>
+<p>This does not expose the complete market-making model. It can still reveal enough to support informed guesses about the desk's inventory, risk limits and likely next action.</p>
+</section>
+<section><h2 id="how-position-history-can-reveal-a-market-making-strategy">How position history can reveal a market-making strategy<a href="#how-position-history-can-reveal-a-market-making-strategy" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<h3>Inventory bias can become visible</h3>
+<p>A market maker may accumulate inventory when fills arrive more heavily on one side of the book. A persistent position can show whether the desk is net long or short and how large that imbalance has become. Observers may then interpret changes in quoting or hedging through the lens of that visible inventory.</p>
+<h3>Quote skew can reveal risk management</h3>
+<p>Market makers often adjust prices and sizes to encourage flow that reduces unwanted inventory. When visible positions are compared with changes in open orders, an observer may infer how the desk skews quotes as inventory builds.</p>
+<h3>Hedging cadence can become predictable</h3>
+<p>Repeated observation may show when and how the desk hedges residual exposure. If the same wallet regularly reduces inventory after reaching a familiar size or PnL threshold, that pattern can become a signal for other participants.</p>
+<h3>Capital allocation can be reconstructed</h3>
+<p>Positions across markets can indicate where the desk is deploying capital, which markets are strategically important and where risk has become concentrated. A long-running wallet can therefore reveal more than the state of one trade.</p>
+<h3>Liquidation information can expose stress</h3>
+<p>Visible liquidation levels and margin usage can show where an account may become vulnerable during a sharp move. This does not mean another participant can force a liquidation, but it provides information about the account's risk boundary and potential need to reduce exposure.</p>
+</section>
+<section><h2 id="public-market-data-and-public-attribution-are-different">Public market data and public attribution are different<a href="#public-market-data-and-public-attribution-are-different" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>A market maker cannot expect its resting orders and executed trades to be invisible on a public venue. Other participants need to see the book, prices and available liquidity.</p>
+<p>The additional exposure comes from persistent attribution. If positions, fills and risk remain connected to one recognised address, observers can combine individual events into a longer trading profile. They are no longer analysing only the market. They are analysing a specific desk.</p>
+<p>Limiting public position exposure therefore means reducing the connection between execution activity and a persistent identity. It does not mean removing orders, fills or positions from Hyperliquid.</p>
+</section>
+<section><h2 id="why-common-account-structures-may-be-incomplete">Why common account structures may be incomplete<a href="#why-common-account-structures-may-be-incomplete" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<h3>Subaccounts organise activity but remain addressable</h3>
+<p>Subaccounts can separate strategies, traders or risk mandates and simplify internal controls. They are useful for operations, but they should not automatically be treated as a privacy layer. Hyperliquid actions on behalf of a subaccount use its account address, and account information can be queried using the relevant address.</p>
+<h3>Manual wallet rotation creates new operational work</h3>
+<p>A desk may move activity between wallets to prevent one address from accumulating a complete history. Funding paths, timing, order behaviour and repeated market selection may still reconnect those wallets. Rotation also increases key management, collateral movement, monitoring and reconciliation work.</p>
+<h3>Splitting activity across venues changes the execution model</h3>
+<p>Using several venues may reduce the information concentrated on one platform, but it introduces additional liquidity, custody, collateral and basis considerations. It may also move execution away from the venue the desk intends to support.</p>
+<h3>Flattening inventory more frequently has a cost</h3>
+<p>A market maker can reduce visible position size by hedging or flattening more often. Doing so may increase fees, spread crossing, market impact or operational complexity. Trading less efficiently to reduce visibility is not a free form of privacy.</p>
+</section>
+<section><h2 id="what-limiting-public-exposure-realistically-means">What limiting public exposure realistically means<a href="#what-limiting-public-exposure-realistically-means" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>There are two different objectives:</p>
+<ol>
+<li>Hiding all market-making activity from the venue</li>
+<li>Reducing the public relationship between execution activity and the desk's recognised wallet</li>
+</ol>
+<p>The first objective is incompatible with participating in a public order book. Orders and fills must remain observable as market activity.</p>
+<p>The second objective is more realistic. If sensitive inventory or hedge positions execute through wallets without an established link to the desk's main wallet, observers have less historical context for interpreting the activity.</p>
+<p>The position remains public. The connection to the market maker's broader identity and trading history is better separated.</p>
+</section>
+<section><h2 id="how-shielded-execution-can-fit-a-market-making-workflow">How shielded execution can fit a market-making workflow<a href="#how-shielded-execution-can-fit-a-market-making-workflow" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>A shielded execution layer separates the wallet supplying funds from the wallet that executes and holds a position. With <a href="/">ShieldTX</a>, the general workflow is:</p>
+<ol>
+<li>The desk deposits USDC into a ShieldTX balance.</li>
+<li>The desk submits a Hyperliquid perpetual order through ShieldTX.</li>
+<li>A fresh trading wallet is funded for the position.</li>
+<li>The order is routed to Hyperliquid's native order book.</li>
+<li>The resulting position is held by the fresh trading wallet.</li>
+<li>When the position is closed through ShieldTX, the proceeds return to the shielded balance.</li>
+</ol>
+<p>The order and position remain visible on Hyperliquid. What changes is the public relationship between the execution wallet and the market maker's recognised funding wallet.</p>
+<p>For market makers, shielded execution may be most relevant for selected inventory hedges, directional residual exposure or positions whose persistent attribution creates unwanted information leakage. It should not be assumed to replace the desk's complete high-frequency quoting loop.</p>
+</section>
+<section><h2 id="where-shieldtx-may-and-may-not-fit">Where ShieldTX may and may not fit<a href="#where-shieldtx-may-and-may-not-fit" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>Hyperliquid notes that a market-making strategy can send large numbers of orders and cancellations, while ShieldTX currently introduces a delay of a few seconds for shielded routing. That difference matters.</p>
+<p>A desk should evaluate ShieldTX for workflows where attribution separation matters more than sub-second order management. Examples may include:</p>
+<ul>
+<li>Opening or closing selected inventory hedges</li>
+<li>Separating directional residual risk from the main quoting wallet</li>
+<li>Managing larger positions that should not accumulate under a recognised address</li>
+<li>Testing shielded execution through a controlled API integration</li>
+</ul>
+<p>Latency-sensitive quoting, rapid cancellations and continuous order refreshes require separate technical evaluation. Teams should confirm supported order types, throughput, failure handling and cancellation behaviour before integrating any privacy layer into production market making.</p>
+</section>
+<section><h2 id="account-structures-and-exposure-at-a-glance">Account structures and exposure at a glance<a href="#account-structures-and-exposure-at-a-glance" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<div class="blog-table-wrap"><table class="blog-table"><thead><tr><th scope="col">Area</th><th scope="col">Primary wallet</th><th scope="col">Subaccounts or rotated wallets</th><th scope="col">Shielded execution</th></tr></thead><tbody>
+<tr><td>Orders and fills</td><td>Public</td><td>Public</td><td>Public</td></tr>
+<tr><td>Position visibility</td><td>Visible on recognised wallet</td><td>Visible on operating account</td><td>Visible on execution wallet</td></tr>
+<tr><td>Link to desk history</td><td>Direct</td><td>May be reconstructed</td><td>Designed to reduce direct public linkage</td></tr>
+<tr><td>Inventory profile</td><td>Accumulates under one address</td><td>Fragmented but potentially linkable</td><td>Separated across execution wallets</td></tr>
+<tr><td>Hyperliquid execution</td><td>Native</td><td>Native</td><td>Native order book</td></tr>
+<tr><td>Operational overhead</td><td>Lower</td><td>Increases with accounts</td><td>Managed within ShieldTX workflow</td></tr>
+<tr><td>Suitability for fast quoting</td><td>Native workflow</td><td>Native workflow</td><td>Requires technical evaluation</td></tr>
+<tr><td>Market and liquidation risk</td><td>Remains</td><td>Remains</td><td>Remains</td></tr>
+</tbody></table></div>
+</section>
+<section><h2 id="what-remains-publicly-visible-with-shieldtx">What remains publicly visible with ShieldTX<a href="#what-remains-publicly-visible-with-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>ShieldTX should not be interpreted as making market-making activity invisible. Public observers may still see:</p>
+<ul>
+<li>The temporary execution wallet</li>
+<li>Orders routed to Hyperliquid</li>
+<li>Fills and position changes</li>
+<li>The market, direction and size of a position</li>
+<li>Entry, mark-price and PnL information</li>
+<li>Leverage, margin mode and liquidation price</li>
+<li>Deposits into and withdrawals from the ShieldTX system</li>
+<li>Solver and settlement activity</li>
+</ul>
+<p>Market impact also remains. A sufficiently large order may still signal that a participant is managing meaningful inventory. Shielded execution reduces persistent attribution; it does not eliminate every behavioural or market signal.</p>
+</section>
+<section><h2 id="what-market-makers-should-review-before-integration">What market makers should review before integration<a href="#what-market-makers-should-review-before-integration" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<h3>Latency and throughput</h3>
+<p>Measure the time from order submission to placement on Hyperliquid and confirm whether the workflow suits the intended position. Shielded routing on ShieldTX currently adds a delay of a few seconds.</p>
+<h3>Order and cancellation support</h3>
+<p>Confirm supported order types, post-only behaviour, partial fills, modifications, cancellations and failure handling. A strategy that continuously refreshes quotes has different requirements from a desk placing an inventory hedge.</p>
+<h3>Position and margin monitoring</h3>
+<p>Ensure the desk can monitor positions, PnL, margin and liquidation levels across execution wallets in real time. Public separation must not reduce the team's internal risk visibility.</p>
+<h3>Reconciliation</h3>
+<p>Define how orders, fills, fees, realised PnL and settlements will be recorded in the desk's internal systems. The accounting view should remain complete even when positions are separated across execution wallets.</p>
+<h3>Controls and key management</h3>
+<p>Review who can submit orders, change permissions, close positions and withdraw funds. API credentials, signing policies and emergency actions should fit the desk's existing control framework.</p>
+<h3>Economics</h3>
+<p>Compare privacy value with routing fees, latency, gas costs and any additional operational work. Not every order needs the same level of attribution separation.</p>
+</section>
+<section><h2 id="review-the-exposure-of-the-current-wallet">Review the exposure of the current wallet<a href="#review-the-exposure-of-the-current-wallet" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>Before changing the execution model, inspect what the market can already learn from the desk's public address. The ShieldTX wallet scanner can show public activity and follower patterns using recent Hyperliquid data. <a href="https://scanner.shieldtx.xyz/">Scan your public Hyperliquid wallet exposure</a>.</p>
+<p>The scanner is a diagnostic tool. Similar timing between wallets does not by itself prove copying or common control, but repeated patterns can identify areas that deserve further review.</p>
+</section>
+<section><h2 id="how-to-access-shieldtx">How to access ShieldTX<a href="#how-to-access-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>ShieldTX is a non-custodial execution privacy layer for Hyperliquid perpetuals.</p>
+<p>Professional trading firms and systematic teams can request private beta access and discuss whether the available API workflow fits selected inventory or hedge execution.</p>
+<p><a class="cta" href="/request-access">Request access to ShieldTX</a></p>
+</section>
+<div class="faq" id="faq">
+  <h2>Frequently asked questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+  <div class="faq-item">
+    <h3>Can a market maker hide its orders on Hyperliquid?</h3>
+    <p>No. Resting orders and executed trades remain part of Hyperliquid's market activity. Shielded execution focuses on reducing the link between execution wallets and the market maker's recognised funding wallet.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does ShieldTX hide market impact?</h3>
+    <p>No. Large or aggressive orders may still move the market. Privacy separation does not remove the price impact created by an order.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Are Hyperliquid subaccounts private?</h3>
+    <p>Subaccounts support organisation and delegated trading, but their account data is still associated with an address. They are not a privacy solution.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can ShieldTX run a complete high-frequency quoting strategy?</h3>
+    <p>That should not be assumed. ShieldTX currently introduces a delay of a few seconds, while market-making systems may require rapid placement, modification and cancellation. Teams should evaluate API developments against their exact strategy.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can ShieldTX be used for market-making hedges?</h3>
+    <p>Potentially. Selected inventory or directional hedges may be a more suitable use case than the core quoting loop, subject to order types, latency, costs and internal risk controls.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does the desk retain internal visibility?</h3>
+    <p>Yes. Shielding reduces what outside observers can connect to the desk, not what the desk can see itself. The desk keeps access to its own positions, fills and risk, and remains responsible for monitoring and reconciling every position.</p>
+  </div>
+</div>
+
+      </div>
+    </article>
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Enterprise-grade shielding for Hyperliquid.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo-v2.svg" alt="Avail" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
+  </main>
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have an invite code<br><span>or ShieldTX Account?</span></h2><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
+
+  <script>
+    (function () {
+      // Copy-link anchor behavior
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
