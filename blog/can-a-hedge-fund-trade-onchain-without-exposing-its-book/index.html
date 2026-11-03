@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onchain Privacy for Hedge Funds · ShieldTX</title>
+  <meta name="description" content="Explore how hedge funds can limit public portfolio attribution on Hyperliquid, what shielded execution changes and which institutional controls still matter." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/can-a-hedge-fund-trade-onchain-without-exposing-its-book" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png?v=3" />
+
+  <meta property="og:title" content="Onchain Privacy for Hedge Funds · ShieldTX" />
+  <meta property="og:description" content="Explore how hedge funds can limit public portfolio attribution on Hyperliquid, what shielded execution changes and which institutional controls still matter." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/can-a-hedge-fund-trade-onchain-without-exposing-its-book" />
+  <meta property="og:image" content="https://shieldtx.xyz/blog/can-a-hedge-fund-trade-onchain-without-exposing-its-book/banner.png" />
+  <meta property="og:image:width" content="7680" />
+  <meta property="og:image:height" content="4320" />
+  <meta property="og:image:alt" content="ShieldTX separates publicly visible Hyperliquid positions from a hedge fund's broader book." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Onchain Privacy for Hedge Funds · ShieldTX" />
+  <meta name="twitter:description" content="Explore how hedge funds can limit public portfolio attribution on Hyperliquid, what shielded execution changes and which institutional controls still matter." />
+  <meta name="twitter:image" content="https://shieldtx.xyz/blog/can-a-hedge-fund-trade-onchain-without-exposing-its-book/banner.png" />
+  <meta name="twitter:image:alt" content="ShieldTX separates publicly visible Hyperliquid positions from a hedge fund's broader book." />
+
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/blog/styles.css?v=4" />
+
+  <!-- @partial head-global -->
+  <!-- PostHog analytics -->
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ji Yi init fn mn Hr pn bn cn capture calculateEventProperties Sn register register_once register_for_session unregister unregister_for_session In getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Mn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Cn xn createPersonProfile setInternalOrTestUser Tn hn Pn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing debug Ur wt getPageViewId captureTraceFeedback captureTraceMetric an".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_vj7vAdMiHrkqstyP22Au7yf634eSv9WSgF63WXXPTcPD', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+      })
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
+  <!-- /@partial head-global -->
+</head>
+<body class="page-blog blog-body">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <article class="section frame blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">TRADING PRIVACY</div>
+        <h1>Onchain Privacy for Hedge Funds: Separating Trades from the Fund Wallet</h1>
+        <p class="blog-post-meta">
+          <span>3 November 2026</span>
+          <span>8 min read</span>
+        </p>
+
+        <figure class="blog-post-hero">
+          <img src="/blog/can-a-hedge-fund-trade-onchain-without-exposing-its-book/hero-dark.webp" alt="ShieldTX separates publicly visible Hyperliquid positions from a hedge fund's broader book." width="2048" height="1152" />
+        </figure>
+
+        <p class="intro">Explore how hedge funds can limit public portfolio attribution on Hyperliquid, what shielded execution changes and which institutional controls still matter.</p>
+<section><h2 id="can-a-hedge-fund-trade-onchain-without-exposing-its-book">Can a hedge fund trade onchain without exposing its book<a href="#can-a-hedge-fund-trade-onchain-without-exposing-its-book" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>Not completely. Onchain venues are designed to make transactions and account activity observable. A hedge fund cannot place a visible order, hold a public position and simultaneously make that market activity disappear.</p>
+<p>It can, however, reduce how easily individual trades and positions are connected to its recognised treasury, fund or strategy wallet. That distinction matters. The market can still see execution, while learning less about the institution behind it and the broader portfolio that the activity belongs to.</p>
+<p>For hedge funds considering Hyperliquid, the practical objective is therefore not invisibility. It is controlled public attribution: keeping a complete internal view of risk while limiting the external trail that connects funding, execution, PnL and liquidation information to one persistent address.</p>
+</section>
+<section><h2 id="what-exposing-the-book-means-onchain">What exposing the book means onchain<a href="#what-exposing-the-book-means-onchain" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>A hedge fund's book is more than a list of open positions. It includes directional exposure, hedges, concentration, leverage, margin usage, entry levels, trading cadence and the relationship between positions across markets.</p>
+<p>On a public venue, an observer who knows a fund's address may be able to monitor:</p>
+<ul>
+<li>Open perpetual positions and their direction</li>
+<li>Position size and average entry price</li>
+<li>Leverage, margin mode and liquidation levels</li>
+<li>Unrealised PnL and changes in account equity</li>
+<li>Open orders, fills and order history</li>
+<li>Funding payments and holding periods</li>
+<li>Deposits, withdrawals and collateral movements</li>
+<li>Repeated activity across the same markets</li>
+</ul>
+<p>No single field reveals a complete investment thesis. The risk grows when these signals are combined over time. A persistent wallet can become a public record of how the fund deploys capital and responds to changing market conditions.</p>
+</section>
+<section><h2 id="what-observers-may-infer-from-a-persistent-fund-wallet">What observers may infer from a persistent fund wallet<a href="#what-observers-may-infer-from-a-persistent-fund-wallet" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<h3>Directional conviction</h3>
+<p>Position size, duration and repeated additions can indicate which trades carry the most conviction. Even when the underlying research remains private, the resulting exposure can reveal where the fund is willing to concentrate risk.</p>
+<h3>Entry and exit discipline</h3>
+<p>A visible history of fills and position changes may show whether the fund scales into trades, takes profit in stages, cuts exposure at defined thresholds or holds through volatility. These patterns can become useful context for copy traders and competing desks.</p>
+<h3>Hedging relationships</h3>
+<p>Positions across related markets may reveal an intended hedge, relative-value trade or basis strategy. An observer may not know the exact mandate, but correlated changes can expose how the fund offsets risk.</p>
+<h3>Stress and liquidation boundaries</h3>
+<p>Leverage, margin usage and liquidation levels can show when a position is moving closer to a risk boundary. This information does not guarantee that another participant can force an outcome, but it can make the fund's constraints easier to estimate.</p>
+<h3>Capital allocation</h3>
+<p>A long-running wallet can show which markets receive the most capital and how exposure changes across a cycle. Over time, the wallet becomes a public portfolio history rather than a record of isolated trades.</p>
+</section>
+<section><h2 id="transparency-and-attribution-are-different">Transparency and attribution are different<a href="#transparency-and-attribution-are-different" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>Onchain trading requires transparency at the market level. Orders, fills and positions must remain verifiable. The more avoidable exposure comes from attribution: the ability to connect that public activity to a known fund and then combine it with the fund's earlier trading history.</p>
+<p>This creates two separate questions:</p>
+<ol>
+<li>Can the fund remove its activity from the public market?</li>
+<li>Can the fund reduce the direct public link between that activity and its recognised wallet?</li>
+</ol>
+<p>The answer to the first question is no. The second is possible when execution is separated from the persistent wallet that supplies capital and carries the fund's public identity.</p>
+</section>
+<section><h2 id="why-common-operating-structures-may-not-be-enough">Why common operating structures may not be enough<a href="#why-common-operating-structures-may-not-be-enough" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<h3>One wallet is operationally simple but information rich</h3>
+<p>Funding and trading from one address simplifies monitoring and reconciliation. It also concentrates positions, PnL, margin and history into a single public profile.</p>
+<h3>Subaccounts separate mandates, not necessarily attribution</h3>
+<p>Subaccounts can help a fund organise strategies and permissions. They remain addressable accounts, and their public activity may still be studied when the relevant address or relationship becomes known.</p>
+<h3>Manual wallet rotation can create a new fingerprint</h3>
+<p>Moving between wallets reduces the history held by one address, but timing, funding paths, position sizes and repeated behaviour may reconnect the activity. Rotation also increases key management and reconciliation work.</p>
+<h3>Centralised venues change the trade-off</h3>
+<p>A centralised venue may reduce public position visibility, but it introduces custody, counterparty and withdrawal considerations. It also moves execution away from the onchain venue and liquidity the fund may specifically want to access.</p>
+</section>
+<section><h2 id="what-shielded-execution-changes">What shielded execution changes<a href="#what-shielded-execution-changes" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>A shielded execution layer separates the wallet providing funds from the wallet that executes and holds a position. With <a href="/">ShieldTX</a>, the general flow is:</p>
+<ol>
+<li>The fund deposits USDC into its ShieldTX balance.</li>
+<li>The fund submits a Hyperliquid perpetual order through ShieldTX.</li>
+<li>A fresh execution wallet is funded for the position.</li>
+<li>The order reaches Hyperliquid's native order book.</li>
+<li>The position and its public account data sit on the execution wallet.</li>
+<li>When the position is closed through ShieldTX, proceeds return to the shielded balance.</li>
+</ol>
+<p>The trade is still onchain. Its size, direction, fills and market impact do not disappear. What changes is the direct public relationship between the execution wallet and the fund's recognised funding wallet.</p>
+<p>For a hedge fund, this can reduce the amount of portfolio context available to an observer. A visible position on a fresh wallet provides less history than the same position added to an address already associated with the fund's treasury and earlier strategies.</p>
+</section>
+<section><h2 id="what-shielded-execution-does-not-hide">What shielded execution does not hide<a href="#what-shielded-execution-does-not-hide" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>ShieldTX should not be interpreted as an invisible order book or a guarantee that no one can infer anything about a trade. Public observers may still see:</p>
+<ul>
+<li>The temporary wallet that executes the position</li>
+<li>Orders and fills on Hyperliquid</li>
+<li>Position size, direction and entry information</li>
+<li>PnL, leverage, margin and liquidation information on that wallet</li>
+<li>Market impact created by the order</li>
+<li>Deposits into and withdrawals from the ShieldTX system</li>
+<li>Solver and settlement activity</li>
+</ul>
+<p>Sophisticated observers may also use timing, size and repeated behaviour to form hypotheses. Shielded execution reduces direct persistent attribution. It does not eliminate all statistical inference, execution risk or market signalling.</p>
+</section>
+<section><h2 id="execution-structures-at-a-glance">Execution structures at a glance<a href="#execution-structures-at-a-glance" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<div class="blog-table-wrap"><table class="blog-table"><thead><tr><th scope="col">Area</th><th scope="col">Persistent fund wallet</th><th scope="col">Manual wallet rotation</th><th scope="col">Shielded execution</th></tr></thead><tbody>
+<tr><td>Orders and fills</td><td>Public</td><td>Public</td><td>Public</td></tr>
+<tr><td>Position data</td><td>On recognised wallet</td><td>On rotated wallet</td><td>On execution wallet</td></tr>
+<tr><td>Link to fund history</td><td>Direct</td><td>May be reconstructed</td><td>Designed to reduce direct linkage</td></tr>
+<tr><td>Portfolio context</td><td>Accumulates over time</td><td>Fragmented but potentially linkable</td><td>Separated across execution wallets</td></tr>
+<tr><td>Hyperliquid liquidity</td><td>Native</td><td>Native</td><td>Native order book</td></tr>
+<tr><td>Operational work</td><td>Lower</td><td>Higher</td><td>Managed through ShieldTX workflow</td></tr>
+<tr><td>Market and liquidation risk</td><td>Remains</td><td>Remains</td><td>Remains</td></tr>
+</tbody></table></div>
+</section>
+<section><h2 id="where-this-can-fit-in-a-hedge-fund-workflow">Where this can fit in a hedge fund workflow<a href="#where-this-can-fit-in-a-hedge-fund-workflow" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>A fund does not need to apply the same execution structure to every trade. The value of attribution separation is usually highest where public portfolio information is most sensitive.</p>
+<p>Potential use cases may include:</p>
+<ul>
+<li>Directional positions that would reveal a high-conviction view</li>
+<li>Hedges that expose the risk profile of another position</li>
+<li>Larger positions accumulated over time</li>
+<li>Trades where copy activity can affect execution or exit conditions</li>
+<li>Selected strategies routed through a controlled API workflow</li>
+</ul>
+<p>Latency-sensitive and high-frequency strategies require separate evaluation. ShieldTX states that shielded routing currently introduces a delay of a few seconds. A fund should confirm that supported order types, cancellation behaviour, throughput and failure handling fit the intended strategy before production use.</p>
+</section>
+<section><h2 id="what-an-institutional-team-should-evaluate">What an institutional team should evaluate<a href="#what-an-institutional-team-should-evaluate" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<h3>Internal risk visibility</h3>
+<p>The portfolio manager and risk team still need a complete view across all execution wallets. Public separation should never create fragmented internal monitoring.</p>
+<h3>Execution and latency</h3>
+<p>Measure the time from instruction to placement on Hyperliquid and test performance under realistic market conditions. Confirm how limit orders, partial fills, cancellations and emergency closes behave.</p>
+<h3>Reconciliation and reporting</h3>
+<p>Define how orders, fills, fees, funding, realised PnL and settlements feed into the fund's books and records. The external trail may be separated, but the internal audit trail must remain complete.</p>
+<h3>Permissions and key management</h3>
+<p>Review who can place orders, close positions and withdraw funds. API credentials, approval policies and incident procedures should fit the fund's existing control environment.</p>
+<h3>Compliance and counterparties</h3>
+<p>A hedge fund should assess the legal, regulatory, sanctions-screening, custody and reporting implications for its jurisdiction and mandate. Shielded execution changes public attribution, not the fund's compliance obligations.</p>
+<h3>Economics</h3>
+<p>Compare the value of limiting information leakage with routing fees, gas costs, latency and operational effort. The appropriate structure may differ by strategy and position size.</p>
+</section>
+<section><h2 id="review-what-the-market-can-already-see">Review what the market can already see<a href="#review-what-the-market-can-already-see" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>Before changing execution, review the public footprint of the fund's current Hyperliquid address. The ShieldTX scanner can help identify visible activity and follower patterns using recent public data. <a href="https://scanner.shieldtx.xyz/">Scan your public Hyperliquid wallet</a>.</p>
+<p>The scanner is a diagnostic tool. Similar activity between wallets is not proof of copying or common control, but it can identify repeated patterns that deserve closer review.</p>
+</section>
+<section><h2 id="how-to-access-shieldtx">How to access ShieldTX<a href="#how-to-access-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+<p>ShieldTX is a non-custodial shielded execution layer for Hyperliquid perpetuals. Hedge funds and professional trading teams can request private beta access and evaluate whether the available workflow fits selected strategies.</p>
+<p><a class="cta" href="/request-access">Request access to ShieldTX</a></p>
+</section>
+<div class="faq" id="faq">
+  <h2>Frequently asked questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+  <div class="faq-item">
+    <h3>Can a hedge fund make its Hyperliquid positions invisible?</h3>
+    <p>No. Positions remain visible on the execution wallet. Shielded execution is designed to reduce the direct public link between that wallet and the fund's recognised funding wallet.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does ShieldTX hide orders or market impact?</h3>
+    <p>No. Orders still reach Hyperliquid's order book, and sufficiently large or aggressive orders may still move the market.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can observers still analyse an execution wallet?</h3>
+    <p>Yes. They can analyse the activity visible on that wallet. A fresh execution wallet provides less persistent context, but it does not make the trade itself disappear.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Are subaccounts enough to protect a fund's book?</h3>
+    <p>Subaccounts are useful for operational separation, but they remain associated with addressable public accounts. They should not automatically be treated as an attribution-shielding solution.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can a fund use ShieldTX through an API?</h3>
+    <p>API access is available on request. The fund should evaluate latency, order support, monitoring, reconciliation and controls against its own requirements.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does shielded execution remove compliance obligations?</h3>
+    <p>No. Funds remain responsible for applicable legal, regulatory, reporting and internal-control requirements.</p>
+  </div>
+</div>
+
+      </div>
+    </article>
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Enterprise-grade shielding for Hyperliquid.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo-v2.svg" alt="Avail" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
+  </main>
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have an invite code<br><span>or ShieldTX Account?</span></h2><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
+
+  <script>
+    (function () {
+      // Copy-link anchor behavior
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
