@@ -226,8 +226,11 @@
   .scan-band { grid-template-columns: 1fr; gap: 28px; }
   .scan-band-cta { align-items: flex-start; }
   /* minmax(0, …) so a child's min-content (the nowrap submit label) cannot
-     stretch the single column past the card's content box. */
-  .scan-panel-grid { grid-template-columns: minmax(0, 1fr); }
+     stretch the single column past the card's content box. The :has() selector
+     matches the desktop two-column rule's specificity, or a shown result would
+     keep the form and result side by side on tablets and phones. */
+  .scan-panel-grid,
+  .scan-panel-grid:has(#scan-result:not([hidden])) { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 700px) {
   .scan-band { padding: 24px; }
