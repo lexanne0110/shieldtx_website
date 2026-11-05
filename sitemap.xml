@@ -36,6 +36,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.shieldtx.xyz/blog/the-copy-bot-tax-hiding-in-your-hyperliquid-trades</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.shieldtx.xyz/blog/private-perpetual-trading-on-hyperliquid</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>yearly</changefreq>
