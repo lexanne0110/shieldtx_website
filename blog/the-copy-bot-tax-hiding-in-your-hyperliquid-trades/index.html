@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Copy-Bot Tax Hiding In Your Hyperliquid Trades · ShieldTX</title>
+  <meta name="description" content="ShieldTX analysis of top 100 traders on Hyperliquid finds losses of 63bps per trade to copy-bots." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/the-copy-bot-tax-hiding-in-your-hyperliquid-trades" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png?v=3" />
+
+  <meta property="og:title" content="The Copy-Bot Tax Hiding In Your Hyperliquid Trades · ShieldTX" />
+  <meta property="og:description" content="ShieldTX analysis of top 100 traders on Hyperliquid finds losses of 63bps per trade to copy-bots." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/the-copy-bot-tax-hiding-in-your-hyperliquid-trades" />
+  <meta property="og:image" content="https://shieldtx.xyz/assets/og-image-v2.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Copy-Bot Tax Hiding In Your Hyperliquid Trades · ShieldTX" />
+  <meta name="twitter:description" content="ShieldTX analysis of top 100 traders on Hyperliquid finds losses of 63bps per trade to copy-bots." />
+
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/blog/styles.css?v=4" />
+
+  <!-- @partial head-global -->
+  <!-- PostHog analytics -->
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ji Yi init fn mn Hr pn bn cn capture calculateEventProperties Sn register register_once register_for_session unregister unregister_for_session In getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Mn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Cn xn createPersonProfile setInternalOrTestUser Tn hn Pn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing debug Ur wt getPageViewId captureTraceFeedback captureTraceMetric an".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_vj7vAdMiHrkqstyP22Au7yf634eSv9WSgF63WXXPTcPD', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+      })
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
+  <!-- /@partial head-global -->
+</head>
+<body class="page-blog blog-body">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <article class="section frame blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <div class="eyebrow">Research</div>
+        <h1>The Copy-Bot Tax Hiding In Your Hyperliquid Trades</h1>
+        <p class="blog-post-meta">
+          <span>5 November 2026</span>
+          <span>3 min read</span>
+        </p>
+
+        <figure class="blog-post-hero">
+          <img src="/blog/the-copy-bot-tax-hiding-in-your-hyperliquid-trades/hero-dark.webp" alt="ShieldTX hero featuring a Roman coin beside the title The Copy-Tax Hiding on Hyperliquid." width="2048" height="1152" />
+        </figure>
+
+        <p class="intro">New ShieldTX <a href="https://www.theblock.co/news/defi/2026-10-28-avail-launches-shieldtx-privacy-tool-targeting-copy-trading-bots-on-hyperliquid-431977">analysis</a> finds that top perp traders being copied lose a median of 63bps per trade. And the bots copying them aren't faring much better.</p>
+
+        <p>Copy trading has become one of the most popular ways to participate in on-chain perps. But how much does copying actually cost, both for the copiers and for the traders being copied?</p>
+        <p>We dug into 30 days of Hyperliquid perp data to find out.</p>
+
+        <section>
+          <h2 id="what-we-did">What we did<a href="#what-we-did" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>We started with every wallet that traded perps on Hyperliquid over a 30-day window: <strong>332,317 wallets</strong> in total.</p>
+          <p>From that universe, we identified <strong>potential copiers</strong>: wallets that opened the same coin and side within 60 seconds of a leader, on at least 10 matching fills over the window.</p>
+          <p>We then measured the economic cost on both sides of the trade:</p>
+          <p><strong>Cost to copiers.</strong> For each matched fill, we calculated the entry edge given up by arriving late. We measured how much worse the copier's entry was than the leader's, multiplied by the copier's size:</p>
+          <p><em>`max(copier_price &minus; leader_price, 0) &times; copier_size`</em> for buys, mirrored for sells.</p>
+          <p>We summed these values across copiers, this captures the slippage copy-bots pay by chasing the leader's price. We counted only the fills where the copier got a worse price, so this is an upper bound on what copiers pay for arriving late.</p>
+          <p><strong>Cost to leaders.</strong> We joined copier fills to each leader burst within the 60-second window, then split bursts into those that had copier fills during execution and those that didn't. Controlling for coin, size and volatility, we compared price drift between the two groups. If copied bursts drift meaningfully more, that difference is the cost of being copied.</p>
+          <p><strong>The headline number.</strong> For a random sample of 7 wallets on the Hyperliquid leaderboard (30-day PnL), we compared the price drift on bursts that were copied against bursts that weren't. The gap between the two is the cost of being copied. We started with 7 wallets and are expanding coverage in future reports.</p>
+        </section>
+
+        <section>
+          <h2 id="what-we-found">What we found<a href="#what-we-found" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>Across our sample, copied bursts drifted a median of 63bps more against the leader than comparable uncopied bursts.</p>
+          <p>On a $1M position, that is roughly $6,300 lost before the trade has a chance to work. The effect was more prevalent on Altcoins.</p>
+          <p>That is the cost of being copied: the adverse drift leaders experience when copy-bots pile into their positions mid-execution. It is a hidden tax on the best traders on the platform, and it adds up on every burst that gets copied.</p>
+        </section>
+
+        <section>
+          <h2 id="check-your-own-wallet">Check your own wallet<a href="#check-your-own-wallet" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>We studied top-100 wallets, but the same mechanics apply to any public Hyperliquid wallet that bots can watch.</p>
+          <p>We built the <strong><a href="https://scanner.shieldtx.xyz/">Hyperliquid Copy-bot Scanner</a></strong> so you can see the estimated impact on your own trading. It uses a rolling 30-day window of all trading activity, perps only, to show which bots are mirroring your trades and what it is costing you. Make sure you have enough HL perp trading activity over the last 30 days to see the results.</p>
+          <p><a href="https://scanner.shieldtx.xyz/">scanner.shieldtx.xyz</a></p>
+        </section>
+
+        <section>
+          <h2 id="shield-your-strategy">Shield your strategy<a href="#shield-your-strategy" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+          <p>Copy bots work by watching a known wallet. ShieldTX opens each position from a fresh Hyperliquid account, so there is no wallet for them to follow.<br /><br />We built ShieldTX to provide enterprise-grade transaction shielding for high-volume perp traders on Hyperliquid with an API that integrates natively into existing trading setups. ShieldTX privately routes your trades to Hyperliquid, protecting your signal, reputation and strategies from copy bots, competitors and media. Your funding wallet stays separate from your trading wallet, and nothing on-chain links the two.</p>
+          <p><a href="/">shieldtx.xyz</a></p>
+        </section>
+
+        <hr />
+
+        <p><em>Methodology note:<br /><br />Universe: 332,317 wallets.</em></p>
+        <p><em>Copiers: at least 10 fills on the same coin and side within 60 seconds after a leader.</em></p>
+        <p><em>Leader sample: 7 wallets drawn at random from the top 100 on the [30-day PnL] leaderboard.</em></p>
+        <p><em>Leader cost: median drift gap, in bps, between copied bursts and matched uncopied bursts.</em></p>
+        <p><em>Copier cost: one-sided entry slippage (upper bound).</em></p>
+        <p><em>Limitations: possible coincidental matches on high-volume coins, and drift may partly reflect momentum.</em></p>
+        <p><em>Scanner uses a rolling 30-day window of perps activity.</em></p>
+      </div>
+    </article>
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Enterprise-grade shielding for Hyperliquid.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo-v2.svg" alt="Avail" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
+  </main>
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have an invite code<br><span>or ShieldTX Account?</span></h2><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
+
+  <script>
+    (function () {
+      // Copy-link anchor behavior
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
