@@ -17,6 +17,7 @@
   const submitLabel = submit ? submit.querySelector('.scan-submit-label') : null;
   const result = document.getElementById('scan-result');
   const openFull = document.getElementById('scan-open-full');
+  const again = document.getElementById('scan-again');
   const walletRe = /^0x[0-9a-f]{40}$/i;
   const SCANNER = (form.dataset.scannerUrl || 'https://scanner.shieldtx.xyz/').replace(/\/+$/, '');
   const ENDPOINT = form.dataset.previewEndpoint || '/api/scanner-preview';
@@ -84,7 +85,7 @@
   function setLoading(loading) {
     form.classList.toggle('is-loading', loading);
     if (submit) submit.disabled = loading;
-    if (submitLabel) submitLabel.textContent = loading ? 'Scanning…' : 'Preview wallet exposure';
+    if (submitLabel) submitLabel.textContent = loading ? 'Scanning wallet…' : 'Check exposure';
   }
 
   function render(data, address) {
@@ -173,14 +174,22 @@
 
   wallet.addEventListener('input', () => { trackStart(); setError(''); });
 
+  // The result replaces the form (css/home.css); this brings the form back.
+  if (again) again.addEventListener('click', () => {
+    result.hidden = true;
+    wallet.focus();
+    wallet.select();
+  });
+
   // Hand-off to the full scanner — the scanner-growth conversion this section
   // exists for: the deep-linked result link, the error fallback, and the
-  // sample-wallet link inside the form.
+  // sample-wallet link and the general scanner link inside the form.
   const trackHandoff = (el, from) => {
     if (!el) return;
     el.addEventListener('click', () => capture('scan_handoff_clicked', { from }));
   };
   trackHandoff(openFull, 'result');
+  trackHandoff(form.querySelector('.scan-meta a'), 'meta');
   trackHandoff(fallback, 'fallback');
   trackHandoff(form.querySelector('.scan-sample a'), 'sample');
 })();

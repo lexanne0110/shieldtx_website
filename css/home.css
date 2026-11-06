@@ -183,11 +183,10 @@
 .scan-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.22, 1, .36, 1); }
 .scan-section.is-open .scan-panel { grid-template-rows: 1fr; }
 .scan-panel-inner { min-height: 0; overflow: hidden; }
-/* One column until there is a result to show: an empty second column reads as a hole
-   under the form. js/wallet-scan.js un-hides #scan-result on success, which is what
-   opens the second column. */
+/* One column on every screen size: js/wallet-scan.js un-hides #scan-result on success,
+   and the result then replaces the form (below) instead of sitting beside it. */
 .scan-panel-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 4vw, 80px); margin: 0 clamp(28px, 3vw, 56px); padding: clamp(28px, 3vw, 48px) 0 clamp(28px, 3vw, 56px); border-top: 1px solid #fff1; opacity: 0; transition: opacity .3s; }
-.scan-panel-grid:has(#scan-result:not([hidden])) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.scan-panel-grid:has(#scan-result:not([hidden])) .scan-form { display: none; }
 .scan-section.is-open .scan-panel-grid { opacity: 1; transition-delay: .12s; }
 
 .scan-form label { display: block; font-size: 13px; color: var(--text-2); margin-bottom: 10px; }
@@ -211,6 +210,11 @@
 
 .scan-side { display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; }
 .scan-full-link { font-size: 14px; width: max-content; }
+/* After a preview: "See more" opens the full scanner deep-linked to the scanned wallet;
+   "Scan another wallet" hides the result and brings the form back (js/wallet-scan.js). */
+.scan-see-more { width: 100%; margin-top: 16px; }
+.scan-again { display: block; margin: 14px auto 0; padding: 4px; border: 0; background: none; font-size: 13px; color: var(--text-3); text-decoration: underline; text-decoration-color: #ffffff4d; text-underline-offset: 4px; }
+.scan-again:hover { color: var(--text-1); }
 .scan-result-summary { font-size: 13px; color: var(--text-3); margin: 0 0 14px; }
 .scan-result-summary b { font: 500 13px var(--mono); color: var(--text-1); }
 .scan-result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0; border: 1px solid #fff2; border-radius: var(--r); overflow: hidden; background: #fff1; }
@@ -222,15 +226,26 @@
 .scan-result-primary dd small { font-size: 14px; color: var(--text-4); margin-left: 4px; }
 .scan-result-primary .scan-result-meta { font-size: 13px; line-height: 1.5; letter-spacing: 0; color: var(--text-3); margin: 10px 0 0; }
 
+/* Desktop: the submit button sits on the input's row instead of a full-width bar, and
+   the result spreads into one row of stats with its actions underneath. */
+@media (min-width: 901px) {
+  .scan-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; }
+  .scan-form > * { grid-column: 1 / -1; }
+  .scan-form input { grid-row: 2; grid-column: 1; }
+  .scan-form .button { grid-row: 2; grid-column: 2; width: auto; margin-top: 0; padding-inline: 28px; }
+  .scan-result { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 24px; }
+  .scan-result > * { grid-column: 1 / -1; }
+  .scan-result-grid { grid-template-columns: 2fr repeat(3, 1fr); }
+  .scan-result-grid .scan-result-primary { grid-column: auto; }
+  .scan-see-more { grid-row: 3; grid-column: 2; width: auto; padding-inline: 28px; }
+  .scan-again { grid-row: 3; grid-column: 1; justify-self: start; margin: 16px 0 0; padding: 4px 0; }
+}
 @media (max-width: 900px) {
   .scan-band { grid-template-columns: 1fr; gap: 28px; }
   .scan-band-cta { align-items: flex-start; }
   /* minmax(0, …) so a child's min-content (the nowrap submit label) cannot
-     stretch the single column past the card's content box. The :has() selector
-     matches the desktop two-column rule's specificity, or a shown result would
-     keep the form and result side by side on tablets and phones. */
-  .scan-panel-grid,
-  .scan-panel-grid:has(#scan-result:not([hidden])) { grid-template-columns: minmax(0, 1fr); }
+     stretch the single column past the card's content box. */
+  .scan-panel-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 700px) {
   .scan-band { padding: 24px; }
