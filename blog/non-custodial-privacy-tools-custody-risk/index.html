@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Non-Custodial Privacy Tools & Custody Risk · ShieldTX</title>
+  <meta name="description" content="Understand how non-custodial privacy tools handle funds, what custody risks remain, and what to check before making shielded Hyperliquid trades." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/non-custodial-privacy-tools-custody-risk" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png?v=3" />
+
+  <meta property="og:title" content="Non-Custodial Privacy Tools &amp; Custody Risk · ShieldTX" />
+  <meta property="og:description" content="Understand how non-custodial privacy tools handle funds, what custody risks remain, and what to check before making shielded Hyperliquid trades." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/non-custodial-privacy-tools-custody-risk" />
+  <meta property="og:image" content="https://shieldtx.xyz/assets/og-image-v2.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Non-Custodial Privacy Tools &amp; Custody Risk · ShieldTX" />
+  <meta name="twitter:description" content="Understand how non-custodial privacy tools handle funds, what custody risks remain, and what to check before making shielded Hyperliquid trades." />
+
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/blog/styles.css?v=4" />
+
+  <!-- @partial head-global -->
+  <!-- PostHog analytics -->
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ji Yi init fn mn Hr pn bn cn capture calculateEventProperties Sn register register_once register_for_session unregister unregister_for_session In getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Mn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Cn xn createPersonProfile setInternalOrTestUser Tn hn Pn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing debug Ur wt getPageViewId captureTraceFeedback captureTraceMetric an".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_vj7vAdMiHrkqstyP22Au7yf634eSv9WSgF63WXXPTcPD', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+      })
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
+  <!-- /@partial head-global -->
+</head>
+<body class="page-blog blog-body">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <article class="section frame blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">← Back to all posts</a>
+        <h1>Non-Custodial Privacy Tools and Custody Risk: Who Controls Your Funds?</h1>
+        <p class="blog-post-meta">
+          <span>6 November 2026</span>
+          <span>4 min read</span>
+        </p>
+
+        <figure class="blog-post-hero">
+          <img src="/blog/non-custodial-privacy-tools-custody-risk/hero-dark.webp" alt="Who Controls Your Funds? ShieldTX hero featuring a wallet, green key and shield." width="2048" height="1152" />
+        </figure>
+
+        <p class="intro">Non-custodial privacy tools can reduce reliance on a custodian by requiring user authorisation to move funds. They do not eliminate smart-contract risk, infrastructure dependencies or withdrawal delays. To assess custody risk, check who can authorise spending, who controls the keys and what must happen before a withdrawal completes.</p>
+<p>For traders using privacy tools, there is another question: who can see the activity? Keeping trades private and keeping control of funds are separate protections. A product should explain both.</p>
+<section>
+<h2 id="what-is-a-non-custodial-privacy-tool">What is a non-custodial privacy tool?<a href="#what-is-a-non-custodial-privacy-tool" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>A non-custodial privacy tool limits public visibility into financial activity while using keys, signatures and protocol rules to enforce user control over spending.</p>
+<p>Funds do not necessarily remain in the user's original wallet. They may be held in a smart contract or committed as collateral on a trading venue. What matters is whether the service can move those funds without the authorisation required by the protocol.</p>
+<p>A private balance alone does not establish non-custodial control. It describes visibility, not spending authority.</p>
+</section>
+<section>
+<h2 id="does-non-custodial-mean-there-is-no-custody-risk">Does non-custodial mean there is no custody risk?<a href="#does-non-custodial-mean-there-is-no-custody-risk" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>No. Non-custodial systems can reduce the risk of a provider spending funds at its discretion, but users still depend on the security of the system and its withdrawal process.</p>
+<p>Several risks need separate consideration:</p>
+<div class="blog-table-wrap"><table class="blog-table"><caption>Custody risks and the controls to check</caption><thead><tr><th scope="col">Risk</th><th scope="col">What to check</th></tr></thead><tbody>
+<tr><th scope="row">Unauthorised spending</th><td>Can anyone move funds without the required user signature?</td></tr>
+<tr><th scope="row">Key compromise</th><td>Who can access, recover or use the keys?</td></tr>
+<tr><th scope="row">Smart-contract failure</th><td>Could a bug allow funds to be stolen or locked?</td></tr>
+<tr><th scope="row">Administrative control</th><td>Can an administrator change contracts, permissions or withdrawal rules?</td></tr>
+<tr><th scope="row">Withdrawal delays</th><td>Does access depend on an operator processing transactions?</td></tr>
+<tr><th scope="row">External dependencies</th><td>Which bridges, attestations or other services must work correctly?</td></tr>
+</tbody></table></div>
+<p>The important distinction is between preventing someone from taking your funds and ensuring you can access them when needed.</p>
+</section>
+<section>
+<h2 id="how-does-shieldtx-handle-funds-for-shielded-hyperliquid-trades">How does ShieldTX handle funds for shielded Hyperliquid trades?<a href="#how-does-shieldtx-handle-funds-for-shielded-hyperliquid-trades" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p><a href="/">ShieldTX</a> holds deposited USDC in an onchain vault on Arbitrum and records a corresponding shielded balance. A fresh Hyperliquid trading account is funded for each trade, and orders execute on Hyperliquid's order book.</p>
+<p>The fund flow has four stages:</p>
+<ol><li><strong>Deposit:</strong> USDC enters the vault, and the user receives a corresponding shielded balance.</li><li><strong>Trade:</strong> A fresh trading account is funded for a shielded Hyperliquid trade.</li><li><strong>Close:</strong> The position closes on Hyperliquid, and proceeds return through the ShieldTX flow to the shielded balance.</li><li><strong>Withdraw:</strong> The user signs a withdrawal request specifying the recipient. Funds are released after the required onchain confirmation.</li></ol>
+<p><a href="/trust-model">ShieldTX's trust model</a> states that Privy handles trading-wallet keys client-side. Users should review the signing and recovery arrangements alongside the fund flow.</p>
+</section>
+<section>
+<h2 id="what-prevents-an-operator-from-spending-a-user-s-funds">What prevents an operator from spending a user's funds?<a href="#what-prevents-an-operator-from-spending-a-user-s-funds" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>In ShieldTX's architecture, spending user-owned notes requires the owner's signature. A withdrawal authorises a specific recipient, preventing a third party relaying the withdrawal from redirecting it to its own address.</p>
+<p>Nightshade, Avail's privacy infrastructure, uses proofs to enforce transaction rules, including ownership and protection against double spending.</p>
+</section>
+<section>
+<h2 id="does-non-custodial-mean-nobody-can-see-your-balance">Does non-custodial mean nobody can see your balance?<a href="#does-non-custodial-mean-nobody-can-see-your-balance" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>No. Custody describes control over funds. Privacy describes access to information.</p>
+<p>ShieldTX's architecture states that its sequencer currently sees note state. The note state is not visible on-chain and can only be seen by account owners. Visibility is preserved for audits and compliance.</p>
+<p>Likewise, shielded trades do not make Hyperliquid positions disappear. Positions remain observable at their trading accounts. Shielding reduces the public connection between those accounts and the wallet supplying the funds.</p>
+<p>To review what your wallet currently reveals to public observers, use the <a href="https://scanner.shieldtx.xyz/">ShieldTX wallet scanner</a> as a starting point for assessing your public trading exposure.</p>
+</section>
+<section>
+<h2 id="do-shielded-trades-reduce-market-or-liquidation-risk">Do shielded trades reduce market or liquidation risk?<a href="#do-shielded-trades-reduce-market-or-liquidation-risk" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>No. Shielded Hyperliquid trades remain subject to price movements, funding costs, margin requirements and liquidation. Shielding changes public wallet association; it does not change the underlying position's risk.</p>
+<p>A privacy tool should be evaluated alongside the trading venue and the infrastructure used to move funds. Strong privacy protections do not replace position monitoring or sound key management.</p>
+</section>
+<div class="faq" id="faq">
+  <h2>Frequently asked questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+  <div class="faq-item">
+    <h3>Are funds in a smart contract automatically non-custodial?</h3>
+    <p>No. Contract permissions matter. Review who can withdraw, upgrade the contract or change its rules before relying on the non-custodial label.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does an audit eliminate custody risk?</h3>
+    <p>No. An audit reviews a defined scope and version. It does not guarantee that every vulnerability has been found or that the deployed system has remained unchanged.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can a tool protect privacy while retaining user control?</h3>
+    <p>Yes. Privacy and user-authorised spending can coexist. Each needs its own explanation: who can see the activity, who can move the funds and which services are required for withdrawals.</p>
+  </div>
+</div>
+<section>
+<h2 id="review-the-controls-behind-shielded-trades">Review the controls behind shielded trades<a href="#review-the-controls-behind-shielded-trades" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>The value of a non-custodial privacy tool depends on both its spending controls and its practical withdrawal process.</p>
+<p>For ShieldTX, review the <a href="/trust-model">trust model</a> and <a href="https://blog.availproject.org/inside-shieldtx-the-architecture-enabling-shielded-trading-onchain/">technical architecture</a> to understand the fund flow and current dependencies. To discuss shielded Hyperliquid trades for your team, <a href="/contact-us/">get in touch</a>.</p>
+</section>
+
+      </div>
+    </article>
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Enterprise-grade shielding for Hyperliquid.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo-v2.svg" alt="Avail" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
+  </main>
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have an invite code<br><span>or ShieldTX Account?</span></h2><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
+
+  <script>
+    (function () {
+      // Copy-link anchor behavior
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
