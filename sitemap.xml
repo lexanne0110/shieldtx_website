@@ -36,6 +36,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.shieldtx.xyz/blog/non-custodial-privacy-tools-custody-risk</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.shieldtx.xyz/blog/the-copy-bot-tax-hiding-in-your-hyperliquid-trades</loc>
     <lastmod>2026-11-05</lastmod>
     <changefreq>yearly</changefreq>
