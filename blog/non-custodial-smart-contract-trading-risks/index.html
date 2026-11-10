@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Non-Custodial Smart Contract Trading Risks · ShieldTX</title>
+  <meta name="description" content="Explore the risks that remain in non-custodial smart contract trading, including contract bugs, withdrawal delays, external dependencies and liquidation." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/blog/non-custodial-smart-contract-trading-risks" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png?v=3" />
+
+  <meta property="og:title" content="Non-Custodial Smart Contract Trading Risks · ShieldTX" />
+  <meta property="og:description" content="Explore the risks that remain in non-custodial smart contract trading, including contract bugs, withdrawal delays, external dependencies and liquidation." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/blog/non-custodial-smart-contract-trading-risks" />
+  <meta property="og:image" content="https://shieldtx.xyz/assets/og-image-v2.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Non-Custodial Smart Contract Trading Risks · ShieldTX" />
+  <meta name="twitter:description" content="Explore the risks that remain in non-custodial smart contract trading, including contract bugs, withdrawal delays, external dependencies and liquidation." />
+
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/blog/styles.css?v=4" />
+
+  <!-- @partial head-global -->
+  <!-- PostHog analytics -->
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ji Yi init fn mn Hr pn bn cn capture calculateEventProperties Sn register register_once register_for_session unregister unregister_for_session In getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Mn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Cn xn createPersonProfile setInternalOrTestUser Tn hn Pn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing debug Ur wt getPageViewId captureTraceFeedback captureTraceMetric an".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_vj7vAdMiHrkqstyP22Au7yf634eSv9WSgF63WXXPTcPD', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+      })
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
+  <!-- /@partial head-global -->
+</head>
+<body class="page-blog blog-body">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <article class="section frame blog-post">
+      <div class="blog-post-wrap">
+        <a href="/blog" class="blog-post-back">\u2190 Back to all posts</a>
+        <h1>Risks That Remain With Non-Custodial Smart Contract Trading</h1>
+        <p class="blog-post-meta">
+          <span>10 November 2026</span>
+          <span>3 min read</span>
+        </p>
+
+        <figure class="blog-post-hero">
+          <img src="/blog/non-custodial-smart-contract-trading-risks/hero-dark.webp" alt="Non-Custodial. Not Risk-Free. Smart-contract document with code brackets and a warning symbol." width="2048" height="1152" />
+        </figure>
+
+        <p class="intro">Non-custodial trading does not eliminate the risk of losing funds. Smart-contract bugs, compromised keys and infrastructure failures can still affect users. Retaining authority over transactions is one protection. The reliability of the contracts, services and markets involved needs a separate assessment.</p>
+<p>For funds and trading desks, the question extends beyond who controls the wallet: what could fail between depositing capital, opening a position and withdrawing the proceeds?</p>
+<section>
+<h2 id="what-does-non-custodial-trading-protect-against">What does non-custodial trading protect against?<a href="#what-does-non-custodial-trading-protect-against" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>Non-custodial trading generally reduces reliance on a provider holding funds and moving them at its discretion. The exact protection depends on the system's signing requirements, permissions and contract rules.</p>
+<p>It does not mean funds always remain in the original wallet. Capital may enter contracts or become trading collateral. Once that happens, access also depends on how those systems work.</p>
+<p>Two questions help separate the risks:</p>
+<ul><li><strong>Control:</strong> Who can authorise transactions?</li><li><strong>Availability:</strong> Can the user access funds when needed?</li></ul>
+</section>
+<section>
+<h2 id="can-smart-contract-bugs-put-funds-at-risk">Can smart-contract bugs put funds at risk?<a href="#can-smart-contract-bugs-put-funds-at-risk" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>A contract can contain a flaw even when its intended design requires user authorisation. Errors in permissions, accounting or interactions with other contracts can allow funds to be stolen or locked.</p>
+<p>Administrative controls also matter. Where a system supports upgrades or emergency pauses, review who holds those powers and how they are protected. <a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">Ethereum's security guidance</a> identifies access controls and compromised administrator keys as important considerations.</p>
+<p>An institution should assess the deployed contracts and their permissions, rather than relying on the non-custodial label alone.</p>
+</section>
+<section>
+<h2 id="does-an-audit-remove-smart-contract-risk">Does an audit remove smart-contract risk?<a href="#does-an-audit-remove-smart-contract-risk" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>An audit adds independent scrutiny, but it cannot guarantee that every vulnerability has been found. <a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">Ethereum's security guidance</a> explicitly cautions against treating audits as a complete solution.</p>
+<p>When reviewing an audit, ask:</p>
+<ul><li>Which contracts and versions were examined?</li><li>Were significant findings resolved?</li><li>Does the deployed system match the reviewed version?</li><li>Which integrations or components were outside the scope?</li></ul>
+<p>An audit is useful evidence. Its scope determines what that evidence covers.</p>
+</section>
+<section>
+<h2 id="can-infrastructure-failures-delay-access-to-funds">Can infrastructure failures delay access to funds?<a href="#can-infrastructure-failures-delay-access-to-funds" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>A system can prevent unauthorised spending while still depending on services that process transactions, generate proofs or complete settlement.</p>
+<p><a href="/">ShieldTX</a> provides a concrete example. Its <a href="https://blog.availproject.org/inside-shieldtx-the-architecture-enabling-shielded-trading-onchain/">architecture</a> explains that withdrawals depend on a proven batch being accepted by the settlement contract. It also describes, in the current architecture, how its sequencer can delay processing or stop submitting batches required for withdrawals.</p>
+<p>The practical question is what recovery process exists if a required service stops operating. Teams should distinguish a recovery mechanism available today from one described as a future improvement.</p>
+</section>
+<section>
+<h2 id="what-risks-remain-outside-the-contract-itself">What risks remain outside the contract itself?<a href="#what-risks-remain-outside-the-contract-itself" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>A contract may depend on information or activity elsewhere. Understanding those dependencies helps identify failures that reviewing the contract alone may miss.</p>
+<div class="blog-table-wrap"><table class="blog-table"><caption>Dependencies to review before trading</caption><thead><tr><th scope="col">Dependency</th><th scope="col">What to check</th></tr></thead><tbody>
+<tr><th scope="row">External data or attestations</th><td>Who confirms that an event happened, and what if the confirmation is wrong?</td></tr>
+<tr><th scope="row">Cross-chain transfers</th><td>Which services must complete the transfer before funds become usable?</td></tr>
+<tr><th scope="row">Transaction processing</th><td>What happens if processing, proving or settlement stops?</td></tr>
+<tr><th scope="row">Signing access</th><td>How are keys, devices and account recovery protected?</td></tr>
+<tr><th scope="row">Trading venue</th><td>Which margin, liquidation and order rules apply after funds arrive?</td></tr>
+</tbody></table></div>
+</section>
+<section>
+<h2 id="assess-the-full-trading-workflow">Assess the full trading workflow<a href="#assess-the-full-trading-workflow" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>Non-custodial design is an important part of evaluating a trading system. A complete assessment also considers what can break and what can delay access.</p>
+<p>For shielded Hyperliquid trades, review ShieldTX's <a href="https://blog.availproject.org/inside-shieldtx-the-architecture-enabling-shielded-trading-onchain/">technical architecture</a> and <a href="/contact-us/">speak with the team</a> about the controls and dependencies relevant to your trading workflow.</p><section aria-labelledby="how-to-access-shieldtx" class="access-section">
+</section>
+<section>
+<h2 id="how-to-access-shieldtx">How to access ShieldTX<a href="#how-to-access-shieldtx" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+
+<p>ShieldTX enables shielded Hyperliquid trades, helping traders limit the public association between their funding wallet and trading activity.</p>
+<p>Professional traders, funds and systematic desks can request access and discuss their trading requirements, including API integration for existing workflows.</p>
+<a class="cta" href="/request-access">Request access to ShieldTX</a>
+</section>
+<div class="faq" id="faq">
+  <h2>Frequently asked questions<a href="#faq" class="anchor-link" aria-label="Link to this section"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg></a></h2>
+  <div class="faq-item">
+    <h3>Does keeping my private key prevent every loss?</h3>
+    <p>A key controls authorisation, but it does not prevent losses caused by contract failures. Protecting the key and understanding the transactions it authorises are both important.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does a zero-knowledge proof guarantee the whole system is safe?</h3>
+    <p>A proof verifies specified conditions. It does not automatically establish that every dependency, external input or operational process is reliable.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What should a trading desk review before committing capital?</h3>
+    <p>Map the complete deposit, trade and withdrawal flow. Identify contract permissions, external dependencies, audit coverage and recovery procedures. Then confirm how the team will monitor positions and respond to interruptions.</p>
+  </div>
+</div>
+
+      </div>
+    </article>
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Enterprise-grade shielding for Hyperliquid.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo-v2.svg" alt="Avail" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
+  </main>
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have an invite code<br><span>or ShieldTX Account?</span></h2><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
+
+  <script>
+    (function () {
+      // Copy-link anchor behavior
+      document.querySelectorAll('.anchor-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(url).then(function () {
+            link.classList.add('copied');
+            setTimeout(function () { link.classList.remove('copied'); }, 2000);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
