@@ -36,6 +36,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.shieldtx.xyz/blog/non-custodial-smart-contract-trading-risks</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.shieldtx.xyz/blog/compliant-confidential-trading-public-blockchains</loc>
     <lastmod>2026-11-09</lastmod>
     <changefreq>yearly</changefreq>
