@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main site -->
   <url>
     <loc>https://www.shieldtx.xyz/</loc>
     <changefreq>weekly</changefreq>
@@ -30,6 +31,15 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- Scanner subdomain -->
+  <url>
+    <loc>https://scanner.shieldtx.xyz/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog -->
   <url>
     <loc>https://www.shieldtx.xyz/blog</loc>
     <changefreq>weekly</changefreq>
