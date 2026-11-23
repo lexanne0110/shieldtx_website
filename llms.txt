@@ -8,7 +8,7 @@
 - Isolates trading activity: positions, PnL, and liquidation levels are not publicly linked to the wallet that funded the trade.
 - Funds each trade from a fresh, temporary wallet; proceeds return to a shielded balance on Arbitrum after closing.
 - Deposits and settlements are on-chain; the trading activity itself is unlinked from the depositor's identity.
-- Bridging is via Avail Nexus from any chain.
+- Bridging is via AVAIL Nexus from any chain.
 
 ## Key specs
 
@@ -54,7 +54,7 @@
 ## Optional
 
 - [Brand Book](https://www.shieldtx.xyz/brand-document/)
-- [Powered by Avail](https://availproject.org/)
+- [Powered by AVAIL](https://availproject.org/)
 - [X / Twitter](https://x.com/ShieldTXxyz)
 - [Terms](https://www.shieldtx.xyz/terms)
 - [Privacy](https://www.shieldtx.xyz/privacy)

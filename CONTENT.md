@@ -16,7 +16,7 @@ Narrative arc: **What (brief) → Why → Back to what (more details) → How �
 
 ### Footer
 - **Style:** Brand-blue-deep (`#1e3a8a`) base with brand-blue radial blooms.
-- **Tagline:** Trade with confidence. Powered by **Avail**.
+- **Tagline:** Trade with confidence. Powered by **AVAIL**.
 - **Status:** Live · build v2.0.0
 - **Product:** Features · Compare · How it works · Beta access
 - **Resources:** FAQ · Scan · Preview
