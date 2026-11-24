@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "npx serve -l 3000 .",
     "deploy": "vercel deploy --prod",
-    "sync": "python3 scripts/sync-partials.py"
+    "sync": "python3 scripts/sync-partials.py",
+    "test": "node --test tests/*.test.mjs"
   }
 }
