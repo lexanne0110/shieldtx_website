@@ -35,6 +35,82 @@
     } catch (_) {}
   }
 
+  // ---- Landing attribution (PostHog) --------------------------------------
+  // /newsletter has to answer "how many arrived, and from where". PostHog's
+  // $pageview already carries $referrer and the campaign params, but it is
+  // shared by every page and carries no classification, so charting
+  // internal vs external vs campaign vs direct means parsing it every time.
+  //
+  // One dedicated event per load, plus the same values registered as super
+  // properties so form_submit_succeeded is attributable without a join.
+  //
+  //   newsletter_landing_viewed { arrival, referrer_host, referrer_path,
+  //                               utm_source, utm_medium, utm_campaign,
+  //                               utm_term, utm_content, has_utm,
+  //                               landing_path }
+  //
+  // arrival is one of: utm | internal | external | direct. A campaign link
+  // wins the label even when it also has a referrer: that is what is being
+  // measured. Nothing here reads or sends anything the visitor typed.
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+  // Same site means the same registrable host: a visitor coming from
+  // shieldtx.xyz to www.shieldtx.xyz (or from app./blog.) is an internal hop,
+  // not an external referral. Comparing hostnames exactly reported those as
+  // external, which would have made the apex and the app look like channels.
+  function baseHost(host) {
+    return String(host || '').toLowerCase().replace(/^www\./, '');
+  }
+
+  function trackLanding() {
+    var params = null;
+    try { params = new URLSearchParams(window.location.search); } catch (_) {}
+
+    var props = { landing_path: window.location.pathname, has_utm: false, arrival: 'direct' };
+    var superProps = {};
+
+    if (params) {
+      for (var i = 0; i < UTM_KEYS.length; i++) {
+        var value = params.get(UTM_KEYS[i]);
+        if (value) {
+          props[UTM_KEYS[i]] = value;
+          props.has_utm = true;
+        }
+      }
+    }
+
+    var referrer = document.referrer || '';
+    if (referrer) {
+      try {
+        var url = new URL(referrer);
+        props.referrer_host = url.hostname;
+        props.referrer_path = url.pathname;
+        props.arrival = (baseHost(url.hostname) === baseHost(window.location.hostname)) ? 'internal' : 'external';
+      } catch (_) {
+        props.arrival = 'external';
+      }
+    }
+    if (props.has_utm) props.arrival = 'utm';
+
+    superProps.nl_arrival = props.arrival;
+    if (props.utm_source) superProps.nl_utm_source = props.utm_source;
+    if (props.utm_campaign) superProps.nl_utm_campaign = props.utm_campaign;
+
+    // The event is the artefact that matters, so it goes first and in its own
+    // guard: a register() that throws must never cost the landing event.
+    try {
+      if (window.posthog && typeof window.posthog.capture === 'function') {
+        window.posthog.capture('newsletter_landing_viewed', props);
+      }
+    } catch (_) {}
+
+    try {
+      if (window.posthog && typeof window.posthog.register === 'function') {
+        window.posthog.register(superProps);
+      }
+    } catch (_) {}
+  }
+
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function bind(form) {
@@ -154,6 +230,7 @@
   }
 
   function init() {
+    trackLanding();
     var forms = document.querySelectorAll('[data-newsletter-form]');
     for (var i = 0; i < forms.length; i++) bind(forms[i]);
   }

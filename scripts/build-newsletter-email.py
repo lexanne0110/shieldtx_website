@@ -99,6 +99,14 @@ def link(url, text, color=T1, size=13, weight=400, ls="0", underline=False):
 
 
 # ---------------------------------------------------------------- blocks
+def story_paras(items, margin="0 0 22px"):
+    """Narrative paragraphs that sit between a section heading and its visual."""
+    return "".join(
+        f'<p style="margin:{margin};font-family:{SANS};font-size:15px;line-height:24px;'
+        f'color:{T2};">{e(x)}</p>'
+        for x in items or []
+    )
+
 def build_topbar(d):
     iss = d["issue"]
     return (
@@ -159,6 +167,7 @@ def build_hero(d):
         f'{e(h["basis"])} &middot; '
         f'<a href="{e(d["issue"]["url"])}#methodology" style="color:{T3};text-decoration:underline;">'
         f'Methodology &rarr;</a></p>'
+        f'{story_paras([h["lede"]] if h.get("lede") else [], margin="22px 0 0")}'
         f'</td></tr>'
     )
 
@@ -200,7 +209,7 @@ def build_trend(d):
 
     return (
         f'<tr><td class="nl-pad" style="{pad("padding-top:0;padding-bottom:34px;")}">'
-        f'{section_label(t["label"])}{h2(t["heading"])}'
+        f'{section_label(t["label"])}{h2(t["heading"])}{story_paras(t.get("story", []))}'
         f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
         f'style="border:1px solid {DIV};">'
         f'<tr><td style="padding:18px 18px 0;">'
@@ -229,7 +238,7 @@ def build_copied(d):
     c = d["copied"]
     return (
         f'<tr><td class="nl-pad" style="{pad("padding-top:0;padding-bottom:34px;")}">'
-        f'{section_label(c["label"])}{h2(c["heading"])}'
+        f'{section_label(c["label"])}{h2(c["heading"])}{story_paras(c.get("story", []))}'
         f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
         f'style="border:1px solid {DIV};">'
         f'<tr><td class="nl-stack" width="360" valign="top" style="padding:20px;">'
@@ -290,7 +299,7 @@ def build_leaderboard(d):
         )
     return (
         f'<tr><td class="nl-pad" style="{pad("padding-top:0;padding-bottom:34px;")}">'
-        f'{section_label(lb["label"])}{h2(lb["heading"])}'
+        f'{section_label(lb["label"])}{h2(lb["heading"])}{story_paras(lb.get("story", []))}'
         f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">'
         f'{head}{"".join(rows)}</table>'
         f'</td></tr>'
@@ -327,7 +336,7 @@ def build_census(d):
         rows.append(f'<tr>{"".join(pair)}</tr>')
     return (
         f'<tr><td class="nl-pad" style="{pad("padding-top:0;padding-bottom:34px;")}">'
-        f'{section_label(c["label"])}{h2(c["heading"])}'
+        f'{section_label(c["label"])}{h2(c["heading"])}{story_paras(c.get("story", []))}'
         f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
         f'style="border:1px solid {DIV};border-top:1px solid {DIV};">{"".join(rows)}</table>'
         f'</td></tr>'
@@ -353,7 +362,7 @@ def build_speed(d):
         )
     return (
         f'<tr><td class="nl-pad" style="{pad("padding-top:0;padding-bottom:34px;")}">'
-        f'{section_label(s["label"])}{h2(s["heading"])}'
+        f'{section_label(s["label"])}{h2(s["heading"])}{story_paras(s.get("story", []))}'
         f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">'
         f'<tr>'
         f'<td class="nl-stack nl-speed-left" width="44%" valign="top" style="padding-right:24px;">'
