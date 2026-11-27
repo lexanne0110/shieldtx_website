@@ -1,0 +1,221 @@
+{
+  "issue": {
+    "number": 1,
+    "number_label": "#001",
+    "date": "23 November 2026",
+    "title": "The cost of being copied",
+    "standfirst": "A weekly intelligence report on copy-bot activity across Hyperliquid.",
+    "preheader": "$14.2M lost to copy-bots last period by the top 100 Hyperliquid traders — 63 bps per trade across 48,214 trades.",
+    "url": "https://www.shieldtx.xyz/newsletter/issue-001",
+    "archive_url": "https://www.shieldtx.xyz/newsletter",
+    "sample_data": true
+  },
+  "hero": {
+    "label": "Cost to top 100 traders · 2–9 Nov 2026",
+    "value": "$14.2M",
+    "ph": "$[X.X]M",
+    "line": "lost to copy-bots last period by the top 100 Hyperliquid traders",
+    "delta": "8% vs last period",
+    "delta_ph": "[X]% vs last period",
+    "basis_prefix": "63 bps",
+    "basis": " per trade across 48,214 trades",
+    "basis_ph": "[N] bps per trade across [N] trades"
+  },
+  "trend": {
+    "label": "02 · The trend",
+    "heading": "Is copying costing traders more?",
+    "axis_max": 16,
+    "series": [
+      {
+        "label": "5 Oct",
+        "value": 9.8
+      },
+      {
+        "label": "12 Oct",
+        "value": 10.4
+      },
+      {
+        "label": "19 Oct",
+        "value": 9.1
+      },
+      {
+        "label": "26 Oct",
+        "value": 11.6
+      },
+      {
+        "label": "2 Nov",
+        "value": 12.9
+      },
+      {
+        "label": "9 Nov",
+        "value": 12.2
+      },
+      {
+        "label": "16 Nov",
+        "value": 13.1
+      },
+      {
+        "label": "23 Nov",
+        "value": 14.2
+      }
+    ],
+    "legend": "Last 8 periods",
+    "delta": "8%",
+    "volume": "3%",
+    "read": "the cost of being copied has risen in five of the last seven weeks, and the last two are the most expensive on record."
+  },
+  "copied": {
+    "label": "03 · Most-copied wallet",
+    "heading": "Who the bots followed hardest.",
+    "wallet": "0x7f…3a2",
+    "note": "Long BTC perps, 20x. Opened and held through the whole period — the bots never had to guess.",
+    "copiers": 214,
+    "copiers_ph": "[N]"
+  },
+  "leaderboard": {
+    "label": "04 · Top 10 most-copied",
+    "heading": "The leaderboard, period over period.",
+    "columns": [
+      "#",
+      "Wallet",
+      "Copiers",
+      "Last",
+      "Move"
+    ],
+    "rows": [
+      [
+        1,
+        "0x7f…3a2",
+        214,
+        198,
+        "▲ 16"
+      ],
+      [
+        2,
+        "0x4c…91e",
+        187,
+        191,
+        "▼ 4"
+      ],
+      [
+        3,
+        "0xb1…77c",
+        164,
+        129,
+        "▲ 35"
+      ],
+      [
+        4,
+        "0x2e…0d4",
+        149,
+        150,
+        "▼ 1"
+      ],
+      [
+        5,
+        "0x9a…c58",
+        131,
+        104,
+        "▲ 27"
+      ],
+      [
+        6,
+        "0x63…41f",
+        118,
+        118,
+        "—"
+      ],
+      [
+        7,
+        "0xd8…2b9",
+        96,
+        88,
+        "▲ 8"
+      ],
+      [
+        8,
+        "0x15…9ae",
+        84,
+        91,
+        "▼ 7"
+      ],
+      [
+        9,
+        "0xe7…630",
+        71,
+        52,
+        "▲ 19"
+      ],
+      [
+        10,
+        "0x3b…f02",
+        66,
+        71,
+        "▼ 5"
+      ]
+    ]
+  },
+  "census": {
+    "label": "05 · Copy-bot census",
+    "heading": "How concentrated the behaviour is.",
+    "items": [
+      {
+        "label": "Bots tracked this period",
+        "value": "1,284",
+        "note": "▲ 6%"
+      },
+      {
+        "label": "Wallets controlling majority",
+        "value": "47",
+        "note": ""
+      },
+      {
+        "label": "Most-followed wallet",
+        "value": "0x7f…3a2",
+        "note": ""
+      },
+      {
+        "label": "Copy concentration",
+        "value": "top 12 = 68%",
+        "note": ""
+      }
+    ]
+  },
+  "speed": {
+    "label": "06 · Speed and size",
+    "heading": "The mechanism: why copying hurts.",
+    "value": "340ms",
+    "value_ph": "[X]ms",
+    "value_label": "Speed",
+    "line": "Average copy-bot fill time, leader fill to copier fill.",
+    "size_label": "Size · share of positions copied",
+    "size_rows": [
+      {
+        "label": "< $50K",
+        "pct": 12
+      },
+      {
+        "label": "$50K–$250K",
+        "pct": 31
+      },
+      {
+        "label": "> $250K",
+        "pct": 64
+      }
+    ],
+    "read": "larger positions attract more copying. Size is signal."
+  },
+  "tiein": {
+    "heading": "Get off this list. Start shielding your trades.",
+    "line": "Every trade from a brand new wallet.",
+    "cta": "Request access",
+    "url": "https://www.shieldtx.xyz/request-access"
+  },
+  "methodology": "Cost figures are estimated from observed copy-bot fill behaviour against top-100 HL wallets by PnL over 2–9 November 2026. “bps per trade” is the median adverse drift, in basis points, between copied and matched uncopied bursts, controlling for coin, size and volatility. Dollar estimates translate those bps against the notional traded in copied bursts. Figures are estimates, not guarantees, and are updated each issue.",
+  "footer": {
+    "tagline": "Built by ShieldTX",
+    "risk": "Shielding protects wallet association, not market or liquidation risk.",
+    "unsubscribe_url": "{{ unsubscribe }}",
+    "unsubscribe_label": "Unsubscribe"
+  }
+}

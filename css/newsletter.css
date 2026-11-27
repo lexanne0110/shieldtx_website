@@ -1,0 +1,591 @@
+/* =========================================================================
+   ShieldTX · weekly report
+   Loaded after /css/theme.css + /css/site.css on:
+     /newsletter            — sign-up landing page  (.page-newsletter)
+     /newsletter/issue-001  — issue template        (.page-newsletter-issue)
+
+   Tokens only (theme.css): --canvas --panel --well --raised --text-1..4
+   --divider --brand --blue-card --r/--r-sm/--r-lg --mono. No new colours.
+   Numbers are mono and tabular everywhere: the report is a data product.
+   ========================================================================= */
+
+/* ---------- Shared ---------- */
+/* Figures use the display face with tabular numerals, not the mono one:
+   Geist Mono's fixed advance makes "$14.2M" read as "$14 . 2M" at display size.
+   Mono is kept for wallets, table cells and axis labels. */
+.nl-fig {
+  font-family: var(--display);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.045em;
+  color: var(--text-1);
+}
+.nl-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: 10px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border: 1px solid #ffffff1f;
+  border-radius: 999px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+.nl-chip::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: .8;
+}
+/* Figures that are placeholders until the data is locked. The bracket token is
+   kept verbatim in data-ph so a build step can swap text for data-ph. */
+.nl-ph { border-bottom: 1px dashed #ffffff2e; }
+
+/* ---------- Landing: hero ---------- */
+.nl-hero { padding-top: 170px; padding-bottom: 40px; }
+.nl-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
+  gap: clamp(40px, 5vw, 88px);
+  align-items: center;
+}
+.nl-hero-copy h1 {
+  font-size: clamp(44px, 5.4vw, 86px);
+  margin-bottom: 24px;
+}
+.nl-lede {
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 46ch;
+  margin: 0 0 34px;
+}
+
+/* Sign-up form (hero + footer repeat) */
+.nl-form { display: flex; flex-wrap: wrap; gap: 10px; max-width: 520px; }
+.nl-form .nl-input {
+  flex: 1 1 240px;
+  min-width: 0;
+  min-height: 50px;
+  background: var(--canvas);
+  border: 1px solid #fff3;
+  border-radius: var(--r);
+  padding: 13px 16px;
+  color: var(--text-1);
+  font: 15px var(--mono);
+  transition: border-color .2s, box-shadow .2s;
+}
+.nl-form .nl-input::placeholder { color: var(--text-4); }
+.nl-form .nl-input:hover { border-color: #ffffff52; }
+.nl-form .nl-input:focus-visible {
+  outline: none;
+  border-color: #ffffff80;
+  box-shadow: 0 0 0 3px #ffffff14;
+}
+.nl-form.is-invalid .nl-input { border-color: #eeabab88; }
+.nl-form .button { flex: 0 0 auto; }
+.nl-micro { font-size: 13px; color: var(--text-4); margin: 14px 0 0; }
+.nl-error { flex: 1 0 100%; font-size: 13px; color: #eeabab; margin: 0; }
+/* Success state: the form is replaced in place by a confirmation panel. */
+.nl-success { display: none; }
+.nl-form.is-sent { display: none; }
+.nl-form.is-sent + .nl-success { display: block; }
+.nl-success p { font-size: 15px; line-height: 1.6; color: var(--text-2); margin: 0; }
+.nl-success strong { font-weight: 500; color: var(--text-1); }
+
+/* Hero stat card */
+.nl-stat-card {
+  position: relative;
+  padding: 34px 34px 28px;
+  border: 1px solid #fff2;
+  border-top-color: var(--blue-edge);
+  border-radius: var(--r-lg);
+  background: var(--blue-card);
+  box-shadow: inset 0 1px 0 #ffffff15;
+  overflow: hidden;
+}
+.nl-stat-card::before {
+  content: "";
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(151, 252, 228, .45), transparent);
+}
+.nl-stat-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.nl-stat-figure {
+  font-size: clamp(48px, 5vw, 68px);
+  line-height: 1;
+  margin: 0 0 16px;
+}
+.nl-stat-caption {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 34ch;
+  margin: 0 0 26px;
+}
+.nl-stat-basis {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-4);
+  border-top: 1px solid #fff1;
+  padding-top: 16px;
+  margin: 0;
+}
+.nl-stat-basis a { color: var(--text-3); text-decoration: underline; text-underline-offset: 3px; }
+.nl-stat-basis a:hover { color: var(--text-1); }
+.nl-spark { width: 100%; height: 74px; margin: 0 0 18px; overflow: visible; }
+
+/* ---------- Landing: three beats ---------- */
+.nl-beats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid #fff2;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--blue-card);
+}
+.nl-beat { padding: 32px 32px 34px; border-right: 1px solid #fff1; }
+.nl-beat:last-child { border-right: 0; }
+.nl-beat-label {
+  display: block;
+  font: 11px var(--mono);
+  letter-spacing: .12em;
+  color: var(--text-4);
+  margin-bottom: 22px;
+}
+.nl-beat-figure {
+  display: block;
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1;
+  margin-bottom: 18px;
+}
+.nl-beat p { font-size: 15px; line-height: 1.65; color: var(--text-3); margin: 0; }
+.nl-beat p strong { font-weight: 500; color: var(--text-2); }
+.nl-beat a { color: var(--text-3); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Landing: what's in each issue ---------- */
+.nl-contents {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+.nl-contents-head h2 { font-size: clamp(36px, 3.4vw, 48px); line-height: 1.12; letter-spacing: -.045em; white-space: normal; margin-bottom: 18px; }
+.nl-contents-head p { font-size: 16px; line-height: 1.65; color: var(--text-3); max-width: 32ch; margin: 0; }
+.nl-issue-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #fff1;
+}
+.nl-issue-list li {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid #fff1;
+}
+.nl-issue-list .nl-num {
+  font: 11px var(--mono);
+  letter-spacing: .1em;
+  color: var(--eyebrow);
+  padding-top: 4px;
+}
+.nl-issue-list h3 { font-size: 17px; line-height: 1.4; letter-spacing: -.01em; margin: 0 0 5px; color: var(--text-1); }
+.nl-issue-list p { font-size: 14px; line-height: 1.6; color: var(--text-3); margin: 0; }
+
+/* ---------- Landing: sample preview (the document artefact) ---------- */
+.nl-preview-window {
+  border: 1px solid #fff2;
+  border-radius: var(--r-lg);
+  background: var(--blue-card);
+  box-shadow: inset 0 1px 0 #ffffff15;
+  overflow: hidden;
+}
+.nl-preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #fff1;
+  font: 10px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+.nl-preview-bar span:first-child { color: var(--text-3); }
+.nl-preview-body { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 0; }
+.nl-preview-pane { padding: 26px 26px 24px; border-right: 1px solid #fff1; min-width: 0; }
+.nl-preview-pane:last-child { border-right: 0; display: flex; flex-direction: column; justify-content: center; }
+.nl-pane-label { display: block; font: 10px var(--mono); letter-spacing: .12em; color: var(--text-4); margin-bottom: 16px; }
+.nl-preview-pane .nl-pane-figure { font: 26px var(--mono); letter-spacing: -.02em; line-height: 1.1; margin: 0 0 6px; color: var(--text-1); }
+.nl-preview-pane .nl-pane-note { font-size: 13px; line-height: 1.6; color: var(--text-3); margin: 0; }
+.nl-preview-table { padding: 22px 26px 18px; border-top: 1px solid #fff1; }
+/* Cell padding is 10px, so pull the table out by the same amount to align its
+   text with the pane's 26px gutter. */
+.nl-preview-table .nl-table { width: calc(100% + 20px); margin-inline: -10px; }
+.nl-preview-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-top: 1px solid #fff1;
+  font-size: 13px;
+  color: var(--text-4);
+}
+.nl-preview-foot a { color: var(--text-2); }
+.nl-preview-foot a:hover { color: var(--text-1); }
+
+/* Tables (self-contained: blog/styles.css is only loaded under /blog) */
+.nl-table-wrap { overflow-x: auto; }
+.nl-table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.nl-table thead th {
+  padding: 10px 10px;
+  text-align: left;
+  font: 500 10px var(--mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--text-4);
+  border-bottom: 1px solid #fff2;
+  white-space: nowrap;
+}
+.nl-table tbody td {
+  padding: 10px;
+  text-align: left;
+  color: var(--text-2);
+  border-bottom: 1px solid #ffffff0d;
+  white-space: nowrap;
+}
+.nl-table tbody tr:last-child td { border-bottom: 0; }
+.nl-table tbody tr:hover td { background: #ffffff05; }
+.nl-table .nl-rank { color: var(--text-4); font-family: var(--mono); width: 1%; }
+.nl-table .nl-wallet { font-family: var(--mono); color: var(--text-1); }
+.nl-table .nl-num-col { text-align: right; font-family: var(--mono); }
+.nl-table th.nl-num-col { text-align: right; }
+.nl-table .nl-move { text-align: right; font-family: var(--mono); color: var(--text-3); }
+.nl-table th.nl-move { text-align: right; }
+.nl-table .nl-move.is-flat { color: var(--text-4); }
+/* On the issue page the table is a bare data block, like the census list, so its
+   first and last columns sit flush with the section gutter. */
+.nl-issue .nl-table th:first-child, .nl-issue .nl-table td:first-child { padding-left: 0; }
+.nl-issue .nl-table th:last-child, .nl-issue .nl-table td:last-child { padding-right: 0; }
+
+/* ---------- Landing: who it's for ---------- */
+.nl-pull {
+  margin: 0;
+  padding: 4px 0 4px 28px;
+  border-left: 2px solid var(--brand);
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.5;
+  letter-spacing: -.02em;
+  color: var(--text-1);
+  max-width: 60ch;
+}
+.nl-pull em { font-style: normal; color: var(--text-3); }
+
+/* ---------- Landing: ShieldTX tie-in ---------- */
+.nl-tiein {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: center;
+  padding: 40px 40px;
+  border: 1px solid #fff2;
+  border-top-color: var(--blue-edge);
+  border-radius: var(--r-lg);
+  background: var(--blue-card);
+}
+.nl-tiein h2 { font-size: clamp(26px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -.03em; margin: 0 0 10px; }
+.nl-tiein p { font-size: 15px; line-height: 1.6; color: var(--text-3); margin: 0; }
+
+/* ---------- Landing: footer CTA ---------- */
+.nl-foot-cta { text-align: center; padding: 56px 40px; border: 1px solid #fff2; border-radius: var(--r-lg); background: var(--blue-card); }
+.nl-foot-cta h2 { font-size: clamp(28px, 3vw, 44px); line-height: 1.1; letter-spacing: -.035em; margin: 0 0 14px; }
+.nl-foot-cta > p { font-size: 15px; color: var(--text-3); margin: 0 auto 28px; max-width: 44ch; }
+.nl-foot-cta .nl-form { margin: 0 auto; justify-content: center; }
+.nl-foot-cta .nl-micro { text-align: center; }
+
+/* ---------- Landing: methodology ---------- */
+.nl-method {
+  padding-top: 28px;
+  border-top: 1px solid #fff1;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text-4);
+}
+.nl-method p { max-width: 82ch; margin: 0; }
+.nl-issue .nl-method { padding-top: 28px; }
+.nl-method strong { display: block; font: 500 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+.nl-method a { color: var(--text-3); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Landing: report footer line ---------- */
+/* "Built by ShieldTX · Privacy · Unsubscribe" — the report's own colophon,
+   sitting above the site footer rather than replacing it. */
+.nl-legal { padding-top: 0; padding-bottom: 40px; }
+.nl-legal p {
+  margin: 0;
+  font: 11px var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+.nl-legal a { color: var(--text-3); text-decoration: underline; text-underline-offset: 3px; }
+.nl-legal a:hover { color: var(--text-1); }
+
+/* Honeypot — off-screen, not display:none, so bots that read the DOM still
+   fill it while no human ever sees or tabs to it. */
+.nl-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* =========================================================================
+   Issue template
+   ========================================================================= */
+.nl-issue { padding-top: 150px; }
+.nl-issue-wrap { max-width: 880px; margin: 0 auto; }
+
+/* Masthead — fixed every week */
+.nl-masthead { border-bottom: 1px solid #ffffff1f; padding-bottom: 18px; margin-bottom: 14px; }
+.nl-masthead-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.nl-masthead-top h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+.nl-masthead-top span {
+  font: 11px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.nl-masthead-sub {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-3);
+  max-width: 62ch;
+  margin: 12px 0 0;
+}
+
+/* Section furniture */
+.nl-sec { margin: 0 0 52px; }
+.nl-sec-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 11px var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--eyebrow);
+  margin-bottom: 16px;
+}
+.nl-sec-label::after { content: ""; flex: 1; height: 1px; background: #ffffff14; }
+.nl-sec h2 {
+  font-size: clamp(24px, 2.4vw, 33px);
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  color: var(--text-1);
+  margin: 0 0 20px;
+}
+
+/* 1. Hero number */
+.nl-hero-num {
+  padding: 36px 36px 30px;
+  border: 1px solid #fff2;
+  border-top-color: var(--blue-edge);
+  border-radius: var(--r-lg);
+  background: var(--blue-card);
+  box-shadow: inset 0 1px 0 #ffffff15;
+}
+.nl-hero-num .nl-fig { display: block; font-size: clamp(56px, 7vw, 92px); line-height: .95; margin: 0 0 14px; }
+.nl-hero-num > p { font-size: 16px; line-height: 1.55; color: var(--text-2); max-width: 38ch; margin: 0 0 24px; }
+.nl-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font: 12px var(--mono);
+  letter-spacing: .04em;
+  color: var(--text-2);
+  border: 1px solid #ffffff1f;
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+  background: #ffffff05;
+}
+.nl-delta b { font-weight: 500; color: var(--text-1); }
+.nl-support { font-size: 13px; line-height: 1.6; color: var(--text-4); margin: 18px 0 0; }
+.nl-support a { color: var(--text-3); text-decoration: underline; text-underline-offset: 3px; }
+
+/* 2. Trend */
+.nl-trend-card { padding: 26px 26px 18px; border: 1px solid #fff2; border-radius: var(--r-lg); background: var(--blue-card); }
+.nl-chart { width: 100%; height: auto; display: block; }
+.nl-trend-legend {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 14px 2px 0;
+  border-top: 1px solid #fff1;
+  margin-top: 10px;
+  font: 11px var(--mono);
+  letter-spacing: .06em;
+  color: var(--text-4);
+}
+.nl-trend-legend b { font-weight: 500; color: var(--text-2); }
+.nl-trend-legend span + span::before { content: "·"; margin-right: 18px; color: var(--text-4); }
+.nl-read { font-size: 15px; line-height: 1.65; color: var(--text-2); margin: 16px 0 0; }
+.nl-read::before { content: "Read — "; font-weight: 500; color: var(--text-1); }
+
+/* 3. Most-copied wallet */
+.nl-wallet-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  padding: 26px 30px;
+  border: 1px solid #fff2;
+  border-radius: var(--r-lg);
+  background: var(--blue-card);
+}
+.nl-wallet-card .nl-wallet-id { font: 26px var(--mono); letter-spacing: -.02em; color: var(--text-1); }
+.nl-wallet-card p { font-size: 14px; line-height: 1.6; color: var(--text-3); margin: 8px 0 0; }
+.nl-copiers { text-align: right; }
+.nl-copiers .nl-fig { display: block; font-size: 26px; line-height: 1.1; }
+.nl-copiers span { font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-4); }
+
+/* 5. Census */
+.nl-census { margin: 0; border-top: 1px solid #fff1; }
+.nl-census div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 2px;
+  border-bottom: 1px solid #fff1;
+}
+.nl-census dt { font-size: 14px; color: var(--text-3); }
+.nl-census dd { margin: 0; font: 15px var(--mono); font-variant-numeric: tabular-nums; color: var(--text-1); white-space: nowrap; }
+.nl-census dd em { font-style: normal; color: var(--text-4); font-size: 12px; margin-left: 8px; }
+
+/* 6. Speed and size */
+.nl-split { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 26px; }
+.nl-split > div { display: flex; flex-direction: column; padding: 24px 26px; border: 1px solid #fff2; border-radius: var(--r-lg); background: var(--blue-card); }
+.nl-split .nl-fig { display: block; font-size: 40px; line-height: 1; margin: 0 0 10px; }
+.nl-split p { font-size: 13px; line-height: 1.6; color: var(--text-4); margin: 0; }
+/* The two cards share one height, so the closing line sits on the baseline of
+   each card rather than under whichever block happens to be shorter. */
+.nl-split > div > p { margin-top: auto; padding-top: 18px; }
+.nl-size-row { display: grid; grid-template-columns: 92px minmax(0, 1fr) 48px; gap: 14px; align-items: center; margin-top: 14px; }
+.nl-size-row span:first-child { font: 12px var(--mono); color: var(--text-3); white-space: nowrap; }
+.nl-size-row b { font: 12px var(--mono); font-weight: 500; color: var(--text-1); text-align: right; }
+.nl-bar { height: 6px; border-radius: 3px; background: #ffffff10; overflow: hidden; }
+.nl-bar i { display: block; height: 100%; border-radius: 3px; background: var(--brand); opacity: .85; }
+
+/* 7. ShieldTX line */
+.nl-tiein-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding: 28px 30px;
+  border: 1px solid #fff2;
+  border-top-color: var(--blue-edge);
+  border-radius: var(--r-lg);
+  background: var(--blue-card);
+}
+.nl-tiein-line h2 { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; letter-spacing: -.03em; margin: 0 0 6px; }
+.nl-tiein-line p { font-size: 14px; color: var(--text-3); margin: 0; }
+
+/* 8. Issue footer */
+.nl-issue-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ffffff1f;
+  font: 11px var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+.nl-issue-footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.nl-issue-footer a { color: var(--text-3); }
+.nl-issue-footer a:hover { color: var(--text-1); }
+.nl-issue-note { font-size: 12px; line-height: 1.7; color: var(--text-4); margin: 18px 0 0; max-width: 78ch; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .nl-hero { padding-top: 130px; }
+  .nl-hero-grid { grid-template-columns: 1fr; gap: 44px; }
+  .nl-contents { grid-template-columns: 1fr; gap: 32px; }
+  .nl-contents-head p { max-width: 56ch; }
+  .nl-beats { grid-template-columns: 1fr; }
+  .nl-beat { border-right: 0; border-bottom: 1px solid #fff1; }
+  .nl-beat:last-child { border-bottom: 0; }
+  .nl-preview-body { grid-template-columns: 1fr; }
+  .nl-preview-pane { border-right: 0; border-bottom: 1px solid #fff1; }
+  .nl-preview-pane:last-child { border-bottom: 0; }
+  .nl-split { grid-template-columns: 1fr; }
+  .nl-issue { padding-top: 120px; }
+}
+
+@media (max-width: 700px) {
+  .nl-hero { padding-top: 112px; padding-bottom: 28px; }
+  .nl-hero-copy h1 { font-size: clamp(34px, 9.4vw, 46px); }
+  .nl-lede { font-size: 15px; margin-bottom: 26px; }
+  .nl-form { flex-direction: column; }
+  .nl-form .nl-input { flex: 1 1 auto; }
+  .nl-form .button { width: 100%; }
+  .nl-stat-card { padding: 24px 22px 22px; }
+  .nl-beat { padding: 24px 22px 26px; }
+  .nl-beat-label { margin-bottom: 16px; }
+  .nl-tiein, .nl-tiein-line { grid-template-columns: 1fr; padding: 26px 22px; }
+  .nl-tiein .button, .nl-tiein-line .button { width: 100%; }
+  .nl-foot-cta { padding: 36px 22px; }
+  .nl-method { padding-top: 34px; font-size: 11px; }
+  .nl-issue { padding-top: 104px; }
+  .nl-masthead-top strong { font-size: 11px; letter-spacing: .14em; }
+  .nl-sec { margin-bottom: 40px; }
+  .nl-hero-num { padding: 26px 22px 24px; }
+  .nl-trend-card { padding: 18px 14px 12px; }
+  .nl-wallet-card { grid-template-columns: 1fr; padding: 22px; }
+  .nl-copiers { text-align: left; }
+  .nl-copiers .nl-fig { display: inline; font-size: 20px; }
+  .nl-copiers span { margin-left: 8px; }
+  .nl-split > div { padding: 20px 22px; }
+  .nl-size-row { grid-template-columns: 78px minmax(0, 1fr) 42px; gap: 10px; }
+  .nl-table { font-size: 13px; }
+  .nl-table thead th, .nl-table tbody td { padding: 9px 8px; }
+  .nl-preview-body { grid-template-columns: 1fr; }
+  .nl-preview-foot { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
