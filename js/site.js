@@ -206,6 +206,10 @@ document.querySelectorAll('.faq-grid details').forEach(details => {
     [/^\/request-access(?:[/?#]|$)/, 'request-access'],
     [/^\/api-access(?:[/?#]|$)/, 'api-access'],
     [/^\/contact-us\/?(?:[?#]|$)/, 'contact'],
+    // The weekly report: reading an issue is the step between landing and
+    // subscribing, so both are chartable as CTAs, issue pattern first.
+    [/^\/newsletter\/issue-\d+(?:[/?#]|$)/, 'newsletter-issue'],
+    [/^\/newsletter(?:[/?#]|$)/, 'newsletter'],
     [/^https:\/\/beta\.shieldtx\.xyz/, 'open-app'],
     [/^https:\/\/scanner\.shieldtx\.xyz/, 'scanner'],
   ];
@@ -215,6 +219,8 @@ document.querySelectorAll('.faq-grid details').forEach(details => {
     if (el.closest('header, .nav')) return 'nav';
     if (el.closest('#wallet-scan')) return 'scan';
     if (el.closest('.hero-copy, .hero')) return 'hero';
+    if (el.closest('.nl-preview-window')) return 'preview';
+    if (el.closest('.nl-tiein')) return 'tiein';
     if (el.closest('.closing')) return 'closing';
     if (el.closest('footer')) return 'footer';
     if (el.closest('.page-intro, .form-section')) return 'form-page';
