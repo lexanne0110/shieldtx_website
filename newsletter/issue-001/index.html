@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Issue #001 · The cost of being copied · ShieldTX</title>
+  <meta name="description" content="Issue #001 of the weekly report: top 100 Hyperliquid traders lost an estimated $14.2M to copy-bots last period, 63 bps per trade." />
+  <link rel="canonical" href="https://www.shieldtx.xyz/newsletter/issue-001" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png?v=3" />
+
+  <meta property="og:title" content="Issue #001 · The cost of being copied" />
+  <meta property="og:description" content="Top 100 Hyperliquid traders lost an estimated $14.2M to copy-bots last period, 63 bps per trade." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://shieldtx.xyz/newsletter/issue-001" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#040405" />
+  <link rel="preload" href="/assets/v2/fonts/Geist-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/theme.css?v=1" />
+  <link rel="stylesheet" href="/css/site.css?v=18" />
+  <link rel="stylesheet" href="/css/newsletter.css?v=1" />
+
+  <!-- @partial head-global -->
+  <!-- PostHog analytics -->
+  <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ji Yi init fn mn Hr pn bn cn capture calculateEventProperties Sn register register_once register_for_session unregister unregister_for_session In getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Mn identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Cn xn createPersonProfile setInternalOrTestUser Tn hn Pn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing debug Ur wt getPageViewId captureTraceFeedback captureTraceMetric an".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_vj7vAdMiHrkqstyP22Au7yf634eSv9WSgF63WXXPTcPD', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+      })
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09KX5RM6XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-09KX5RM6XD');
+  </script>
+  <!-- /@partial head-global -->
+<meta property="og:image" content="https://shieldtx.xyz/assets/og-image-v2.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta name="twitter:image" content="https://shieldtx.xyz/assets/og-image-v2.jpg" />
+</head>
+<!--
+  DESIGN NOTES — /newsletter/issue-001, the weekly issue template.
+
+  Eight fixed blocks, in this order, every week:
+    1 hero number · 2 trend · 3 most-copied wallet · 4 top-10 leaderboard
+    5 copy-bot census · 6 speed and size · 7 ShieldTX line · 8 footer
+
+  House rules the template enforces (from the brief):
+    - the hero number is always top, always one number, always the same size;
+    - every chart carries one sentence of interpretation, no naked charts;
+    - wallets are truncated only (0x7f…3a2) — never a full address;
+    - every figure carries a footnote or a basis line;
+    - an issue with no quotable stat is held, not sent.
+
+  All figures are sample data. The bracket token is kept verbatim in data-ph on
+  each placeholder so a build step can swap rendered value for token:
+    $[X.X]M · [X]% vs last period · [N] bps · [N] trades · [N] copiers ·
+    leaderboard counts · census counts · [X]% concentration · [X]ms · size bands
+-->
+<body class="page-newsletter-issue">
+  <!-- @partial nav -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="page-rails" aria-hidden="true"></div>
+  <header class="site-header"><div class="nav-frame frame">
+  <span class="rail-cross top-left" aria-hidden="true"></span><span class="rail-cross top-right" aria-hidden="true"></span><span class="rail-cross bottom-left" aria-hidden="true"></span><span class="rail-cross bottom-right" aria-hidden="true"></span>
+  <a class="brand" href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a>
+  <nav id="navigation" aria-label="Main navigation"><a href="/#problem">About</a><a href="/#how-it-works">How it works</a><a href="/#wallet-scan">Wallet scan</a><a href="/blog">Blog</a></nav>
+  <a class="button light small nav-cta" href="/request-access" data-dialog="account-dialog" aria-haspopup="dialog">Start trading</a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false"><span></span><span></span></button>
+  </div></header>
+  <!-- /@partial nav -->
+
+  <main id="main">
+    <article class="section frame nl-issue">
+      <div class="nl-issue-wrap">
+
+        <!-- ===================== Masthead (fixed every week) ===================== -->
+        <header class="nl-masthead">
+          <div class="nl-masthead-top">
+            <h1>The cost of being copied</h1>
+            <span>Issue #001 · 23 November 2026</span>
+          </div>
+          <p class="nl-masthead-sub">A weekly intelligence report on copy-bot activity across Hyperliquid.</p>
+        </header>
+
+        <!-- ===================== 1. The hero number ===================== -->
+        <section class="nl-sec" aria-labelledby="hero-num-title">
+          <h2 id="hero-num-title" class="sr-only">The hero number</h2>
+          <div class="nl-hero-num">
+            <div class="nl-stat-label">
+              <span class="micro">Cost to top 100 traders · 2–9 Nov 2026</span>
+              <span class="nl-chip">Sample data</span>
+            </div>
+            <span class="nl-fig" data-ph="$[X.X]M">$14.2M</span>
+            <p>lost to copy-bots last period by the top 100 Hyperliquid traders</p>
+            <span class="nl-delta">▲ <b data-ph="[X]% vs last period">8% vs last period</b></span>
+            <p class="nl-support"><span data-ph="[N] bps per trade across [N] trades"><span class="nl-ph">63 bps</span> per trade across <span class="nl-ph">48,214</span> trades</span>. <a href="#methodology">Methodology →</a></p>
+          </div>
+        </section>
+
+        <!-- ===================== 2. The trend ===================== -->
+        <section class="nl-sec" aria-labelledby="trend-title">
+          <span class="nl-sec-label">02 · The trend</span>
+          <h2 id="trend-title">The trend: is copying costing traders more?</h2>
+          <div class="nl-trend-card">
+            <svg class="nl-chart" viewBox="0 0 760 280" role="img" aria-label="Cost to top 100 Hyperliquid traders across eight periods to 23 November 2026, rising from 9.8 to 14.2 million dollars.">
+              <defs><linearGradient id="nlAreaIssue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#97fce4" stop-opacity=".20"/><stop offset="1" stop-color="#97fce4" stop-opacity="0"/></linearGradient></defs>
+              <line x1="10" y1="246" x2="716" y2="246" stroke="#ffffff10" stroke-width="1"/><text x="726" y="250" fill="#6B7488" font-size="10" font-family="var(--mono)">$0M</text>
+              <line x1="10" y1="189" x2="716" y2="189" stroke="#ffffff10" stroke-width="1"/><text x="726" y="193" fill="#6B7488" font-size="10" font-family="var(--mono)">$4M</text>
+              <line x1="10" y1="132" x2="716" y2="132" stroke="#ffffff10" stroke-width="1"/><text x="726" y="136" fill="#6B7488" font-size="10" font-family="var(--mono)">$8M</text>
+              <line x1="10" y1="75" x2="716" y2="75" stroke="#ffffff10" stroke-width="1"/><text x="726" y="79" fill="#6B7488" font-size="10" font-family="var(--mono)">$12M</text>
+              <line x1="10" y1="18" x2="716" y2="18" stroke="#ffffff10" stroke-width="1"/><text x="726" y="22" fill="#6B7488" font-size="10" font-family="var(--mono)">$16M</text>
+              <path d="M 10 106.35 L 110.86 97.8 L 211.71 116.33 L 312.57 80.7 L 413.43 62.17 L 514.29 72.15 L 615.14 59.33 L 716 43.65 L 716 246 L 10 246 Z" fill="url(#nlAreaIssue)"/>
+              <path d="M 10 106.35 L 110.86 97.8 L 211.71 116.33 L 312.57 80.7 L 413.43 62.17 L 514.29 72.15 L 615.14 59.33 L 716 43.65" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+              <circle cx="10" cy="106.35" r="2.6" fill="#0F1917" stroke="var(--brand)" stroke-width="1.6"/>
+              <circle cx="110.86" cy="97.8" r="2.6" fill="#0F1917" stroke="var(--brand)" stroke-width="1.6"/>
+              <circle cx="211.71" cy="116.33" r="2.6" fill="#0F1917" stroke="var(--brand)" stroke-width="1.6"/>
+              <circle cx="312.57" cy="80.7" r="2.6" fill="#0F1917" stroke="var(--brand)" stroke-width="1.6"/>
+              <circle cx="413.43" cy="62.17" r="2.6" fill="#0F1917" stroke="var(--brand)" stroke-width="1.6"/>
+              <circle cx="514.29" cy="72.15" r="2.6" fill="#0F1917" stroke="var(--brand)" stroke-width="1.6"/>
+              <circle cx="615.14" cy="59.33" r="2.6" fill="#0F1917" stroke="var(--brand)" stroke-width="1.6"/>
+              <circle cx="716" cy="43.65" r="4.5" fill="var(--brand)" stroke="var(--brand)" stroke-width="1.6"/>
+              <text x="10" y="268" fill="#6B7488" font-size="10" font-family="var(--mono)">5 Oct</text>
+              <text x="211.71" y="268" fill="#6B7488" font-size="10" font-family="var(--mono)" text-anchor="middle">19 Oct</text>
+              <text x="413.43" y="268" fill="#6B7488" font-size="10" font-family="var(--mono)" text-anchor="middle">2 Nov</text>
+              <text x="615.14" y="268" fill="#6B7488" font-size="10" font-family="var(--mono)" text-anchor="middle">16 Nov</text>
+              <text x="716" y="268" fill="#6B7488" font-size="10" font-family="var(--mono)" text-anchor="end">23 Nov</text>
+            </svg>
+            <div class="nl-trend-legend">
+              <span>Cost to top 100 traders, last 8 periods</span>
+              <span>▲ <b>8%</b> vs last period</span>
+              <span>Volume ▼ <b>3%</b></span>
+            </div>
+          </div>
+          <p class="nl-read">the cost of being copied has risen in five of the last seven weeks, and the last two are the most expensive on record.</p>
+        </section>
+
+        <!-- ===================== 3. Most-copied wallet ===================== -->
+        <section class="nl-sec" aria-labelledby="copied-title">
+          <span class="nl-sec-label">03 · Most-copied wallet</span>
+          <h2 id="copied-title">Who the bots followed hardest.</h2>
+          <div class="nl-wallet-card">
+            <div>
+              <span class="nl-wallet-id">0x7f…3a2</span>
+              <p>Long BTC perps, 20x. Opened and held through the whole period — the bots never had to guess.</p>
+            </div>
+            <div class="nl-copiers">
+              <span class="nl-fig" data-ph="[N]">214</span>
+              <span>copiers</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================== 4. Top 10 leaderboard ===================== -->
+        <section class="nl-sec" aria-labelledby="leaderboard-title">
+          <span class="nl-sec-label">04 · Top 10 most-copied</span>
+          <h2 id="leaderboard-title">The leaderboard, period over period.</h2>
+          <div class="nl-table-wrap">
+            <table class="nl-table">
+              <caption class="sr-only">Top 10 most-copied Hyperliquid wallets, this period versus last period, with movement</caption>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Wallet</th>
+                  <th scope="col" class="nl-num-col">Copiers</th>
+                  <th scope="col" class="nl-num-col">Last period</th>
+                  <th scope="col" class="nl-move">Move</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="nl-rank">1</td><td class="nl-wallet">0x7f…3a2</td><td class="nl-num-col">214</td><td class="nl-num-col">198</td><td class="nl-move">▲ 16</td></tr>
+                <tr><td class="nl-rank">2</td><td class="nl-wallet">0x4c…91e</td><td class="nl-num-col">187</td><td class="nl-num-col">191</td><td class="nl-move">▼ 4</td></tr>
+                <tr><td class="nl-rank">3</td><td class="nl-wallet">0xb1…77c</td><td class="nl-num-col">164</td><td class="nl-num-col">129</td><td class="nl-move">▲ 35</td></tr>
+                <tr><td class="nl-rank">4</td><td class="nl-wallet">0x2e…0d4</td><td class="nl-num-col">149</td><td class="nl-num-col">150</td><td class="nl-move">▼ 1</td></tr>
+                <tr><td class="nl-rank">5</td><td class="nl-wallet">0x9a…c58</td><td class="nl-num-col">131</td><td class="nl-num-col">104</td><td class="nl-move">▲ 27</td></tr>
+                <tr><td class="nl-rank">6</td><td class="nl-wallet">0x63…41f</td><td class="nl-num-col">118</td><td class="nl-num-col">118</td><td class="nl-move is-flat">—</td></tr>
+                <tr><td class="nl-rank">7</td><td class="nl-wallet">0xd8…2b9</td><td class="nl-num-col">96</td><td class="nl-num-col">88</td><td class="nl-move">▲ 8</td></tr>
+                <tr><td class="nl-rank">8</td><td class="nl-wallet">0x15…9ae</td><td class="nl-num-col">84</td><td class="nl-num-col">91</td><td class="nl-move">▼ 7</td></tr>
+                <tr><td class="nl-rank">9</td><td class="nl-wallet">0xe7…630</td><td class="nl-num-col">71</td><td class="nl-num-col">52</td><td class="nl-move">▲ 19</td></tr>
+                <tr><td class="nl-rank">10</td><td class="nl-wallet">0x3b…f02</td><td class="nl-num-col">66</td><td class="nl-num-col">71</td><td class="nl-move">▼ 5</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ===================== 5. Copy-bot census ===================== -->
+        <section class="nl-sec" aria-labelledby="census-title">
+          <span class="nl-sec-label">05 · Copy-bot census</span>
+          <h2 id="census-title">How concentrated the behaviour is.</h2>
+          <dl class="nl-census">
+            <div>
+              <dt>Bots tracked this period</dt>
+              <dd data-ph="[N]">1,284 <em>▲ 6%</em></dd>
+            </div>
+            <div>
+              <dt>Wallets controlling majority</dt>
+              <dd data-ph="[N]">47</dd>
+            </div>
+            <div>
+              <dt>Most-followed wallet</dt>
+              <dd>0x7f…3a2</dd>
+            </div>
+            <div>
+              <dt>Copy concentration</dt>
+              <dd data-ph="top [N] wallets = [X]% of copying">top 12 wallets = 68%</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- ===================== 6. Speed and size ===================== -->
+        <section class="nl-sec" aria-labelledby="speed-title">
+          <span class="nl-sec-label">06 · Speed and size</span>
+          <h2 id="speed-title">The mechanism: why copying hurts.</h2>
+          <div class="nl-split">
+            <div>
+              <span class="micro">Speed</span>
+              <span class="nl-fig" data-ph="[X]ms" style="margin-top:14px">340ms</span>
+              <p>Average copy-bot fill time, leader fill to copier fill.</p>
+            </div>
+            <div>
+              <span class="micro">Size · share of positions copied</span>
+              <div class="nl-size-row">
+                <span>&lt; $50K</span>
+                <span class="nl-bar"><i style="width:12%"></i></span>
+                <b>12%</b>
+              </div>
+              <div class="nl-size-row">
+                <span>$50K–$250K</span>
+                <span class="nl-bar"><i style="width:31%"></i></span>
+                <b>31%</b>
+              </div>
+              <div class="nl-size-row">
+                <span>&gt; $250K</span>
+                <span class="nl-bar"><i style="width:64%"></i></span>
+                <b>64%</b>
+              </div>
+              <p class="nl-read">larger positions attract more copying. Size is signal.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================== 7. The ShieldTX line (fixed) ===================== -->
+        <section class="nl-sec" aria-labelledby="shieldtx-title">
+          <div class="nl-tiein-line">
+            <div>
+              <h2 id="shieldtx-title">Get off this list. Start shielding your trades.</h2>
+              <p>Every trade from a brand new wallet.</p>
+            </div>
+            <a class="button light" href="/request-access">Request access
+              <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- ===================== Methodology ===================== -->
+        <section class="nl-sec" id="methodology" aria-labelledby="method-title">
+          <div class="nl-method">
+            <strong id="method-title">Methodology</strong>
+            <p>Cost figures are estimated from observed copy-bot fill behaviour against top-100 HL wallets by PnL over 2–9 November 2026. “bps per trade” is the median adverse drift, in basis points, between copied and matched uncopied bursts, controlling for coin, size and volatility. Dollar estimates translate those bps against the notional traded in copied bursts. Figures are estimates, not guarantees, and are updated each issue.</p>
+          </div>
+        </section>
+
+        <!-- ===================== 8. Footer (fixed) ===================== -->
+        <footer class="nl-issue-footer">
+          <nav aria-label="Issue links">
+            <a href="#methodology">Methodology →</a>
+            <a href="/newsletter">Archive →</a>
+            <a href="/newsletter#signup">Unsubscribe</a>
+          </nav>
+          <span>Built by ShieldTX</span>
+        </footer>
+
+      </div>
+    </article>
+
+    <!-- @partial footer -->
+    <div class="section-divider frame" aria-hidden="true"><span class="rail-cross top-left"></span><span class="rail-cross top-right"></span><span class="rail-cross bottom-left"></span><span class="rail-cross bottom-right"></span></div>
+    <footer class="frame" id="footer" aria-label="Site footer"><div class="footer-main"><div class="footer-brand"><a href="/" aria-label="ShieldTX home"><img src="/assets/v2/shieldtx-logo.svg" alt="ShieldTX" width="136" height="34"></a><p>Enterprise-grade shielding for Hyperliquid.</p><a class="social" href="https://x.com/ShieldTXxyz" target="_blank" rel="noopener" aria-label="ShieldTX on X">𝕏</a></div><nav aria-label="Product"><h3>Product</h3><a href="/#shieldtx">Features</a><a href="/#how-it-works">How it works</a><a href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener">Open app</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/#faq">FAQ</a><a href="/#wallet-scan">Wallet scan</a><a href="/trust-model">Trust model</a><a href="/brand-document/">Brand book</a></nav><nav aria-label="Company"><h3>Company</h3><a href="/blog">Blog</a><a href="/request-access">Request access</a><a href="/api-access">API access</a><a href="/contact-us/">Contact</a></nav><nav aria-label="Legal"><h3>Legal</h3><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></div><div class="footer-bottom"><span>© 2026 ShieldTX. All rights reserved.</span><a href="https://availproject.org/" target="_blank" rel="noopener" class="footer-avail"><span>Powered by</span><img src="/assets/v2/avail-logo-v2.svg" alt="AVAIL" width="84" height="28"></a></div><p class="risk-disclosure">Shielding protects wallet association, not market or liquidation risk.</p></footer>
+    <!-- /@partial footer -->
+  </main>
+
+  <!-- @partial site-end -->
+  <button class="scroll-top" type="button" aria-label="Scroll to top" hidden><span aria-hidden="true">↑</span><span class="scroll-top-label">Scroll to top</span></button>
+  <dialog id="account-dialog" class="account-dialog" aria-labelledby="account-title"><div class="dialog-top"><span class="micro">START TRADING</span><button class="scan-close" type="button" aria-label="Close">×</button></div><h2 id="account-title">Do you have an invite code<br><span>or ShieldTX Account?</span></h2><div class="account-choices"><a class="button bevel" href="https://beta.shieldtx.xyz/" target="_blank" rel="noopener" data-dialog-close data-account-choice="yes">Yes, open the app <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg></a><a class="button light" href="/request-access" data-account-choice="no">No, request access</a></div></dialog>
+  <script src="/js/site.js?v=6" defer></script>
+  <!-- /@partial site-end -->
+</body>
+</html>
