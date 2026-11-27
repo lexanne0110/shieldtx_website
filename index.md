@@ -57,7 +57,7 @@ Private beta access members get discounted pricing.
 | Close position (skip shielding) | Free |
 | Liquidation | None |
 | Deposit | Free |
-| Withdraw to external wallet | $2 |
+| Withdraw to external wallet | $0.10 |
 | Private transfer (within ShieldTX) | Free |
 
 **Can I speak with someone to learn more?**
