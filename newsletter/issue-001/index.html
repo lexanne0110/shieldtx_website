@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Issue #001 · The cost of being copied · ShieldTX</title>
+  <title>Issue #001 · The Copy Tax · ShieldTX</title>
   <meta name="description" content="Issue #001 of the weekly report: top 100 Hyperliquid traders lost an estimated $14.2M to copy-bots last period, 63 bps per trade." />
   <link rel="canonical" href="https://www.shieldtx.xyz/newsletter/issue-001" />
 
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
   <link rel="apple-touch-icon" href="/assets/favicon-192.png?v=3" />
 
-  <meta property="og:title" content="Issue #001 · The cost of being copied" />
+  <meta property="og:title" content="Issue #001 · The Copy Tax" />
   <meta property="og:description" content="Top 100 Hyperliquid traders lost an estimated $14.2M to copy-bots last period, 63 bps per trade." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://shieldtx.xyz/newsletter/issue-001" />
@@ -87,7 +87,7 @@
         <!-- ===================== Masthead (fixed every week) ===================== -->
         <header class="nl-masthead">
           <div class="nl-masthead-top">
-            <h1>The cost of being copied</h1>
+            <h1>The Copy Tax</h1>
             <span>Issue #001 · 23 November 2026</span>
           </div>
           <p class="nl-masthead-sub">A weekly intelligence report on copy-bot activity across Hyperliquid.</p>
@@ -105,6 +105,7 @@
             <p>lost to copy-bots last period by the top 100 Hyperliquid traders</p>
             <span class="nl-delta">▲ <b data-ph="[X]% vs last period">8% vs last period</b></span>
             <p class="nl-support"><span data-ph="[N] bps per trade across [N] trades"><span class="nl-ph">63 bps</span> per trade across <span class="nl-ph">48,214</span> trades</span>. <a href="#methodology">Methodology →</a></p>
+            <p class="nl-story">Every week we count what copying costs the traders at the top of Hyperliquid. This period the bill was $14.2M, and most of the people paying it never saw the bots coming.</p>
           </div>
         </section>
 
@@ -112,6 +113,8 @@
         <section class="nl-sec" aria-labelledby="trend-title">
           <span class="nl-sec-label">02 · The trend</span>
           <h2 id="trend-title">The trend: is copying costing traders more?</h2>
+          <p class="nl-story">Copying is not new, but it is getting faster and cheaper to do. Every period the bots get a little quicker to the fill and a little better at spotting the trades worth following.</p>
+          <p class="nl-story">Volume has eased 3% over the same stretch. The traders on the other side are moving a little less and paying a little more for every trade they make.</p>
           <div class="nl-trend-card">
             <svg class="nl-chart" viewBox="0 0 760 280" role="img" aria-label="Cost to top 100 Hyperliquid traders across eight periods to 23 November 2026, rising from 9.8 to 14.2 million dollars.">
               <defs><linearGradient id="nlAreaIssue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#97fce4" stop-opacity=".20"/><stop offset="1" stop-color="#97fce4" stop-opacity="0"/></linearGradient></defs>
@@ -149,10 +152,12 @@
         <section class="nl-sec" aria-labelledby="copied-title">
           <span class="nl-sec-label">03 · Most-copied wallet</span>
           <h2 id="copied-title">Who the bots followed hardest.</h2>
+          <p class="nl-story">Every copy-bot needs someone to follow, and this period most of them picked the same wallet. It opened a large BTC long at 20x and simply held it, so there was nothing left to guess at.</p>
+          <p class="nl-story">The trader never asked for an audience. By the end of the period, 214 copiers had lined up behind a position they could watch in real time.</p>
           <div class="nl-wallet-card">
             <div>
               <span class="nl-wallet-id">0x7f…3a2</span>
-              <p>Long BTC perps, 20x. Opened and held through the whole period — the bots never had to guess.</p>
+              <p>Long BTC perps, 20x. Opened and held through the whole period. The bots never had to guess.</p>
             </div>
             <div class="nl-copiers">
               <span class="nl-fig" data-ph="[N]">214</span>
@@ -165,6 +170,7 @@
         <section class="nl-sec" aria-labelledby="leaderboard-title">
           <span class="nl-sec-label">04 · Top 10 most-copied</span>
           <h2 id="leaderboard-title">The leaderboard, period over period.</h2>
+          <p class="nl-story">The top of the board is sticky, but the bottom is restless. Wallet 0xb1…77c added 35 copiers in a single period, the biggest jump on the list, while 0x4c…91e lost four. A single good week can be enough to turn a trader into someone the bots follow.</p>
           <div class="nl-table-wrap">
             <table class="nl-table">
               <caption class="sr-only">Top 10 most-copied Hyperliquid wallets, this period versus last period, with movement</caption>
@@ -197,6 +203,7 @@
         <section class="nl-sec" aria-labelledby="census-title">
           <span class="nl-sec-label">05 · Copy-bot census</span>
           <h2 id="census-title">How concentrated the behaviour is.</h2>
+          <p class="nl-story">The bots are many, but their attention is narrow. 1,284 were tracked this period, up 6%, yet 47 wallets control the majority of copying and the top 12 account for 68% of it. If you are not one of those twelve, the bots are probably not watching you.</p>
           <dl class="nl-census">
             <div>
               <dt>Bots tracked this period</dt>
@@ -221,6 +228,8 @@
         <section class="nl-sec" aria-labelledby="speed-title">
           <span class="nl-sec-label">06 · Speed and size</span>
           <h2 id="speed-title">The mechanism: why copying hurts.</h2>
+          <p class="nl-story">The mechanism is simple. The average copy-bot fills 340 milliseconds after the leader, fast enough to trade on the same move the leader just created.</p>
+          <p class="nl-story">Size is the second part of the problem. Only 12% of positions under $50K were copied, against 64% of positions above $250K. The bigger the trade, the more it is worth following, and the more it costs to be followed.</p>
           <div class="nl-split">
             <div>
               <span class="micro">Speed</span>
@@ -253,10 +262,10 @@
         <section class="nl-sec" aria-labelledby="shieldtx-title">
           <div class="nl-tiein-line">
             <div>
-              <h2 id="shieldtx-title">Get off this list. Start shielding your trades.</h2>
+              <h2 id="shieldtx-title">Stop paying copy tax.</h2>
               <p>Every trade from a brand new wallet.</p>
             </div>
-            <a class="button light" href="/request-access">Request access
+            <a class="button light" href="https://www.shieldtx.xyz/">Learn more
               <svg class="cta-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 6 6-6 6m7-12 6 6-6 6"/></svg>
             </a>
           </div>

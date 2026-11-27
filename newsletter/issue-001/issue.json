@@ -3,9 +3,9 @@
     "number": 1,
     "number_label": "#001",
     "date": "23 November 2026",
-    "title": "The cost of being copied",
+    "title": "The Copy Tax",
     "standfirst": "A weekly intelligence report on copy-bot activity across Hyperliquid.",
-    "preheader": "$14.2M lost to copy-bots last period by the top 100 Hyperliquid traders — 63 bps per trade across 48,214 trades.",
+    "preheader": "$14.2M lost to copy-bots last period by the top 100 Hyperliquid traders. 63 bps per trade across 48,214 trades.",
     "url": "https://www.shieldtx.xyz/newsletter/issue-001",
     "archive_url": "https://www.shieldtx.xyz/newsletter",
     "sample_data": true
@@ -15,6 +15,7 @@
     "value": "$14.2M",
     "ph": "$[X.X]M",
     "line": "lost to copy-bots last period by the top 100 Hyperliquid traders",
+    "lede": "Every week we count what copying costs the traders at the top of Hyperliquid. This period the bill was $14.2M, and most of the people paying it never saw the bots coming.",
     "delta": "8% vs last period",
     "delta_ph": "[X]% vs last period",
     "basis_prefix": "63 bps",
@@ -24,6 +25,10 @@
   "trend": {
     "label": "02 · The trend",
     "heading": "Is copying costing traders more?",
+    "story": [
+      "Copying is not new, but it is getting faster and cheaper to do. Every period the bots get a little quicker to the fill and a little better at spotting the trades worth following.",
+      "Volume has eased 3% over the same stretch. The traders on the other side are moving a little less and paying a little more for every trade they make."
+    ],
     "axis_max": 16,
     "series": [
       {
@@ -68,13 +73,20 @@
     "label": "03 · Most-copied wallet",
     "heading": "Who the bots followed hardest.",
     "wallet": "0x7f…3a2",
-    "note": "Long BTC perps, 20x. Opened and held through the whole period — the bots never had to guess.",
+    "note": "Long BTC perps, 20x. Opened and held through the whole period. The bots never had to guess.",
+    "story": [
+      "Every copy-bot needs someone to follow, and this period most of them picked the same wallet. It opened a large BTC long at 20x and simply held it, so there was nothing left to guess at.",
+      "The trader never asked for an audience. By the end of the period, 214 copiers had lined up behind a position they could watch in real time."
+    ],
     "copiers": 214,
     "copiers_ph": "[N]"
   },
   "leaderboard": {
     "label": "04 · Top 10 most-copied",
     "heading": "The leaderboard, period over period.",
+    "story": [
+      "The top of the board is sticky, but the bottom is restless. Wallet 0xb1…77c added 35 copiers in a single period, the biggest jump on the list, while 0x4c…91e lost four. A single good week can be enough to turn a trader into someone the bots follow."
+    ],
     "columns": [
       "#",
       "Wallet",
@@ -158,6 +170,9 @@
   "census": {
     "label": "05 · Copy-bot census",
     "heading": "How concentrated the behaviour is.",
+    "story": [
+      "The bots are many, but their attention is narrow. 1,284 were tracked this period, up 6%, yet 47 wallets control the majority of copying and the top 12 account for 68% of it. If you are not one of those twelve, the bots are probably not watching you."
+    ],
     "items": [
       {
         "label": "Bots tracked this period",
@@ -184,6 +199,10 @@
   "speed": {
     "label": "06 · Speed and size",
     "heading": "The mechanism: why copying hurts.",
+    "story": [
+      "The mechanism is simple. The average copy-bot fills 340 milliseconds after the leader, fast enough to trade on the same move the leader just created.",
+      "Size is the second part of the problem. Only 12% of positions under $50K were copied, against 64% of positions above $250K. The bigger the trade, the more it is worth following, and the more it costs to be followed."
+    ],
     "value": "340ms",
     "value_ph": "[X]ms",
     "value_label": "Speed",
@@ -206,10 +225,10 @@
     "read": "larger positions attract more copying. Size is signal."
   },
   "tiein": {
-    "heading": "Get off this list. Start shielding your trades.",
+    "heading": "Stop paying copy tax.",
     "line": "Every trade from a brand new wallet.",
-    "cta": "Request access",
-    "url": "https://www.shieldtx.xyz/request-access"
+    "cta": "Learn more",
+    "url": "https://www.shieldtx.xyz/"
   },
   "methodology": "Cost figures are estimated from observed copy-bot fill behaviour against top-100 HL wallets by PnL over 2–9 November 2026. “bps per trade” is the median adverse drift, in basis points, between copied and matched uncopied bursts, controlling for coin, size and volatility. Dollar estimates translate those bps against the notional traded in copied bursts. Figures are estimates, not guarantees, and are updated each issue.",
   "footer": {
